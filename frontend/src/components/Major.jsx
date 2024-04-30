@@ -1,16 +1,11 @@
 const Major = ({ label, url, img_src }) => {
 
-    let bg_img = "";
-
-    if (img_src) {
-        bg_img = `bg-[url(${img_src})]`;
-    } else {
-        bg_img = "bg-slate-300";
-    }
-
     return (
-        <div className={`group aspect-video bg-cover bg-norepeat bg-center ${bg_img}`}>
-            <a href={url} className="p-5 w-full h-1/3 group-hover:h-full block capitalize text-white bg-orange-400">{label}</a>
+        <div className={`relative group overflow-hidden aspect-video bg-cover bg-norepeat bg-center`}>
+            <a href={url} className=" p-5 absolute transition-all duration-300 ease-in-out z-0 h-full w-full flex justify-center items-center text-center capitalize text-white top-1 group-hover:top-0 -translate-y-full group-hover:translate-y-0 bg-orange-500/100 group-hover:bg-orange-500/50 backdrop-blur">{label}</a>
+            {img_src && (
+                <img src={img_src} />
+            )}
         </div>
     );
 
