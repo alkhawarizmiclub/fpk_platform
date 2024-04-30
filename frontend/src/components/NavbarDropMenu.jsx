@@ -1,3 +1,6 @@
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const NavbarDropMenu = ({ label, subElementsList }) => {
 
     let subMenu = null;
@@ -19,11 +22,12 @@ const NavbarDropMenu = ({ label, subElementsList }) => {
     return (
         <div className="relative group">
 
-            <div className="flex space-x-1">
-                <div>{label}</div>
+            <div className="flex items-center space-x-1">
                 {subElementsList && (
-                    <div className="transform -rotate-90 group-hover:rotate-0 text-orange-400">⯆</div>
+                    <FontAwesomeIcon icon={faAngleDown} className="transition duration-300 transform -rotate-90 group-hover:rotate-0 text-orange-400"/>
+                    // <div className="">⯆</div>
                 )}
+                <div>{label}</div>
             </div>
             
             {subMenu}
