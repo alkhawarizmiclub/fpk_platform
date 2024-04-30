@@ -4,15 +4,12 @@ import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 import Error404Page from "../pages/Error404Page";
 import PlainLayout from "../layouts/PlainLayout";
+import UserLayout from "../layouts/UserLayout";
 
 export const router = createBrowserRouter([
     {
         element: <PlainLayout />,
         children: [
-            {
-                path: '/',
-                element: <HomePage />
-            },
             {
                 path: '/login',
                 element: <LoginPage />
@@ -25,6 +22,15 @@ export const router = createBrowserRouter([
                 path: '*',
                 element: <Error404Page />
             }
+        ]
+    },
+    {
+        element: <UserLayout />,
+        children: [
+            {
+                path: '/',
+                element: <HomePage />
+            },
         ]
     }
 ])

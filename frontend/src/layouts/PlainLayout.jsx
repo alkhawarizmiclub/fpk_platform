@@ -4,9 +4,7 @@ import Footer from "../components/Footer";
 const PlainLayout = () => {
     return (
         <>
-            <main className="grow flex">
-                <Outlet />
-            </main>
+            <Outlet />
             <Footer />
         </>
     );
