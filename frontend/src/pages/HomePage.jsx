@@ -77,16 +77,16 @@ const HomePage = () => {
 
             <section className="p-10">
                 <SectionTitle title="avis & announces" />
-                <div className='grid grid-cols-4 gap-5'>
-                    <Announcement title="Announcement title #1" url="#" />
-                    <Announcement title="Announcement title #2" url="#" />
-                    <Announcement title="Announcement title #3" url="#" />
-                    <Announcement title="Announcement title #4" url="#" />
-                    <Announcement title="Announcement title #5" url="#" />
-                    <Announcement title="Announcement title #6" url="#" />
-                    <Announcement title="Announcement title #7" url="#" />
-                    <Announcement title="Announcement title #9" url="#" />
-                    <Announcement title="Announcement title #10" url="#" />
+                <div className='grid grid-cols-2 gap-5'>
+                    <Announcement title="Announcement title #1 Announcement title #1" url="#" img_src="https://picsum.photos/200/300?random=9"/>
+                    <Announcement title="Announcement title #2 Announcement title #2 Announcement title #2 Announcement title #2" url="#" img_src="https://picsum.photos/200/300?random=10"/>
+                    <Announcement title="Announcement title #3" url="#" img_src="https://picsum.photos/200/300?random=11"/>
+                    <Announcement title="Announcement title #4" url="#" img_src="https://picsum.photos/200/300?random=12"/>
+                    <Announcement title="Announcement title #5" url="#" img_src="https://picsum.photos/200/300?random=13"/>
+                    <Announcement title="Announcement title #6 Announcement title #6" url="#" img_src="https://picsum.photos/200/300?random=14"/>
+                    <Announcement title="Announcement title #7" url="#" img_src="https://picsum.photos/200/300?random=15"/>
+                    <Announcement title="Announcement title #9" url="#" img_src="https://picsum.photos/200/300?random=16"/>
+                    <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="https://picsum.photos/200/300?random=17"/>
                 </div>
             </section>
 
