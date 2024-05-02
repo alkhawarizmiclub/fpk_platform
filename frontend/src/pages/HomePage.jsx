@@ -6,6 +6,7 @@ import Activity from '../components/Activity';
 import Major from '../components/Major';
 import Staff from '../components/Staff';
 import MajorCategory from '../components/MajorCategory';
+import Announcement from '../components/Announcement';
 
 const HomePage = () => {
     return (
@@ -34,8 +35,8 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="py-20 px-10 text-white bg-orange-400">
-                <div className="grid grid-cols-5 text-center">
+            <section className="p-10 bg-orange-400">
+                <div className="text-white grid grid-cols-5 text-center">
                     <HomeStatsElement icon={faBookOpenReader} number="5226" label="étudiants" />
                     <HomeStatsElement icon={faUserGraduate} number="537" label="lauréats" />
                     <HomeStatsElement icon={faPenRuler} number="13" label="filières" />
@@ -46,7 +47,7 @@ const HomePage = () => {
 
             <section className="p-10">
                 <SectionTitle title="staff administratif" />
-                <div className="p-10 grid grid-cols-4 gap-5">
+                <div className="grid grid-cols-4 gap-5">
                     <Staff first_name="Khalid" last_name="Mehdi" occupation="Occupation" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/02/doyen-1-scaled-e1677513352365.jpg" />
                     <Staff first_name="Khalid" last_name="Sbiaai" occupation="Vice Doyen chargé à la pédagogie" img_src="http://www.fpk.ac.ma/wp-content/uploads/2022/12/vdoyen-e1670942309390.jpeg" />
                     <Staff first_name="Noureddine" last_name="Barka" occupation="Vice Doyen chargé de la recherche scientifique et de la coopération" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2024/03/Noureddine-Barka.jpg" />
@@ -54,9 +55,9 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="p-10">
+            <section className="p-10 bg-slate-100">
                 <SectionTitle title="filières" />
-                <div className="p-4 flex justify-center gap-5">
+                <div className="mb-4 flex justify-center gap-5">
                     <MajorCategory label="licences fondamentales" />
                     <MajorCategory label="licences professionnelles" />
                     <MajorCategory label="master" />
@@ -76,14 +77,31 @@ const HomePage = () => {
 
             <section className="p-10">
                 <SectionTitle title="avis & announces" />
-                To Be Filled
+                <div className='grid grid-cols-2 gap-5'>
+                    <Announcement title="Announcement title #1 Announcement title #1" url="#" img_src="https://picsum.photos/200/300?random=9"/>
+                    <Announcement title="Announcement title #2 Announcement title #2 Announcement title #2 Announcement title #2" url="#" img_src="https://picsum.photos/200/300?random=10"/>
+                    <Announcement title="Announcement title #3" url="#" img_src="https://picsum.photos/200/300?random=11"/>
+                    <Announcement title="Announcement title #4" url="#" img_src="https://picsum.photos/200/300?random=12"/>
+                    <Announcement title="Announcement title #5" url="#" img_src="https://picsum.photos/200/300?random=13"/>
+                    <Announcement title="Announcement title #6 Announcement title #6" url="#" img_src="https://picsum.photos/200/300?random=14"/>
+                    <Announcement title="Announcement title #7" url="#" img_src="https://picsum.photos/200/300?random=15"/>
+                    <Announcement title="Announcement title #9" url="#" img_src="https://picsum.photos/200/300?random=16"/>
+                    <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="https://picsum.photos/200/300?random=17"/>
+                </div>
             </section>
 
             <section className="p-10">
                 <SectionTitle title="activités & événements" />
-                <Activity />
-                <Activity />
-                <Activity />
+                <div className="grid grid-cols-4 gap-5">
+                    <Activity label="Activitie number #1 Activitie number #1Activitie number #1" url="#" img_src="https://picsum.photos/200/300?random=1" />
+                    <Activity label="Activitie number #2 Activitie number #2Activitie number #2" url="#" img_src="https://picsum.photos/200/300?random=2" />
+                    <Activity label="Activitie number #3" url="#" img_src="https://picsum.photos/200/300?random=3" />
+                    <Activity label="Activitie number #4 Activitie number #4Activitie number #4" url="#" img_src="https://picsum.photos/200/300?random=4" />
+                    <Activity label="Activitie number #5" url="#" img_src="https://picsum.photos/200/300?random=5" />
+                    <Activity label="Activitie number #6" url="#" img_src="https://picsum.photos/200/300?random=6" />
+                    <Activity label="Activitie number #7 Activitie number #7Activitie number #7" url="#" img_src="https://picsum.photos/200/300?random=7" />
+                    <Activity label="Activitie number #8" url="#" img_src="https://picsum.photos/200/300?random=8" />
+                </div>
             </section>
 
         </>
