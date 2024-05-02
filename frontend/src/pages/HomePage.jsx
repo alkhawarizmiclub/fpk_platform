@@ -13,10 +13,10 @@ const HomePage = () => {
 
             <section className='px-10'>
                 <div className="-translate-y-5 grid grid-cols-4 gap-10 text-center">
-                    <HomeGateElement icon={faBookOpenReader} label="Espace étudiants" url="" />
-                    <HomeGateElement icon={faChalkboardTeacher} label="Espace enseigants" url="" />
-                    <HomeGateElement icon={faBullhorn} label="Avis et announces" url="" />
-                    <HomeGateElement icon={faPeopleGroup} label="Clubs et activities" url="" />
+                    <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url="/" />
+                    <HomeGateElement icon={faChalkboardTeacher} label="espace enseignants" url="/" />
+                    <HomeGateElement icon={faBullhorn} label="avis et announces" url="/" />
+                    <HomeGateElement icon={faPeopleGroup} label="clubs et organisations" url="/" />
                 </div>
             </section>
 
@@ -29,13 +29,6 @@ const HomePage = () => {
                         <p>De par sa vocation la Faculté Polydisciplinaire de Khouribga offre des formations diversifiées couvrant plusieurs champs disciplinaires sous forme de filières à enseignement modulaire.</p>
                     </div>
                     <div>
-                        {/* <iframe
-                            className="w-full aspect-video rounded-lg border border-slate-300"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1140.7043195271508!2d-6.905736303784177!3d32.869769894863275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda427000bc5899f%3A0xba7e39743b7a569b!2sFacult%C3%A9%20Polydisciplinaire%20de%20Khouribga!5e0!3m2!1sen!2sma!4v1714438474595!5m2!1sen!2sma"
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        ></iframe> */}
                         <div className="aspect-video rounded-lg bg-cover bg-norepeat bg-center bg-[url(/map.jpg)]"></div>
                     </div>
                 </div>
@@ -64,10 +57,10 @@ const HomePage = () => {
             <section className="p-10">
                 <SectionTitle title="filières" />
                 <div className="p-4 flex justify-center gap-5">
-                    <MajorCategory label="licences fondamentales"/>
-                    <MajorCategory label="licences professionnelles"/>
-                    <MajorCategory label="master"/>
-                    <MajorCategory label="doctorat"/>
+                    <MajorCategory label="licences fondamentales" />
+                    <MajorCategory label="licences professionnelles" />
+                    <MajorCategory label="master" />
+                    <MajorCategory label="doctorat" />
                 </div>
                 <div className="grid grid-cols-5 gap-5">
                     <Major label="science mathématique et informatique" url="#" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
