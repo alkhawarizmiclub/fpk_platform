@@ -9,7 +9,7 @@ const NavbarDropMenu = ({ label, subElementsList }) => {
         subMenu = (
             <div className="absolute -translate-x-1/2 left-1/2 pt-9 hidden group-hover:block text-nowrap">
                 <ul className="px-5 shadow bg-white">
-                    {subElementsList.map((label, url) => (
+                    {subElementsList.map(( {label, url} ) => (
                         <li key={label} className="py-3 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
                             <a href={url}>{label}</a>
                         </li>
@@ -24,12 +24,11 @@ const NavbarDropMenu = ({ label, subElementsList }) => {
 
             <div className="flex items-center space-x-1">
                 {subElementsList && (
-                    <FontAwesomeIcon icon={faAngleDown} className="transition duration-300 transform -rotate-90 group-hover:rotate-0 text-orange-400"/>
-                    // <div className="">⯆</div>
+                    <FontAwesomeIcon icon={faAngleDown} className="transition duration-300 transform -rotate-90 group-hover:rotate-0 text-orange-400" />
                 )}
                 <div>{label}</div>
             </div>
-            
+
             {subMenu}
 
         </div>

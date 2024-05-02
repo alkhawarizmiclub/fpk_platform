@@ -6,41 +6,41 @@ const Navbar = () => {
         {
             label: "ETABLISSEMENT",
             children: [
-                ["link 1", "url 1"],
-                ["link 2", "url 2"],
-                ["link 3", "url 3"],
+                {label: "link 1", url: "url 1"},
+                {label: "link 2", url: "url 2"},
+                {label: "link 3", url: "url 3"}
             ]
         },
         {
             label: "FORMATION",
             children: [
-                ["This is a sub menu link 1", "url 1"],
-                ["This is a sub menu link 2", "url 1"],
-                ["This is a sub menu link 3", "url 1"],
-                ["This is a sub menu link 4", "url 1"]
+                {label: "Licence Fondamentale", url: "/lf"},
+                {label: "Licence Professionnelle", url: "/lp"},
+                {label: "Master", url: "/master"},
+                {label: "Doctorat", url: "/doctorat"}
             ]
         },
         {
             label: "ESPACE ETUDIANTS",
             children: [
-                ["Another sub menu link 1", "url 1"],
-                ["Another sub menu link 2", "url 1"],
-                ["Another sub menu link 3", "url 1"],
-                ["Another sub menu link 4", "url 1"],
-                ["Another sub menu link 5", "url 1"]
+                {label: "Another sub menu link 1", url: "url 1"},
+                {label: "Another sub menu link 2", url: "url 1"},
+                {label: "Another sub menu link 3", url: "url 1"},
+                {label: "Another sub menu link 4", url: "url 1"},
+                {label: "Another sub menu link 5", url: "url 1"}
             ]
         },
         {
             label: "RECHERCHE & COOPÉRATION",
             children: [
-                ["link 1", "url 1"],
-                ["link 2", "url 2"],
-                ["link 3", "url 3"],
+                {label: "link 1", url: "url 1"},
+                {label: "link 2", url: "url 2"},
+                {label: "link 3", url: "url 3"}
             ]
         },
         {
             label: "CONTACT"
-        },
+        }
     ]
 
     return (
