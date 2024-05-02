@@ -54,7 +54,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="p-10">
+            <section className="p-10 bg-slate-100">
                 <SectionTitle title="filières" />
                 <div className="p-4 flex justify-center gap-5">
                     <MajorCategory label="licences fondamentales" />
@@ -81,9 +81,16 @@ const HomePage = () => {
 
             <section className="p-10">
                 <SectionTitle title="activités & événements" />
-                <Activity />
-                <Activity />
-                <Activity />
+                <div className="p-10 grid grid-cols-4 gap-5">
+                    <Activity label="Activitie number #1" />
+                    <Activity label="Activitie number #2" />
+                    <Activity label="Activitie number #3" />
+                    <Activity label="Activitie number #4" />
+                    <Activity label="Activitie number #5" />
+                    <Activity label="Activitie number #6" />
+                    <Activity label="Activitie number #7" />
+                    <Activity label="Activitie number #8" />
+                </div>
             </section>
 
         </>
