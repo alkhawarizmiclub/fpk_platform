@@ -77,28 +77,30 @@ const HomePage = () => {
 
             <section className="p-10">
                 <SectionTitle title="avis & announces" />
-                <Announcement title="Announcement title #1" url="#" />
-                <Announcement title="Announcement title #2" url="#" />
-                <Announcement title="Announcement title #3" url="#" />
-                <Announcement title="Announcement title #4" url="#" />
-                <Announcement title="Announcement title #5" url="#" />
-                <Announcement title="Announcement title #6" url="#" />
-                <Announcement title="Announcement title #7" url="#" />
-                <Announcement title="Announcement title #9" url="#" />
-                <Announcement title="Announcement title #10" url="#" />
+                <div className='grid grid-cols-4 gap-5'>
+                    <Announcement title="Announcement title #1" url="#" />
+                    <Announcement title="Announcement title #2" url="#" />
+                    <Announcement title="Announcement title #3" url="#" />
+                    <Announcement title="Announcement title #4" url="#" />
+                    <Announcement title="Announcement title #5" url="#" />
+                    <Announcement title="Announcement title #6" url="#" />
+                    <Announcement title="Announcement title #7" url="#" />
+                    <Announcement title="Announcement title #9" url="#" />
+                    <Announcement title="Announcement title #10" url="#" />
+                </div>
             </section>
 
             <section className="p-10">
                 <SectionTitle title="activités & événements" />
                 <div className="grid grid-cols-4 gap-5">
-                    <Activity label="Activitie number #1 Activitie number #1Activitie number #1" url="#" img_src="https://picsum.photos/200/300?random=1"/>
-                    <Activity label="Activitie number #2 Activitie number #2Activitie number #2" url="#" img_src="https://picsum.photos/200/300?random=2"/>
-                    <Activity label="Activitie number #3" url="#" img_src="https://picsum.photos/200/300?random=3"/>
-                    <Activity label="Activitie number #4 Activitie number #4Activitie number #4" url="#" img_src="https://picsum.photos/200/300?random=4"/>
-                    <Activity label="Activitie number #5" url="#" img_src="https://picsum.photos/200/300?random=5"/>
-                    <Activity label="Activitie number #6" url="#" img_src="https://picsum.photos/200/300?random=6"/>
-                    <Activity label="Activitie number #7 Activitie number #7Activitie number #7" url="#" img_src="https://picsum.photos/200/300?random=7"/>
-                    <Activity label="Activitie number #8" url="#" img_src="https://picsum.photos/200/300?random=8"/>
+                    <Activity label="Activitie number #1 Activitie number #1Activitie number #1" url="#" img_src="https://picsum.photos/200/300?random=1" />
+                    <Activity label="Activitie number #2 Activitie number #2Activitie number #2" url="#" img_src="https://picsum.photos/200/300?random=2" />
+                    <Activity label="Activitie number #3" url="#" img_src="https://picsum.photos/200/300?random=3" />
+                    <Activity label="Activitie number #4 Activitie number #4Activitie number #4" url="#" img_src="https://picsum.photos/200/300?random=4" />
+                    <Activity label="Activitie number #5" url="#" img_src="https://picsum.photos/200/300?random=5" />
+                    <Activity label="Activitie number #6" url="#" img_src="https://picsum.photos/200/300?random=6" />
+                    <Activity label="Activitie number #7 Activitie number #7Activitie number #7" url="#" img_src="https://picsum.photos/200/300?random=7" />
+                    <Activity label="Activitie number #8" url="#" img_src="https://picsum.photos/200/300?random=8" />
                 </div>
             </section>
 
