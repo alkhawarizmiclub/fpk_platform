@@ -68,7 +68,6 @@ const Smi = () => {
 
     return (
         <>
-            <Navbar />
             <section className="bg-sky-700 py-16 px-20 flex items-center justify-between">
                 <div className="flex-1 mr-10">
                     <h1 className="text-white text-3xl">Licence</h1>
