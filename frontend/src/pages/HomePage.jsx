@@ -64,43 +64,43 @@ const HomePage = () => {
                     <MajorCategory label="doctorat" />
                 </div>
                 <div className="grid grid-cols-5 gap-5">
-                    <Major label="science mathématique et informatique" url="#" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
-                    <Major label="science mathématique et application" url="#" img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
-                    <Major label="science economie et gestion" url="#" img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
-                    <Major label="science de la matière physique" url="#" img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />
-                    <Major label="science de la matière chimie" url="#" img_src="https://fpk-biblio.netlify.app/img/smc.jpg" />
-                    <Major label="sciences de la Vie" url="#" img_src="https://fpk-biblio.netlify.app/img/sv.jpg" />
-                    <Major label="géographie" url="#" img_src="https://fpk-biblio.netlify.app/img/geo.jpg" />
-                    <Major label="études arabe" url="#" img_src="https://fpk-biblio.netlify.app/img/ea.jpg" />
+                    <Major label="science mathématique et informatique" url="#" img_src="/w.jpg" />
+                    <Major label="science mathématique et application" url="#" img_src="/w.jpg" />
+                    <Major label="science economie et gestion" url="#" img_src="/w.jpg" />
+                    <Major label="science de la matière physique" url="#" img_src="/w.jpg" />
+                    <Major label="science de la matière chimie" url="#" img_src="/w.jpg" />
+                    <Major label="sciences de la Vie" url="#" img_src="/w.jpg" />
+                    <Major label="géographie" url="#" img_src="/w.jpg" />
+                    <Major label="études arabe" url="#" img_src="/w.jpg" />
                 </div>
             </section>
 
             <section className="p-10">
                 <SectionTitle title="avis & announces" />
                 <div className='grid grid-cols-2 gap-5'>
-                    <Announcement title="Announcement title #1 Announcement title #1" url="#" img_src="https://picsum.photos/200/300?random=9"/>
-                    <Announcement title="Announcement title #2 Announcement title #2 Announcement title #2 Announcement title #2" url="#" img_src="https://picsum.photos/200/300?random=10"/>
-                    <Announcement title="Announcement title #3" url="#" img_src="https://picsum.photos/200/300?random=11"/>
-                    <Announcement title="Announcement title #4" url="#" img_src="https://picsum.photos/200/300?random=12"/>
-                    <Announcement title="Announcement title #5" url="#" img_src="https://picsum.photos/200/300?random=13"/>
-                    <Announcement title="Announcement title #6 Announcement title #6" url="#" img_src="https://picsum.photos/200/300?random=14"/>
-                    <Announcement title="Announcement title #7" url="#" img_src="https://picsum.photos/200/300?random=15"/>
-                    <Announcement title="Announcement title #9" url="#" img_src="https://picsum.photos/200/300?random=16"/>
-                    <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="https://picsum.photos/200/300?random=17"/>
+                    <Announcement title="college: All the Stats, Facts, and Data You'll Ever Need to Know" url="#" img_src="/w.jpg"/>
+                    <Announcement title="Announcement title number two this is a list of the Most Underrated Skills That'll Make You a Rockstar in the college Industry " url="#" img_src="/w.jpg"/>
+                    <Announcement title="How to Explain college to Your Mom" url="#" img_src="/w.jpg"/>
+                    <Announcement title="An Introduction to college" url="#" img_src="/w.jpg"/>
+                    <Announcement title="So You've Bought college ... Now What?" url="#" img_src="/w.jpg"/>
+                    <Announcement title="Announcement title #6 Announcement title #6" url="#" img_src="/w.jpg"/>
+                    <Announcement title="Announcement title #7" url="#" img_src="/w.jpg"/>
+                    <Announcement title="Announcement title #9" url="#" img_src="/w.jpg"/>
+                    <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="/w.jpg"/>
                 </div>
             </section>
 
             <section className="p-10">
                 <SectionTitle title="activités & événements" />
                 <div className="grid grid-cols-4 gap-5">
-                    <Activity label="Activitie number #1 Activitie number #1Activitie number #1" url="#" img_src="https://picsum.photos/200/300?random=1" />
-                    <Activity label="Activitie number #2 Activitie number #2Activitie number #2" url="#" img_src="https://picsum.photos/200/300?random=2" />
-                    <Activity label="Activitie number #3" url="#" img_src="https://picsum.photos/200/300?random=3" />
-                    <Activity label="Activitie number #4 Activitie number #4Activitie number #4" url="#" img_src="https://picsum.photos/200/300?random=4" />
-                    <Activity label="Activitie number #5" url="#" img_src="https://picsum.photos/200/300?random=5" />
-                    <Activity label="Activitie number #6" url="#" img_src="https://picsum.photos/200/300?random=6" />
-                    <Activity label="Activitie number #7 Activitie number #7Activitie number #7" url="#" img_src="https://picsum.photos/200/300?random=7" />
-                    <Activity label="Activitie number #8" url="#" img_src="https://picsum.photos/200/300?random=8" />
+                    <Activity label="The 14 best website builders for small businesses in 2023" url="#" img_src="/w.jpg" date_day="01" date_month="January" date_year="2024"/>
+                    <Activity label="The best web design software to use in 2023" url="#" img_src="/w.jpg" date_day="13" date_month="May" date_year="2024"/>
+                    <Activity label="10 best freelance digital designers for hire in 2023" url="#" img_src="/w.jpg" date_day="20" date_month="Decemeber" date_year="2024"/>
+                    <Activity label="10 best freelance Youtube banner designers for hire in 2023" url="#" img_src="/w.jpg" date_day="08" date_month="April" date_year="2024"/>
+                    <Activity label="The 10 best freelance web designers for hire in 2023" url="#" img_src="/w.jpg" date_day="10" date_month="October" date_year="2024"/>
+                    <Activity label="8 immersive ecommerce trends for 2023" url="#" img_src="/w.jpg" date_day="29" date_month="August" date_year="2024"/>
+                    <Activity label="The 10 best freelance landing page designers for hire in 2023" url="#" img_src="/w.jpg" date_day="06" date_month="June" date_year="2024"/>
+                    <Activity label="Activitie number #8" url="#" img_src="/w.jpg" date_day="30" date_month="July" date_year="2024"/>
                 </div>
             </section>
 
