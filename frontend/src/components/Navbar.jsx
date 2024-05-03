@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavbarDropMenu from "./NavbarDropMenu";
 
 const Navbar = () => {
@@ -55,8 +56,8 @@ const Navbar = () => {
             </ul>
 
             <div className="flex gap-4">
-                <button type="button" className="py-3 px-6 rounded-lg text-white font-semibold bg-orange-400">Login</button>
-                <button type="button" className="py-3 px-6 rounded-lg text-orange-400 font-semibold border border-orange-400">Apply</button>
+                <Link type="button" className="py-3 px-6 rounded-lg text-white font-semibold bg-orange-400" to="/login">Login</Link>
+                <Link type="button" className="py-3 px-6 rounded-lg text-orange-400 font-semibold border border-orange-400" to="/apply">Apply</Link>
             </div>
 
         </nav>
