@@ -55,9 +55,9 @@ const HomePage = () => {
                 <SectionTitle title="staff administratif" />
                 <div className="p-10 grid grid-cols-4 gap-5">
                     <Staff first_name="Khalid" last_name="Mehdi" occupation="Occupation" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/02/doyen-1-scaled-e1677513352365.jpg" />
+                    <Staff first_name="Omar" last_name="Hansali" occupation="Secrétaire Générale" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/03/IMG-20230310-WA0003-e1678463961724.jpg" />
                     <Staff first_name="Khalid" last_name="Sbiaai" occupation="Vice Doyen chargé à la pédagogie" img_src="http://www.fpk.ac.ma/wp-content/uploads/2022/12/vdoyen-e1670942309390.jpeg" />
                     <Staff first_name="Noureddine" last_name="Barka" occupation="Vice Doyen chargé de la recherche scientifique et de la coopération" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2024/03/Noureddine-Barka.jpg" />
-                    <Staff first_name="Omar" last_name="Hansali" occupation="Secrétaire Générale" img_src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/03/IMG-20230310-WA0003-e1678463961724.jpg" />
                 </div>
             </section>
 
@@ -70,7 +70,7 @@ const HomePage = () => {
                     <MajorCategory label="doctorat"/>
                 </div>
                 <div className="grid grid-cols-5 gap-5">
-                    <Major label="science mathématique et informatique" url="#" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
+                    <Major label="science mathématique et informatique" url="/smi" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
                     <Major label="science mathématique et application" url="#" img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
                     <Major label="science economie et gestion" url="#" img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
                     <Major label="science de la matière physique" url="#" img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />

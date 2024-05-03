@@ -5,6 +5,7 @@ import SignUpPage from "../pages/SignUpPage";
 import Error404Page from "../pages/Error404Page";
 import PlainLayout from "../layouts/PlainLayout";
 import UserLayout from "../layouts/UserLayout";
+import Smi from "../pages/majors/Smi" ;
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
                 element: <SignUpPage />
             },
             {
+                path: '/smi',
+                element: <Smi />
+            },
+            {
                 path: '*',
                 element: <Error404Page />
             }
@@ -31,6 +36,8 @@ export const router = createBrowserRouter([
                 path: '/',
                 element: <HomePage />
             },
+            
+            
         ]
     }
 ])
