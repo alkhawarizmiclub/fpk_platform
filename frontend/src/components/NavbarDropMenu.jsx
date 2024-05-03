@@ -11,7 +11,7 @@ const NavbarDropMenu = ({ label, subElementsList }) => {
                 <ul className="px-5 shadow bg-white">
                     {subElementsList.map(( {label, url} ) => (
                         <li key={label} className="py-3 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
-                            <a href={url}>{label}</a>
+                            <a href={url} className="w-full block">{label}</a>
                         </li>
                     ))}
                 </ul>
