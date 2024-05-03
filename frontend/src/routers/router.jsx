@@ -5,6 +5,15 @@ import SignUpPage from "../pages/SignUpPage";
 import Error404Page from "../pages/Error404Page";
 import PlainLayout from "../layouts/PlainLayout";
 import UserLayout from "../layouts/UserLayout";
+import Smi from "../pages/majors/Smi" ;
+import PageLayout from "../layouts/PageLayout";
+import Sma from "../pages/majors/Sma";
+import Smp from "../pages/majors/Smp";
+import Ea from "../pages/majors/Ea";
+import Sv from "../pages/majors/Sv";
+import Smc from "../pages/majors/Smc";
+import Geo from "../pages/majors/Geo";
+import Seg from "../pages/majors/Seg";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +40,47 @@ export const router = createBrowserRouter([
                 path: '/',
                 element: <HomePage />
             },
+            
+            
+        ]
+    },
+    {
+        element: <PageLayout />,
+        children: [
+            {
+                path: '/smi',
+                element: <Smi />
+            },
+            {
+                path: '/sma',
+                element: <Sma />
+            },
+            {
+                path: '/smp',
+                element: <Smp />
+            },
+            {
+                path: '/ea',
+                element: <Ea />
+            },
+            {
+                path: '/sv',
+                element: <Sv/>
+            },
+            {
+                path: '/smc',
+                element: <Smc />
+            },
+            {
+                path: '/geo',
+                element: <Geo/>
+            },
+            {
+                path: '/seg',
+                element: <Seg />
+            },
+            
+            
         ]
     }
 ])
