@@ -71,13 +71,13 @@ const HomePage = () => {
                 </div>
                 <div className="grid grid-cols-5 gap-5">
                     <Major label="science mathématique et informatique" url="/smi" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
-                    <Major label="science mathématique et application" url="#" img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
-                    <Major label="science economie et gestion" url="#" img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
-                    <Major label="science de la matière physique" url="#" img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />
-                    <Major label="science de la matière chimie" url="#" img_src="https://fpk-biblio.netlify.app/img/smc.jpg" />
-                    <Major label="sciences de la Vie" url="#" img_src="https://fpk-biblio.netlify.app/img/sv.jpg" />
-                    <Major label="géographie" url="#" img_src="https://fpk-biblio.netlify.app/img/geo.jpg" />
-                    <Major label="études arabe" url="#" img_src="https://fpk-biblio.netlify.app/img/ea.jpg" />
+                    <Major label="science mathématique et application" url="/sma" img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
+                    <Major label="science economie et gestion" url="seg" img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
+                    <Major label="science de la matière physique" url="smp" img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />
+                    <Major label="science de la matière chimie" url="smc" img_src="https://fpk-biblio.netlify.app/img/smc.jpg" />
+                    <Major label="sciences de la Vie" url="sv" img_src="https://fpk-biblio.netlify.app/img/sv.jpg" />
+                    <Major label="géographie" url="geo" img_src="https://fpk-biblio.netlify.app/img/geo.jpg" />
+                    <Major label="études arabe" url="ea" img_src="https://fpk-biblio.netlify.app/img/ea.jpg" />
                 </div>
             </section>
 
