@@ -14,6 +14,7 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
+import ApplyPage from "../pages/ApplyPage";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUpPage />
+            },
+            {
+                path: '/apply',
+                element: <ApplyPage />
             },
             {
                 path: '*',
