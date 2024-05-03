@@ -7,9 +7,13 @@ const Navbar = () => {
         {
             label: "ETABLISSEMENT",
             children: [
-                {label: "link 1", url: "url 1"},
-                {label: "link 2", url: "url 2"},
-                {label: "link 3", url: "url 3"}
+                {label: "Mot du Doyen", url: "url 1"},
+                {label: "Présentation", url: "url 2"},
+                {label: "Staff administratif", url: "url 3"},
+                {label: "Départements", url: "url 3"},
+                {label: "Réglementation", url: "url 3"},
+                {label: "Galerie", url: "url 3"},
+                {label: "Video", url: "url 3"}
             ]
         },
         {
@@ -24,19 +28,16 @@ const Navbar = () => {
         {
             label: "ESPACE ETUDIANTS",
             children: [
-                {label: "Another sub menu link 1", url: "url 1"},
-                {label: "Another sub menu link 2", url: "url 1"},
-                {label: "Another sub menu link 3", url: "url 1"},
-                {label: "Another sub menu link 4", url: "url 1"},
-                {label: "Another sub menu link 5", url: "url 1"}
+                {label: "Evénements", url: "url 1"},
+                {label: "Clubs", url: "url 1"},
+                {label: "Activités para-universitaires", url: "url 1"}
             ]
         },
         {
             label: "RECHERCHE & COOPÉRATION",
             children: [
-                {label: "link 1", url: "url 1"},
-                {label: "link 2", url: "url 2"},
-                {label: "link 3", url: "url 3"}
+                {label: "Laboratoires", url: "url 1"},
+                {label: "Thèses", url: "url 1"}
             ]
         },
         {
