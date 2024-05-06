@@ -43,8 +43,7 @@ const SignUpPage = () => {
                         <label htmlFor="password2">Mot de passe (répété)</label>
                         <input type="password" name="password2" id="password2" placeholder="Répétez le mot de passe ici" className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" />
                     </div>
-
-                    <p>Forgot your password ? <a href="#" className="text-orange-400">Reset it here.</a></p>
+                    <p>Mot de passe oublié?<a href="#" className="text-orange-400"> Réinitialisez-le ici.</a></p>
 
                     <input type="submit" value="Sign Up" className="py-2 px-3 rounded-lg text-white bg-orange-400" />
 
