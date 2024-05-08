@@ -8,9 +8,9 @@ const NavbarDropMenu = ({ label, subElementsList }) => {
     if (subElementsList) {
         subMenu = (
             <div className="absolute -translate-x-1/2 left-1/2 pt-9 hidden group-hover:block text-nowrap">
-                <ul className="px-5 shadow bg-white">
+                <ul className="shadow bg-white">
                     {subElementsList.map(( {label, url} ) => (
-                        <li key={label} className="py-3 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
+                        <li key={label} className="py-3 px-5 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
                             <a href={url} className="w-full block">{label}</a>
                         </li>
                     ))}
