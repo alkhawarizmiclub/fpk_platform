@@ -31,7 +31,7 @@ const Staff = ({ first_name, last_name, occupation, img_src }) => {
             <div className="mb-5 max-w-48 w-full aspect-square overflow-hidden rounded-full flex items-center justify-center bg-slate-300">
                 <img src={img_src} class="object-cover w-full h-full" alt={`${first_name} ${last_name}'s portrait image`}/>
             </div>
-        </div>
+        </div > 
     );
 }
 
