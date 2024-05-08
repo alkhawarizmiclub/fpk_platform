@@ -5,8 +5,11 @@ import SignUpPage from "../pages/SignUpPage";
 import Error404Page from "../pages/Error404Page";
 import PlainLayout from "../layouts/PlainLayout";
 import UserLayout from "../layouts/UserLayout";
-import Smi from "../pages/majors/Smi" ;
 import PageLayout from "../layouts/PageLayout";
+import ApplyPage from "../pages/ApplyPage";
+import PresentationPage from "../pages/PresentationPage";
+import StaffPage from "../pages/StaffPage";
+import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
 import Ea from "../pages/majors/Ea";
@@ -15,20 +18,34 @@ import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
 
-export const router = createBrowserRouter([
+const Paths = {
+    HOME_PAGE: "/",
+    LOGIN_PAGE: "/login",
+    SIGN_PAGE: "/signup",
+    APPLY_PAGE: "/apply",
+    PRESENTATION_PAGE: "/p/presenetation",
+    STAFF_PAGE: "/p/staff",
+    ERROR_PAGE: "*"
+}
+
+const router = createBrowserRouter([
     {
         element: <PlainLayout />,
         children: [
             {
-                path: '/login',
+                path: Paths.LOGIN_PAGE,
                 element: <LoginPage />
             },
             {
-                path: '/signup',
+                path: Paths.SIGN_PAGE,
                 element: <SignUpPage />
             },
             {
-                path: '*',
+                path: Paths.APPLY_PAGE,
+                element: <ApplyPage />
+            },
+            {
+                path: Paths.ERROR_PAGE,
                 element: <Error404Page />
             }
         ]
@@ -37,50 +54,24 @@ export const router = createBrowserRouter([
         element: <UserLayout />,
         children: [
             {
-                path: '/',
+                path: Paths.HOME_PAGE,
                 element: <HomePage />
-            },
-            
-            
+            }
         ]
     },
     {
-        element: <PageLayout />,
+        path: "/p",
         children: [
             {
-                path: '/smi',
-                element: <Smi />
+                path: Paths.PRESENTATION_PAGE,
+                element: <PresentationPage page_title="Presenetation" />
             },
             {
-                path: '/sma',
-                element: <Sma />
-            },
-            {
-                path: '/smp',
-                element: <Smp />
-            },
-            {
-                path: '/ea',
-                element: <Ea />
-            },
-            {
-                path: '/sv',
-                element: <Sv/>
-            },
-            {
-                path: '/smc',
-                element: <Smc />
-            },
-            {
-                path: '/geo',
-                element: <Geo/>
-            },
-            {
-                path: '/seg',
-                element: <Seg />
-            },
-            
-            
+                path: Paths.STAFF_PAGE,
+                element: <StaffPage page_title="Staff administratif" />
+            }
         ]
     }
 ])
+
+export { Paths, router };
