@@ -9,43 +9,40 @@ const Navbar = () => {
         {
             label: "ETABLISSEMENT",
             children: [
-                { label: "Mot du Doyen", url: "url 1" },
+                { label: "Mot du Doyen", url: Paths.WORD_FROM_THE_DEAN_PAGE },
                 { label: "Présentation", url: Paths.PRESENTATION_PAGE },
                 { label: "Staff administratif", url: Paths.STAFF_PAGE },
-                { label: "Départements", url: "/url 3" },
-                { label: "Réglementation", url: "/url 3" },
-                { label: "Galerie", url: "/url 3" },
-                { label: "Video", url: "/url 3" }
+                { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
+                { label: "Réglementation", url: Paths.REGULATION_PAGE },
+                { label: "Galerie", url: Paths.MEDIA_PAGE }
             ]
         },
         {
-            label: "FORMATION",
+            label: "FORMATIONS",
             children: [
-                { label: "Licence Fondamentale", url: "/lf" },
-                { label: "Licence Professionnelle", url: "/lp" },
-                { label: "Master", url: "/master" },
-                { label: "Doctorat", url: "/doctorat" }
+                { label: "Licence Fondamentale", url: Paths.BACHELORS_PAGE },
+                { label: "Licence Professionnelle", url: Paths.PROFESSIONAL_BACHELORS_PAGE },
+                { label: "Master", url: Paths.MASTERS_PAGE },
+                { label: "Doctorat", url: Paths.PHDS_PAGE }
             ]
         },
         {
             label: "ESPACE ETUDIANTS",
             children: [
-                { label: "Evénements", url: "url 1" },
-                { label: "Clubs", url: "url 1" },
-                { label: "Activités para-universitaires", url: "url 1" }
+                { label: "Espace Numerique de Travail", url: Paths.ENT_PAGE },
+                { label: "Evénements", url: Paths.EVENTS_PAGE },
+                { label: "Clubs", url: Paths.CLUBS_PAGE },
+                { label: "Activités para-universitaires", url: Paths.EXTRACURRICULAR_ACTIVITIES_PAGE }
             ]
         },
         {
             label: "RECHERCHE & COOPÉRATION",
             children: [
-                { label: "Laboratoires", url: "url 1" },
-                { label: "Thèses", url: "url 1" }
+                { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
+                { label: "Thèses", url: Paths.THESES_PAGE }
             ]
         },
-        {
-            label: "CONTACT",
-            url: "/contact"
-        }
+        { label: "CONTACT", url: Paths.CONTACT_PAGE }
     ]
 
     return (
@@ -66,7 +63,7 @@ const Navbar = () => {
                     <Link className="py-3 px-6 block" to={Paths.LOGIN_PAGE}>Login</Link>
                 </Button>
                 <Button>
-                    <Link className="py-3 px-6 block" to={Paths.APPLY_PAGE}>Apply</Link>
+                    <Link className="py-3 px-6 block" to={Paths.SIGNUP_PAGE}>Apply</Link>
                 </Button>
             </div>
 
