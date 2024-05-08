@@ -1,17 +1,18 @@
-import { Outlet } from "react-router-dom";
+import HeaderPage from "../components/HeaderPage";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-const PageLayout = () => {
+const PageLayout = ({ page_title, children }) => {
     return (
-     <>
-            <Navbar/>
-            <main>
-                <Outlet/>
+        <>
+            <Navbar />
+            <HeaderPage page_title={page_title} />
+            <main className="grow">
+                {children}
             </main>
-            <Footer/>
-    </>
+            <Footer />
+        </>
     );
 }
- 
+
 export default PageLayout;
