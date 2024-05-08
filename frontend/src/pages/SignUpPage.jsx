@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { Paths } from "../routers/router";
+
 const SignUpPage = () => {
     return (
         <div className="min-h-screen flex">
@@ -51,11 +54,11 @@ const SignUpPage = () => {
 
             </div>
 
-            <div className="p-48 w-1/2 bg-cover bg-no-repeat bg-center bg-[url(http://www.fpk.ac.ma/wp-content/uploads/2023/03/20220309_152649-scaled.jpg)]">
+            <div className="p-48 w-1/2 bg-cover bg-no-repeat bg-center bg-[url(/signup_bg.jpg)]">
                 <div className="w-full h-full flex rounded-lg shadow shadow-black/20 backdrop-blur-3xl">
-                    <a href="#" className="grow flex justify-center items-center">
+                    <Link to={Paths.HOME_PAGE} className="grow flex justify-center items-center">
                         <img src="/fpk_logo.svg" className="max-w-64" />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
