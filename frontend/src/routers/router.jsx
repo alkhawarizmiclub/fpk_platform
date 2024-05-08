@@ -21,33 +21,40 @@ import Seg from "../pages/majors/Seg";
 const Paths = {
     HOME_PAGE: "/",
     LOGIN_PAGE: "/login",
-    SIGN_PAGE: "/signup",
+    SIGNUP_PAGE: "/signup",
     APPLY_PAGE: "/apply",
-    PRESENTATION_PAGE: "/p/presenetation",
-    STAFF_PAGE: "/p/staff",
-    ERROR_PAGE: "*"
+    CONTACT_PAGE: "/apply",
+    WORD_FROM_THE_DEAN_PAGE: "/mot-du-doyen",
+    PRESENTATION_PAGE: "/presenetation",
+    STAFF_PAGE: "/staff",
+    DEPARTMENTS_PAGE: "/departements",
+    REGULATION_PAGE: "/reglementation",
+    MEDIA_PAGE: "/media",
+    TRACKS_PAGE: "/formations",
+    BACHELORS_PAGE: "/formations/licence-fondamentale",
+    PROFESSIONAL_BACHELORS_PAGE: "/formations/licence-professionnelle",
+    MASTERS_PAGE: "/formations/master",
+    PHDS_PAGE: "/formations/doctorat",
+    E_STUDENT_PAGE: "/e-student",
+    E_TEACHER_PAGE: "/e-enseignant",
+    EVENTS_PAGE: "/events",
+    CLUBS_PAGE: "/clubs",
+    EXTRACURRICULAR_ACTIVITIES_PAGE: "/activite-parascolaire",
+    LABOLATORIES_PAGE: "/recherche/laboratoires",
+    THESES_PAGE: "/recherche/theses",
+    ANNOUNCEMENTS_PAGE: "/avis",
+    ERROR_PAGE: "*",
+    AL_KHAWARIZMI_CLUB_URL: "https://www.example.com/"
 }
 
 const router = createBrowserRouter([
     {
         element: <PlainLayout />,
         children: [
-            {
-                path: Paths.LOGIN_PAGE,
-                element: <LoginPage />
-            },
-            {
-                path: Paths.SIGN_PAGE,
-                element: <SignUpPage />
-            },
-            {
-                path: Paths.APPLY_PAGE,
-                element: <ApplyPage />
-            },
-            {
-                path: Paths.ERROR_PAGE,
-                element: <Error404Page />
-            }
+            { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
+            { path: Paths.SIGNUP_PAGE, element: <SignUpPage /> },
+            { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
+            { path: Paths.ERROR_PAGE, element: <Error404Page /> }
         ]
     },
     {
@@ -59,19 +66,8 @@ const router = createBrowserRouter([
             }
         ]
     },
-    {
-        path: "/p",
-        children: [
-            {
-                path: Paths.PRESENTATION_PAGE,
-                element: <PresentationPage page_title="Presenetation" />
-            },
-            {
-                path: Paths.STAFF_PAGE,
-                element: <StaffPage page_title="Staff administratif" />
-            }
-        ]
-    }
+    { path: Paths.PRESENTATION_PAGE, element: <PresentationPage page_title="Presenetation" /> },
+    { path: Paths.STAFF_PAGE, element: <StaffPage page_title="Staff administratif" /> },
 ])
 
 export { Paths, router };
