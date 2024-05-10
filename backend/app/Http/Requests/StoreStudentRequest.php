@@ -30,7 +30,7 @@ class StoreStudentRequest extends FormRequest
             'firstname' => 'required|string|max:64',
             'lastname' => 'required|string|max:64',
             'email' => 'required|email|unique:students|max:255',
-            'phone_number' => 'required|string|min:10|unique:students|max:10',
+            'phone_number' => 'required|string|unique:students',
             'birth_date' => 'required|date|date_format:Y-m-d',
             'password' => 'required|string|min:8',
             'gender' => ['required', Rule::in($allowedGenders)]

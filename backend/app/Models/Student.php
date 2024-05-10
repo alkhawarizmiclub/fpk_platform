@@ -22,4 +22,10 @@ class Student extends Model
     ];
     protected $table = 'students';
     protected $primaryKey = 'apogee';
+    public $incrementing = true;
+    public $timestamps = true;
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class, 'module_student', 'apogee', 'module_id');
+    }
 }
