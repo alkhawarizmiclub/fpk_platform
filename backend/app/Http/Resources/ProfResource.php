@@ -14,6 +14,15 @@ class ProfResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'phone_number' => $this->phone_number,
+            'gender' => $this->gender,
+            'birth_date' => $this->birth_date,
+            'modules' => ModuleResource::collection($this->whenLoaded('modules'))
+        ];
     }
 }

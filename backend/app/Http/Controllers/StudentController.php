@@ -73,7 +73,7 @@ class StudentController extends Controller
                 'message' => 'student retrieved successfully',
                 'data' => $student
             ],
-            201
+            200
         );
     }
 

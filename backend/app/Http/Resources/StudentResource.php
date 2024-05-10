@@ -22,6 +22,7 @@ class StudentResource extends JsonResource
             'phone_number' => $this->phone_number,
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
+            'modules' => $this->whenLoaded('modules')
         ];
     }
 }
