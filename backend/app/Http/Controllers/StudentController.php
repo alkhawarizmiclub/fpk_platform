@@ -6,9 +6,15 @@ use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use App\Http\Resources\StudentResource;
+use App\Services\StudentService;
 
 class StudentController extends Controller
 {
+    protected StudentService $studentService ;
+    public function __construct(StudentService $studentService)
+    {
+        $this->studentService = $studentService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,12 +44,13 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        Student::create($request->all());
+        $student = Student::create($request->all());
+        $this->studentService->setDefaultModules($student);
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student created successfully',
-                'data' => $request->all()
+                'data' => new StudentResource($student)
             ],
             201
         );
