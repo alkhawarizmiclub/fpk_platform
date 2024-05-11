@@ -1,17 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
-import Navbar from "../components/ent/Navbar";
+import Navbar from "../components/Navbar";
 
-const UserLayout = () => {
+const StaticPageLayout = () => {
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <main className="grow">
-                <Outlet/>
+                {<Outlet />}
             </main>
-            <Footer/>
+            <Footer />
         </>
     );
 }
 
-export default UserLayout;
+export default StaticPageLayout;
