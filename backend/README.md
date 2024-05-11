@@ -23,3 +23,13 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## API docs
+
+/api/students => get all students 
+/api/students => create new student
+
+/api/students/{id} => get stduent by id
+/api/students/{id}/modules => get stduent modules (not impl yet (TODO))
+
+/api/profs/{id}/modules => get all prof modules
+/api/profs/{id}/modules/{moduleId} => get all student who has that module (list insciption)
+
