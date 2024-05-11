@@ -9,6 +9,7 @@ import MajorCategory from '../components/MajorCategory';
 import Announcement from '../components/Announcement';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
+import { Paths } from '../routers/router';
 
 const HomePage = () => {
     return (
@@ -16,10 +17,10 @@ const HomePage = () => {
 
             <section className='px-10'>
                 <div className="-translate-y-5 grid grid-cols-4 gap-10 text-center">
-                    <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url="/" />
-                    <HomeGateElement icon={faChalkboardTeacher} label="espace enseignants" url="/" />
-                    <HomeGateElement icon={faBullhorn} label="avis et announces" url="/" />
-                    <HomeGateElement icon={faPeopleGroup} label="clubs et organisations" url="/" />
+                    <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url={Paths.E_STUDENT_PAGE} />
+                    <HomeGateElement icon={faChalkboardTeacher} label="espace enseignants" url={Paths.E_TEACHER_PAGE} />
+                    <HomeGateElement icon={faBullhorn} label="avis et announces" url={Paths.ANNOUNCEMENTS_PAGE} />
+                    <HomeGateElement icon={faPeopleGroup} label="clubs et organisations" url={Paths.CLUBS_PAGE} />
                 </div>
             </section>
 
@@ -30,6 +31,11 @@ const HomePage = () => {
                         <p>La Faculté Polydisciplinaire de Khouribga (FPK) a été créée en 2005 dans le cadre de la politique de décentralisation et de régionalisation que connait le Maroc.</p>
                         <p>La FPK est consciente du rôle qu'elle doit jouer pour être à la hauteur des attentes de la population de cette Province, établissement universitaire relevant de l'Université Sultan Moulay Sliman et ayant pour vocation la formation sous toutes ces formes (initiale et continue).</p>
                         <p>De par sa vocation la Faculté Polydisciplinaire de Khouribga offre des formations diversifiées couvrant plusieurs champs disciplinaires sous forme de filières à enseignement modulaire.</p>
+                        <div>
+                            <Button plain_bg={true} >
+                                <Link className="py-3 px-6 block" to={Paths.PRESENTATION_PAGE}>Show More</Link>
+                            </Button>
+                        </div>
                     </div>
                     <div>
                         <div className="aspect-video rounded-lg bg-cover bg-norepeat bg-center bg-[url(/map.jpg)]"></div>
@@ -91,6 +97,11 @@ const HomePage = () => {
                     <Announcement title="Announcement title #9" url="#" img_src="/w.jpg" />
                     <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="/w.jpg" />
                 </div>
+                <div className="text-center">
+                    <Button plain_bg={true} >
+                        <Link className="py-3 px-6 block" to={Paths.ANNOUNCEMENTS_PAGE} >Show More</Link>
+                    </Button>
+                </div>
             </Section>
 
             <Section title="activités & événements" className="p-10 bg-slate-100">
@@ -105,8 +116,8 @@ const HomePage = () => {
                     <Activity label="Activitie number #8" url="#" img_src="/w.jpg" date_day="30" date_month="July" date_year="2024" location="Casablanca" />
                 </div>
                 <div className="text-center">
-                    <Button >
-                        <Link className="py-3 px-6 block" to="/">Show More</Link>
+                    <Button plain_bg={true} >
+                        <Link className="py-3 px-6 block" to={Paths.EXTRACURRICULAR_ACTIVITIES_PAGE}>Show More</Link>
                     </Button>
                 </div>
             </Section>
