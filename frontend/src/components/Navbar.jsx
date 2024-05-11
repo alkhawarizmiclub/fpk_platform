@@ -9,10 +9,9 @@ const Navbar = () => {
         {
             label: "ETABLISSEMENT",
             children: [
-                { label: "Mot du Doyen", url: Paths.WORD_FROM_THE_DEAN_PAGE },
+                { label: "Mot du Doyen", url: Paths.DEAN_WORD_PAGE },
                 { label: "Présentation", url: Paths.PRESENTATION_PAGE },
                 { label: "Staff administratif", url: Paths.STAFF_PAGE },
-                { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
                 { label: "Réglementation", url: Paths.REGULATION_PAGE },
                 { label: "Galerie", url: Paths.MEDIA_PAGE }
             ]
@@ -38,6 +37,7 @@ const Navbar = () => {
         {
             label: "RECHERCHE & COOPÉRATION",
             children: [
+                { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
                 { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
                 { label: "Thèses", url: Paths.THESES_PAGE }
             ]
@@ -53,8 +53,8 @@ const Navbar = () => {
             </Link>
 
             <ul className="flex gap-5 font-semibold">
-                {navLinks.map(({ label, children }) => (
-                    <li key={label} ><NavbarDropMenu label={label} subElementsList={children} /></li>
+                {navLinks.map(({ label, url, children }) => (
+                    <li key={label} ><NavbarDropMenu label={label} url={url} subElementsList={children} /></li>
                 ))}
             </ul>
 

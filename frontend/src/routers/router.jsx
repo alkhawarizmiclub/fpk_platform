@@ -20,29 +20,35 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
+import UserLayout from "../layouts/UserLayout";
+import EntStudentDashbordPage from "../pages/ent/student/EntStudentDashbordPage";
 
 const Paths = {
     HOME_PAGE: "/",
     LOGIN_PAGE: "/login",
     SIGNUP_PAGE: "/signup",
     APPLY_PAGE: "/apply",
-    CONTACT_PAGE: "/apply",
+    CONTACT_PAGE: "/contact",
     DEAN_WORD_PAGE: "/mot-du-doyen",
     PRESENTATION_PAGE: "/presenetation",
     STAFF_PAGE: "/staff",
-    DEPARTMENTS_PAGE: "/departements",
     REGULATION_PAGE: "/reglementation",
     MEDIA_PAGE: "/media",
+
     TRACKS_PAGE: "/formations",
     BACHELORS_PAGE: "/formations/licence-fondamentale",
     PROFESSIONAL_BACHELORS_PAGE: "/formations/licence-professionnelle",
     MASTERS_PAGE: "/formations/master",
     PHDS_PAGE: "/formations/doctorat",
+    
     E_STUDENT_PAGE: "/e-student",
     E_TEACHER_PAGE: "/e-enseignant",
+    
     EVENTS_PAGE: "/events",
     CLUBS_PAGE: "/clubs",
     EXTRACURRICULAR_ACTIVITIES_PAGE: "/activite-parascolaire",
+    
+    DEPARTMENTS_PAGE: "/recherche/departements",
     LABOLATORIES_PAGE: "/recherche/laboratoires",
     THESES_PAGE: "/recherche/theses",
     ANNOUNCEMENTS_PAGE: "/avis",
@@ -72,6 +78,12 @@ const router = createBrowserRouter([
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
         ]
     },
+    {
+        element: <UserLayout />,
+        children: [
+            { path: "/e-student", element: <EntStudentDashbordPage />}
+        ]
+    }
 ])
 
 export { Paths, router };
