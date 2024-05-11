@@ -3,12 +3,9 @@ import Footer from "../components/Footer";
 
 const PlainLayout = () => {
     return (
-        <>
-            <main className="grow">
-                <Outlet />
-            </main>
-            <Footer />
-        </>
+        <main className="grow">
+            <Outlet />
+        </main>
     );
 }
 

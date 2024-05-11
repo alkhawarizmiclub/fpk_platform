@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Paths } from "../routers/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 const SignUpPage = () => {
     return (
@@ -7,6 +9,13 @@ const SignUpPage = () => {
             <div className="p-10 w-1/2 flex justify-center items-center">
 
                 <form method="post" className="w-full max-w-lg flex flex-col gap-5">
+
+                    <p>
+                        <Link to={Paths.HOME_PAGE} className="w-full space-x-2 text-sm text-slate-600">
+                            <FontAwesomeIcon icon={faArrowLeftLong} />
+                            <span>Go back Home</span>
+                        </Link>
+                    </p>
 
                     <div className="flex gap-5">
                         <div className="w-1/2 flex flex-col">

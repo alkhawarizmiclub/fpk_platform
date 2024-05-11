@@ -1,14 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
+import BlankLayout from "../layouts/BlankLayout";
+import StaticPageLayout from "../layouts/StaticPageLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
-import Error404Page from "../pages/Error404Page";
-import PlainLayout from "../layouts/PlainLayout";
-import UserLayout from "../layouts/UserLayout";
-import PageLayout from "../layouts/PageLayout";
 import ApplyPage from "../pages/ApplyPage";
-import PresentationPage from "../pages/PresentationPage";
-import StaffPage from "../pages/StaffPage";
+import Error404Page from "../pages/static/Error404Page";
+import PresentationPage from "../pages/static/PresentationPage";
+import StaffPage from "../pages/static/StaffPage";
+import DepartmentsPage from "../pages/static/DepartmentsPage";
+import RegulationPage from "../pages/static/RegulationPage";
+import MediaPage from "../pages/static/MediaPage";
+import DeanWordPage from "../pages/static/DeanWordPage";
 import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
@@ -24,7 +27,7 @@ const Paths = {
     SIGNUP_PAGE: "/signup",
     APPLY_PAGE: "/apply",
     CONTACT_PAGE: "/apply",
-    WORD_FROM_THE_DEAN_PAGE: "/mot-du-doyen",
+    DEAN_WORD_PAGE: "/mot-du-doyen",
     PRESENTATION_PAGE: "/presenetation",
     STAFF_PAGE: "/staff",
     DEPARTMENTS_PAGE: "/departements",
@@ -48,8 +51,9 @@ const Paths = {
 }
 
 const router = createBrowserRouter([
+    { path: Paths.HOME_PAGE, element: <HomePage /> },
     {
-        element: <PlainLayout />,
+        element: <BlankLayout />,
         children: [
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
             { path: Paths.SIGNUP_PAGE, element: <SignUpPage /> },
@@ -58,16 +62,16 @@ const router = createBrowserRouter([
         ]
     },
     {
-        element: <UserLayout />,
+        element: <StaticPageLayout/>,
         children: [
-            {
-                path: Paths.HOME_PAGE,
-                element: <HomePage />
-            }
+            { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage />},
+            { path: Paths.PRESENTATION_PAGE, element: <PresentationPage />},
+            { path: Paths.STAFF_PAGE, element: <StaffPage /> },
+            { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
+            { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
+            { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
         ]
     },
-    { path: Paths.PRESENTATION_PAGE, element: <PresentationPage page_title="Presenetation" /> },
-    { path: Paths.STAFF_PAGE, element: <StaffPage page_title="Staff administratif" /> },
 ])
 
 export { Paths, router };
