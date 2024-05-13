@@ -39,6 +39,7 @@ class StudentController extends Controller
     {
         return ($this->studentService->save($request));
     }
+
     public function modules(string $id)
     {
         return ($this->studentService->getModules($id));
@@ -52,6 +53,10 @@ class StudentController extends Controller
         return ($this->studentService->findById($id));
     }
 
+    public function getResult(string $id)
+    {
+        return ($this->studentService->getNote($id));
+    }
 
     /**
      * Remove the specified resource from storage.

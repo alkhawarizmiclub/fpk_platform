@@ -9,8 +9,8 @@ use App\Models\Prof;
 use App\Http\Resources\ModuleResource;
 use App\Services\ProfService;
 use Illuminate\Http\Response;
-use ModuleService;
-use Template;
+use App\Services\ModuleService;
+use App\Services\Template;
 
 class ModuleController extends Controller
 {
@@ -34,19 +34,29 @@ class ModuleController extends Controller
      */
     public function store(StoreModuleRequest $request)
     {
+
         return ($this->moduleService->save($request));
     }
 
-
-    public function assignProf(string $moduleId)
+    // TODO : move to defferant route
+    public function show(string $moduleId)
     {
         $module = Module::find($moduleId);
         if (!$module)
             return (Template::NOT_FOUND('Module'));
-        if ($module->prof_id != NULL)
+        $profId  = request()->query('profId');
+        if (!$profId)
+            return ($this->moduleService->toJson($module));
+        if (Prof::find($profId) == null)
+            return (Template::NOT_FOUND('Prof'));
+        if ($module->prof_id != null)
             return (Template::ERROR('module already have a prof', Response::HTTP_CONFLICT));
-
-
+        $_ = $module->update(['prof_id' => $profId]);
+        return (response()->json([
+            'status' => 'success',
+            'message' => 'module has been assign',
+            'data' => $_,
+        ], Response::HTTP_OK));
     }
     /**
      * Update the specified resource in storage.

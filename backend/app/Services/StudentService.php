@@ -6,6 +6,7 @@ use App\Http\Resources\ModuleResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use App\http\Requests\StoreStudentRequest;
+use App\Models\Result;
 
 class StudentService
 {
@@ -16,7 +17,7 @@ class StudentService
 
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([1, 2]);
+        $student->modules()->attach([1, 2, 3]);
     }
 
     public function getModules(string $id)
@@ -36,7 +37,7 @@ class StudentService
         return response()->json(
             [
                 'status' => 'success',
-                'message' => 'prof retrieved successfully',
+                'message' => 'student retrieved successfully',
                 'data' => $module
             ],
             200
@@ -66,6 +67,7 @@ class StudentService
             200
         );
     }
+
     public function save(StoreStudentRequest $request)
     {
         $student = Student::create($request->all());
@@ -77,6 +79,18 @@ class StudentService
                 'data' => new StudentResource($student)
             ],
             201
+        );
+    }
+    public function getNote(string $id)
+    {
+        $module = Result::where('apogee', $id)->get();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'module retrieved successfully',
+                'data' => $module
+            ],
+            200
         );
     }
 }
