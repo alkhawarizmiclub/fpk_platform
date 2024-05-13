@@ -13,5 +13,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::apiResource('/students', StudentController::class);
 Route::apiResource('/profs', ProfController::class);
 Route::apiResource('/modules', ModuleController::class);
+
+
+Route::get('/students/{id}/modules', [StudentController::class, 'modules']);
 Route::get('/profs/{id}/modules', [ProfController::class, 'getModules']);
 Route::get('/profs/{profId}/modules/{moduleId}', [ProfController::class, 'getListInscriptions']);

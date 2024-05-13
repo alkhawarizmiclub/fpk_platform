@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProfRequest;
 use App\Http\Requests\UpdateProfRequest;
 use App\Http\Resources\ProfResource;
-use App\Models\Module;
 use App\Models\Prof;
-use Illuminate\Database\QueryException;
-use App\Http\Resources\ModuleResource;
-use App\Http\Resources\StudentResource;
+use App\Services\ProfService;
 
 class ProfController extends Controller
 {
+    private ProfService $profService;
+    public function __construct(ProfService $profService)
+    {
+        $this->profService = $profService;
+    }
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $prof = ProfResource::collection(Prof::all());
@@ -34,25 +37,7 @@ class ProfController extends Controller
      */
     public function store(StoreProfRequest $request)
     {
-        try {
-            Prof::create($request->all());
-        } catch (QueryException $_) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'server error',
-                ],
-                500
-            );
-        }
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Prof created successfully',
-                'data' => $request->all()
-            ],
-            201
-        );
+        return ($this->profService->save($request));
     }
 
     /**
@@ -60,76 +45,8 @@ class ProfController extends Controller
      */
     public function show(string $id)
     {
-        $prof = Prof::find($id);
-        if (!$prof) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'prof not found',
-                    'data' => null
-                ],
-                404
-            );
-        };
-        $prof  = new ProfResource($prof);
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'prof retrieved successfully',
-                'data' => $prof
-            ],
-            200
-        );
+        return ($this->profService->findById($id));
     }
-    public function getModules(string $id)
-    {
-        $prof = Prof::find($id)->load('modules');
-        if (!$prof) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'prof not found',
-                    'data' => null
-                ],
-                404
-            );
-        };
-        $prof  = new ProfResource($prof);
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'prof retrieved successfully',
-                'data' => $prof
-            ],
-            200
-        );
-    }
-    public function getListInscriptions(string $profId, string $moduleId)
-    {
-        $module = Module::where('prof_id', $profId,)->where('id', $moduleId)->exists();
-        if (!$module ){
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'Resource not Available',
-                    'data' => null
-                ],
-                404
-            );
-        };
-        $module  = StudentResource::collection(Module::find($moduleId)->students);
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'module retrieved successfully',
-                'data' => $module
-            ],
-            200
-        );
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
