@@ -10,8 +10,8 @@ const NavbarDropMenu = ({ label, url, subElementsList }) => {
         subMenu = (
             <div className="absolute -translate-x-1/2 left-1/2 pt-9 hidden group-hover:block text-nowrap">
                 <ul className="shadow bg-white">
-                    {subElementsList.map(({ label, url }) => (
-                        <li key={label} className="py-3 px-5 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
+                    {subElementsList.map(({ label, url }, i) => (
+                        <li key={i} className="py-3 px-5 text-slate-900 hover:text-slate-600 border-b border-slate-200 last:border-0">
                             <Link to={url} className="w-full block">{label}</Link>
                         </li>
                     ))}
@@ -29,9 +29,9 @@ const NavbarDropMenu = ({ label, url, subElementsList }) => {
                 )}
 
                 {url ? (
-                    <Link to={url}>{label}</Link>
+                    <Link to={url} className="capitalize">{label}</Link>
                 ) : (
-                    <div >{label}</div>
+                    <div className="capitalize">{label}</div>
                 )}
 
             </div>
