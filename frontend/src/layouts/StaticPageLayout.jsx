@@ -6,8 +6,10 @@ const StaticPageLayout = () => {
     return (
         <>
             <Navbar />
-            <main className="grow">
-                {<Outlet />}
+            <main className="grow flex flex-col justify-start bg-gray-100">
+                <div className="mx-auto w-full max-w-[1300px] shadow bg-white">
+                    {<Outlet />}
+                </div>
             </main>
             <Footer />
         </>

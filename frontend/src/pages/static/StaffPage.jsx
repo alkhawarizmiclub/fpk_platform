@@ -1,8 +1,10 @@
+import StaticPageContainer from "../../layouts/StaticPageContainer";
+
 const StaffPage = () => {
     return (
-        <>
-            Staff administratif
-        </>
+        <StaticPageContainer page_title="Staff">
+            Staff
+        </StaticPageContainer>
     );
 }
 

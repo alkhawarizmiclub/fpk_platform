@@ -1,0 +1,44 @@
+{
+    "HOME_PAGE": "/",
+    "LOGIN_PAGE": "/login",
+    "SIGNUP_PAGE": "/signup",
+    "LOGOUT_PAGE": "/logout",
+    "APPLY_PAGE": "/apply",
+    "CONTACT_PAGE": "/contact",
+    "DEAN_WORD_PAGE": "/mot-du-doyen",
+    "PRESENTATION_PAGE": "/presenetation",
+    "STAFF_PAGE": "/staff",
+    "REGULATION_PAGE": "/reglementation",
+    "MEDIA_PAGE": "/media",
+
+    "TRACKS_PAGE": "/formations",
+    "BACHELORS_PAGE": "/formations/licence-fondamentale",
+    "PROFESSIONAL_BACHELORS_PAGE": "/formations/licence-professionnelle",
+    "MASTERS_PAGE": "/formations/master",
+    "PHDS_PAGE": "/formations/doctorat",
+
+    "E_STUDENT_DASHBOARD_PAGE": "/e-etudiant",
+    "E_STUDENT_RESULTS_PAGE": "/e-etudiant/resultats",
+    "E_STUDENT_ACCOUNTS_PAGE": "/e-etudiant/comptes",
+    "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
+    "E_STUDENT_PLANNING_PAGE": "/e-etudiant/planning",
+    "E_STUDENT_SCHEDULES_PAGE": "/e-etudiant/emplois",
+    "E_STUDENT_E_DOCUMENTS_PAGE": "/e-etudiant/e-documents",
+    "E_STUDENT_INSCRIPTIONS_PAGE": "/e-etudiant/e-documents",
+
+    "E_TEACHER_PAGE": "/e-enseignant",
+
+    "EVENTS_PAGE": "/events",
+    "CLUBS_PAGE": "/clubs",
+    "EXTRACURRICULAR_ACTIVITIES_PAGE": "/activite-parascolaire",
+
+    "DEPARTMENTS_PAGE": "/recherche/departements",
+    "LABOLATORIES_PAGE": "/recherche/laboratoires",
+    "THESES_PAGE": "/recherche/theses",
+
+    "ANNOUNCEMENTS_PAGE": "/avis",
+
+    "ERROR_PAGE": "*",
+
+    "AL_KHAWARIZMI_CLUB_URL": "https://www.example.com/"
+}

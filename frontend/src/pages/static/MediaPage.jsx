@@ -1,6 +1,10 @@
+import StaticPageContainer from "../../layouts/StaticPageContainer";
+
 const MediaPage = () => {
     return (
-        <>MediaPage</>
+        <StaticPageContainer page_title="MediaPage">
+            MediaPage
+        </StaticPageContainer>
     );
 }
 

@@ -1,6 +1,10 @@
+import StaticPageContainer from "../../layouts/StaticPageContainer";
+
 const RegulationPage = () => {
     return (
-        <>RegulationPage</>
+        <StaticPageContainer page_title="RegulationPage">
+            RegulationPage
+        </StaticPageContainer>
     );
 }
 

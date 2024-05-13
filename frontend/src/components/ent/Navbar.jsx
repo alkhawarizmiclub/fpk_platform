@@ -1,44 +1,25 @@
 import { Link } from "react-router-dom";
-import { Paths } from "../../routers/router";
+import Paths from "../../routers/Paths.json";
 import NavbarDropMenu from "../NavbarDropMenu";
+import Button from "../Button";
 
 const Navbar = () => {
 
-    let navLinks = [
-        {
-            label: "RESULTATS",
-            url: "/p"
-        },
-        {
-            label: "COMPTES",
-            url: "/p"
-        },
-        {
-            label: "DEMANDES",
-            url: "/p"
-        },
-        {
-            label: "RECHERCHE & COOPÉRATION",
-            url: "/p"
-        }
-    ]
+    let fullname = "Achraf Mansari";
+    let major = "Science Mathématique et Informatique";
+    let semester = "S6"
 
     return (
-        <nav className="z-10 py-5 px-10 h-24 flex justify-between items-center shadow bg-white">
+        <nav className="z-10 p-5 h-20 flex justify-between items-center shadow bg-white">
 
-            <Link to={Paths.HOME_PAGE} className="h-full">
-                <img src="/fpk_logo.svg" className="h-full" />
-            </Link>
-
-            <ul className="flex gap-5 font-semibold">
-                {navLinks.map(({ label, url, children }) => (
-                    <li key={label} ><NavbarDropMenu label={label} url={url} subElementsList={children} /></li>
-                ))}
-            </ul>
-
-            <div className="flex gap-4">
-                O
+            <div>
+                <div className="font-semibold">{fullname}</div>
+                <div className="text-sm text-slate-500">{major} - {semester}</div>
             </div>
+
+            <Button>
+                <Link className="py-3 px-6 block" to={Paths.LOGOUT_PAGE}>Log Out</Link>
+            </Button>
 
         </nav>
     );

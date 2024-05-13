@@ -9,7 +9,7 @@ import MajorCategory from '../components/MajorCategory';
 import Announcement from '../components/Announcement';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
-import { Paths } from '../routers/router';
+import Paths from "../routers/Paths.json";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -23,7 +23,7 @@ const HomePage = () => {
 
                 <section className='px-10'>
                     <div className="-translate-y-5 grid grid-cols-4 gap-10 text-center">
-                        <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url={Paths.E_STUDENT_PAGE} />
+                        <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url={Paths.E_STUDENT_DASHBOARD_PAGE} />
                         <HomeGateElement icon={faChalkboardTeacher} label="espace enseignants" url={Paths.E_TEACHER_PAGE} />
                         <HomeGateElement icon={faBullhorn} label="avis et announces" url={Paths.ANNOUNCEMENTS_PAGE} />
                         <HomeGateElement icon={faPeopleGroup} label="clubs et organisations" url={Paths.CLUBS_PAGE} />
