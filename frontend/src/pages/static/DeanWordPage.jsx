@@ -1,6 +1,10 @@
+import StaticPageContainer from "../../layouts/StaticPageContainer";
+
 const DeanWordPage = () => {
     return (
-        <>DeanWordPage</>
+        <StaticPageContainer page_title="Mot du Doyen">
+            Mot du Doyen
+        </StaticPageContainer>
     );
 }
 
