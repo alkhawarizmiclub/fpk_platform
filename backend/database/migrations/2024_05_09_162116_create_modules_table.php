@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prof_id');
+            $table->unsignedBigInteger('prof_id')->nullable();
             $table->string('module_name');
             $table->string('filiere');
             $table->foreign('prof_id')->references('id')

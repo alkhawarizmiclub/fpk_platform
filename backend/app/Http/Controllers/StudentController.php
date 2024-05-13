@@ -10,7 +10,8 @@ use App\Services\StudentService;
 
 class StudentController extends Controller
 {
-    protected StudentService $studentService ;
+    protected StudentService $studentService;
+
     public function __construct(StudentService $studentService)
     {
         $this->studentService = $studentService;
@@ -20,40 +21,27 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = StudentResource::collection(Student::all());
         return (response()->json(
             [
                 'status' => 'success',
                 'message' => 'Students retrieved successfully',
-                'data' => $students
+                'data' => StudentResource::collection(Student::all())
             ],
             200
         ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreStudentRequest $request)
     {
-        $student = Student::create($request->all());
-        $this->studentService->setDefaultModules($student);
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Student created successfully',
-                'data' => new StudentResource($student)
-            ],
-            201
-        );
+        return ($this->studentService->save($request));
+    }
+    public function modules(string $id)
+    {
+        return ($this->studentService->getModules($id));
     }
 
     /**
@@ -61,44 +49,9 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        $student = Student::find($id);
-        if (!$student) {
-            return response()->json(
-            [
-                'status' => 'error',
-                'message' => 'Student not found',
-                'data' => null
-            ],
-            404
-            );
-        };
-        $student  = new StudentResource($student);
-
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'student retrieved successfully',
-                'data' => $student
-            ],
-            200
-        );
+        return ($this->studentService->findById($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Student $student)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateStudentRequest $request, Student $student)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
