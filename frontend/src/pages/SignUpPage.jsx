@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Paths } from "../routers/router";
+import Paths from "../routers/Paths.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 

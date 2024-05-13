@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone, faFax, faAt } from '@fortawesome/free-solid-svg-icons'
 import FooterSection from './FooterSection';
-import { Paths } from '../routers/router';
+import Paths from "../routers/Paths.json";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

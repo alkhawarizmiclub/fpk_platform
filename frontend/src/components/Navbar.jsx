@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import NavbarDropMenu from "./NavbarDropMenu";
-import { Paths } from "../routers/router";
+import Paths from "../routers/Paths.json";
 import Button from "./Button";
 
 const Navbar = () => {
 
     let navLinks = [
         {
-            label: "ETABLISSEMENT",
+            label: "etablissement",
             children: [
                 { label: "Mot du Doyen", url: Paths.DEAN_WORD_PAGE },
                 { label: "Présentation", url: Paths.PRESENTATION_PAGE },
                 { label: "Staff administratif", url: Paths.STAFF_PAGE },
                 { label: "Réglementation", url: Paths.REGULATION_PAGE },
-                { label: "Galerie", url: Paths.MEDIA_PAGE }
+                { label: "Media", url: Paths.MEDIA_PAGE }
             ]
         },
         {
-            label: "FORMATIONS",
+            label: "formation",
             children: [
                 { label: "Licence Fondamentale", url: Paths.BACHELORS_PAGE },
                 { label: "Licence Professionnelle", url: Paths.PROFESSIONAL_BACHELORS_PAGE },
@@ -26,23 +26,32 @@ const Navbar = () => {
             ]
         },
         {
-            label: "ESPACE ETUDIANTS",
+            label: "espace scolarité",
             children: [
-                { label: "Espace Numerique de Travail", url: Paths.ENT_PAGE },
+                { label: "E-Etudiant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
+                { label: "E-Enseignant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
+                { label: "Emploi du temps", url: "____" },
+                { label: "Planning des exams", url: "____" },
+            ]
+        },
+        {
+            label: "h",
+            children: [
                 { label: "Evénements", url: Paths.EVENTS_PAGE },
                 { label: "Clubs", url: Paths.CLUBS_PAGE },
                 { label: "Activités para-universitaires", url: Paths.EXTRACURRICULAR_ACTIVITIES_PAGE }
             ]
         },
         {
-            label: "RECHERCHE & COOPÉRATION",
+            label: "recherche & coopérqtion",
             children: [
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
                 { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
+                { label: "Equipes de recherche", url: Paths.LABOLATORIES_PAGE },
                 { label: "Thèses", url: Paths.THESES_PAGE }
             ]
         },
-        { label: "CONTACT", url: Paths.CONTACT_PAGE }
+        { label: "contact", url: Paths.CONTACT_PAGE }
     ]
 
     return (
