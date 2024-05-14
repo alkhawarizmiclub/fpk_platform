@@ -31,3 +31,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 -   /api/profs/{id}/modules => get all prof modules
 -   /api/profs/{id}/modules/{moduleId} => get all student who has that module (list insciption)
 
+
+for more info check Route/api.php or dm me 
+
+
