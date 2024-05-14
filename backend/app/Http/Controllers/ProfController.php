@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProfRequest;
 use App\Http\Resources\ProfResource;
 use App\Models\Prof;
 use App\Services\ProfService;
+use Illuminate\Http\Request;
 
 class ProfController extends Controller
 {
@@ -21,12 +22,11 @@ class ProfController extends Controller
 
     public function index()
     {
-        $prof = ProfResource::collection(Prof::all());
         return (response()->json(
             [
                 'status' => 'success',
                 'message' => 'Profs retrieved successfully',
-                'data' => $prof
+                'data' => ProfResource::collection(Prof::all())
             ],
             200
         ));
@@ -40,6 +40,11 @@ class ProfController extends Controller
         return ($this->profService->save($request));
     }
 
+    public function addResult(string $profId, Request $request)
+    {
+        return ($this->profService->addResult($profId, $request));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -47,12 +52,14 @@ class ProfController extends Controller
     {
         return ($this->profService->findById($id));
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Prof $prof)
+
+    public function modules(string $id)
     {
-        //
+        return ($this->profService->modules($id));
+    }
+    public function listStudents(string $profId, string $moduleId)
+    {
+        return ($this->profService->getListInscriptions($profId, $moduleId));
     }
 
     /**

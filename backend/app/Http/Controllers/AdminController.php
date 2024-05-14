@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Admin;
+use App\Models\Module;
+use App\Models\Prof;
+use App\Services\Template;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AdminController extends Controller
 {
@@ -56,11 +61,22 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
+    public function assignProf(Request $request)
     {
-        //
+        $moduleId = $request->module_id;
+        $profId = $request->prof_id;
+        $module = Module::find($moduleId);
+        if (!$module)
+            return (Template::NOT_FOUND('Module'));
+        if (Prof::find($profId) == null)
+            return (Template::NOT_FOUND('Prof'));
+        if ($module->prof_id != null)
+            return (Template::ERROR('module already have a prof', Response::HTTP_CONFLICT));
+        $_ = $module->update(['prof_id' => $profId]);
+        return (response()->json([
+            'status' => 'success',
+            'message' => 'module has been assign',
+            'data' => $_,
+        ], Response::HTTP_OK));
     }
 }

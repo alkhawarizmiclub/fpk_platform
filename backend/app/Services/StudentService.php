@@ -15,9 +15,11 @@ class StudentService
         //
     }
 
+    // add module to new student
+    // after that it will base on modules next table to determine student modules
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([1, 2, 3]);
+        $student->modules()->attach([1, 2, 3, 3, 4, 5, 6, 7]);
     }
 
     public function getModules(string $id)

@@ -23,6 +23,6 @@ class Prof extends Model
     protected $table = 'profs';
     public function modules()
     {
-        return $this->hasMany(Module::class);
+        return $this->hasMany(Module::class, 'prof_id', 'id');
     }
 }

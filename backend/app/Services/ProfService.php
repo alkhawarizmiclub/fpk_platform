@@ -7,6 +7,9 @@ use App\Models\Prof;
 use App\Models\Module;
 use App\Http\Resources\ProfResource;
 use App\Http\Resources\StudentResource;
+use App\Http\Resources\ModuleResource;
+use Illuminate\Http\Request;
+use App\Models\Result;
 
 class ProfService
 {
@@ -14,10 +17,10 @@ class ProfService
     {
     }
 
-    public function getModules(string $id)
+    public function modules(string $id)
     {
-        $prof = Prof::find($id)->modules;
-        if (!$prof) {
+        $modules = Prof::find($id)->modules;
+        if (!$modules) {
             return response()->json(
                 [
                     'status' => 'error',
@@ -27,12 +30,12 @@ class ProfService
                 404
             );
         };
-        $prof  = ProfResource::collection($prof);
+        $modules  = ModuleResource::collection($modules);
         return response()->json(
             [
                 'status' => 'success',
-                'message' => 'prof retrieved successfully',
-                'data' => $prof
+                'message' => 'modules retrieved successfully',
+                'data' => $modules
             ],
             200
         );
@@ -40,7 +43,7 @@ class ProfService
 
     public function getListInscriptions(string $profId, string $moduleId)
     {
-        $module = Module::where('prof_id', $profId,)->where('id', $moduleId)->exists();
+        $module = Module::where('prof_id', $profId)->where('id', $moduleId)->exists();
         if (!$module) {
             return response()->json(
                 [
@@ -94,6 +97,29 @@ class ProfService
                 'status' => 'success',
                 'message' => 'Prof created successfully',
                 'data' => $prof
+            ],
+            201
+        );
+    }
+    public function addResult(string $profId, Request $request)
+    {
+        if (!Prof::whereId($profId)->exists())
+            return (Template::NOT_FOUND('prof'));
+
+        $moduleId = $request->module_id;
+        $apogee = $request->apogee;
+        $student = Result::where('module_id', $moduleId)->where('apogee', $apogee);
+        // $result_normal = $request->result_normal;
+        // $resutl_ratt_ratt = $request->result_ratt;
+        $state = $student->update([
+            'normal' => $request->normal,
+            'ratt' => $request->ratt
+        ]);
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Result added successfully',
+                'data' => $state
             ],
             201
         );
