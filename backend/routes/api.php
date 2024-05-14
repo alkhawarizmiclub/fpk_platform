@@ -18,3 +18,4 @@ Route::apiResource('/modules', ModuleController::class);
 Route::get('/students/{id}/modules', [StudentController::class, 'modules']);
 Route::get('/profs/{id}/modules', [ProfController::class, 'getModules']);
 Route::get('/profs/{profId}/modules/{moduleId}', [ProfController::class, 'getListInscriptions']);
+Route::get('/students/{id}/result', [studentController::class, 'getResult']);

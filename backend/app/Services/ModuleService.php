@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Services;
 use App\Http\Resources\ModuleResource;
 use App\Http\Requests\StoreModuleRequest;
 use App\Models\Module;
@@ -41,6 +41,17 @@ class ModuleService
                 'data' => new ModuleResource($module)
             ],
             Response::HTTP_CREATED
+        );
+    }
+    public function toJson($module)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Module retrieved successfully',
+                'data' => new ModuleResource($module)
+            ],
+            Response::HTTP_OK
         );
     }
 }

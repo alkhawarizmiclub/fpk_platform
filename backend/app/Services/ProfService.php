@@ -61,6 +61,7 @@ class ProfService
             200
         );
     }
+
     public function findById(string $id)
     {
         $prof = Prof::find($id);
@@ -97,4 +98,5 @@ class ProfService
             201
         );
     }
+    // public function addNote()
 }

@@ -19,6 +19,10 @@ class ModuleResource extends JsonResource
             'module_name' => $this->module_name,
             'filiere' => $this->filiere,
             'prof_id' => $this->prof_id,
+            // 'normal' => $this->normal,
+            // 'result_normal' => $this->result_normal,
+            // 'ratt' => $this->ratt,
+            // 'result_ratt' => $this->result_ratt
         ];
     }
 }
