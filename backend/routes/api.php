@@ -10,6 +10,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Id may get remove from the route after add auth
+
 Route::apiResource('/students', StudentController::class);
 Route::apiResource('/profs', ProfController::class);
 Route::apiResource('/modules', ModuleController::class);
@@ -17,11 +19,11 @@ Route::apiResource('/modules', ModuleController::class);
 //stduent
 Route::get('/students/{id}/modules', [StudentController::class, 'modules']);
 Route::get('/students/{id}/result', [studentController::class, 'getResult']);
+
 // prof
-//
-Route::get('/profs/{id}/modules', [ProfController::class, 'modules']);
+Route::get('/profs/{profId}/modules', [ProfController::class, 'modules']);
 Route::get('/profs/{profId}/modules/{moduleId}', [ProfController::class, 'listStudents']);
-Route::post('/profs/{profId}/add-result/', [ProfController::class, 'addResult']);
+Route::put('/profs/{profId}/add-result/', [ProfController::class, 'addResult']);
 
 // admin
 Route::post('/admins/assign-prof', [AdminController::class, 'assignProf']);

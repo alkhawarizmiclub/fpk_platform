@@ -23,7 +23,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## API docs
-# {id} may get remove after add auth 
+#   {id} may get remove after add auth 
 -   /api/students => get all students 
 -   /api/students => create new student
 -   /api/students/{id} => get stduent by id

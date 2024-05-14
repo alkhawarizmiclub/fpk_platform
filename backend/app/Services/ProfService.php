@@ -8,13 +8,21 @@ use App\Models\Module;
 use App\Http\Resources\ProfResource;
 use App\Http\Resources\StudentResource;
 use App\Http\Resources\ModuleResource;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateResultRequest;
 use App\Models\Result;
 
 class ProfService
 {
-    public function __construct()
+    public function all()
     {
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'profs retrieved successfully',
+                'data' => ProfResource::collection(Prof::all())
+            ],
+            200
+        );
     }
 
     public function modules(string $id)
@@ -101,19 +109,21 @@ class ProfService
             201
         );
     }
-    public function addResult(string $profId, Request $request)
+    // TODO : make better algo for adding result
+    public function addResult(string $profId, UpdateResultRequest $request)
     {
-        if (!Prof::whereId($profId)->exists())
-            return (Template::NOT_FOUND('prof'));
-
+        $modules = Prof::find($profId)->modules()->where('id', $request->module_id)->exists();
+        if (!$modules)
+            return (Template::resourceNotFound());
         $moduleId = $request->module_id;
         $apogee = $request->apogee;
         $student = Result::where('module_id', $moduleId)->where('apogee', $apogee);
-        // $result_normal = $request->result_normal;
-        // $resutl_ratt_ratt = $request->result_ratt;
+        $normal = $request->normal;
+        $ratt = $request->ratt;
         $state = $student->update([
-            'normal' => $request->normal,
-            'ratt' => $request->ratt
+            'normal' => $normal,
+            'result_normal' => 'NV',
+            'ratt' => $ratt
         ]);
         return response()->json(
             [
