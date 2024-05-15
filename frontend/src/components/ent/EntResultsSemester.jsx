@@ -1,4 +1,4 @@
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faEye, faEyeDropper, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import EntResultsTypeInfo from "./EntResultsTypeInfo";
@@ -21,7 +21,9 @@ const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
                     <FontAwesomeIcon icon={faAngleRight} className="text-xs text-slate-600" />
                     <span>S{semesterNumber}</span>
                 </div>
-                <button onClick={() => handleExtendButton()} className="capitalize">{extended ? "cacher" : "afficher"}</button>
+                <button onClick={() => handleExtendButton()} className="capitalize">
+                    {extended ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+                </button>
             </div>
 
             <div className={`${extended ? "h-full" : "h-0"} overflow-hidden transition-all duration-300`}>
