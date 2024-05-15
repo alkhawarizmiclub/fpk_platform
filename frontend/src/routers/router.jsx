@@ -56,6 +56,38 @@ const router = createBrowserRouter([
             {
                 path: Paths.HOME_PAGE,
                 element: <HomePage />
+            },
+            {
+                path: "/smi",
+                element: <Smi /> 
+            },
+            {
+                path: "/sma",
+                element: <Sma /> 
+            },
+            {
+                path: "/geo",
+                element: <Geo /> 
+            },
+            {
+                path: "/ea",
+                element: <Ea /> 
+            },
+            {
+                path: "/smp",
+                element: <Smp /> 
+            },
+            {
+                path: "/sv",
+                element: <Sv /> 
+            },
+            {
+                path: "/seg",
+                element: <Seg /> 
+            },
+            {
+                path: "/smc",
+                element: <Smc /> 
             }
         ]
     },
