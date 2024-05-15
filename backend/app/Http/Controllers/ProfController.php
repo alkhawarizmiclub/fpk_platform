@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProfRequest;
 use App\Http\Resources\ProfResource;
 use App\Models\Prof;
 use App\Services\ProfService;
+use App\Http\Requests\UpdateResultRequest;
 
 class ProfController extends Controller
 {
@@ -15,59 +16,36 @@ class ProfController extends Controller
     {
         $this->profService = $profService;
     }
-    /**
-     * Display a listing of the resource.
-     */
 
     public function index()
     {
-        $prof = ProfResource::collection(Prof::all());
-        return (response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Profs retrieved successfully',
-                'data' => $prof
-            ],
-            200
-        ));
+        return ($this->profService->all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreProfRequest $request)
     {
         return ($this->profService->save($request));
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function addResult(string $profId, UpdateResultRequest $request)
+    {
+        return ($this->profService->addResult($profId, $request));
+    }
+
+
     public function show(string $id)
     {
         return ($this->profService->findById($id));
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Prof $prof)
+
+    public function modules(string $id)
     {
-        //
+        return ($this->profService->modules($id));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProfRequest $request, Prof $prof)
+    public function listStudents(string $profId, string $moduleId)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Prof $prof)
-    {
-        //
+        return ($this->profService->getListInscriptions($profId, $moduleId));
     }
 }

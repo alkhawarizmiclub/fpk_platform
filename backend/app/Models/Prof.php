@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Prof extends Model
+class Prof extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
+
+    protected $table = 'profs';
+    protected $guard = 'prof';
 
     protected $fillable = [
         'firstname',
@@ -20,9 +24,19 @@ class Prof extends Model
         'gender',
         'birth_date',
     ];
-    protected $table = 'profs';
+
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
     public function modules()
     {
-        return $this->hasMany(Module::class);
+        return $this->hasMany(Module::class, 'prof_id', 'id');
     }
 }

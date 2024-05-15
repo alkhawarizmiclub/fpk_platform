@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: my-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: demo_db
+      MYSQL_ROOT_PASSWORD: rootmotpass
+      MYSQL_USER: hicham
+      MYSQL_PASSWORD: motpass
+    ports:
+      - '3306:3306'

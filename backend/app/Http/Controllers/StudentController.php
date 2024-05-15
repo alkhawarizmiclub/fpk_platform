@@ -53,9 +53,9 @@ class StudentController extends Controller
         return ($this->studentService->findById($id));
     }
 
-    public function getResult(string $id)
+    public function result(string $id)
     {
-        return ($this->studentService->getNote($id));
+        return ($this->studentService->result($id));
     }
 
     /**

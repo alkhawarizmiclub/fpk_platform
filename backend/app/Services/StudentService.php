@@ -7,6 +7,7 @@ use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use App\http\Requests\StoreStudentRequest;
 use App\Models\Result;
+use App\Http\Resources\ResultResource;
 
 class StudentService
 {
@@ -15,9 +16,11 @@ class StudentService
         //
     }
 
+    // add module to new student
+    // after that it will base on modules next table to determine student modules
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([1, 2, 3]);
+        $student->modules()->attach([1, 2, 3, 3, 4, 5, 6, 7]);
     }
 
     public function getModules(string $id)
@@ -81,14 +84,15 @@ class StudentService
             201
         );
     }
-    public function getNote(string $id)
+
+    public function result(string $id)
     {
         $module = Result::where('apogee', $id)->get();
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'module retrieved successfully',
-                'data' => $module
+                'data' => ResultResource::collection($module)
             ],
             200
         );
