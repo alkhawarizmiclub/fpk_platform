@@ -6,6 +6,7 @@ use App\Models\Module;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Services\ModuleService;
+use App\Models\Student;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         ModuleService::ADD_MODULE();
+        $students = Student::factory(10)->create();
+        foreach($students as $student){
+            $student->modules()->attach([1, 2, 3, 4, 5, 6, 7]);
+        }
 
     }
 }

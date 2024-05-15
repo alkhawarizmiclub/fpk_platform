@@ -122,17 +122,14 @@ class ProfService
         $ratt = $request->ratt;
         $state = $student->update([
             'normal' => $normal,
-            'result_normal' => 'NV',
             'ratt' => $ratt
         ]);
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Result added successfully',
-                'data' => $state
             ],
-            201
+            202
         );
     }
-    // public function addNote()
 }
