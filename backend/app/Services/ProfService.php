@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\StoreProfRequest;
+use App\Http\Requests\ProfAuth\LoginRequest;
 use App\Models\Prof;
 use App\Models\Module;
 use App\Http\Resources\ProfResource;
@@ -10,6 +11,12 @@ use App\Http\Resources\StudentResource;
 use App\Http\Resources\ModuleResource;
 use App\Http\Requests\UpdateResultRequest;
 use App\Models\Result;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use App\Services\Template;
 
 class ProfService
 {
@@ -100,14 +107,44 @@ class ProfService
     public function save(StoreProfRequest $request)
     {
         $prof = Prof::create($request->all());
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Prof created successfully',
-                'data' => $prof
-            ],
-            201
-        );
+        event(new Registered($prof));
+
+        Auth::login($prof);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Prof registered successfully',
+            'prof' => $prof
+        ]);
+    }
+
+    public function login(LoginRequest $request): JsonResponse
+    {
+        $request->authenticate();
+        $prof = Prof::where('email', $request->email)->first();
+        $prof->tokens()->delete();
+        $token = $prof->createToken('api_token', ['role:prof']);
+        return response()->json([
+            'status' => 'success',
+            'prof' => $prof,
+            'token' => $token->plainTextToken
+        ]);
+    }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        Auth::guard('prof')->logout();
+        $request->user()->tokens()->delete();
+
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Prof logged out successfully'
+        ]);
     }
     // TODO : make better algo for adding result
     public function addResult(string $profId, UpdateResultRequest $request)

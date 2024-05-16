@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\StudentAuth\LoginRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use App\Http\Resources\StudentResource;
 use App\Services\StudentService;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -40,6 +42,11 @@ class StudentController extends Controller
         return ($this->studentService->save($request));
     }
 
+    public function login(LoginRequest $request)
+    {
+        return ($this->studentService->login($request));
+    }
+
     public function modules(string $id)
     {
         return ($this->studentService->getModules($id));
@@ -48,9 +55,9 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        return ($this->studentService->findById($id));
+        return ($request->user());
     }
 
     public function result(string $id)
