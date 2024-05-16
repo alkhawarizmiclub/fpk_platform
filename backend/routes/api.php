@@ -17,8 +17,11 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', VerifyProf::c
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', VerifyStudent::class]], function () {
     Route::get('/', [StudentController::class, 'show']);
-    // Route::get('/users', 'AdminController@users');
-    // ...more admin routes...
+    Route::get('/result', [StudentController::class, 'result']);
+    Route::get('/profile', 'AdminController@users');
+    Route::get('modules', [StudentController::class, 'modules']);
+
+    Route::get('/logout', [ProfController::class, 'logout']);
 });
 
 

@@ -39,4 +39,16 @@ class Template
             Response::HTTP_NOT_FOUND
         ));
     }
+
+    public static function DATA(string $T, $data)
+    {
+        return (response()->json(
+            [
+                'status' => "success",
+                'message' => "$T retrieved successfully",
+                'data' => $data
+            ],
+            Response::HTTP_OK
+        ));
+    }
 }

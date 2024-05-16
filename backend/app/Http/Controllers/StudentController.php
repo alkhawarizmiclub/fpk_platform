@@ -23,14 +23,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return (response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Students retrieved successfully',
-                'data' => StudentResource::collection(Student::all())
-            ],
-            200
-        ));
+        return ($this->studentService->all());
     }
 
 
@@ -47,9 +40,10 @@ class StudentController extends Controller
         return ($this->studentService->login($request));
     }
 
-    public function modules(string $id)
+    public function modules()
     {
-        return ($this->studentService->getModules($id));
+        $apogee = request()->user()->apogee;
+        return ($this->studentService->modules($apogee));
     }
 
     /**
@@ -60,16 +54,9 @@ class StudentController extends Controller
         return ($request->user());
     }
 
-    public function result(string $id)
+    public function result()
     {
-        return ($this->studentService->result($id));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Student $student)
-    {
-        //
+        $apogee = request()->user()->apogee;
+        return ($this->studentService->result($apogee));
     }
 }

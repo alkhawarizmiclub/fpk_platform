@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBiginteger("apogee");
             $table->unsignedBiginteger('module_id');
 
-            // $table->string('semster');
             $table->decimal('normal', 6, 4)->nullable();
             $table->string('result_normal')->nullable();
             $table->decimal('ratt', 6, 4)->nullable();

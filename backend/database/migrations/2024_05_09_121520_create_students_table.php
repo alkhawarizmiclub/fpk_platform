@@ -15,11 +15,14 @@ return new class extends Migration
             $table->unsignedBigInteger("apogee")->primary()->autoIncrement();
             $table->string("password");
             $table->string("phone_number");
-            $table->string("gender");
             $table->string("firstname");
             $table->string("lastname");
-            $table->string("email");
             $table->date("birth_date");
+            $table->string("email")->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string("gender");
+            $table->rememberToken();
             $table->timestamps();
         });
     }

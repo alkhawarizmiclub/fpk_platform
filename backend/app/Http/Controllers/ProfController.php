@@ -30,19 +30,9 @@ class ProfController extends Controller
         return ($this->profService->save($request));
     }
 
-    public function login(LoginRequest $request)
+    public function result(UpdateResultRequest $request)
     {
-        return ($this->profService->login($request));
-    }
-
-    public function logout(Request $request)
-    {
-        return ($this->profService->logout($request));
-    }
-
-    public function addResult(string $profId, UpdateResultRequest $request)
-    {
-        return ($this->profService->addResult($profId, $request));
+        return ($this->profService->result($request));
     }
 
 
@@ -56,9 +46,18 @@ class ProfController extends Controller
         return ($this->profService->modules($request->user()->id));
     }
 
-    public function listStudents(string $profId, string $moduleId)
+    public function listStudents(string $moduleId)
     {
-        return ($this->profService->getListInscriptions($profId, $moduleId));
+        return ($this->profService->listStudents($moduleId));
+    }
+    public function login(LoginRequest $request)
+    {
+        return ($this->profService->login($request));
+    }
+
+    public function logout(Request $request)
+    {
+        return ($this->profService->logout($request));
     }
 
 }
