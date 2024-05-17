@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StudentAuth\LoginRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Traits\JsonTemplate;
 
 
 class StudentService
 {
+    use JsonTemplate;
     public function all()
     {
         $students = StudentResource::collection(Student::all());
-        return (Template::DATA('students', $students));
+        return ($this->DATA('students', $students));
     }
     // add module to new student
     // after that it will base on modules next table to determine student modules
@@ -34,16 +36,16 @@ class StudentService
     {
         $module = Student::find($id)->modules;
         if (!$module)
-            return (Template::NOT_FOUND('student'));
+            return ($this->NOT_FOUND('student'));
         $module  = ModuleResource::collection($module);
-        return (Template::DATA('modules', $module));
+        return ($this->DATA('modules', $module));
     }
 
     public function findById(string $id)
     {
         $student = Student::find($id);
         if (!$student)
-            return (Template::NOT_FOUND('student'));
+            return ($this->NOT_FOUND('student'));
 
         $student  = new StudentResource($student);
         return response()->json(
@@ -106,6 +108,6 @@ class StudentService
     {
         $module = Result::where('apogee', $apogee)->get();
         $results = ResultResource::collection($module);
-        return (Template::DATA('results', $results));
+        return ($this->DATA('results', $results));
     }
 }

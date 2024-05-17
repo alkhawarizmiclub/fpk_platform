@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('thumbnail_path')->nullable();
             $table->string('tags')->nullable();
             $table->text('content');
+            $table->morphs('author');
             $table->string('poster_image_path')->nullable();
-            $table->date('published_at');
+            $table->date('published_at')->nullable()->default(null);
             $table->boolean('is_accepted')->default(false);
             $table->timestamps();
         });

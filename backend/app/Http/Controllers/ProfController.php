@@ -10,6 +10,7 @@ use App\Http\Requests\ProfAuth\LoginRequest;
 use App\Services\ProfService;
 use App\Http\Requests\UpdateResultRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAnnouncementRequest;
 
 class ProfController extends Controller
 {
@@ -50,6 +51,7 @@ class ProfController extends Controller
     {
         return ($this->profService->listStudents($moduleId));
     }
+
     public function login(LoginRequest $request)
     {
         return ($this->profService->login($request));
@@ -58,6 +60,10 @@ class ProfController extends Controller
     public function logout(Request $request)
     {
         return ($this->profService->logout($request));
+    }
+    public function announce(StoreAnnouncementRequest $request)
+    {
+        return ($this->profService->announce($request));
     }
 
 }

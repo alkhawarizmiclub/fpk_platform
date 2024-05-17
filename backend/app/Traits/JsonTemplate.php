@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services;
-use App\Services;
-use Symfony\Component\HttpFoundation\Response;
-class Template
+namespace App\Traits;
+use Illuminate\Http\Response;
+
+trait JsonTemplate
 {
-    public static function NOT_FOUND(string $T)
+    public function NOT_FOUND(string $T)
     {
         return (response()->json(
             [
@@ -17,7 +17,7 @@ class Template
         ));
     }
 
-    public static function ERROR(string $T, $status = Response::HTTP_NOT_FOUND)
+    public function ERROR(string $T, $status = Response::HTTP_NOT_FOUND)
     {
         return (response()->json(
             [
@@ -28,7 +28,7 @@ class Template
             $status
         ));
     }
-    public static function resourceNotFound()
+    public function resourceNotFound()
     {
         return (response()->json(
             [
@@ -40,7 +40,7 @@ class Template
         ));
     }
 
-    public static function DATA(string $T, $data)
+    public function DATA(string $T, $data)
     {
         return (response()->json(
             [

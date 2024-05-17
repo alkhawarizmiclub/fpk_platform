@@ -15,24 +15,27 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Services\Template;
+use App\Traits\JsonTemplate;
 use Carbon\Carbon;
+use App\Http\Requests\StoreannouncementRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProfService
 {
+    use JsonTemplate;
     public function all()
     {
         $profs = ProfResource::collection(Prof::all());
-        return (Template::DATA('profs', $profs));
+        return ($this->DATA('profs', $profs));
     }
 
     public function modules(string $id)
     {
         $modules = Prof::find($id)->modules;
         if (!$modules)
-            return (Template::NOT_FOUND('prof'));
+            return ($this->NOT_FOUND('prof'));
         $modules  = ModuleResource::collection($modules);
-        return (Template::DATA('modules', $modules));
+        return ($this->DATA('modules', $modules));
     }
 
     public function listStudents(string $moduleId)
@@ -40,18 +43,18 @@ class ProfService
         $profId = request()->user()->id;
         $module = Module::where('prof_id', $profId)->where('id', $moduleId)->exists();
         if (!$module)
-            return (Template::resourceNotFound());;
+            return ($this->resourceNotFound());;
         $student  = StudentResource::collection(Module::find($moduleId)->students);
-        return (Template::DATA('profs', $student));
+        return ($this->DATA('profs', $student));
     }
 
     public function findById(string $id)
     {
         $prof = Prof::find($id);
         if (!$prof)
-            return (Template::NOT_FOUND('prof'));
+            return ($this->NOT_FOUND('prof'));
         $prof  = new ProfResource($prof);
-        return (Template::DATA('prof', $prof));
+        return ($this->DATA('prof', $prof));
     }
     public function save(StoreProfRequest $request)
     {
@@ -101,7 +104,7 @@ class ProfService
         $profId = request()->user()->id;
         $modules = Prof::find($profId)->modules()->where('id', $request->module_id)->exists();
         if (!$modules)
-            return (Template::resourceNotFound());
+            return ($this->resourceNotFound());
         $moduleId = $request->module_id;
         $apogee = $request->apogee;
         $student = Result::where('module_id', $moduleId)->where('apogee', $apogee);
@@ -117,6 +120,35 @@ class ProfService
                 'message' => 'Result added successfully',
             ],
             202
+        );
+    }
+
+    // if file should not visible to public it get store on local storage else is on public
+    public function announce(StoreAnnouncementRequest $request)
+    {
+        $poster_image_path = null;
+        $prof = request()->user();
+        if (!$prof)
+            return ($this->resourceNotFound());
+        if ($request->hasFile('thumbnail_path'))
+            $thumbnail_path = $request->file('thumbnail_path')->store('public');
+        else
+            $thumbnail_path = 'default.png';
+        if ($request->hasFile('poster_image_path'))
+            $poster_image_path = $request->file('poster_image_path')->store('public');
+        $prof->announcements()->create([
+            'title' => $request->title,
+            'thumbnail_path' => $thumbnail_path,
+            'tags' => $request->tags,
+            'content' => $request->content,
+            'poster_image_path' => $poster_image_path,
+        ]);
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Announcement created successfully',
+            ],
+            201
         );
     }
 }
