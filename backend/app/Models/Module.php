@@ -12,9 +12,9 @@ class Module extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'prof_id',
         'module_name',
-        'filiere'
+        'filiere',
+        'prof_id'
     ];
     public function students()
     {

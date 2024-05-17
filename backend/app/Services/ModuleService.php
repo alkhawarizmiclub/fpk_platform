@@ -4,6 +4,9 @@ use App\Http\Resources\ModuleResource;
 use App\Http\Requests\StoreModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Response;
+use App\Services\Template;
+use App\Models\Prof;
+use Illuminate\Http\Request;
 
 class ModuleService
 {
@@ -53,5 +56,43 @@ class ModuleService
             ],
             Response::HTTP_OK
         );
+    }
+
+    public static function ADD_MODULE()
+    {
+        Module::create([
+            'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M04- Physique 1 – Mécanique 1',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M05- Physique 2 – Thermodynamique',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M07- LT I',
+            'filiere' => 'SMI'
+        ]);
     }
 }

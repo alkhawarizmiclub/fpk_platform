@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Student extends Model
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Student extends Authenticatable
 {
-    use HasFactory;
 
-    // use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'firstname',
@@ -24,6 +24,19 @@ class Student extends Model
     protected $primaryKey = 'apogee';
     public $incrementing = true;
     public $timestamps = true;
+
+    protected $guard = 'student';
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     public function modules()
     {
         return $this->belongsToMany(Module::class, 'module_student', 'apogee', 'module_id');

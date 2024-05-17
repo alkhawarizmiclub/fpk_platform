@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use App\Services\ModuleService;
 use App\Services\Template;
 
+// TODO : add auth so only admin can access this controller
 class ModuleController extends Controller
 {
     private ModuleService $moduleService;
@@ -38,29 +39,22 @@ class ModuleController extends Controller
         return ($this->moduleService->save($request));
     }
 
-    // TODO : move to defferant route
     public function show(string $moduleId)
     {
         $module = Module::find($moduleId);
         if (!$module)
             return (Template::NOT_FOUND('Module'));
-        $profId  = request()->query('profId');
-        if (!$profId)
-            return ($this->moduleService->toJson($module));
-        if (Prof::find($profId) == null)
-            return (Template::NOT_FOUND('Prof'));
-        if ($module->prof_id != null)
-            return (Template::ERROR('module already have a prof', Response::HTTP_CONFLICT));
-        $_ = $module->update(['prof_id' => $profId]);
-        return (response()->json([
-            'status' => 'success',
-            'message' => 'module has been assign',
-            'data' => $_,
-        ], Response::HTTP_OK));
+
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'module retrieved successfully',
+                'data' => new ModuleResource($module),
+            ],
+            Response::HTTP_OK
+        ));
     }
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(UpdateModuleRequest $request, Module $module)
     {
         //

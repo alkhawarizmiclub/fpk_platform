@@ -66,6 +66,7 @@ class StoreProfRequest extends FormRequest
         ];
     }
 
+
     protected function failedValidation(Validator $validator)
     {
         $response = new JsonResponse([
