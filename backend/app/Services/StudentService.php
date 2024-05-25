@@ -15,6 +15,7 @@ use App\Http\Requests\StudentAuth\LoginRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
+use DateTime;
 
 
 class StudentService
@@ -29,7 +30,15 @@ class StudentService
     // after that it will base on modules next table to determine student modules
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([1, 2, 3, 3, 4, 5, 6, 7]);
+        $student->modules()->attach([
+            ['module_id' => 1],
+            ['module_id' => 2],
+            ['module_id' => 3],
+            ['module_id' => 4],
+            ['module_id' => 5],
+            ['module_id' => 6],
+            ['module_id' => 7],
+        ]);
     }
 
     public function modules(string $id)
@@ -109,5 +118,25 @@ class StudentService
         $module = Result::where('apogee', $apogee)->get();
         $results = ResultResource::collection($module);
         return ($this->DATA('results', $results));
+    }
+
+    public static  function getAcademicYear($date, $academicYearStartMonth = 9)
+    {
+        // Create a DateTime object from the input date
+        $dateTime = new DateTime($date);
+
+        // Get the year and month from the DateTime object
+        $year = (int)$dateTime->format('Y');
+        $month = (int)$dateTime->format('m');
+        // Determine the academic year
+        if ($month >= $academicYearStartMonth) {
+            $startYear = $year;
+            $endYear = $year + 1;
+        } else {
+            $startYear = $year - 1;
+            $endYear = $year;
+        }
+        // Return the academic year in the format "YYYY-YYYY"
+        return $startYear . '-' . $endYear;
     }
 }

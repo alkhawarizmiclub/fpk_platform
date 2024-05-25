@@ -14,7 +14,8 @@ class Module extends Model
     protected $fillable = [
         'module_name',
         'filiere',
-        'prof_id'
+        'prof_id',
+        'semester'
     ];
     public function students()
     {

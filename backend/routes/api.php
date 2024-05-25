@@ -11,6 +11,11 @@ use App\Http\Controllers\FpkController;
 Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', VerifyProf::class]], function () {
     Route::get('/', [ProfController::class, 'show']);
     Route::get('/modules', [ProfController::class, 'modules']);
+
+    // TODO: add a route to get all students in a module
+    // TODO: add search functionality to get student by name or apogee
+    Route::get('/modules/{id}', [ProfController::class, 'student']);
+    Route::get('/modules/{id}?search=', [ProfController::class, 'student']);
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
 });
@@ -19,7 +24,7 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', VerifyProf::c
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', VerifyStudent::class]], function () {
     Route::get('/', [StudentController::class, 'show']);
     Route::get('/result', [StudentController::class, 'result']);
-    Route::get('modules', [StudentController::class, 'modules']);
+    Route::get('/modules', [StudentController::class, 'modules']);
     Route::get('/logout', [ProfController::class, 'logout']);
 });
 
@@ -42,10 +47,10 @@ Route::post('/prof/login', [ProfController::class, 'login'])
     ->middleware('guest')
     ->name('login');
 
-// get all with pagination
-Route::group(['prefix' => 'public', ], function () {
-    // Route::get('/announce', [FpkController::class, 'index']);
+Route::group(['prefix' => 'public', 'guest'], function () {
+    // get all with pagination
     Route::get('/announce', [FpkController::class, 'announce']);
+    Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
 });
 
 // Route::get('announce', function () {

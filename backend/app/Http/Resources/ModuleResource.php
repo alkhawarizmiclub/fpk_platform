@@ -18,6 +18,7 @@ class ModuleResource extends JsonResource
             'id' => $this->id,
             'module_name' => $this->module_name,
             'filiere' => $this->filiere,
+            'semester' => $this->semester,
             'prof_id' => $this->prof_id,
             // 'normal' => $this->normal,
             // 'result_normal' => $this->result_normal,
