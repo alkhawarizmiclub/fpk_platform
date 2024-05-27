@@ -1,7 +1,3 @@
-import { Link } from "react-router-dom";
-import Paths from "../../routers/Paths.json";
-import NavbarDropMenu from "../NavbarDropMenu";
-import Button from "../Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 
