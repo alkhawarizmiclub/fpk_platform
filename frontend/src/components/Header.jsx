@@ -11,9 +11,6 @@ const Header = () => {
             <div className="absolute z-[-2] w-full h-full flex">
                 <img className="w-full h-full object-cover" src="/header.png" alt="Header background" />
             </div>
-            <div className="absolute bottom-0 w-full h-32 flex">
-                <img className="w-full h-full object-cover" src="http://econcours.usms.ac.ma/theme/img/curved-border.svg" alt="Header background" />
-            </div>
         </header>
     );
 }
