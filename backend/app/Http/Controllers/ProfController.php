@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfRequest;
-use App\Http\Requests\UpdateProfRequest;
-use App\Http\Resources\ProfResource;
-use App\Models\Prof;
+use App\Http\Requests\ProfAuth\LoginRequest;
+// use App\Http\Requests\UpdateProfRequest;
+// use App\Http\Resources\ProfResource;
+// use App\Models\Prof;
 use App\Services\ProfService;
 use App\Http\Requests\UpdateResultRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\StoreAnnouncementRequest;
 
 class ProfController extends Controller
 {
     private ProfService $profService;
+
     public function __construct(ProfService $profService)
     {
         $this->profService = $profService;
@@ -22,30 +26,44 @@ class ProfController extends Controller
         return ($this->profService->all());
     }
 
-
     public function store(StoreProfRequest $request)
     {
         return ($this->profService->save($request));
     }
 
-    public function addResult(string $profId, UpdateResultRequest $request)
+    public function result(UpdateResultRequest $request)
     {
-        return ($this->profService->addResult($profId, $request));
+        return ($this->profService->result($request));
     }
 
 
-    public function show(string $id)
+    public function show(Request $request)
     {
-        return ($this->profService->findById($id));
+        return ($request->user());
     }
 
-    public function modules(string $id)
+    public function modules(Request $request)
     {
-        return ($this->profService->modules($id));
+        return ($this->profService->modules($request->user()->id));
     }
 
-    public function listStudents(string $profId, string $moduleId)
+    public function listStudents(string $moduleId)
     {
-        return ($this->profService->getListInscriptions($profId, $moduleId));
+        return ($this->profService->listStudents($moduleId));
     }
+
+    public function login(LoginRequest $request)
+    {
+        return ($this->profService->login($request));
+    }
+
+    public function logout(Request $request)
+    {
+        return ($this->profService->logout($request));
+    }
+    public function announce(StoreAnnouncementRequest $request)
+    {
+        return ($this->profService->announce($request));
+    }
+
 }

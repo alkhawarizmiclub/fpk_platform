@@ -62,36 +62,43 @@ class ModuleService
     {
         Module::create([
             'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M04- Physique 1 – Mécanique 1',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M05- Physique 2 – Thermodynamique',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
 
         Module::create([
             'module_name' => 'M07- LT I',
+            'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
     }
