@@ -32,6 +32,7 @@
     "CLUBS_PAGE": "/clubs",
     "EXTRACURRICULAR_ACTIVITIES_PAGE": "/activite-parascolaire",
 
+    "PROFESSORS_PAGE": "/recherche/professeurs",
     "DEPARTMENTS_PAGE": "/recherche/departements",
     "LABOLATORIES_PAGE": "/recherche/laboratoires",
     "THESES_PAGE": "/recherche/theses",
