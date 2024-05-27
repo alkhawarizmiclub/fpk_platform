@@ -1,8 +1,12 @@
 <?php
 
+use App\Services\StudentService;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
+// write by ai encadrant par moi
+
 
 return new class extends Migration
 {
@@ -11,17 +15,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('module_student', function (Blueprint $table) {
             $table->id();
             $table->unsignedBiginteger("apogee");
             $table->unsignedBiginteger('module_id');
-
-            // $table->string('semster');
+            $table->integer('inscrit_number')->default(1);
+            $table->string('inscrit_year')->default(StudentService::getAcademicYear(date('Y-m-d')));
             $table->decimal('normal', 6, 4)->nullable();
             $table->string('result_normal')->nullable();
             $table->decimal('ratt', 6, 4)->nullable();
             $table->string('result_ratt')->nullable();
-
             $table->foreign('apogee')->references('apogee')
                 ->on('students')->onDelete('cascade');
             $table->foreign('module_id')->references('id')

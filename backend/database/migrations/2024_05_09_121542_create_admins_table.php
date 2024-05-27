@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("firstname");
             $table->string("lastname");
             $table->date("birth_date");
-            $table->string("role")->default("admin");
             $table->string("password");
             $table->string("phone_number")->unique();
             $table->string("gender");

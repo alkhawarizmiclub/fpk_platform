@@ -35,8 +35,14 @@ class Prof extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function modules()
     {
         return $this->hasMany(Module::class, 'prof_id', 'id');
+    }
+
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'author');
     }
 }

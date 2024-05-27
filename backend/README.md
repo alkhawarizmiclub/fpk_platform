@@ -23,14 +23,19 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## API docs
-#   {id} may get remove after add auth 
--   /api/students => get all students 
--   /api/students => create new student
--   /api/students/{id} => get stduent by id
--   /api/students/{id}/modules => get stduent modules (not impl yet (TODO))
--   /api/profs/{id}/modules => get all prof modules
--   /api/profs/{id}/modules/{moduleId} => get all student who has that module (list insciption)
--   /api/profs/{id}/add-result => methode put with module id and apogee and note and maybe some option to see if nomral or ratt 
+-   /api/student/regester => create new student
+-   /api/student/login => login and get token for auth
+-   /api/student get student info // for profile
+-   /api/student/modules => get stduent modules  // TODO : add semster
+-   /api/student/result => get stduent modules 
+-   /api/prof/modules => get all prof modules
+-   /api/prof/modules/{moduleId} => get all student who has that module (list insciption) // TODO : add pagintion 
+-   /api/prof/add-result => methode put with module id and apogee and note and maybe some option to see if nomral or ratt 
+    /api/prof/login|regester
+    /api/prof/logout
+    /api/public/announce
+    /api/prof/announce add new announce with image (still under test)
+## TODO
 
 
 for more info check Route/api.php or dm me 

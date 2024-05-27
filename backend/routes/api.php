@@ -2,75 +2,61 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ProfAuth\EmailVerificationNotificationController;
-use App\Http\Controllers\ProfAuth\RegisteredUserController;
-use App\Http\Controllers\ProfAuth\AuthenticatedSessionController;
-use App\Http\Controllers\ProfAuth\NewPasswordController;
-use App\Http\Controllers\ProfAuth\PasswordResetLinkController;
-use App\Http\Controllers\ProfAuth\VerifyEmailController;
-use Illuminate\Http\Request;
-use App\Http\Middleware\ProfVerify;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ProfController;
+use App\Http\Middleware\VerifyProf;
+use App\Http\Middleware\VerifyStudent;
+use App\Http\Controllers\FpkController;
 
-// Route::middleware(['auth:prof'])->get('/user', function (Request $request) {
-//     return $request->user();
-//     Route::apiResource('/students', StudentController::class);
-// });
+Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', VerifyProf::class]], function () {
+    Route::get('/', [ProfController::class, 'show']);
+    Route::get('/modules', [ProfController::class, 'modules']);
 
-// Route::fallback(function (Illuminate\Auth\AuthenticationException $exception) {
-//     return response()->json(['message' => $exception->getMessage()], 401);
-// });
-Route::middleware(['auth:sanctum', ProfVerify::class])->group(function () {
-    Route::get('/prof', function (Request $request) {
-        return $request->user();
-    });
-    Route::get('/prof/test', function () {
-        return response()->json([
-            'message' => 'Welcome to prof dashboard'
-        ]);
-    });
+    // TODO: add a route to get all students in a module
+    // TODO: add search functionality to get student by name or apogee
+    Route::get('/modules/{id}', [ProfController::class, 'student']);
+    Route::get('/modules/{id}?search=', [ProfController::class, 'student']);
+    Route::get('/logout', [ProfController::class, 'logout']);
+    Route::post('/announce', [ProfController::class, 'announce']);
 });
 
-Route::middleware(['auth:student'])->group(function () {
-    Route::get('/student', function (Request $request) {
-        return $request->user();
-    });
 
-    Route::get('/student/test', function () {
-        return response()->json([
-            'message' => 'Welcome to prof dashboard'
-        ]);
-    });
+Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', VerifyStudent::class]], function () {
+    Route::get('/', [StudentController::class, 'show']);
+    Route::get('/result', [StudentController::class, 'result']);
+    Route::get('/modules', [StudentController::class, 'modules']);
+    Route::get('/logout', [ProfController::class, 'logout']);
 });
 
 
 
-Route::middleware(['guest'])->group(function () {
-    Route::post('/register', [RegisteredUserController::class, 'store'])
-        ->middleware(['guest:prof'])
-        ->name('register');
-
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-        ->middleware(['guest:prof'])
-        ->name('login');
-});
-
-
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+Route::post('/student/register', [StudentController::class, 'store'])
     ->middleware('guest')
-    ->name('password.email');
+    ->name('register');
 
-Route::post('/reset-password', [NewPasswordController::class, 'store'])
+Route::post('/student/login', [StudentController::class, 'login'])
     ->middleware('guest')
-    ->name('password.store');
+    ->name('login');
 
-Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-    ->middleware(['auth', 'signed', 'throttle:6,1'])
-    ->name('verification.verify');
 
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    ->middleware(['auth', 'throttle:6,1'])
-    ->name('verification.send');
+Route::post('/prof/register', [ProfController::class, 'store'])
+    ->middleware('guest')
+    ->name('register');
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
+Route::post('/prof/login', [ProfController::class, 'login'])
+    ->middleware('guest')
+    ->name('login');
+
+Route::group(['prefix' => 'public', 'guest'], function () {
+    // get all with pagination
+    Route::get('/announce', [FpkController::class, 'announce']);
+    Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
+});
+
+// Route::get('announce', function () {
+//     $announcements = \App\Models\Announcement::where('is_accepted', false)->paginate();
+//     foreach ($announcements as $announcement) {
+//         $announcement->author;
+//     }
+//     return response()->json($announcements);
+// });
