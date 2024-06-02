@@ -1,6 +1,8 @@
 import { faCalendarDays, faClipboardCheck, faClock, faFileLines, faTableList, faUser } from "@fortawesome/free-solid-svg-icons";
 import Paths from "../../routers/Paths.json";
 
+// I put this list in a seperate file because I use it in both the Sidebar component and the EntStudentDashboardPage page 
+
 const EntPagesUrlsList = [
     {
         label: "inscription",
