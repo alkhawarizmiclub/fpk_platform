@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Paths from "./Paths.json";
 import BlankLayout from "../layouts/BlankLayout";
 import StaticPageLayout from "../layouts/StaticPageLayout";
-import UserLayout from "../layouts/UserLayout";
 import EntLayout from "../layouts/EntLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
@@ -34,6 +33,8 @@ import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage"
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
 import EntTeacherDashbordPage from "../pages/ent/teacher/EntTeacherDashbordPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
+import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
+import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        element: <EntLayout />,
+        element: <EntLayout EntPagesUrlsList={EntStudentPagesUrlsList} />,
         children: [
             { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashbordPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
@@ -80,9 +81,15 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
+        ]
+    },
+    {
+        element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
+        children: [
             { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashbordPage /> },
         ]
     }
+    
 ])
 
 export { router };

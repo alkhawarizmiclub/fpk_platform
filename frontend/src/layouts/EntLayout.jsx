@@ -3,11 +3,11 @@ import Footer from "../components/ent/Footer";
 import Sidebar from "../components/ent/Sidebar";
 import Navbar from "../components/ent/Navbar";
 
-const EntLayout = () => {
+const EntLayout = ({ EntPagesUrlsList }) => {
     return (
         <>
             <main className="grow min-h-screen flex bg-gray-100">
-                <Sidebar />
+                <Sidebar EntPagesUrlsList={EntPagesUrlsList} />
                 <div className="grow flex flex-col">
                     <Navbar />
                     <Outlet />
