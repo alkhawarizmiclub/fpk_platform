@@ -35,6 +35,12 @@ import EntTeacherDashboardPage from "../pages/ent/teacher/EntTeacherDashboardPag
 import ProfessorsPage from "../pages/static/ProfessorsPage";
 import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
 import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
+import EntTeacherAccountsPage from "../pages/ent/teacher/EntTeacherAccountsPage";
+import EntTeacherSchedulePage from "../pages/ent/teacher/EntTeacherSchedulePage";
+import EntTeacherPlanningPage from "../pages/ent/teacher/EntTeacherPlanningPage";
+import EntTeacherClassesPage from "../pages/ent/teacher/EntTeacherClassesPage";
+import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
+import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnouncementsPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -52,14 +58,6 @@ const router = createBrowserRouter([
         element: <StaticPageLayout />,
         children: [
             { path: Paths.HOME_PAGE, element: <HomePage /> },
-            { path: Paths.SMI, element: <Smi /> },
-            { path: Paths.SMA, element: <Sma /> },
-            { path: Paths.GEO, element: <Geo /> },
-            { path: Paths.EA, element: <Ea /> },
-            { path: Paths.SMP, element: <Smp /> },
-            { path: Paths.SV, element: <Sv /> },
-            { path: Paths.SEG, element: <Seg /> },
-            { path: Paths.SMC, element: <Smc /> },
             { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage /> },
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
@@ -67,6 +65,14 @@ const router = createBrowserRouter([
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
+            { path: Paths.BACHELOR_SMI_PAGE, element: <Smi /> },
+            { path: Paths.BACHELOR_SMA_PAGE, element: <Sma /> },
+            { path: Paths.BACHELOR_GEO_PAGE, element: <Geo /> },
+            { path: Paths.BACHELOR_EA_PAGE, element: <Ea /> },
+            { path: Paths.BACHELOR_SMP_PAGE, element: <Smp /> },
+            { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
+            { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
+            { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
         ]
     },
     {
@@ -86,6 +92,12 @@ const router = createBrowserRouter([
         element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
         children: [
             { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashboardPage /> },
+            { path: Paths.E_TEACHER_ACCOUNTS_PAGE, element: <EntTeacherAccountsPage /> },
+            { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
+            { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },
+            { path: Paths.E_TEACHER_GRADES_PAGE, element: <EntTeacherGradesPage /> },
         ]
     }
     

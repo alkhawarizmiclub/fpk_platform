@@ -14,16 +14,16 @@
     "TRACKS_PAGE": "/formations",
 
     "BACHELORS_PAGE": "/formations/licence-fondamentale",
-    "SMI": "/formations/licence-fondamentale/smi",
-    "SMA": "/formations/licence-fondamentale/sma",
-    "GEO": "/formations/licence-fondamentale/geo",
-    "EA": "/formations/licence-fondamentale/ea",
-    "SMP": "/formations/licence-fondamentale/smp",
-    "SV": "/formations/licence-fondamentale/sv",
-    "SEG": "/formations/licence-fondamentale/seg",
-    "SMC": "/formations/licence-fondamentale/smc",
+    "BACHELOR_SMI_PAGE": "/formations/licence-fondamentale/smi",
+    "BACHELOR_SMA_PAGE": "/formations/licence-fondamentale/sma",
+    "BACHELOR_GEO_PAGE": "/formations/licence-fondamentale/geo",
+    "BACHELOR_EA_PAGE": "/formations/licence-fondamentale/ea",
+    "BACHELOR_SMP_PAGE": "/formations/licence-fondamentale/smp",
+    "BACHELOR_SV_PAGE": "/formations/licence-fondamentale/sv",
+    "BACHELOR_SEG_PAGE": "/formations/licence-fondamentale/seg",
+    "BACHELOR_SMC_PAGE": "/formations/licence-fondamentale/smc",
 
-    "PROFESSIONAL_BACHELORS_PAGE": "/formations/licence-professionnelle",
+    "PROFESSIONAL_BACHELOR_PAGE": "/formations/licence-professionnelle",
     "MASTERS_PAGE": "/formations/master",
     "PHDS_PAGE": "/formations/doctorat",
 
@@ -37,14 +37,12 @@
     "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
     
     "E_TEACHER_DASHBOARD_PAGE": "/e-enseignant",
-    "E_TEACHER_INSCRIPTIONS_PAGE": "/e-enseignant/insctiptions",
     "E_TEACHER_ACCOUNTS_PAGE": "/e-enseignant/comptes",
     "E_TEACHER_SCHEDULES_PAGE": "/e-enseignant/emplois",
     "E_TEACHER_PLANNING_PAGE": "/e-enseignant/planning",
-    "E_TEACHER_RESULTS_PAGE": "/e-enseignant/resultats",
-    "E_TEACHER_E_DOCUMENTS_PAGE": "/e-enseignant/e-documents",
-    "E_TEACHER_COMPLAINTS_PAGE": "/e-enseignant/reclamations",
-
+    "E_TEACHER_ANNOUNCEMENTS_PAGE": "/e-enseignant/avis",
+    "E_TEACHER_GRADES_PAGE": "/e-enseignant/notes",
+    "E_TEACHER_CLASSES_PAGE": "/e-enseignant/classes",
 
     "EVENTS_PAGE": "/events",
     "CLUBS_PAGE": "/clubs",
