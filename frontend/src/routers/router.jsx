@@ -67,6 +67,14 @@ const router = createBrowserRouter([
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
+            { path: Paths.BACHELOR_SMI_PAGE, element: <Smi /> },
+            { path: Paths.BACHELOR_SMA_PAGE, element: <Sma /> },
+            { path: Paths.BACHELOR_GEO_PAGE, element: <Geo /> },
+            { path: Paths.BACHELOR_EA_PAGE, element: <Ea /> },
+            { path: Paths.BACHELOR_SMP_PAGE, element: <Smp /> },
+            { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
+            { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
+            { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
         ]
     },
     {
