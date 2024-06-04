@@ -35,8 +35,16 @@
     "E_STUDENT_RESULTS_PAGE": "/e-etudiant/resultats",
     "E_STUDENT_E_DOCUMENTS_PAGE": "/e-etudiant/e-documents",
     "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
+    
+    "E_TEACHER_DASHBOARD_PAGE": "/e-enseignant",
+    "E_TEACHER_INSCRIPTIONS_PAGE": "/e-enseignant/insctiptions",
+    "E_TEACHER_ACCOUNTS_PAGE": "/e-enseignant/comptes",
+    "E_TEACHER_SCHEDULES_PAGE": "/e-enseignant/emplois",
+    "E_TEACHER_PLANNING_PAGE": "/e-enseignant/planning",
+    "E_TEACHER_RESULTS_PAGE": "/e-enseignant/resultats",
+    "E_TEACHER_E_DOCUMENTS_PAGE": "/e-enseignant/e-documents",
+    "E_TEACHER_COMPLAINTS_PAGE": "/e-enseignant/reclamations",
 
-    "E_TEACHER_PAGE": "/e-enseignant",
 
     "EVENTS_PAGE": "/events",
     "CLUBS_PAGE": "/clubs",

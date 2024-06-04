@@ -1,12 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import EntStudentPagesUrlsList from "../../../components/ent/EntStudentPagesUrlsList";
-import { axiosClient } from "../../../api/axios";
-
 
 const EntStudentDashbordPage = () => {
-
-    console.log(axiosClient.defaults);
 
     return (
         <div className="p-5 grid grid-cols-5 gap-5">
