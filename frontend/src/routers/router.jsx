@@ -23,7 +23,7 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
-import EntStudentDashbordPage from "../pages/ent/student/EntStudentDashbordPage";
+import EntStudentDashboardPage from "../pages/ent/student/EntStudentDashboardPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/EntStudentComplaintsPage";
 import EntStudentPlanningPage from "../pages/ent/student/EntStudentPlanningPage";
@@ -31,10 +31,16 @@ import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPag
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
-import EntTeacherDashbordPage from "../pages/ent/teacher/EntTeacherDashbordPage";
+import EntTeacherDashboardPage from "../pages/ent/teacher/EntTeacherDashboardPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
 import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
 import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
+import EntTeacherAccountsPage from "../pages/ent/teacher/EntTeacherAccountsPage";
+import EntTeacherSchedulePage from "../pages/ent/teacher/EntTeacherSchedulePage";
+import EntTeacherPlanningPage from "../pages/ent/teacher/EntTeacherPlanningPage";
+import EntTeacherClassesPage from "../pages/ent/teacher/EntTeacherClassesPage";
+import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
+import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnouncementsPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -52,14 +58,6 @@ const router = createBrowserRouter([
         element: <StaticPageLayout />,
         children: [
             { path: Paths.HOME_PAGE, element: <HomePage /> },
-            { path: Paths.SMI, element: <Smi /> },
-            { path: Paths.SMA, element: <Sma /> },
-            { path: Paths.GEO, element: <Geo /> },
-            { path: Paths.EA, element: <Ea /> },
-            { path: Paths.SMP, element: <Smp /> },
-            { path: Paths.SV, element: <Sv /> },
-            { path: Paths.SEG, element: <Seg /> },
-            { path: Paths.SMC, element: <Smc /> },
             { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage /> },
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
@@ -80,7 +78,7 @@ const router = createBrowserRouter([
     {
         element: <EntLayout EntPagesUrlsList={EntStudentPagesUrlsList} />,
         children: [
-            { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashbordPage /> },
+            { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashboardPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
             { path: Paths.E_STUDENT_ACCOUNTS_PAGE, element: <EntStudentAccountsPage /> },
             { path: Paths.E_STUDENT_SCHEDULES_PAGE, element: <EntStudentSchedulesPage /> },
@@ -93,7 +91,13 @@ const router = createBrowserRouter([
     {
         element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
         children: [
-            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashbordPage /> },
+            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashboardPage /> },
+            { path: Paths.E_TEACHER_ACCOUNTS_PAGE, element: <EntTeacherAccountsPage /> },
+            { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
+            { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },
+            { path: Paths.E_TEACHER_GRADES_PAGE, element: <EntTeacherGradesPage /> },
         ]
     }
     

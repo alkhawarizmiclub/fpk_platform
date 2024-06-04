@@ -37,14 +37,12 @@
     "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
     
     "E_TEACHER_DASHBOARD_PAGE": "/e-enseignant",
-    "E_TEACHER_INSCRIPTIONS_PAGE": "/e-enseignant/insctiptions",
     "E_TEACHER_ACCOUNTS_PAGE": "/e-enseignant/comptes",
     "E_TEACHER_SCHEDULES_PAGE": "/e-enseignant/emplois",
     "E_TEACHER_PLANNING_PAGE": "/e-enseignant/planning",
-    "E_TEACHER_RESULTS_PAGE": "/e-enseignant/resultats",
-    "E_TEACHER_E_DOCUMENTS_PAGE": "/e-enseignant/e-documents",
-    "E_TEACHER_COMPLAINTS_PAGE": "/e-enseignant/reclamations",
-
+    "E_TEACHER_ANNOUNCEMENTS_PAGE": "/e-enseignant/avis",
+    "E_TEACHER_GRADES_PAGE": "/e-enseignant/notes",
+    "E_TEACHER_CLASSES_PAGE": "/e-enseignant/classes",
 
     "EVENTS_PAGE": "/events",
     "CLUBS_PAGE": "/clubs",

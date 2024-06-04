@@ -77,14 +77,14 @@ const HomePage = () => {
                             <MajorCategory label="doctorat" />
                         </div>
                         <div className="grid grid-cols-4 gap-5">
-                            <Major label="science mathématique et informatique" url="/smi" img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
-                            <Major label="science mathématique et application" url="/sma" img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
-                            <Major label="science economie et gestion" url="seg" img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
-                            <Major label="science de la matière physique" url="smp" img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />
-                            <Major label="science de la matière chimie" url="smc" img_src="https://fpk-biblio.netlify.app/img/smc.jpg" />
-                            <Major label="sciences de la Vie" url="sv" img_src="https://fpk-biblio.netlify.app/img/sv.jpg" />
-                            <Major label="géographie" url="geo" img_src="https://fpk-biblio.netlify.app/img/geo.jpg" />
-                            <Major label="études arabe" url="ea" img_src="https://fpk-biblio.netlify.app/img/ea.jpg" />
+                            <Major label="science mathématique et informatique" url={Paths.BACHELOR_SMI_PAGE} img_src="https://fpk-biblio.netlify.app/img/smi.jpg" />
+                            <Major label="science mathématique et application" url={Paths.BACHELOR_SMA_PAGE} img_src="https://fpk-biblio.netlify.app/img/sma.jpg" />
+                            <Major label="science economie et gestion" url={Paths.BACHELOR_SEG_PAGE} img_src="https://fpk-biblio.netlify.app/img/seg.jpg" />
+                            <Major label="science de la matière physique" url={Paths.BACHELOR_SMP_PAGE} img_src="https://fpk-biblio.netlify.app/img/smp.jpg" />
+                            <Major label="science de la matière chimie" url={Paths.BACHELOR_SMC_PAGE} img_src="https://fpk-biblio.netlify.app/img/smc.jpg" />
+                            <Major label="sciences de la Vie" url={Paths.BACHELOR_SV_PAGE} img_src="https://fpk-biblio.netlify.app/img/sv.jpg" />
+                            <Major label="géographie" url={Paths.BACHELOR_GEO_PAGE} img_src="https://fpk-biblio.netlify.app/img/geo.jpg" />
+                            <Major label="études arabe" url={Paths.BACHELOR_EA_PAGE} img_src="https://fpk-biblio.netlify.app/img/ea.jpg" />
                         </div>
 
                     </div>
