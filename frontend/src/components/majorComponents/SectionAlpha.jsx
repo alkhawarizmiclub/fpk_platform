@@ -1,3 +1,5 @@
+import target from "../../../public/target.png"
+
 const SectionAlpha = ({objectifs,competences}) => {
     return ( 
 
@@ -14,7 +16,7 @@ const SectionAlpha = ({objectifs,competences}) => {
                 </ul>
             </div>
             <div className="w-1/3 pt-20">
-                <img src="https://cigma.org/assets/svg/formation-objectif.svg" alt="image" className="w-full h-auto"/>
+                <img src={target} alt="image" className="w-full h-auto"/>
             </div>
         </section>
 
