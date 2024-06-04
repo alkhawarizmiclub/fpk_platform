@@ -23,7 +23,7 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
-import EntStudentDashbordPage from "../pages/ent/student/EntStudentDashbordPage";
+import EntStudentDashboardPage from "../pages/ent/student/EntStudentDashboardPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/EntStudentComplaintsPage";
 import EntStudentPlanningPage from "../pages/ent/student/EntStudentPlanningPage";
@@ -31,7 +31,7 @@ import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPag
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
-import EntTeacherDashbordPage from "../pages/ent/teacher/EntTeacherDashbordPage";
+import EntTeacherDashboardPage from "../pages/ent/teacher/EntTeacherDashboardPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
 import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
 import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     {
         element: <EntLayout EntPagesUrlsList={EntStudentPagesUrlsList} />,
         children: [
-            { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashbordPage /> },
+            { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashboardPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
             { path: Paths.E_STUDENT_ACCOUNTS_PAGE, element: <EntStudentAccountsPage /> },
             { path: Paths.E_STUDENT_SCHEDULES_PAGE, element: <EntStudentSchedulesPage /> },
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     {
         element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
         children: [
-            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashbordPage /> },
+            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashboardPage /> },
         ]
     }
     
