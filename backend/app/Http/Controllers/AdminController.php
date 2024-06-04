@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAdminRequest;
-use App\Http\Requests\UpdateAdminRequest;
-use App\Models\Admin;
-use App\Models\Module;
-use App\Models\Prof;
-use App\Services\Template;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\Models\Admin;
+
+use App\Http\Requests\AdminAuth\LoginRequest;
+
 
 class AdminController extends Controller
 {
@@ -21,20 +21,37 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAdminRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
-        //
+        $request->authenticate();
+        $admin = Admin::where('email', $request->email)->first();
+        $admin->tokens()->delete();
+        $token = $admin->createToken('api_token', ['role:admin'], Carbon::now()->addHours(2));
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'logged in successfully',
+                'admin' => $admin,
+                'token' => $token->plainTextToken,
+            ]
+        );
+    }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        Auth::guard('admin')->logout();
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'logged out successfully'
+        ]);
     }
 
     /**
@@ -45,21 +62,7 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAdminRequest $request, Admin $admin)
-    {
-        //
-    }
 
     // public function assignProf(Request $request)
     // {

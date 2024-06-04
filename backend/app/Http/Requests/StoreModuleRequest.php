@@ -3,9 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\Validation\Validator;
 
 class StoreModuleRequest extends FormRequest
 {
@@ -27,7 +24,8 @@ class StoreModuleRequest extends FormRequest
         return [
             'module_name' => 'required|string|max:64',
             'filiere' => 'required|string|max:64',
-            'prof_id' => 'integer|exists:profs,id'
+            'semester' => 'required|string|max:64',
+            'prof_id' => 'integer|exists:profs,id|nullable'
         ];
     }
     public function messages(): array
@@ -40,17 +38,10 @@ class StoreModuleRequest extends FormRequest
             'filiere.string' => 'The filiere must be a string',
             'filiere.max' => 'The filiere must not exceed 64 characters',
             'prof_id.integer' => 'The prof id must be an integer',
-            'prof_id.exists' => 'The prof id does not exist'
+            'prof_id.exists' => 'The prof id does not exist',
+            'semester.required' => 'The semester is required',
+            'semester.string' => 'The semester must be a string',
+            'semester.max' => 'The semester must not exceed 64 characters'
         ];
-    }
-    protected function failedValidation(Validator $validator)
-    {
-        $response = new JsonResponse([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => $validator->errors()
-        ], 422);
-
-        throw new ValidationException($validator, $response);
     }
 }

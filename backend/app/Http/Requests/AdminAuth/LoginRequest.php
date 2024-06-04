@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\ProfAuth;
+namespace App\Http\Requests\AdminAuth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class LoginRequest extends FormRequest
 {
@@ -44,7 +43,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-
     /**
      * Attempt to authenticate the request's credentials.
      *
@@ -53,13 +51,13 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-        if (!Auth::guard('prof')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::guard('admin')->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
         }
-
+        Log::info('login request');
         RateLimiter::clear($this->throttleKey());
     }
 

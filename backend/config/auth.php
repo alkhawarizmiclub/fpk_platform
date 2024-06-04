@@ -43,6 +43,10 @@ return [
         'student' => [
             'driver' => 'session',
             'provider' => 'students',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ]
 
     ],
@@ -65,20 +69,25 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => env('AUTH_MODEL', App\Models\User::class),
+        // ],
 
         'profs' => [
             'driver' => 'eloquent',
             'model' => App\Models\Prof::class,
         ],
 
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
         'students' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class,
-        ],
+        ]
+
 
     ],
 
@@ -102,12 +111,12 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+        // 'users' => [
+        //     'provider' => 'users',
+        //     'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ],
 
         'profs' => [
             'provider' => 'profs',
@@ -118,6 +127,12 @@ return [
 
         'students' => [
             'provider' => 'students',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,

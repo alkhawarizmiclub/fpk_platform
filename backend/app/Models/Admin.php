@@ -12,11 +12,16 @@ class Admin extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guard = 'admin';
+    protected $table = 'admins';
 
     protected $fillable = [
-        'name',
+        'lastname',
+        'firstname',
         'email',
         'password',
+        'birth_date',
+        'phone_number',
+        'gender',
     ];
 
     protected $hidden = [
@@ -28,6 +33,7 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function announces()
     {
         return $this->morphMany(Announcement::class, 'author');

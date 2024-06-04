@@ -23,7 +23,7 @@ class StudentService
     use JsonTemplate;
     public function all()
     {
-        $students = StudentResource::collection(Student::all());
+        $students = StudentResource::collection(Student::paginate());
         return ($this->DATA('students', $students));
     }
     // add module to new student
@@ -41,42 +41,32 @@ class StudentService
         ]);
     }
 
-    public function modules(string $id)
+    public function modules(Student $student)
     {
-        $module = Student::find($id)->modules;
-        if (!$module)
-            return ($this->NOT_FOUND('student'));
+        $module = $student->modules;
         $module  = ModuleResource::collection($module);
         return ($this->DATA('modules', $module));
     }
 
-    public function findById(string $id)
+    public function result(Student $student)
     {
-        $student = Student::find($id);
-        if (!$student)
-            return ($this->NOT_FOUND('student'));
-
-        $student  = new StudentResource($student);
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'student retrieved successfully',
-                'data' => $student
-            ],
-            200
-        );
+        $result = Result::where('apogee', $student->apogee)->get();
+        $results = ResultResource::collection($result);
+        return ($this->DATA('results', $results));
     }
+
+
     public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . 'api_token', ['role:student'], Carbon::now()->addHours());
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student logged in successfully',
-                'data' => $student,
+                'data' => new StudentResource($student),
                 'token' => $token->plainTextToken
             ]
         );
@@ -96,29 +86,36 @@ class StudentService
     }
 
 
+    // store on public (not very secure ) impl something later like s3
     public function save(StoreStudentRequest $request): JsonResponse
     {
+        // return "TODO";
+
+        $baccalaureat = $request->file('baccalaureat')->store('public');
+        $releve_note = $request->file('releve_note')->store('public');
+        $image_presonnal = $request->file('image_presonnal')->store('public');
+        $identify_recto_versto = $request->file('identify_recto_verso')->store('public');
+        $request->merge([
+            'baccalaureat' => $baccalaureat,
+            'releve_note' => $releve_note,
+            'image_presonnal' => $image_presonnal,
+            'identify_recto_versto' => $identify_recto_versto,
+            'inscription_date' => $this->getAcademicYear($request->date_naissance)
+        ]);
 
         $student = Student::create($request->all());
         $this->setDefaultModules($student);
         event(new Registered($student));
-        Auth::login($student);
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student created successfully',
-                'data' => new StudentResource($student)
+                'data' => $student
             ],
             201
         );
     }
 
-    public function result($apogee)
-    {
-        $module = Result::where('apogee', $apogee)->get();
-        $results = ResultResource::collection($module);
-        return ($this->DATA('results', $results));
-    }
 
     public static  function getAcademicYear($date, $academicYearStartMonth = 9)
     {
