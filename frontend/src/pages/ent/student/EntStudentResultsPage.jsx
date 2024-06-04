@@ -1,4 +1,5 @@
 import EntResultsSemester from "../../../components/ent/EntResultsSemester";
+import EntPageContainer from "../../../components/ent/EntPageContainer";
 
 const EntStudentResultsPage = () => {
 
@@ -198,9 +199,15 @@ const EntStudentResultsPage = () => {
     ]
 
     return (
-        <div className="m-5 p-5 rounded-lg flex flex-col gap-5 bg-white">
-            {results.map(({ semesterNumber, majorLabel, moduleObjects }, i) => <EntResultsSemester key={i} semesterNumber={semesterNumber} majorLabel={majorLabel} moduleObjects={moduleObjects} />)}
-        </div>
+
+        <EntPageContainer title="Resultats">
+            <div className="flex flex-col gap-5">
+                {results.map(({ semesterNumber, majorLabel, moduleObjects }, i) =>
+                    <EntResultsSemester key={i} semesterNumber={semesterNumber} majorLabel={majorLabel} moduleObjects={moduleObjects} />
+                )}
+            </div>
+        </EntPageContainer>
+
     );
 }
 
