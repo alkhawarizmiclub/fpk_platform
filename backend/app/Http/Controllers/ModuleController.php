@@ -5,22 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreModuleRequest;
 use App\Http\Requests\UpdateModuleRequest;
 use App\Models\Module;
-use App\Models\Prof;
 use App\Http\Resources\ModuleResource;
-use App\Services\ProfService;
 use Illuminate\Http\Response;
 use App\Services\ModuleService;
-use App\Services\Template;
 
-// TODO : add auth so only admin can access this controller
 class ModuleController extends Controller
 {
     private ModuleService $moduleService;
-    private ProfService $profService;
-    public function __construct(ModuleService $moduleService, ProfService $profService)
+    public function __construct(ModuleService $moduleService)
     {
         $this->moduleService = $moduleService;
-        $this->profService = $profService;
     }
     /**
      * Display a listing of the resource.
@@ -35,7 +29,6 @@ class ModuleController extends Controller
      */
     public function store(StoreModuleRequest $request)
     {
-
         return ($this->moduleService->save($request));
     }
 
@@ -43,7 +36,7 @@ class ModuleController extends Controller
     {
         $module = Module::find($moduleId);
         if (!$module)
-            return (Template::NOT_FOUND('Module'));
+            return ($this->moduleService->NOT_FOUND('module'));
 
         return (response()->json(
             [

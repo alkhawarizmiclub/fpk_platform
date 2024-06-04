@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
 use Carbon\Carbon;
 use App\Http\Requests\StoreannouncementRequest;
-use Illuminate\Support\Facades\Storage;
+
 
 class ProfService
 {
@@ -38,7 +38,7 @@ class ProfService
         return ($this->DATA('modules', $modules));
     }
 
-    public function listStudents(string $moduleId)
+    public function students(string $moduleId)
     {
         $profId = request()->user()->id;
         $module = Module::where('prof_id', $profId)->where('id', $moduleId)->exists();
@@ -81,7 +81,7 @@ class ProfService
             [
                 'status' => 'success',
                 'prof' => $prof,
-                'token' => $token->plainTextToken
+                'token' => $token->plainTextToken,
             ]
         );
     }
@@ -126,16 +126,9 @@ class ProfService
     // if file should not visible to public it get store on local storage else is on public
     public function announce(StoreAnnouncementRequest $request)
     {
-        $poster_image_path = null;
         $prof = request()->user();
-        if (!$prof)
-            return ($this->resourceNotFound());
-        if ($request->hasFile('thumbnail_path'))
-            $thumbnail_path = $request->file('thumbnail_path')->store('public');
-        else
-            $thumbnail_path = 'default.png';
-        if ($request->hasFile('poster_image_path'))
-            $poster_image_path = $request->file('poster_image_path')->store('public');
+        $thumbnail_path = $request->file('thumbnail_path')->store('public');
+        $poster_image_path = $request->file('poster_image_path')->store('public');
         $prof->announcements()->create([
             'title' => $request->title,
             'thumbnail_path' => $thumbnail_path,

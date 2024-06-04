@@ -1,39 +1,37 @@
 <?php
+
 namespace App\Services;
+
 use App\Http\Resources\ModuleResource;
 use App\Http\Requests\StoreModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Response;
-use App\Services\Template;
-use App\Models\Prof;
-use Illuminate\Http\Request;
+use App\Traits\JsonTemplate;
 
 class ModuleService
 {
+    use JsonTemplate;
+
+    public function index()
+    {
+        return ModuleResource::collection(Module::all());
+    }
 
     public function findById(string $id)
     {
         $module = Module::find($id);
-        if (!$module) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'module not found',
-                    'data' => null
-                ],
-                Response::HTTP_NOT_FOUND
-            );
-        };
-        $module  = new ModuleResource($module);
+        if (!$module)
+            return $this->NOT_FOUND('Module');
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Module retrieved successfully',
-                'data' => $module
+                'data' => new ModuleResource($module)
             ],
             Response::HTTP_OK
         );
     }
+
     public function save(StoreModuleRequest $request)
     {
         $module = Module::create($request->all());
@@ -46,17 +44,7 @@ class ModuleService
             Response::HTTP_CREATED
         );
     }
-    public function toJson($module)
-    {
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'Module retrieved successfully',
-                'data' => new ModuleResource($module)
-            ],
-            Response::HTTP_OK
-        );
-    }
+
 
     public static function ADD_MODULE()
     {

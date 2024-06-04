@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import EntTeacherPagesUrlsList from "../../../components/ent/EntTeacherPagesUrlsList";
 
-const EntTeacherDashbordPage = () => {
+const EntTeacherDashboardPage = () => {
 
     return (
         <div className="p-5 grid grid-cols-5 gap-5">
@@ -18,4 +18,4 @@ const EntTeacherDashbordPage = () => {
     );
 }
 
-export default EntTeacherDashbordPage;
+export default EntTeacherDashboardPage;
