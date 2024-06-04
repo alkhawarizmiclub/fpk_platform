@@ -32,6 +32,7 @@ import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPag
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
+import ProfessorsPage from "../pages/static/ProfessorsPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -48,12 +49,22 @@ const router = createBrowserRouter([
     {
         element: <StaticPageLayout />,
         children: [
+            { path: Paths.HOME_PAGE, element: <HomePage /> },
+            { path: "/smi", element: <Smi /> },
+            { path: "/sma", element: <Sma /> },
+            { path: "/geo", element: <Geo /> },
+            { path: "/ea", element: <Ea /> },
+            { path: "/smp", element: <Smp /> },
+            { path: "/sv", element: <Sv /> },
+            { path: "/seg", element: <Seg /> },
+            { path: "/smc", element: <Smc /> },
             { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage /> },
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
+            { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
         ]
     },
     {

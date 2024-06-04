@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import Paths from "../../routers/Paths.json";
-import NavbarDropMenu from "../NavbarDropMenu";
-import Button from "../Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
 
@@ -17,9 +15,9 @@ const Navbar = () => {
                 <div className="text-sm text-slate-500">{major} - {semester}</div>
             </div>
 
-            <Button>
-                <Link className="py-3 px-6 block" to={Paths.LOGOUT_PAGE}>Log Out</Link>
-            </Button>
+            <button className="flex items-center">
+                <FontAwesomeIcon icon={faBell} className="text-xl text-slate-500"/>
+            </button>
 
         </nav>
     );

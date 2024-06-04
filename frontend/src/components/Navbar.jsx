@@ -45,6 +45,7 @@ const Navbar = () => {
         {
             label: "recherche & coopérqtion",
             children: [
+                { label: "Professeurs", url: Paths.PROFESSORS_PAGE },
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
                 { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
                 { label: "Equipes de recherche", url: Paths.LABOLATORIES_PAGE },
