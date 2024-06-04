@@ -3,6 +3,7 @@ import { useState } from "react";
 import Mheader from "../../components/majorComponents/Mheader";
 import SectionAlpha from "../../components/majorComponents/SectionAlpha";
 import SectionBeta from "../../components/majorComponents/SectionBeta";
+import smi from "../../../public/smi.png"
 
 
 const Smi = () => {
@@ -45,11 +46,11 @@ const Smi = () => {
         <>
             <Mheader formation="Licence" filiere="Filière Sciences Mathématiques et Informatique" 
                     slogan="Formez-vous aux technologies et aux compétences nécessaires pour réussir dans ce domaine passionnant."
-                    image="https://cigma.org/assets/img/filieres/y9ugngux0d.svg"/>
+                    image={smi}/>
 
             <section className="bg-zinc-200">
                 <SectionAlpha objectifs={objectifs} competences={competences}/>
-                <SectionBeta  image="https://cigma.org/assets/img/filieres/y9ugngux0d.svg" opportunities={opportunities} conditions1={conditions1} conditions2={conditions2} titre="Cette formation est destinée aux étudiants titulaires d’un baccalauréat en :"/>
+                <SectionBeta  image={smi} opportunities={opportunities} conditions1={conditions1} conditions2={conditions2} titre="Cette formation est destinée aux étudiants titulaires d’un baccalauréat en :"/>
                 
             </section>
         </>

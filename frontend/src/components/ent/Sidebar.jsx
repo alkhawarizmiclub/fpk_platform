@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import Paths from "../../routers/Paths.json";
-import EntPagesUrlsList from "./EntPagesUrlsList";
 import SidebarMenuItem from "./SidebarMenuItem";
-import { faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar = () => {
+const Sidebar = ({ EntPagesUrlsList }) => {
 
     return (
         <aside className="p-5 w-full max-w-xs flex flex-col justify-between bg-slate-700">
@@ -15,7 +14,6 @@ const Sidebar = () => {
                 </Link>
 
                 <div className="flex flex-col gap-1">
-                    <SidebarMenuItem label="Home" url={Paths.E_STUDENT_DASHBOARD_PAGE} icon={faHome} />
                     {EntPagesUrlsList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
                 </div>
             </div>

@@ -89,5 +89,47 @@ class ModuleService
             'semester' => 'S1',
             'filiere' => 'SMI'
         ]);
+
+        Module::create([
+            'module_name' => 'M08- Analyse 2- Intégration',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => ' M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M11- Physique 3 – Electrostatique et Electrocinétique',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M13- Informatique 2 – Algorithmique I',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
+
+        Module::create([
+            'module_name' => 'M07- LT I',
+            'semester' => 'S2',
+            'filiere' => 'SMI'
+        ]);
     }
 }

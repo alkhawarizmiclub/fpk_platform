@@ -1,12 +1,19 @@
-import { faCalendarDays, faClipboardCheck, faClock, faFileLines, faTableList, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faClipboardCheck, faClock, faFileLines, faHome, faTableList, faUser } from "@fortawesome/free-solid-svg-icons";
 import Paths from "../../routers/Paths.json";
 
-// I put this list in a seperate file because I use it in both the Sidebar component and the EntStudentDashboardPage page 
+// ⚠ I put this list in a seperate file because I use it in both the Sidebar component and the EntStudentDashboardPage page 
 
-const EntPagesUrlsList = [
+const EntStudentPagesUrlsList = [
+    {
+        label: "acceuil",
+        url: Paths.E_STUDENT_DASHBOARD_PAGE,
+        icon: faHome,
+        bg: "bg-gradient-to-tr from-red-500 to-red-300",
+        isHome: true,
+    },
     {
         label: "inscription",
-        url: Paths.E_STUDENT_E_DOCUMENTS_PAGE,
+        url: Paths.E_STUDENT_INSCRIPTIONS_PAGE,
         icon: faFileLines,
         bg: "bg-gradient-to-tr from-red-500 to-red-300"
     },
@@ -48,4 +55,4 @@ const EntPagesUrlsList = [
     }
 ]
 
-export default EntPagesUrlsList;
+export default EntStudentPagesUrlsList;

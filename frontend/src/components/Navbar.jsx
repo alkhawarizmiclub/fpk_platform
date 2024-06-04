@@ -29,7 +29,7 @@ const Navbar = () => {
             label: "espace scolarité",
             children: [
                 { label: "E-Etudiant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
-                { label: "E-Enseignant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
+                { label: "E-Enseignant", url: Paths.E_TEACHER_DASHBOARD_PAGE },
                 { label: "Emploi du temps", url: "____" },
                 { label: "Planning des exams", url: "____" },
             ]

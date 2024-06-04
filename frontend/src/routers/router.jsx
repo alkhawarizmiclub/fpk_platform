@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Paths from "./Paths.json";
 import BlankLayout from "../layouts/BlankLayout";
 import StaticPageLayout from "../layouts/StaticPageLayout";
-import UserLayout from "../layouts/UserLayout";
 import EntLayout from "../layouts/EntLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
@@ -32,7 +31,10 @@ import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPag
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
+import EntTeacherDashbordPage from "../pages/ent/teacher/EntTeacherDashbordPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
+import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
+import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -50,14 +52,14 @@ const router = createBrowserRouter([
         element: <StaticPageLayout />,
         children: [
             { path: Paths.HOME_PAGE, element: <HomePage /> },
-            { path: "/smi", element: <Smi /> },
-            { path: "/sma", element: <Sma /> },
-            { path: "/geo", element: <Geo /> },
-            { path: "/ea", element: <Ea /> },
-            { path: "/smp", element: <Smp /> },
-            { path: "/sv", element: <Sv /> },
-            { path: "/seg", element: <Seg /> },
-            { path: "/smc", element: <Smc /> },
+            { path: Paths.SMI, element: <Smi /> },
+            { path: Paths.SMA, element: <Sma /> },
+            { path: Paths.GEO, element: <Geo /> },
+            { path: Paths.EA, element: <Ea /> },
+            { path: Paths.SMP, element: <Smp /> },
+            { path: Paths.SV, element: <Sv /> },
+            { path: Paths.SEG, element: <Seg /> },
+            { path: Paths.SMC, element: <Smc /> },
             { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage /> },
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
@@ -68,7 +70,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        element: <EntLayout />,
+        element: <EntLayout EntPagesUrlsList={EntStudentPagesUrlsList} />,
         children: [
             { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashbordPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
@@ -79,7 +81,14 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
         ]
+    },
+    {
+        element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
+        children: [
+            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashbordPage /> },
+        ]
     }
+    
 ])
 
 export { router };
