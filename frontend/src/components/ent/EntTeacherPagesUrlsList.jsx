@@ -13,7 +13,7 @@ const EntTeacherPagesUrlsList = [
     },
     {
         label: "inscription",
-        url: Paths.E_TEACHER_E_DOCUMENTS_PAGE,
+        url: Paths.E_TEACHER_INSCRIPTIONS_PAGE,
         icon: faFileLines,
         bg: "bg-gradient-to-tr from-red-500 to-red-300"
     },

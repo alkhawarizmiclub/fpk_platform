@@ -80,7 +80,6 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_RESULTS_PAGE, element: <EntStudentResultsPage /> },
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
-            { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
         ]
     },
     {
