@@ -1,4 +1,4 @@
-import { faCalendarDays, faClipboardCheck, faClock, faFileLines, faHome, faTableList, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBullhorn, faCalendarDays, faClock, faHome, faTableList, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import Paths from "../../routers/Paths.json";
 
 // ⚠ I put this list in a seperate file because I use it in both the Sidebar component and the EntTeacherDashboardPage page 
@@ -10,12 +10,6 @@ const EntTeacherPagesUrlsList = [
         icon: faHome,
         bg: "bg-gradient-to-tr from-red-500 to-red-300",
         isHome: true,
-    },
-    {
-        label: "inscription",
-        url: Paths.E_TEACHER_INSCRIPTIONS_PAGE,
-        icon: faFileLines,
-        bg: "bg-gradient-to-tr from-red-500 to-red-300"
     },
     {
         label: "comptes",
@@ -36,22 +30,22 @@ const EntTeacherPagesUrlsList = [
         bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
     },
     {
-        label: "resultats",
-        url: Paths.E_TEACHER_RESULTS_PAGE,
+        label: "announces",
+        url: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE,
+        icon: faBullhorn,
+        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
+    },
+    {
+        label: "classes",
+        url: Paths.E_TEACHER_CLASSES_PAGE,
+        icon: faUsers,
+        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
+    },
+    {
+        label: "notes",
+        url: Paths.E_TEACHER_GRADES_PAGE,
         icon: faTableList,
-        bg: "bg-gradient-to-tr from-blue-500 to-blue-300"
-    },
-    {
-        label: "e-documents",
-        url: Paths.E_TEACHER_E_DOCUMENTS_PAGE,
-        icon: faFileLines,
-        bg: "bg-gradient-to-tr from-red-500 to-red-300"
-    },
-    {
-        label: "reclamations",
-        url: Paths.E_TEACHER_COMPLAINTS_PAGE,
-        icon: faClipboardCheck,
-        bg: "bg-gradient-to-tr from-orange-500 to-orange-300"
+        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
     }
 ]
 
