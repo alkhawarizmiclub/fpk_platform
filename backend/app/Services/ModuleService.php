@@ -102,13 +102,6 @@ class ModuleService
             'filiere' => 'SMI'
         ]);
 
-        // M08- Analyse 2- Intégration
-        // M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications
-        // M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants
-        // M11- Physique 3 – Electrostatique et Electrocinétique
-        // M12- Physique 4 – Optique 1
-        // M13- Informatique 2 – Algorithmique I
-        // M14- LT II
         Module::create([
             'module_name' => 'M08- Analyse 2- Intégration',
             'semester' => 'S2',
