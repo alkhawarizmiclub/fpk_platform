@@ -47,9 +47,9 @@ class ProfController extends Controller
         return ($this->profService->modules($request->user()->id));
     }
 
-    public function listStudents(string $moduleId)
+    public function students(string $moduleId)
     {
-        return ($this->profService->listStudents($moduleId));
+        return ($this->profService->students($moduleId));
     }
 
     public function login(LoginRequest $request)

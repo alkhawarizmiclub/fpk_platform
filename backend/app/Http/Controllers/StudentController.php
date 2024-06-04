@@ -42,8 +42,8 @@ class StudentController extends Controller
 
     public function modules()
     {
-        $apogee = request()->user()->apogee;
-        return ($this->studentService->modules($apogee));
+        $student = request()->user();
+        return ($this->studentService->modules($student));
     }
 
     /**
@@ -51,12 +51,19 @@ class StudentController extends Controller
      */
     public function show(Request $request)
     {
-        return ($request->user());
+        $student = request()->user();
+        return (Response()->json(
+            [
+                'status' => 'success',
+                'message' => 'student profile retrieved successfully',
+                'data' => new StudentResource($student)
+            ]
+        ));
     }
 
     public function result()
     {
-        $apogee = request()->user()->apogee;
-        return ($this->studentService->result($apogee));
+        $student = request()->user();
+        return ($this->studentService->result($student));
     }
 }

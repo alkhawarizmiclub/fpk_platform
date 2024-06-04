@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use DateTime;
+
+
 
 class Student extends Authenticatable
 {
@@ -16,12 +17,27 @@ class Student extends Authenticatable
     protected $fillable = [
         'firstname',
         'lastname',
-        'email',
-        'password',
-        'phone_number',
-        'gender',
+        'firstname_ar',
+        'lastname_ar',
         'birth_date',
+        'birth_place',
+        'student_code',
+        'nationality',
+        'num_identify',
+        'email',
+        'phone_number',
+        'phone_urgent',
+        'address',
+        'filiere',
+        'password',
+        'gender',
+        'baccalaureat',
+        'releve_note',
+        'image_presonnal',
+        'identify_recto_verso',
+        'inscription_date',
     ];
+
     protected $table = 'students';
     protected $primaryKey = 'apogee';
     public $incrementing = true;
