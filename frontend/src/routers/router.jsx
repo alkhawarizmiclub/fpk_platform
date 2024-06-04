@@ -32,6 +32,7 @@ import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPag
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
+import EntTeacherDashbordPage from "../pages/ent/teacher/EntTeacherDashbordPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
 
 const router = createBrowserRouter([
@@ -78,6 +79,8 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_RESULTS_PAGE, element: <EntStudentResultsPage /> },
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
+            { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
+            { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashbordPage /> },
         ]
     }
 ])
