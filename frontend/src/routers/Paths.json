@@ -12,7 +12,17 @@
     "MEDIA_PAGE": "/media",
 
     "TRACKS_PAGE": "/formations",
+
     "BACHELORS_PAGE": "/formations/licence-fondamentale",
+    "SMI": "/formations/licence-fondamentale/smi",
+    "SMA": "/formations/licence-fondamentale/sma",
+    "GEO": "/formations/licence-fondamentale/geo",
+    "EA": "/formations/licence-fondamentale/ea",
+    "SMP": "/formations/licence-fondamentale/smp",
+    "SV": "/formations/licence-fondamentale/sv",
+    "SEG": "/formations/licence-fondamentale/seg",
+    "SMC": "/formations/licence-fondamentale/smc",
+
     "PROFESSIONAL_BACHELORS_PAGE": "/formations/licence-professionnelle",
     "MASTERS_PAGE": "/formations/master",
     "PHDS_PAGE": "/formations/doctorat",
