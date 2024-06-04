@@ -48,51 +48,12 @@ const router = createBrowserRouter([
     {
         element: <StaticPageLayout />,
         children: [
-<<<<<<< lafwan
-            {
-                path: Paths.HOME_PAGE,
-                element: <HomePage />
-            },
-            {
-                path: "/smi",
-                element: <Smi /> 
-            },
-            {
-                path: "/sma",
-                element: <Sma /> 
-            },
-            {
-                path: "/geo",
-                element: <Geo /> 
-            },
-            {
-                path: "/ea",
-                element: <Ea /> 
-            },
-            {
-                path: "/smp",
-                element: <Smp /> 
-            },
-            {
-                path: "/sv",
-                element: <Sv /> 
-            },
-            {
-                path: "/seg",
-                element: <Seg /> 
-            },
-            {
-                path: "/smc",
-                element: <Smc /> 
-            }
-=======
             { path: Paths.DEAN_WORD_PAGE, element: <DeanWordPage /> },
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
->>>>>>> main
         ]
     },
     {
