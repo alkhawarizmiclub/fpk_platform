@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\StudentAuth\LoginRequest;
-use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Student;
 use App\Http\Resources\StudentResource;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
@@ -51,7 +49,7 @@ class StudentController extends Controller
      */
     public function show(Request $request)
     {
-        $student = request()->user();
+        $student = $request->user();
         return (Response()->json(
             [
                 'status' => 'success',

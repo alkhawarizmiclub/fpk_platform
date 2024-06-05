@@ -30,7 +30,28 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male'
 
         ]);
-
-
+        Student::create([
+            'firstname' => 'test',
+            'lastname' => 'test',
+            'firstname_ar' => 'هشام',
+            'lastname_ar' => 'شام',
+            'birth_date' => '1998-05-09',
+            'birth_place' => 'casablanca',
+            'student_code' => '1234567890',
+            'nationality' => 'moroccan',
+            'num_identify'=>'q1323',
+            'email'=>'test@mail.com',
+            'phone_number' => '0612345678',
+            'phone_urgent' => '0612345676',
+            'address' => 'hay fath',
+            'filiere' => 'SMI',
+            'password' => bcrypt('motpass'),
+            'gender' => 'male',
+            'baccalaureat' => 'math',
+            'releve_note' => 'note',
+            'image_presonnal' => 'image',
+            'identify_recto_verso' => 'identite',
+            'inscription_date' => '2021-09-09',
+        ]);
     }
 }

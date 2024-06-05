@@ -46,7 +46,7 @@ const SignUpPage = () => {
       setErrors('Please fill out all required fields.');
     } else {
       setErrors('');
-      // Envoyer les données du formulaire
+      console.log(formData);
       alert('Form submitted successfully!');
     }
   };
