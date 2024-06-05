@@ -35,6 +35,7 @@
     "E_STUDENT_RESULTS_PAGE": "/e-etudiant/resultats",
     "E_STUDENT_E_DOCUMENTS_PAGE": "/e-etudiant/e-documents",
     "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
+    "E_STUDENT_COMPLAINTS_CREATE_PAGE": "/e-etudiant/reclamations/create",
     
     "E_TEACHER_DASHBOARD_PAGE": "/e-enseignant",
     "E_TEACHER_ACCOUNTS_PAGE": "/e-enseignant/comptes",

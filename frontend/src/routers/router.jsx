@@ -25,7 +25,8 @@ import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
 import EntStudentDashboardPage from "../pages/ent/student/EntStudentDashboardPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
-import EntStudentComplaintsPage from "../pages/ent/student/EntStudentComplaintsPage";
+import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
+import EntStudentComplaintsCreatePage from "../pages/ent/student/Complaints/EntStudentComplaintsCreatePage";
 import EntStudentPlanningPage from "../pages/ent/student/EntStudentPlanningPage";
 import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPage";
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_RESULTS_PAGE, element: <EntStudentResultsPage /> },
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
+            { path: Paths.E_STUDENT_COMPLAINTS_CREATE_PAGE, element: <EntStudentComplaintsCreatePage /> },
         ]
     },
     {
