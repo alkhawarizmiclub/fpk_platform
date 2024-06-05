@@ -1,4 +1,4 @@
-import EntPageContainer from "../../../components/ent/EntPageContainer";
+import EntPageContainer from "../../../../components/ent/EntPageContainer";
 
 const EntStudentEDocumentsPage = () => {
     return (

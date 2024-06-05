@@ -30,7 +30,7 @@ import EntStudentPlanningPage from "../pages/ent/student/EntStudentPlanningPage"
 import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPage";
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
-import EntStudentEDocumentsPage from "../pages/ent/student/EntStudentEDocumentsPage";
+import EntStudentEDocumentsPage from "../pages/ent/student/E-Documents/EntStudentEDocumentsPage";
 import EntTeacherDashboardPage from "../pages/ent/teacher/EntTeacherDashboardPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
 import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
