@@ -32,6 +32,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::get('/', [StudentController::class, 'show']);
     Route::get('/result', [StudentController::class, 'result']);
     Route::get('/modules', [StudentController::class, 'modules']);
+    Route::get('/final-result', [StudentController::class, 'finalResult']);
     Route::get('/logout', [StudentController::class, 'logout']);
 });
 

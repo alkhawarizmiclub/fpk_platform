@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('module_id');
             $table->decimal('note', 6, 4);
             $table->string('session');
+            $table->string('semester');
             $table->string('year');
-
             $table->foreign('apogee')
                 ->references('apogee')
                 ->on('students');

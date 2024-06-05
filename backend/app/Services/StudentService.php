@@ -136,4 +136,15 @@ class StudentService
         // Return the academic year in the format "YYYY-YYYY"
         return $startYear . '-' . $endYear;
     }
+
+    public function finalResult(Student $student)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student final result',
+                'data' => $student->results->GroupBy('semester')
+            ]
+        );
+    }
 }
