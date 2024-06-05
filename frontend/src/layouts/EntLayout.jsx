@@ -6,7 +6,7 @@ import Navbar from "../components/ent/Navbar";
 const EntLayout = ({ EntPagesUrlsList }) => {
     return (
         <>
-            <main className="grow min-h-screen flex bg-gray-100">
+            <main className="grow overflow-auto min-h-screen flex bg-gray-100">
                 <Sidebar EntPagesUrlsList={EntPagesUrlsList} />
                 <div className="grow flex flex-col">
                     <Navbar />

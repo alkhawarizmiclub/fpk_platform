@@ -1,6 +1,10 @@
+import EntPageContainer from "../../../components/ent/EntPageContainer";
+
 const EntStudentSchedulesPage = () => {
     return (
-        <>EntStudentSchedulesPage</>
+        <EntPageContainer title="Emploi du temps">
+            EntStudentSchedulesPage
+        </EntPageContainer>
     );
 }
 
