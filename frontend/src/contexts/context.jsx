@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext({
     user: {
@@ -7,7 +7,9 @@ const UserContext = createContext({
         role: "", // teacher || student || staff
         currentMajor: "",
         currentSemester: ""
-    }
+    },
+    entSidebarDisplay: false,
+    setEntSidebarDisplay: () => {},
 });
 
 const UserContextProvider = ({ children }) => {
@@ -20,9 +22,11 @@ const UserContextProvider = ({ children }) => {
         currentSemester: "S6"
     };
 
+    const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
+
     return (
         <>
-            <UserContext.Provider value={{ user }}>
+            <UserContext.Provider value={{ user, entSidebarDisplay, setEntSidebarDisplay }}>
                 {children}
             </UserContext.Provider>
         </>
