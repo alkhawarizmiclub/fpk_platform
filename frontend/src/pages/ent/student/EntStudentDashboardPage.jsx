@@ -5,7 +5,7 @@ import EntStudentPagesUrlsList from "../../../components/ent/EntStudentPagesUrls
 const EntStudentDashboardPage = () => {
 
     return (
-        <div className="p-5 grid grid-cols-5 gap-5">
+        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             {EntStudentPagesUrlsList.map(({ label, url, icon, bg, isHome }, i) => 
                 !isHome && (
                     <Link to={url} key={i} className="aspect-square flex flex-col justify-center items-center gap-2 rounded-lg shadow bg-white">
