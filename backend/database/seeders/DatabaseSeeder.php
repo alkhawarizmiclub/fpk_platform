@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male'
 
         ]);
-        Student::create([
+        $student = Student::create([
             'firstname' => 'test',
             'lastname' => 'test',
             'firstname_ar' => 'هشام',
@@ -52,6 +52,15 @@ class DatabaseSeeder extends Seeder
             'image_presonnal' => 'image',
             'identify_recto_verso' => 'identite',
             'inscription_date' => '2021-09-09',
+        ]);
+        $student->modules()->attach([
+            ['module_id' => 1],
+            ['module_id' => 2],
+            ['module_id' => 3],
+            ['module_id' => 4],
+            ['module_id' => 5],
+            ['module_id' => 6],
+            ['module_id' => 7],
         ]);
     }
 }
