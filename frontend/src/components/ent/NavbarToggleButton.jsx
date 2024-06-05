@@ -11,7 +11,7 @@ const NavbarToggleButton = ({ className }) => {
     }
 
     return (
-        <button onClick={sidebarHandler} className={`p-3 ${className}`}><FontAwesomeIcon icon={faBars} className="text-xl" /></button>
+        <button onClick={sidebarHandler} className={`p-3 flex ${className}`}><FontAwesomeIcon icon={faBars} className="text-xl" /></button>
     );
 }
 
