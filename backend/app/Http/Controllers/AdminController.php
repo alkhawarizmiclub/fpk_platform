@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -13,32 +14,18 @@ use App\Http\Requests\AdminAuth\LoginRequest;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private AdminService $adminService;
+    public function __construct(AdminService $adminService)
     {
-        //
+        $this->adminService = $adminService;
     }
-
 
     /**
      * Store a newly created resource in storage.
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $request->authenticate();
-        $admin = Admin::where('email', $request->email)->first();
-        $admin->tokens()->delete();
-        $token = $admin->createToken('api_token', ['role:admin'], Carbon::now()->addHours(2));
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'logged in successfully',
-                'admin' => $admin,
-                'token' => $token->plainTextToken,
-            ]
-        );
+        return $this->adminService->login($request);
     }
 
     /**
@@ -46,21 +33,10 @@ class AdminController extends Controller
      */
     public function logout(Request $request): JsonResponse
     {
-        Auth::guard('admin')->logout();
-        $request->user()->tokens()->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'logged out successfully'
-        ]);
+        return $this->adminService->logout($request);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
+
 
 
 

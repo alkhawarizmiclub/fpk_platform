@@ -23,9 +23,11 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:admin']], function () {
 
-    // Route::get('/logout', [ProfController::class, 'logout']);
+    Route::get('/logout', [AdminController::class, 'logout']);
     Route::post('/add-module', [ModuleController::class, 'store']);
     Route::post('/modules', [ModuleController::class, 'index']);
+    Route::get('/gn-note', [AdminController::class, 'genreateFinalResult']);
+
 });
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:student']], function () {
