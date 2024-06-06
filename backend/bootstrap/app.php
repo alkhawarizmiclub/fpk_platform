@@ -25,7 +25,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'EnsureAuthorized' => \App\Http\Middleware\EnsureAuthorized::class,
         ]);
 
-        //
+        $middleware->validateCsrfTokens(except: [
+            "api/student/login"
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (ValidationException $e, Request $request) {
