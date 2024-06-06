@@ -61,6 +61,13 @@ class DatabaseSeeder extends Seeder
             ['module_id' => 5],
             ['module_id' => 6],
             ['module_id' => 7],
+            ['module_id' => 8],
+            ['module_id' => 9],
+            ['module_id' => 10],
+            ['module_id' => 11],
+            ['module_id' => 12],
+            ['module_id' => 13],
+            ['module_id' => 14],
         ]);
     }
 }

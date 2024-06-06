@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:students',
+            'email' => 'required|email',
             'password' => ['required', 'string'],
         ];
     }
@@ -38,33 +38,11 @@ class LoginRequest extends FormRequest
         return [
             'email.required' => 'Email is required',
             'email.email' => 'Email must be a valid email',
-            'email.exists' => 'Email does not exist',
             'password.required' => 'Password is required',
             'password.string' => 'Password must be a string',
         ];
     }
-    protected function failedAuthorization()
-    {
 
-        $validator = NULL;
-        $response = new JsonResponse([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => null
-        ], 422);
-
-        throw new ValidationException($validator, $response);
-    }
-    protected function failedValidation(Validator $validator)
-    {
-        $response = new JsonResponse([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => $validator->errors()
-        ], 422);
-
-        throw new ValidationException($validator, $response);
-    }
 
     /**
      * Attempt to authenticate the request's credentials.

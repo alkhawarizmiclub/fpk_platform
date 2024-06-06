@@ -38,6 +38,13 @@ class StudentService
             ['module_id' => 5],
             ['module_id' => 6],
             ['module_id' => 7],
+            ['module_id' => 8],
+            ['module_id' => 9],
+            ['module_id' => 10],
+            ['module_id' => 11],
+            ['module_id' => 12],
+            ['module_id' => 13],
+            ['module_id' => 14],
         ]);
     }
 
@@ -61,7 +68,7 @@ class StudentService
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2)));
         return response()->json(
             [
                 'status' => 'success',
@@ -100,7 +107,7 @@ class StudentService
             'releve_note' => $releve_note,
             'image_presonnal' => $image_presonnal,
             'identify_recto_versto' => $identify_recto_versto,
-            'inscription_date' => $this->getAcademicYear($request->date_naissance)
+            'inscription_date' => $this->getAcademicYear(date('Y-m-d'))
         ]);
 
         $student = Student::create($request->all());

@@ -19,7 +19,7 @@ class EnsureAuthorized
             return response()->json(
                 [
                     'status' => 'error',
-                    'message' => 'You are not authorized to access this resource.',
+                    'message' => 'You are not authorized',
                     'data' => null
                 ],
                 403
