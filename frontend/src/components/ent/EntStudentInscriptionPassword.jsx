@@ -4,16 +4,16 @@ import { useState } from "react";
 
 const EntStudentInscriptionPassword = ({ password }) => {
 
-    const [blur, setBlur] = useState(true);
+    const [display, setDisplay] = useState(false);
 
     const blurHandler = () => {
-        setBlur(!blur);
+        setDisplay(!display);
     }
 
     return (
         <span className="space-x-3">
             <button onClick={blurHandler}><FontAwesomeIcon icon={faEye} /></button>
-            <span className={blur ? "blur" : ""}>{password}</span>
+            <span>{display ? password : "•".repeat(password.length)}</span>
         </span>
     );
 }
