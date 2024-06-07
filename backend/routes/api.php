@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'EnsureAutho
     Route::post('/add-module', [ModuleController::class, 'store']);
     Route::post('/modules', [ModuleController::class, 'index']);
     Route::get('/gn-note', [AdminController::class, 'genreateFinalResult']);
-
+    Route::post('/add-prof', [ProfController::class, 'store']);
 });
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:student']], function () {
@@ -48,10 +48,11 @@ Route::post('/student/login', [StudentController::class, 'login'])
     ->middleware('guest')
     ->name('login');
 
-
-Route::post('/prof/register', [ProfController::class, 'store'])
+Route::post('/admin/login', [AdminController::class, 'login'])
     ->middleware('guest')
-    ->name('register');
+    ->name('login');
+
+
 
 Route::post('/prof/login', [ProfController::class, 'login'])
     ->middleware('guest')
@@ -64,13 +65,3 @@ Route::group(['prefix' => 'public', 'guest'], function () {
 });
 
 
-Route::post('/admin/login', [AdminController::class, 'login'])
-    ->middleware('guest')
-    ->name('login');
-// Route::get('announce', function () {
-//     $announcements = \App\Models\Announcement::where('is_accepted', false)->paginate();
-//     foreach ($announcements as $announcement) {
-//         $announcement->author;
-//     }
-//     return response()->json($announcements);
-// });

@@ -21,6 +21,7 @@ class ResultResource extends JsonResource
             'module_id' => $this->module_id,
             'module_name' => Module::find($this->module_id)->module_name,
             'inscrit_year' => $this->inscrit_year,
+            'inscrit_number' => $this->inscrit_number,
             'normal' => $this->normal,
             'result_normal' => $this->result_normal,
             'ratt' => $this->ratt,
