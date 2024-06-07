@@ -14,6 +14,7 @@ class FinalResult extends Model
         'module_id',
         'note',
         'session',
+        'semester',
         'year',
     ];
     protected $table = 'final_results';

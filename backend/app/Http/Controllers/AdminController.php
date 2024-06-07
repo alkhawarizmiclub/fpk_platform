@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Models\Admin;
+
+use App\Services\AdminService;
 
 use App\Http\Requests\AdminAuth\LoginRequest;
 
@@ -20,9 +18,7 @@ class AdminController extends Controller
         $this->adminService = $adminService;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function login(LoginRequest $request): JsonResponse
     {
         return $this->adminService->login($request);
@@ -34,6 +30,10 @@ class AdminController extends Controller
     public function logout(Request $request): JsonResponse
     {
         return $this->adminService->logout($request);
+    }
+    public function genreateFinalResult()
+    {
+        return $this->adminService->genreateFinalResult();
     }
 
 
