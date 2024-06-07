@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Paths from "../../routers/Paths.json";
 import SidebarMenuItem from "./SidebarMenuItem";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +23,10 @@ const Sidebar = ({ EntPagesUrlsList }) => {
                     </div>
                 </div>
 
-                <SidebarMenuItem label="Log Out" url={Paths.LOGOUT_PAGE} icon={faSignOut} />
+                <div>
+                    <SidebarMenuItem label="Log Out" url={Paths.LOGOUT_PAGE} icon={faSignOut} />
+                    <SidebarMenuItem label="Retour au FPK" url={Paths.HOME_PAGE} icon={faSignOut} />
+                </div>
 
             </aside>
         </>

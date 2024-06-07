@@ -5,9 +5,7 @@ import { useUserContext } from "../../contexts/context";
 
 const Navbar = () => {
 
-    const context = useUserContext();
-
-    const fullname = `${context.user.firstName} ${context.user.lastName}`;
+    const {user} = useUserContext();
 
     return (
         <nav className="z-10 p-5 h-20 flex justify-between items-center shadow bg-white">
@@ -15,8 +13,8 @@ const Navbar = () => {
             <div className="flex items-center gap-5">
                 <NavbarToggleButton className="text-slate-500" />
                 <div>
-                    <div className="font-semibold">{fullname}</div>
-                    <div className="text-sm text-slate-500">{context.user.currentMajor} - {context.user.currentSemester}</div>
+                    <div className="font-semibold">{`${user.firstname} ${user.lastname}`}</div>
+                    <div className="text-sm text-slate-500">{user.apogee}</div>
                 </div>
             </div>
 
