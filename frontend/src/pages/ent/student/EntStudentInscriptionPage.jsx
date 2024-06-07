@@ -1,14 +1,9 @@
 import EntPageContainer from "../../../components/ent/EntPageContainer";
+import EntStudentApi from "../../../api/EntStudentApi";
 
 const EntStudentInscriptionPage = () => {
 
-    const subjects = [
-        { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Group 3", inscriptionStatus: "Inscrit" },
-        { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Group 4", inscriptionStatus: "Inscrit" },
-        { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Section B", inscriptionStatus: "Inscrit" },
-        { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Secion A", inscriptionStatus: "Inscrit" },
-        { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "", inscriptionStatus: "Inscrit" },
-    ]
+    const subjects = EntStudentApi.getInscriptionData();
 
     return (
         <EntPageContainer title="Inscription">

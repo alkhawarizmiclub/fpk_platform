@@ -2,15 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import EntStudentInscriptionPassword from "../../../components/ent/EntStudentInscriptionPassword";
+import EntStudentApi from "../../../api/EntStudentApi";
 
 const EntStudentAccountsPage = () => {
 
-    const accounts = [
-        { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-        { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-        { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-        { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-    ]
+    const accounts = EntStudentApi.getAccountsData();
 
     return (
         <EntPageContainer title="Comptes">
