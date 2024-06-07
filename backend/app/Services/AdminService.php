@@ -11,7 +11,7 @@ use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
+use App\Models\Module;
 use App\Models\Result;
 
 class AdminService
@@ -20,37 +20,39 @@ class AdminService
 
     //1|yIPNx7q9m6Kws3QZ2bzrFmN2QQVaEKLFlU2HDKR51376ef23
     //2|Fmt1hZSSG8LhRG3jQFbVO3sr8wU1zxsW45g2vG0S8391bb41
+    private function getCurrentNote($module)
+    {
+        if ($module->normale == null && $module->ratt == null)
+            return null;
+        $max = max($module->normale, $module->ratt);
+        if ($max == $module->normale)
+            return $max >= 10 ? ['note' => $module->normale, 'session' => 'normale'] : null;
+        return $max >= 10 ? ['note' => $module->ratt, 'session' => 'rattrapage'] : null;
+    }
+
     private function validateModules(Student $student)
     {
         $result = Result::where('apogee', $student->apogee)->get();
         foreach ($result as $module) {
-            $note = null;
-            $session = null;
-                Log::info('generating final results for student ' . $module->normale);
-            if ($module->normale != null) {
-                $note = $module->normale;
-                $session = 'normale';
-            }
-            if ($module->ratt != null) {
-                $note = max($note ?? 0, $module->ratt);
-                $session = 'ratrappage';
-            } else {
-                $module->normale = null;
-                $module->ratt = null;
-            }
-            if ($note != null) {
+            $res = $this->getCurrentNote($module);
+            if ($res == null)
+                $module->update(['inscrit_number' => $module->inscrit_number + 1]);
+            else
+            {
                 FinalResult::create([
                     'apogee' => $student->apogee,
-                    'module_id' => $module->id,
-                    'note' => $note,
-                    'session' => $session,
-                    'semester' => 'S1',
-                    'year' => StudentService::getAcademicYear(date('Y-m-d'))
+                    'module_id' => $module->module_id,
+                    'note' => $res['note'],
+                    'session' => $res['session'],
+                    'semester' => Module::find($module->module_id)->semester,
+                    'year' => $module->inscrit_year
                 ]);
                 $module->delete();
             }
+
         }
     }
+
     public function genreateFinalResult()
     {
         Student::chunk(100, function ($students) {
@@ -58,6 +60,13 @@ class AdminService
                 $this->validateModules($student);
             }
         });
+        return response()->json([
+            'status' => 'success',
+            'message' => 'final results generated successfully'
+        ], 201);
+    }
+    public function generatedRelveNote()
+    {
         return response()->json([
             'status' => 'success',
             'message' => 'final results generated successfully'
