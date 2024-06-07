@@ -28,7 +28,7 @@ import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
 import EntStudentComplaintsCreatePage from "../pages/ent/student/Complaints/EntStudentComplaintsCreatePage";
 import EntStudentPlanningPage from "../pages/ent/student/EntStudentPlanningPage";
-import EntStudentSchedulesPage from "../pages/ent/student/EntStudentSchedulesPage";
+import EntStudentSchedulePage from "../pages/ent/student/EntStudentSchedulePage";
 import EntStudentInscriptionPage from "../pages/ent/student/EntStudentInscriptionPage";
 import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage";
 import EntStudentEDocumentsPage from "../pages/ent/student/E-Documents/EntStudentEDocumentsPage";
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashboardPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
             { path: Paths.E_STUDENT_ACCOUNTS_PAGE, element: <EntStudentAccountsPage /> },
-            { path: Paths.E_STUDENT_SCHEDULES_PAGE, element: <EntStudentSchedulesPage /> },
+            { path: Paths.E_STUDENT_SCHEDULES_PAGE, element: <EntStudentSchedulePage /> },
             { path: Paths.E_STUDENT_PLANNING_PAGE, element: <EntStudentPlanningPage /> },
             { path: Paths.E_STUDENT_RESULTS_PAGE, element: <EntStudentResultsPage /> },
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
