@@ -12,7 +12,6 @@ const EntLayout = ({ EntPagesUrlsList }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(authenticated, "if (", !authenticated, ")");
         if (!authenticated) {
             navigate(Paths.LOGIN_PAGE)
         }
