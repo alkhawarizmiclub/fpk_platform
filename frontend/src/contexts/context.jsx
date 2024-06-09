@@ -6,8 +6,10 @@ const UserContext = createContext({
     setUser: (userData) => { },
     authenticated: false,
     setAuthenticated: (isAuthenticated) => { },
-    login: (email, password) => { },
+    login: async (email, password) => { },
     logout: () => { },
+    entPagesList: {},
+    setEntPagesList: () => { },
     entSidebarDisplay: false,
     setEntSidebarDisplay: () => { },
 });
@@ -21,7 +23,6 @@ const UserContextProvider = ({ children }) => {
     });
 
     const setUser = (userData) => {
-        console.log(userData);
         _setUser(userData);
         window.localStorage.setItem("USER", JSON.stringify(userData));
     }
@@ -46,10 +47,11 @@ const UserContextProvider = ({ children }) => {
         setAuthenticated(false);
     }
 
+    const [entPagesList, setEntPagesList] = useState({});
     const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
     return (
-        <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, login, logout, entSidebarDisplay, setEntSidebarDisplay }}>
+        <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, login, logout, entPagesList, setEntPagesList, entSidebarDisplay, setEntSidebarDisplay }}>
             {children}
         </UserContext.Provider>
     );
