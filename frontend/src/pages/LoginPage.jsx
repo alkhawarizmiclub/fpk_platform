@@ -11,37 +11,50 @@ const LoginPage = () => {
     const { login, authenticated, setAuthenticated, setUser } = useUserContext();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
-        login(email, password).then(
-            (response) => {
-                if (response.data.status === "success") {
-                    setAuthenticated(true);
-                    setUser(response.data.data);
-                    navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
-                }
-            }
-        );
-    }
-
     useEffect(() => {
         if (authenticated) {
             navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
         }
     }, []);
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState("");
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        setIsSubmitting(true);
+
+        login(email, password).then(
+            (response) => {
+                if (response.data.status === "success") {
+                    setAuthenticated(true);
+                    setUser({
+                        ...response.data.data,
+                        role: "student"
+                    });
+                    // navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
+                }
+            }
+        ).finally(() => {
+            console.log(isSubmitting);
+            setIsSubmitting(false);
+        });
+
+    }
+
     return (
         <div className="min-h-screen flex">
-            <div className="p-10 w-1/2 flex justify-center items-center">
-
+            <div className="p-10 w-full md:w-1/2 flex justify-center items-center">
                 <form onSubmit={submitHandler} className="w-full max-w-lg flex flex-col gap-5">
 
-                    <p>
+                    <Link to={Paths.HOME_PAGE} className="block md:hidden w-full h-28 flex justify-center items-center rounded-lg">
+                        <img src="/fpk_logo.svg" className="w-full h-full object-fit" />
+                    </Link>
+
+                    <p className="hidden md:block">
                         <Link to={Paths.HOME_PAGE} className="w-full space-x-2 text-sm text-slate-600">
                             <FontAwesomeIcon icon={faArrowLeftLong} />
                             <span>Go back Home</span>
@@ -60,18 +73,16 @@ const LoginPage = () => {
 
                     <p>Mot de passe oublié?<a href="#" className="text-orange-400"> Réinitialisez-le ici.</a></p>
 
-                    <button type="submit" className="py-2 px-3 rounded-lg text-white bg-orange-400" >Login</button>
+                    <button type="submit" className={`py-2 px-3 rounded-lg text-white ${isSubmitting ? "bg-orange-200" : "bg-orange-400"}`} disabled={isSubmitting}>{isSubmitting ? 'Logging in...' : 'Login'}</button>
 
                 </form>
 
             </div>
 
-            <div className="p-48 w-1/2 bg-cover bg-no-repeat bg-center bg-[url(/signup_bg.jpg)]">
-                <div className="w-full h-full flex rounded-lg shadow shadow-black/20 backdrop-blur-3xl">
-                    <Link to={Paths.HOME_PAGE} className="grow flex justify-center items-center">
-                        <img src="/fpk_logo.svg" className="max-w-64" />
-                    </Link>
-                </div>
+            <div className="hidden md:block p-10 w-1/2 bg-cover bg-no-repeat bg-center bg-[url(/signup_bg.jpg)]">
+                <Link to={Paths.HOME_PAGE} className="p-5 w-full h-full flex justify-center items-center rounded-lg shadow shadow-black/20 backdrop-blur-3xl">
+                    <img src="/fpk_logo.svg" className="max-w-64 w-full max-h-64 h-full object-contain" />
+                </Link>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import EntTeacherPagesUrlsList from "../../../components/ent/EntTeacherPagesUrlsList";
+import { EntTeacherPagesUrlsList } from "../../../components/ent/EntPagesUrlsList";
 
 const EntTeacherDashboardPage = () => {
 

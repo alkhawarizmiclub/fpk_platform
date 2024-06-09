@@ -1,22 +1,24 @@
 import { axiosClient } from "./axiosClient"
 
+const randomInt = (min, max) => {
+    return min + Math.random() * (max - min);
+}
+
 const EntStudentApi = {
     getCsrfToken: async () => {
         return await axiosClient.get("/sanctum/csrf-cookie", {
             baseURL: import.meta.env.VITE_BACKEND_URL
-        })
+        });
     },
     login: async (email, password) => {
-        return await axiosClient.post(import.meta.env.BACKEND_API_STUDENT_LOGIN_PATH, { email, password })
+        return await axiosClient.post("/api/student/login", { email, password });
     },
-    getInscriptionData: () => {
-        return [
-            { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Group 3", inscriptionStatus: "Inscrit" },
-            { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Group 4", inscriptionStatus: "Inscrit" },
-            { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Section B", inscriptionStatus: "Inscrit" },
-            { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "Secion A", inscriptionStatus: "Inscrit" },
-            { label: "Module 2", isOldSystem: true, semesterNumber: 2, groupLabel: "", inscriptionStatus: "Inscrit" },
-        ]
+    logout: async () => {
+        return await axiosClient.post("/api/student/logout");
+    },
+    getInscriptionData: async () => {
+        const api_data = await axiosClient.get("/api/student/modules");
+        return api_data.data;
     },
     getAccountsData: () => {
         return [
@@ -24,7 +26,7 @@ const EntStudentApi = {
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-        ]
+        ];
     },
     getSchedulePDF: () => {
         return "https://fpk-biblio.netlify.app/media/smi/s6/Gestion%20de%20projet/Gestion%20de%20projet%20-%20Autres%20-%20Etude%20de%20cas.pdf";
@@ -226,15 +228,16 @@ const EntStudentApi = {
                     }
                 ]
             },
-        ]
+        ];
     },
     getEDocumentsData: () => {
         return [
-            {"label": "doc 1"},
-            {"label": "doc 2"},
-            {"label": "doc 3"},
-            {"label": "doc 4"}
-        ]
+            { label: "Relevé de notes de S1", creationDateTime: new Date(), type: "grades sheet", data: {} },
+            { label: "Attestation de DEUG", creationDateTime: new Date(), type: "deug attestation", data: {} },
+            { label: "Relevé de notes de S3", creationDateTime: new Date(), type: "grades sheet", data: {} },
+            { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} },
+            { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} }
+        ];
     },
     getComplaintsData: () => {
         return [
@@ -243,8 +246,25 @@ const EntStudentApi = {
             { id: 176, datetime: new Date(), subject: "Lorem Ipsum", message: "لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص،" },
             { id: 321, datetime: new Date(), subject: "Lorem Ipsum", message: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old." },
             { id: 1023, datetime: new Date(), subject: "Lorem Ipsum", message: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source." },
-        ]
-    }
+        ];
+    },
+    createComplaint: async (subject, message) => {
+
+        console.log(subject, message);
+
+        return {
+            status: 204,
+            complaintId: randomInt(1, 400),
+        }
+    },
+    deleteComplaint: (complaintId) => {
+
+        console.log(`Deleted complaint [${complaintId}]`);
+
+        return {
+            status: 204,
+        }
+    },
 }
 
 export default EntStudentApi;

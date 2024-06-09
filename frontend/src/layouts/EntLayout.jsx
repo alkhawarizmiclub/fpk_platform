@@ -1,34 +1,31 @@
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useUserContext } from "../contexts/context";
-import Paths from "../routers/Paths.json";
 import Footer from "../components/ent/Footer";
 import Sidebar from "../components/ent/Sidebar";
 import Navbar from "../components/ent/Navbar";
+import LoginPage from "../pages/LoginPage";
 
-const EntLayout = ({ EntPagesUrlsList }) => {
+const EntLayout = () => {
 
     const { authenticated } = useUserContext();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!authenticated) {
-            navigate(Paths.LOGIN_PAGE)
-        }
-    }, [authenticated])
 
     return (
-        <>
-            <main className="grow overflow-auto min-h-screen flex bg-gray-100">
-                <Sidebar EntPagesUrlsList={EntPagesUrlsList} />
-                <div className="grow flex flex-col">
-                    <Navbar />
-                    <Outlet />
-                </div>
-            </main>
-            <Footer />
-        </>
+        authenticated ? (
+            <>
+                <main className="grow overflow-auto min-h-screen flex bg-gray-100">
+                    <Sidebar />
+                    <div className="grow flex flex-col">
+                        <Navbar />
+                        <Outlet />
+                    </div>
+                </main >
+                <Footer />
+            </>
+        ) : (
+            <LoginPage />
+        )
     );
+
 }
 
 export default EntLayout;

@@ -34,14 +34,13 @@ import EntStudentAccountsPage from "../pages/ent/student/EntStudentAccountsPage"
 import EntStudentEDocumentsPage from "../pages/ent/student/E-Documents/EntStudentEDocumentsPage";
 import EntTeacherDashboardPage from "../pages/ent/teacher/EntTeacherDashboardPage";
 import ProfessorsPage from "../pages/static/ProfessorsPage";
-import EntStudentPagesUrlsList from "../components/ent/EntStudentPagesUrlsList";
-import EntTeacherPagesUrlsList from "../components/ent/EntTeacherPagesUrlsList";
 import EntTeacherAccountsPage from "../pages/ent/teacher/EntTeacherAccountsPage";
 import EntTeacherSchedulePage from "../pages/ent/teacher/EntTeacherSchedulePage";
 import EntTeacherPlanningPage from "../pages/ent/teacher/EntTeacherPlanningPage";
 import EntTeacherClassesPage from "../pages/ent/teacher/EntTeacherClassesPage";
 import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
 import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnouncementsPage";
+import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -77,7 +76,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        element: <EntLayout EntPagesUrlsList={EntStudentPagesUrlsList} />,
+        element: <EntLayout />,
         children: [
             { path: Paths.E_STUDENT_DASHBOARD_PAGE, element: <EntStudentDashboardPage /> },
             { path: Paths.E_STUDENT_INSCRIPTIONS_PAGE, element: <EntStudentInscriptionPage /> },
@@ -88,11 +87,7 @@ const router = createBrowserRouter([
             { path: Paths.E_STUDENT_E_DOCUMENTS_PAGE, element: <EntStudentEDocumentsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_PAGE, element: <EntStudentComplaintsPage /> },
             { path: Paths.E_STUDENT_COMPLAINTS_CREATE_PAGE, element: <EntStudentComplaintsCreatePage /> },
-        ]
-    },
-    {
-        element: <EntLayout EntPagesUrlsList={EntTeacherPagesUrlsList} />,
-        children: [
+            { path: Paths.E_STUDENT_COMPLAINTS_DELETE_PAGE, element: <EntStudentComplaintsDeletePage /> },
             { path: Paths.E_TEACHER_DASHBOARD_PAGE, element: <EntTeacherDashboardPage /> },
             { path: Paths.E_TEACHER_ACCOUNTS_PAGE, element: <EntTeacherAccountsPage /> },
             { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
@@ -102,7 +97,7 @@ const router = createBrowserRouter([
             { path: Paths.E_TEACHER_GRADES_PAGE, element: <EntTeacherGradesPage /> },
         ]
     }
-    
+
 ])
 
 export { router };

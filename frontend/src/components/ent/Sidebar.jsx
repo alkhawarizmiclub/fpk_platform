@@ -1,16 +1,37 @@
 import Paths from "../../routers/Paths.json";
 import SidebarMenuItem from "./SidebarMenuItem";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../contexts/context";
 import NavbarToggleButton from "./NavbarToggleButton";
+import { EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
 
-const Sidebar = ({ EntPagesUrlsList }) => {
+const Sidebar = () => {
 
-    const context = useUserContext();
+    const {user, entSidebarDisplay} = useUserContext();
+
+    let EntPagesUrlsList;
+
+    switch (user.role) {
+        case "student":
+            EntPagesUrlsList = EntStudentPagesUrlsList;
+            break;
+
+        case "teacher":
+            EntPagesUrlsList = EntTeacherPagesUrlsList;
+            break;
+
+        case "staff":
+            EntPagesUrlsList = [];
+            break;
+
+        default:
+            EntPagesUrlsList = []
+            break;
+    }
 
     return (
         <>
-            <aside className={`fixed z-[11] p-5 w-full max-w-xs h-screen transition-all duration-300 ${context.entSidebarDisplay ? "-translate-x-0" : "-translate-x-full"} flex flex-col justify-between bg-slate-700`}>
+            <aside className={`fixed z-[11] p-5 w-full max-w-xs h-screen transition-all duration-300 ${entSidebarDisplay ? "-translate-x-0" : "-translate-x-full"} flex flex-col justify-between bg-slate-700`}>
 
                 <div className="space-y-5">
                     <div className="flex items-center text-white">
@@ -25,7 +46,7 @@ const Sidebar = ({ EntPagesUrlsList }) => {
 
                 <div>
                     <SidebarMenuItem label="Log Out" url={Paths.LOGOUT_PAGE} icon={faSignOut} />
-                    <SidebarMenuItem label="Retour au FPK" url={Paths.HOME_PAGE} icon={faSignOut} />
+                    <SidebarMenuItem label="Retour à la page d'accueil" url={Paths.HOME_PAGE} icon={faHome} />
                 </div>
 
             </aside>
