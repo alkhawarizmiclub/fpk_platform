@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EntPageContainer from "../../../components/ent/EntPageContainer";
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import EntStudentInscriptionPassword from "../../../components/ent/EntStudentInscriptionPassword";
+import EntPageContainer from "../../../components/ent/EntPageContainer";
+import EntAccountPassword from "../../../components/ent/EntAccountPassword";
 import EntStudentApi from "../../../api/EntStudentApi";
 
 const EntStudentAccountsPage = () => {
@@ -26,7 +26,7 @@ const EntStudentAccountsPage = () => {
                         </div>
                         <div>
                             <div className="text-sm text-slate-700 font-semibold">Password</div>
-                            <div className="text-slate-500"><EntStudentInscriptionPassword password={password} /></div>
+                            <div className="text-slate-500"><EntAccountPassword password={password} /></div>
                         </div>
                     </div>
                 )}

@@ -1,16 +1,9 @@
-import { faBorderAll, faBullhorn, faCalendarDays, faClipboardCheck, faClock, faFileLines, faTableList, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBullhorn, faCalendarDays, faClipboardCheck, faClock, faFileLines, faTableList, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import Paths from "../../routers/Paths.json";
 
 // ⚠ I put this list in a seperate file because I use it in both the Sidebar component and the EntDashboardPage page 
 
 const EntStudentPagesUrlsList = [
-    {
-        label: "tableau de bord",
-        url: Paths.E_STUDENT_DASHBOARD_PAGE,
-        icon: faBorderAll,
-        bg: "bg-gradient-to-tr from-red-500 to-red-300",
-        isHome: true,
-    },
     {
         label: "inscription",
         url: Paths.E_STUDENT_INSCRIPTIONS_PAGE,
@@ -57,13 +50,6 @@ const EntStudentPagesUrlsList = [
 
 const EntTeacherPagesUrlsList = [
     {
-        label: "tableau de bord",
-        url: Paths.E_TEACHER_DASHBOARD_PAGE,
-        icon: faBorderAll,
-        bg: "bg-gradient-to-tr from-red-500 to-red-300",
-        isHome: true,
-    },
-    {
         label: "comptes",
         url: Paths.E_TEACHER_ACCOUNTS_PAGE,
         icon: faUser,
@@ -101,4 +87,7 @@ const EntTeacherPagesUrlsList = [
     }
 ];
 
-export { EntStudentPagesUrlsList, EntTeacherPagesUrlsList };
+const EntStaffPagesUrlsList = [
+];
+
+export { EntStudentPagesUrlsList, EntTeacherPagesUrlsList, EntStaffPagesUrlsList };
