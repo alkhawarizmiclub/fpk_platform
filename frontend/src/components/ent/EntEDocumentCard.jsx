@@ -1,22 +1,33 @@
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import jsPDF from 'jspdf';
+import { gradeSheetsPdfGenerator } from "./EntPdfTemplateGradeSheet";
 
-const EntEDocumentCard = ({ label, creationDateTime, type, data }) => {
+
+const EntEDocumentCard = ({ label, creationDateTime, type }) => {
 
     const downloadHandler = () => {
-        const doc = new jsPDF();
+        const generatedPdfFile = gradeSheetsPdfGenerator({
+            schoolSeason: "2023/2024",
+            docTitle: "RELEVE",
+            docId: "DRYN34R0GJ95",
+            fullname: "John Wick",
+            cneNum: "f131310020",
+            apogeeNum: "20001001",
+            birthPlace: "Casablanca",
+            birthDate: new Date(),
+            semesterNum: 2,
+            majorLabel: "science mathématique et informatique",
+            subjectsResultsTable: [
+                ["Row 1 Col 1", 13, "V", "Normale", "Row 1 Col 5"],
+                ["Row 1 Col 1", 15, "V", "Normale", "Row 1 Col 5"],
+                ["Row 1 Col 1", 12, "V", "Normale", "Row 1 Col 5"],
+                ["Row 1 Col 1", 7, "NV", "Normale", "Row 1 Col 5"],
+                ["Row 1 Col 1", 4.7, "NVAJ", "Rattrapage", "Row 1 Col 5"],
+                ["Row 1 Col 1", 9, "NV", "Rattrapage", "Row 1 Col 5"],
+            ],
+        });
 
-        // Set the title
-        doc.setFontSize(22);
-        doc.text(label, 10, 20);
-
-        // Set the description
-        doc.setFontSize(16);
-        doc.text("This is a description for my PDF file.", 10, 30);
-
-        // Save the PDF
-        doc.save('download.pdf');
+        generatedPdfFile.save();
     }
 
     return (
