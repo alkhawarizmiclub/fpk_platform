@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Complaints;
 
 
 
@@ -65,4 +66,8 @@ class Student extends Authenticatable
         return $this->hasMany(FinalResult::class, 'apogee');
     }
 
+    public function complaints()
+    {
+        return $this->hasMany(Complaints::class, 'apogee');
+    }
 }

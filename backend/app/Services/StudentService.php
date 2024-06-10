@@ -154,4 +154,8 @@ class StudentService
             ]
         );
     }
+    public function complaints(Student $student)
+    {
+
+    }
 }

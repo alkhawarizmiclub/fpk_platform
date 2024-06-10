@@ -69,4 +69,5 @@ class StudentController extends Controller
         $student = request()->user();
         return ($this->studentService->finalResult($student));
     }
+
 }
