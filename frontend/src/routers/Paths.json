@@ -28,6 +28,7 @@
     "PHDS_PAGE": "/formations/doctorat",
 
     "ENT_DASHBOARD_PAGE": "/ent",
+    "ENT_E_DOCUMENTS_VERIFICATION_PAGE": "/verify",
 
     "E_STUDENT_INSCRIPTIONS_PAGE": "/ent/etudiant/insctiptions",
     "E_STUDENT_ACCOUNTS_PAGE": "/ent/etudiant/comptes",
