@@ -35,7 +35,7 @@ const LoginPage = () => {
                         ...response.data.data,
                         role: "student"
                     });
-                    // navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
+                    navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
                 }
             }
         ).finally(() => {
