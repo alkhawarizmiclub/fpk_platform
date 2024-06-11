@@ -4,16 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useUserContext } from "../contexts/context";
 import Paths from "../routers/Paths.json";
+import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "../components/ent/EntPagesUrlsList";
 
 
 const LoginPage = () => {
 
-    const { login, authenticated, setAuthenticated, setUser } = useUserContext();
+    const { login, authenticated, setAuthenticated, setUser, user, setEntPagesList } = useUserContext();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (authenticated) {
-            navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
+            navigate(Paths.ENT_DASHBOARD_PAGE);
         }
     }, []);
 
@@ -31,11 +32,31 @@ const LoginPage = () => {
             (response) => {
                 if (response.data.status === "success") {
                     setAuthenticated(true);
-                    setUser({
+
+                    const userData = {
                         ...response.data.data,
-                        role: "student"
-                    });
-                    navigate(Paths.E_STUDENT_DASHBOARD_PAGE);
+                        role: "student" // <--- REMEMBER TO CHANGE THIS !
+                    }
+                    setUser(userData);
+
+                    switch (userData.role) {
+                        case "student":
+                            setEntPagesList(EntStudentPagesUrlsList);
+                            break;
+
+                        case "teacher":
+                            setEntPagesList(EntTeacherPagesUrlsList);
+                            break;
+
+                        case "staff":
+                            setEntPagesList(EntStaffPagesUrlsList);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    
+                    navigate(Paths.ENT_DASHBOARD_PAGE);
                 }
             }
         ).finally(() => {

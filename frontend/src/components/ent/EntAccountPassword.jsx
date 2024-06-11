@@ -1,8 +1,8 @@
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-const EntStudentInscriptionPassword = ({ password }) => {
+const EntAccountPassword = ({ password }) => {
 
     const [display, setDisplay] = useState(false);
 
@@ -12,10 +12,12 @@ const EntStudentInscriptionPassword = ({ password }) => {
 
     return (
         <span className="space-x-3">
-            <button onClick={blurHandler}><FontAwesomeIcon icon={faEye} /></button>
+            <button onClick={blurHandler}>
+                {display ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+            </button>
             <span>{display ? password : "•".repeat(password.length)}</span>
         </span>
     );
 }
 
-export default EntStudentInscriptionPassword;
+export default EntAccountPassword;

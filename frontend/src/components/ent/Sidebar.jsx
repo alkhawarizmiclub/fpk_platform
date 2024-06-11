@@ -1,13 +1,13 @@
 import Paths from "../../routers/Paths.json";
 import SidebarMenuItem from "./SidebarMenuItem";
-import { faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faBorderAll, faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../contexts/context";
 import NavbarToggleButton from "./NavbarToggleButton";
 import { EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
 
 const Sidebar = () => {
 
-    const {user, entSidebarDisplay} = useUserContext();
+    const { user, entSidebarDisplay } = useUserContext();
 
     let EntPagesUrlsList;
 
@@ -40,6 +40,7 @@ const Sidebar = () => {
                     </div>
 
                     <div className="flex flex-col gap-1">
+                        <SidebarMenuItem label="tableau de bord" url={Paths.ENT_DASHBOARD_PAGE} icon={faBorderAll} />
                         {EntPagesUrlsList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
                     </div>
                 </div>
