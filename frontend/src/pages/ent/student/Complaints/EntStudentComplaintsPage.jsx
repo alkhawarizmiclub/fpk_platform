@@ -12,11 +12,12 @@ const EntStudentComplaintsPage = () => {
     return (
         <EntPageContainer title="Reclamations">
 
-            <div className="mb-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-                <Link to={Paths.E_STUDENT_COMPLAINTS_CREATE_PAGE} className="p-5 flex justify-center items-center shadow rounded-lg border border-slate-100"><FontAwesomeIcon icon={faPlus} /></Link>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+
+                <Link to={Paths.E_STUDENT_COMPLAINTS_CREATE_PAGE} className="p-5 flex justify-center items-center shadow rounded-lg border border-slate-100"><FontAwesomeIcon icon={faPlus} /></Link>
+
+                <div class="hidden md:block xl:col-span-2"></div> {/* Grid Placeholder */}
+
                 {complaints.map(({ id, datetime, subject, message }, i) =>
 
                     <div key={i} className="relative p-5 shadow rounded-lg border border-slate-100">
@@ -30,6 +31,7 @@ const EntStudentComplaintsPage = () => {
                     </div>
 
                 )}
+
             </div>
 
         </EntPageContainer>
