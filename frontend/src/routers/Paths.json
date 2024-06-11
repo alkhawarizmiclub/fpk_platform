@@ -36,6 +36,7 @@
     "E_STUDENT_PLANNING_PAGE": "/ent/etudiant/planning",
     "E_STUDENT_RESULTS_PAGE": "/ent/etudiant/resultats",
     "E_STUDENT_E_DOCUMENTS_PAGE": "/ent/etudiant/e-documents",
+    "E_STUDENT_E_DOCUMENTS_CREATE_PAGE": "/ent/etudiant/e-documents/create",
     "E_STUDENT_COMPLAINTS_PAGE": "/ent/etudiant/reclamations",
     "E_STUDENT_COMPLAINTS_CREATE_PAGE": "/ent/etudiant/reclamations/create",
     "E_STUDENT_COMPLAINTS_DELETE_PAGE": "/ent/etudiant/reclamations/delete/:id",
