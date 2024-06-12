@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Complaints extends Model
+class Complaint extends Model
 {
     use HasFactory;
 
@@ -13,10 +13,12 @@ class Complaints extends Model
         'type',
         'is_active'
     ];
-    // protected $updateble = [
-    //     'type',
-    //     'is_active'
-    // ];
-    protected $table = 'complaints';
+
+    // protected $table = 'student_complaints';
     public $timestamps = true;
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'student_complaints', 'complaint_id', 'apogee')->withTimestamps();
+    }
 }

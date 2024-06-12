@@ -29,8 +29,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'EnsureAutho
     Route::post('/modules', [ModuleController::class, 'index']);
     Route::get('/gn-note', [AdminController::class, 'genreateFinalResult']);
     Route::post('/add-prof', [ProfController::class, 'store']);
-    Route::post('/complaint', [ComplaintsController::class, 'store']);
-    Route::get('/complaint', [ComplaintsController::class, 'index']);
+
+   Route::post('/complaint', [ComplaintsController::class, 'store']);
     Route::delete('/complaint/{id}', [ComplaintsController::class, 'destroy']); // delete
     Route::put('/complaint/{id}', [ComplaintsController::class, 'update']); // update
 });
@@ -42,11 +42,12 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::get('/final-result', [StudentController::class, 'finalResult']);
     Route::get('/logout', [StudentController::class, 'logout']);
 
+    Route::post('/complaint', [StudentController::class, 'complaints']);
+    Route::get('/complaint', [StudentController::class, 'getComplaints']);
 
     // TODO:
-    Route::get('/accounts', [StudentController::class, 'accounts']);
-    Route::get('/complaints', [StudentController::class, 'complaints']);
-    Route::post('/complaints', [StudentController::class, 'add-complaints']);
+    // Route::get('/accounts', [StudentController::class, 'accounts']);
+    // Route::post('/complaints', [StudentController::class, 'add-complaints']);
 });
 
 
@@ -70,6 +71,7 @@ Route::post('/prof/login', [ProfController::class, 'login'])
     ->name('login');
 
 Route::group(['prefix' => 'public', 'guest'], function () {
+    Route::get('/complaint', [ComplaintsController::class, 'index']);
     // get all with pagination
     Route::get('/announce', [FpkController::class, 'announce']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);

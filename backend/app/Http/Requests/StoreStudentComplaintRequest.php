@@ -11,7 +11,7 @@ class StoreStudentComplaintRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreStudentComplaintRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'complaint_id' => 'required|exists:complaints,id',
+            'message' => 'required|string|max:4096|min:8',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'complaint_id.required' => 'complaint_id is required',
+            'complaint_id.exists' => 'complaint_id does not exist',
+            'message.required' => 'message is required',
+            'message.string' => 'message must be a string',
+            'message.max' => 'message must not exceed 4096 characters',
+            'message.min' => 'message must be at least 8 characters',
         ];
     }
 }

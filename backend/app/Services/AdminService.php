@@ -77,7 +77,7 @@ class AdminService
         $request->authenticate();
         $admin = Admin::where('email', $request->email)->first();
         $admin->tokens()->delete();
-        $token = $admin->createToken('api_token', ['role:admin'], Carbon::now()->addHours((int)env('A_TOKEN_EXPIRATION', 2)));
+        $token = $admin->createToken('api_token', ['role:admin'], /*Carbon::now()->addHours((int)env('A_TOKEN_EXPIRATION', 2))*/);
         return response()->json(
             [
                 'status' => 'success',

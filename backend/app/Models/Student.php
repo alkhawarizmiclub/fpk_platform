@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Complaints;
-
-
+use App\Models\Complaint;
 
 class Student extends Authenticatable
 {
@@ -68,6 +66,6 @@ class Student extends Authenticatable
 
     public function complaints()
     {
-        return $this->hasMany(Complaints::class, 'apogee');
+        return $this->belongsToMany(Complaint::class, 'student_complaints', 'apogee', 'complaint_id')->withPivot(['message', 'id'])->withTimestamps();
     }
 }
