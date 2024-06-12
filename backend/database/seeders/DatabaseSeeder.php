@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
-use App\Models\Module;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Complaint;
 use Illuminate\Database\Seeder;
 use App\Services\ModuleService;
 use App\Models\Student;
@@ -68,6 +67,9 @@ class DatabaseSeeder extends Seeder
             ['module_id' => 12],
             ['module_id' => 13],
             ['module_id' => 14],
+        ]);
+        Complaint::create([
+            'type' => 'PFE : is problem',
         ]);
     }
 }

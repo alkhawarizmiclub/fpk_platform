@@ -7,6 +7,8 @@ use App\Http\Requests\StudentAuth\LoginRequest;
 use App\Http\Resources\StudentResource;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreComplaintsRequest;
+use App\Http\Requests\StoreStudentComplaintRequest;
 
 class StudentController extends Controller
 {
@@ -69,4 +71,15 @@ class StudentController extends Controller
         $student = request()->user();
         return ($this->studentService->finalResult($student));
     }
+
+    public function complaints(StoreStudentComplaintRequest $request)
+    {
+        return ($this->studentService->complaints($request));
+    }
+    public function getComplaints(Request $request)
+    {
+        $Student = $request->user();
+        return ($this->studentService->getComplaints($Student));
+    }
+
 }
