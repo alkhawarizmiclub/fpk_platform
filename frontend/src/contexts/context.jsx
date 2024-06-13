@@ -8,7 +8,7 @@ const UserContext = createContext({
     setAuthenticated: (isAuthenticated) => { },
     login: async (email, password) => { },
     logout: () => { },
-    entPagesList: {},
+    entPagesList: [],
     setEntPagesList: () => { },
     entSidebarDisplay: false,
     setEntSidebarDisplay: () => { },
@@ -46,8 +46,9 @@ const UserContextProvider = ({ children }) => {
         setUser({});
         setAuthenticated(false);
     }
+    const [entPagesList, setEntPagesList] = useState([]);
 
-    const [entPagesList, setEntPagesList] = useState({});
+    
     const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
     return (
