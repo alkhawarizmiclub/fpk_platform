@@ -174,13 +174,13 @@ class StudentService
         $student = request()->user();
         $student->complaints()->attach($request->complaint_id, ['description' => $request->description]);
 
-        $complaint = $this->dbRepository->getStudentComplaints($student);
+        $complaint = $this->dbRepository->getStudentLatestComplaint($student);
 
         return (response()->json(
             [
                 'status' => 'success',
                 'message' => 'Complaint created successfully',
-                'data' => StudentComplaintResource::collection($complaint)
+                'data' => new StudentComplaintResource($complaint)
 
             ],
             201
