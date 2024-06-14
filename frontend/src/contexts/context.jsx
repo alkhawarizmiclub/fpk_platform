@@ -58,6 +58,8 @@ const UserContextProvider = ({ children }) => {
         setAuthenticated(false);
         setEntPagesList([]);
     }
+    const [entPagesList, setEntPagesList] = useState([]);
+    const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
     return (
         <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, login, logout, entPagesList, setEntPagesList, entSidebarDisplay, setEntSidebarDisplay }}>

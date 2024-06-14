@@ -71,12 +71,13 @@ class ProfService
         );
     }
 
+    // TODO : add expration date
     public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
         $prof = Prof::where('email', $request->email)->first();
         $prof->tokens()->delete();
-        $token = $prof->createToken('api_token', ['role:prof'], Carbon::now()->addHours((int)env('P_TOKEN_EXPIRATION', 2)));
+        $token = $prof->createToken('api_token', ['role:prof']);
         return response()->json(
             [
                 'status' => 'success',

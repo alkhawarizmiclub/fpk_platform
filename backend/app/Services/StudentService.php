@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreComplaintsRequest;
+use App\Http\Resources\StudentComplaintCollection;
+use App\Http\Requests\StoreStudentComplaintRequest;
 use App\Http\Resources\ModuleResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
@@ -13,6 +16,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StudentAuth\LoginRequest;
 use Carbon\Carbon;
+use App\Http\Resources\StoreStudentComplaintResource;
+use App\Http\Resources\StudentComplaintResource;
+use App\Models\StudentComplaint;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
 use DateTime;
@@ -68,7 +74,7 @@ class StudentService
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2)));
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], /*Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2))*/);
         return response()->json(
             [
                 'status' => 'success',
@@ -153,5 +159,31 @@ class StudentService
                 'data' => $student->results->GroupBy('semester')
             ]
         );
+    }
+
+    public function complaints(StoreStudentComplaintRequest $request)
+    {
+        $student = request()->user();
+        $student->complaints()->attach($request->complaint_id, ['description' => $request->description]);
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Complaint created successfully',
+                'data' => new StudentComplaintcollection($student->complaints()->paginate()),
+            ],
+            201
+        ));
+    }
+
+    public function getComplaints(Student $student)
+    {
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Complaint created successfully',
+                'data' => new StudentComplaintcollection($student->complaints()->paginate()),
+            ],
+            201
+        ));
     }
 }
