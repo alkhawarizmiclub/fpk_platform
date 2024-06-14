@@ -23,7 +23,7 @@ class StoreStudentComplaintRequest extends FormRequest
     {
         return [
             'complaint_id' => 'required|exists:complaints,id',
-            'message' => 'required|string|max:4096|min:8',
+            'description' => 'required|string|max:4096|min:8',
         ];
     }
     public function messages(): array
@@ -31,10 +31,10 @@ class StoreStudentComplaintRequest extends FormRequest
         return [
             'complaint_id.required' => 'complaint_id is required',
             'complaint_id.exists' => 'complaint_id does not exist',
-            'message.required' => 'message is required',
-            'message.string' => 'message must be a string',
-            'message.max' => 'message must not exceed 4096 characters',
-            'message.min' => 'message must be at least 8 characters',
+            'description.required' => 'description is required',
+            'description.string' => 'description must be a string',
+            'description.max' => 'description must not exceed 4096 characters',
+            'description.min' => 'description must be at least 8 characters',
         ];
     }
 }

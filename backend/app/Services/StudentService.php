@@ -164,7 +164,7 @@ class StudentService
     public function complaints(StoreStudentComplaintRequest $request)
     {
         $student = request()->user();
-        $student->complaints()->attach($request->complaint_id, ['message' => $request->message]);
+        $student->complaints()->attach($request->complaint_id, ['description' => $request->description]);
         return (response()->json(
             [
                 'status' => 'success',
@@ -175,7 +175,7 @@ class StudentService
         ));
     }
 
-    public function getComplaints($student)
+    public function getComplaints(Student $student)
     {
         return (response()->json(
             [
