@@ -30,4 +30,15 @@ class DBRepository
             ->get();
         return ($complaints);
     }
+
+    public function getStudentLatestComplaint(Student $student)
+    {
+        $complaint = DB::table('student_complaints')
+            ->join('complaints', 'student_complaints.complaint_id', '=', 'complaints.id')
+            ->where('student_complaints.apogee', $student->apogee)
+            ->orderBy('student_complaints.created_at', 'desc')
+            ->select('student_complaints.*', 'complaints.type')
+            ->first();
+        return $complaint;
+    }
 }
