@@ -19,7 +19,7 @@ class StudentComplaintResource extends JsonResource
             'type' => $this->type,
             'apogee' => $this->pivot->apogee,
             'complaint_id' => $this->pivot->complaint_id,
-            'description' => $this->pivot->message,
+            'description' => $this->pivot->description,
             'created_at' => $this->pivot->created_at,
         ];
     }

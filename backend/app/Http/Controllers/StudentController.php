@@ -9,6 +9,7 @@ use App\Services\StudentService;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreComplaintsRequest;
 use App\Http\Requests\StoreStudentComplaintRequest;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -82,4 +83,12 @@ class StudentController extends Controller
         return ($this->studentService->getComplaints($Student));
     }
 
+    public function deleteComplaint(string $id)
+    {
+        $student = request()->user();
+
+
+        DB::table('student_complaints')->where('id', $id)->where('apogee', $student->apogee)->delete();
+        return ($this->studentService->getComplaints($student));
+    }
 }
