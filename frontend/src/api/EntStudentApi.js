@@ -29,10 +29,10 @@ const EntStudentApi = {
         ];
     },
     getSchedulePDF: () => {
-        return "https://fpk-biblio.netlify.app/media/smi/s6/Gestion%20de%20projet/Gestion%20de%20projet%20-%20Autres%20-%20Etude%20de%20cas.pdf";
+        return "http://www.fpk.ac.ma/wp-content/uploads/2024/03/Emploi-du-Temps-SMI-S4-SP-23-24.pdf";
     },
     getPlanningPDF: () => {
-        return "https://fpk-biblio.netlify.app/media/smi/s6/Gestion%20de%20projet/Gestion%20de%20projet%20-%20Autres%20-%20Etude%20de%20cas.pdf";
+        return "http://www.fpk.ac.ma/wp-content/uploads/2024/06/smi_.pdf";
     },
     getResultsData: () => {
         return [
@@ -246,6 +246,13 @@ const EntStudentApi = {
             { id: 176, datetime: new Date(), subject: "Lorem Ipsum", message: "لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص،" },
             { id: 321, datetime: new Date(), subject: "Lorem Ipsum", message: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old." },
             { id: 1023, datetime: new Date(), subject: "Lorem Ipsum", message: "Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source." },
+        ];
+    },
+    getComplaintCategories: async () => {
+        return [
+            {id: 124, label: ""},
+            {id: 124, label: ""},
+            {id: 124, label: ""},
         ];
     },
     createComplaint: async (subject, message) => {

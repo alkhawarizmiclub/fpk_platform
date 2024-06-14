@@ -8,8 +8,8 @@ const UserContext = createContext({
     setAuthenticated: (isAuthenticated) => { },
     login: async (email, password) => { },
     logout: () => { },
-    entPagesList: {},
-    setEntPagesList: () => { },
+    entPagesList: [],
+    setEntPagesList: (entPagesListData) => { },
     entSidebarDisplay: false,
     setEntSidebarDisplay: () => { },
 });
@@ -18,7 +18,7 @@ const UserContext = createContext({
 const UserContextProvider = ({ children }) => {
 
     const [user, _setUser] = useState(() => {
-        const userData = localStorage.getItem('USER');
+        const userData = window.localStorage.getItem('USER');
         return userData ? JSON.parse(userData) : {};
     });
 
@@ -37,6 +37,17 @@ const UserContextProvider = ({ children }) => {
         window.localStorage.setItem("AUTHENTICATED", JSON.stringify(isAuthenticated));
     }
 
+    const [entPagesList, _setEntPagesList] = useState(() => {
+        const entPagesListData = window.localStorage.getItem("ENT_PAGES_LIST");
+        return entPagesListData ? JSON.parse(entPagesListData) : [];
+    });
+
+    const setEntPagesList = (entPagesListData) => {
+        window.localStorage.setItem("ENT_PAGES_LIST", JSON.stringify(entPagesListData));
+    }
+
+    const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
+
     const login = async (email, password) => {
         await EntStudentApi.getCsrfToken();
         return EntStudentApi.login(email, password);
@@ -45,10 +56,8 @@ const UserContextProvider = ({ children }) => {
     const logout = () => {
         setUser({});
         setAuthenticated(false);
+        setEntPagesList([]);
     }
-
-    const [entPagesList, setEntPagesList] = useState({});
-    const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
     return (
         <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, login, logout, entPagesList, setEntPagesList, entSidebarDisplay, setEntSidebarDisplay }}>
