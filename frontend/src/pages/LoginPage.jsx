@@ -35,7 +35,7 @@ const LoginPage = () => {
 
                     const userData = {
                         ...response.data.data,
-                        role: "student" // <--- REMEMBER TO CHANGE THIS !
+                        role: "teacher" // <--- REMEMBER TO CHANGE THIS !
                     }
                     setUser(userData);
 
