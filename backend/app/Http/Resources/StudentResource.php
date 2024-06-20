@@ -25,6 +25,7 @@ class StudentResource extends JsonResource
             'phone_urgant' => $this->phone_urgent,
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
+            'role' => 'student'
         ];
     }
 }

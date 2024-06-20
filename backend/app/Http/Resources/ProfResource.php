@@ -22,7 +22,8 @@ class ProfResource extends JsonResource
             'phone_number' => $this->phone_number,
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
-            'modules' => ModuleResource::collection($this->whenLoaded('modules'))
+            'modules' => ModuleResource::collection($this->whenLoaded('modules')),
+            'role' => 'prof'
         ];
     }
 }
