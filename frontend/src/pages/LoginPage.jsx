@@ -9,7 +9,7 @@ import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList
 
 const LoginPage = () => {
 
-    const { login, authenticated, setAuthenticated, setUser, user, setEntPagesList } = useUserContext();
+    const { login, authenticated, setAuthenticated, setUser, user, setToken } = useUserContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,32 +35,14 @@ const LoginPage = () => {
 
                     const userData = {
                         ...response.data.data,
-                        role: "teacher" // <--- REMEMBER TO CHANGE THIS !
+                        role: "student" // <--- TODO: REMEMBER TO CHANGE THIS !
                     }
                     setUser(userData);
-
-                    switch (userData.role) {
-                        case "student":
-                            setEntPagesList(EntStudentPagesUrlsList);
-                            break;
-
-                        case "teacher":
-                            setEntPagesList(EntTeacherPagesUrlsList);
-                            break;
-
-                        case "staff":
-                            setEntPagesList(EntStaffPagesUrlsList);
-                            break;
-
-                        default:
-                            break;
-                    }
-                    
+                    setToken(response.data.token);
                     navigate(Paths.ENT_DASHBOARD_PAGE);
                 }
             }
         ).finally(() => {
-            console.log(isSubmitting);
             setIsSubmitting(false);
         });
 

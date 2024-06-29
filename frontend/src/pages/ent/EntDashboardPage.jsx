@@ -1,10 +1,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../../contexts/context";
+import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "../../components/ent/EntPagesUrlsList";
 
 const EntDashboardPage = () => {
 
-    const { entPagesList } = useUserContext();
+    const { user } = useUserContext();
+
+    let entPagesList = []
+    switch (user.role) {
+        case "student":
+            entPagesList = EntStudentPagesUrlsList;
+            break;
+
+        case "teacher":
+            entPagesList = EntTeacherPagesUrlsList;
+            break;
+
+        case "staff":
+            entPagesList = EntStaffPagesUrlsList;
+            break;
+
+        default:
+            break;
+    }
 
     return (
         <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">

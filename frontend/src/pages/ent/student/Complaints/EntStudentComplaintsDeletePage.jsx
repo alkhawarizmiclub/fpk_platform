@@ -10,11 +10,11 @@ const EntStudentComplaintsDeletePage = () => {
 
     const deleteHandler = () => {
 
-        EntStudentApi.deleteComplaint(id);
+        EntStudentApi.deleteComplaint(id).then(() => {
+            navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
+        });
 
-        navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
-
-    } 
+    }
 
     return (
         <EntPageContainer>

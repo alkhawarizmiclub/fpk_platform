@@ -9,17 +9,18 @@ const EntStudentComplaintsCreatePage = () => {
     const complaintCategories = EntStudentApi.getComplaintCategories();
 
     const [complaintCategory, setComplaintCategory] = useState("");
-    const [message, setMessage] = useState("");
+    const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
     const complaintCategoryChangeHandler = (e) => setComplaintCategory(e.target.value);
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        EntStudentApi.createComplaint(subject, message);
+        await EntStudentApi.createComplaint(complaintCategory, description).then(() => {
+            navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
+        });
 
-        navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
     }
 
     return (
@@ -39,9 +40,9 @@ const EntStudentComplaintsCreatePage = () => {
 
                 <div className="w-full flex flex-col">
 
-                    <label htmlFor="message">Votre reclamation :</label>
+                    <label htmlFor="description">Votre reclamation :</label>
 
-                    <textarea name="message" id="message" value={message} onChange={(e) => setMessage(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
+                    <textarea name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
 
                 </div>
 

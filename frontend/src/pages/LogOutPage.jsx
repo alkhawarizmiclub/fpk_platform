@@ -4,11 +4,14 @@ import Paths from "../routers/Paths.json";
 
 const LogOutPage = () => {
 
-    const { logout } = useUserContext();
+    const { setUser, setAuthenticated, setToken, logout } = useUserContext();
     const navigate = useNavigate();
 
-    const logoutHandler = () => {
-        logout();
+    const logoutHandler = async () => {
+        // await logout();
+        setUser({});
+        setAuthenticated(false);
+        setToken("");
         navigate(Paths.LOGIN_PAGE);
     }
 
