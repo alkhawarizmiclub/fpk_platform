@@ -1,33 +1,39 @@
+
+
 import EntTeacherApi from "../../../api/EntTeacherApi";
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 
 const EntTeacherAccountsPage = () => {
-
     const accounts = EntTeacherApi.getAccountsData();
 
     return (
-        <EntPageContainer title="comptes">
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Compte</th>
-                        <th>Email</th>
-                        <th>Mot de passe</th>
-                        <th>Lien de connexion</th>
-                    </tr>
-                    {accounts.map(({ label, email, password, loginURL }) =>
+        <EntPageContainer title="Comptes">
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+                    <thead>
                         <tr>
-                            <td className="py-2 px-3 text-center">{label}</td>
-                            <td className="py-2 px-3 text-center">{email}</td>
-                            <td className="py-2 px-3 text-center">{password}</td>
-                            <td className="py-2 px-3 text-center underline"><a href={loginURL}>Lien</a></td>
+                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Compte</th>
+                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Email</th>
+                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Mot de passe</th>
+                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Lien de connexion</th>
                         </tr>
-                    )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {accounts.map(({ label, email, password, loginURL }, i) => (
+                            <tr key={i} className="hover:bg-gray-100 transition-colors duration-200">
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{label}</td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{email}</td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{password}</td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-blue-600 underline text-center">
+                                    <a href={loginURL} target="_blank" rel="noopener noreferrer" className="hover:text-blue-800">Lien</a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </EntPageContainer>
     );
-
 }
 
 export default EntTeacherAccountsPage;

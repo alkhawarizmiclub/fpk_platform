@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use App\Models\Complaint;
+use App\Models\Prof;
 use Illuminate\Database\Seeder;
 use App\Services\ModuleService;
 use App\Models\Student;
@@ -17,7 +18,6 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        ModuleService::ADD_MODULE();
 
         Admin::create([
             'lastname' => 'admin',
@@ -29,6 +29,17 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male'
 
         ]);
+                $prof = Prof::create([
+            'lastname' => 'chifo',
+            'firstname' => 'master',
+            'email' => 'chifo@gmail.com',
+            'password' => bcrypt('pandas'),
+            'birth_date' => '1998-05-09',
+            'phone_number' => '1234567890',
+            'gender' => 'male'
+
+        ]);
+        ModuleService::ADD_MODULE($prof->id);
         $student = Student::create([
             'firstname' => 'test',
             'lastname' => 'test',
@@ -52,6 +63,7 @@ class DatabaseSeeder extends Seeder
             'identify_recto_verso' => 'identite',
             'inscription_date' => '2021-09-09',
         ]);
+
         $student->modules()->attach([
             ['module_id' => 1],
             ['module_id' => 2],
@@ -71,5 +83,9 @@ class DatabaseSeeder extends Seeder
         Complaint::create([
             'type' => 'PFE : is problem',
         ]);
+
+
+
+
     }
 }

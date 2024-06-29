@@ -46,30 +46,37 @@ class ModuleService
     }
 
 
-    public static function ADD_MODULE()
+    public static function ADD_MODULE(string $id)
     {
         Module::create([
             'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
             'semester' => 'S1',
-            'filiere' => 'SMI'
+            'filiere' => 'SMI',
+            'prof_id' => $id
         ]);
 
         Module::create([
             'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
             'semester' => 'S1',
-            'filiere' => 'SMI'
+            'filiere' => 'SMI',
+            'prof_id' => $id
+
         ]);
 
         Module::create([
             'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
             'semester' => 'S1',
-            'filiere' => 'SMI'
+            'filiere' => 'SMI',
+            'prof_id' => $id
+
         ]);
 
         Module::create([
             'module_name' => 'M04- Physique 1 – Mécanique 1',
             'semester' => 'S1',
-            'filiere' => 'SMI'
+            'filiere' => 'SMI',
+            'prof_id' => $id
+
         ]);
 
         Module::create([
