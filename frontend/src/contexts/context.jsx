@@ -1,15 +1,16 @@
 import { createContext, useContext, useState } from "react";
 import EntStudentApi from "../api/EntStudentApi";
+import { readFromLocalStorage, writeToLocalStorage } from "../api/localStorage";
 
 const UserContext = createContext({
     user: {},
     setUser: (userData) => { },
     authenticated: false,
     setAuthenticated: (isAuthenticated) => { },
+    token: "",
+    setToken: (tokenValue) => { },
     login: async (email, password) => { },
-    logout: () => { },
-    entPagesList: [],
-    setEntPagesList: (entPagesListData) => { },
+    logout: async () => { },
     entSidebarDisplay: false,
     setEntSidebarDisplay: () => { },
 });
@@ -25,7 +26,7 @@ const UserContextProvider = ({ children }) => {
     const setUser = (userData) => {
         _setUser(userData);
         window.localStorage.setItem("USER", JSON.stringify(userData));
-    }
+    };
 
     const [authenticated, _setAuthenticated] = useState(() => {
         const isAuthenticated = localStorage.getItem('AUTHENTICATED');
@@ -35,15 +36,15 @@ const UserContextProvider = ({ children }) => {
     const setAuthenticated = (isAuthenticated) => {
         _setAuthenticated(isAuthenticated);
         window.localStorage.setItem("AUTHENTICATED", JSON.stringify(isAuthenticated));
-    }
+    };
 
-    const [entPagesList, _setEntPagesList] = useState(() => {
-        const entPagesListData = window.localStorage.getItem("ENT_PAGES_LIST");
-        return entPagesListData ? JSON.parse(entPagesListData) : [];
+    const [token, _setToken] = useState(() => {
+        readFromLocalStorage("TOKEN", "");
     });
 
-    const setEntPagesList = (entPagesListData) => {
-        window.localStorage.setItem("ENT_PAGES_LIST", JSON.stringify(entPagesListData));
+    const setToken = (tokenValue) => {
+        _setToken(tokenValue);
+        writeToLocalStorage("TOKEN", tokenValue);
     }
 
     const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
@@ -53,16 +54,12 @@ const UserContextProvider = ({ children }) => {
         return EntStudentApi.login(email, password);
     }
 
-    const logout = () => {
-        setUser({});
-        setAuthenticated(false);
-        setEntPagesList([]);
+    const logout = async () => {
+        await EntStudentApi.logout();
     }
-    const [entPagesList, setEntPagesList] = useState([]);
-    const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
     return (
-        <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, login, logout, entPagesList, setEntPagesList, entSidebarDisplay, setEntSidebarDisplay }}>
+        <UserContext.Provider value={{ user, setUser, authenticated, setAuthenticated, token, setToken, login, logout, entSidebarDisplay, setEntSidebarDisplay }}>
             {children}
         </UserContext.Provider>
     );

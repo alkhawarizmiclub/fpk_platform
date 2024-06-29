@@ -3,10 +3,29 @@ import SidebarMenuItem from "./SidebarMenuItem";
 import { faBorderAll, faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../contexts/context";
 import NavbarToggleButton from "./NavbarToggleButton";
+import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
 
 const Sidebar = () => {
 
-    const { entPagesList, entSidebarDisplay } = useUserContext();
+    const { user, entSidebarDisplay } = useUserContext();
+
+    let entPagesList = []
+    switch (user.role) {
+        case "student":
+            entPagesList = EntStudentPagesUrlsList;
+            break;
+
+        case "teacher":
+            entPagesList = EntTeacherPagesUrlsList;
+            break;
+
+        case "staff":
+            entPagesList = EntStaffPagesUrlsList;
+            break;
+
+        default:
+            break;
+    }
 
     return (
         <>
