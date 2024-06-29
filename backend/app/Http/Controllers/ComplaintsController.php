@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComplaintsRequest;
 use App\Http\Requests\UpdateComplaintsRequest;
-use App\Models\Complaints;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Models\Complaint;
 use App\Traits\JsonTemplate;
 
 class ComplaintsController extends Controller
@@ -18,7 +16,7 @@ class ComplaintsController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Complaints retrieved successfully',
-            'data' => Complaints::all()
+            'data' => Complaint::where('is_active', true)->get()
         ]);
     }
 
@@ -32,7 +30,7 @@ class ComplaintsController extends Controller
      */
     public function store(StoreComplaintsRequest $request)
     {
-        $complaints = Complaints::create($request->all());
+        $complaints = Complaint::create($request->all());
         return response()->json(
             [
                 'status' => 'success',
@@ -45,7 +43,7 @@ class ComplaintsController extends Controller
 
     public function update(UpdateComplaintsRequest $request, string $id)
     {
-        $complaint = Complaints::find($id);
+        $complaint = Complaint::find($id);
         if (!$complaint)
             return ($this->NOT_FOUND('Complaint'));
         $complaint->update(array_filter($request->all(), fn ($value) => $value !== null));
@@ -65,7 +63,7 @@ class ComplaintsController extends Controller
      */
     public function destroy(string $id)
     {
-        Complaints::destroy($id);
+        Complaint::destroy($id);
         return response()->json(
             [
                 'status' => 'success',

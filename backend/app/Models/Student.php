@@ -66,6 +66,6 @@ class Student extends Authenticatable
 
     public function complaints()
     {
-        return $this->belongsToMany(Complaint::class, 'student_complaints', 'apogee', 'complaint_id')->withPivot(['message', 'id'])->withTimestamps();
+        return $this->belongsToMany(Complaint::class, 'student_complaints', 'apogee', 'complaint_id')->withPivot(['description', 'id'])->withTimestamps();
     }
 }

@@ -21,12 +21,20 @@ use App\Http\Resources\StudentComplaintResource;
 use App\Models\StudentComplaint;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
+use Illuminate\Support\Facades\DB;
 use DateTime;
 
+use App\Services\DBRepository;
 
 class StudentService
 {
     use JsonTemplate;
+    private DBRepository $dbRepository;
+
+    public function __construct(DBRepository $dbRepository)
+    {
+        $this->dbRepository = $dbRepository;
+    }
     public function all()
     {
         $students = StudentResource::collection(Student::paginate());
@@ -164,24 +172,29 @@ class StudentService
     public function complaints(StoreStudentComplaintRequest $request)
     {
         $student = request()->user();
-        $student->complaints()->attach($request->complaint_id, ['message' => $request->message]);
+        $student->complaints()->attach($request->complaint_id, ['description' => $request->description]);
+
+        $complaint = $this->dbRepository->getStudentLatestComplaint($student);
+
         return (response()->json(
             [
                 'status' => 'success',
                 'message' => 'Complaint created successfully',
-                'data' => new StudentComplaintcollection($student->complaints()->paginate()),
+                'data' => new StudentComplaintResource($complaint)
+
             ],
             201
         ));
     }
 
-    public function getComplaints($student)
+    public function getComplaints(Student $student)
     {
+        $complaint = $this->dbRepository->getStudentComplaints($student);
         return (response()->json(
             [
                 'status' => 'success',
                 'message' => 'Complaint created successfully',
-                'data' => new StudentComplaintcollection($student->complaints()->paginate()),
+                'data' => StudentComplaintResource::collection($complaint)
             ],
             201
         ));

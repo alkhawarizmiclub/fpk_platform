@@ -3,29 +3,27 @@ import SidebarMenuItem from "./SidebarMenuItem";
 import { faBorderAll, faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { useUserContext } from "../../contexts/context";
 import NavbarToggleButton from "./NavbarToggleButton";
-import { EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
+import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
 
 const Sidebar = () => {
 
     const { user, entSidebarDisplay } = useUserContext();
 
-    let EntPagesUrlsList;
-
+    let entPagesList = []
     switch (user.role) {
         case "student":
-            EntPagesUrlsList = EntStudentPagesUrlsList;
+            entPagesList = EntStudentPagesUrlsList;
             break;
 
         case "teacher":
-            EntPagesUrlsList = EntTeacherPagesUrlsList;
+            entPagesList = EntTeacherPagesUrlsList;
             break;
 
         case "staff":
-            EntPagesUrlsList = [];
+            entPagesList = EntStaffPagesUrlsList;
             break;
 
         default:
-            EntPagesUrlsList = []
             break;
     }
 
@@ -41,7 +39,7 @@ const Sidebar = () => {
 
                     <div className="flex flex-col gap-1">
                         <SidebarMenuItem label="tableau de bord" url={Paths.ENT_DASHBOARD_PAGE} icon={faBorderAll} />
-                        {EntPagesUrlsList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
+                        {entPagesList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
                     </div>
                 </div>
 

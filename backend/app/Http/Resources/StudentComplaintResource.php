@@ -15,12 +15,12 @@ class StudentComplaintResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->pivot->id,
+            'id' => $this->id,
             'type' => $this->type,
-            'apogee' => $this->pivot->apogee,
-            'complaint_id' => $this->pivot->complaint_id,
-            'description' => $this->pivot->message,
-            'created_at' => $this->pivot->created_at,
+            'apogee' => $this->apogee,
+            'complaint_id' => $this->complaint_id,
+            'description' => $this->description,
+            'created_at' => $this->created_at,
         ];
     }
 }

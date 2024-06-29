@@ -14,25 +14,26 @@ class StudentComplaintCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        return parent::toArray($request);
         // return ([$this->collection]);
-        return [
-            'data' => $this->collection,
-            'links' => [
-                'first' => $this->url(1),
-                'last' => $this->url($this->lastPage()),
-                'prev' => $this->previousPageUrl(),
-                'next' => $this->nextPageUrl(),
-            ],
-            'meta' => [
-                'current_page' => $this->currentPage(),
-                'from' => $this->firstItem(),
-                'last_page' => $this->lastPage(),
-                'path' => $this->path(),
-                'per_page' => $this->perPage(),
-                'to' => $this->lastItem(),
-                'total' => $this->total(),
-            ],
-        ];
+    //     return [
+    //         'data' => $this->collection,
+    //         'links' => [
+    //             'first' => $this->url(1),
+    //             'last' => $this->url($this->lastPage()),
+    //             'prev' => $this->previousPageUrl(),
+    //             'next' => $this->nextPageUrl(),
+    //         ],
+    //         'meta' => [
+    //             'current_page' => $this->currentPage(),
+    //             'from' => $this->firstItem(),
+    //             'last_page' => $this->lastPage(),
+    //             'path' => $this->path(),
+    //             'per_page' => $this->perPage(),
+    //             'to' => $this->lastItem(),
+    //             'total' => $this->total(),
+    //         ],
+    //     ];
 
     }
 }
