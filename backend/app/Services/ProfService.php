@@ -127,18 +127,24 @@ class ProfService
     public function result(UpdateResultRequest $request)
     {
         $profId = request()->user()->id;
-        $modules = Prof::find($profId)->modules()->where('id', $request->module_id)->exists();
+        $modules = Module::find($request->module_id)?->where('prof_id', $profId)->where('id', $request->module_id)->exists();
         if (!$modules)
             return ($this->resourceNotFound());
         $moduleId = $request->module_id;
         $apogee = $request->apogee;
-        $student = Result::where('module_id', $moduleId)->where('apogee', $apogee);
-        $normal = $request->normal;
+        $student = Result::where('module_id', $moduleId)->where('apogee', $apogee)->first();
+        if (!$student)
+            return ($this->resourceNotFound());
+        $normale = $request->normale;
         $ratt = $request->ratt;
-        $state = $student->update([
-            'normal' => $normal,
-            'ratt' => $ratt
-        ]);
+        if (!$normale && !$ratt)
+            return (response()->noContent());
+        $notes = [];
+        if ($normale)
+            $notes['normale'] = $normale;
+        if ($ratt)
+            $notes['ratt'] = $ratt;
+        $student->update($notes);
         return response()->json(
             [
                 'status' => 'success',
