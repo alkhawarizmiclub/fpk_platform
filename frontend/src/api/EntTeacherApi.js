@@ -1,5 +1,9 @@
+import { axiosClient } from "./axiosClient"
+
 const EntTeacherApi = {
-    login: (email, password) => { },
+    login: async (email, password) => {
+        return await axiosClient.post("/api/prof/login", { email, password });
+    },
     getAccountsData: () => {
         return [
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },

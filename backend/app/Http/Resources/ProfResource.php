@@ -23,7 +23,7 @@ class ProfResource extends JsonResource
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
             'modules' => ModuleResource::collection($this->whenLoaded('modules')),
-            'role' => 'prof'
+            'role' => 'teacher'
         ];
     }
 }
