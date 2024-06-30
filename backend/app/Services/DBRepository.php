@@ -46,18 +46,10 @@ class DBRepository
     {
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
-            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
             ->where('ms.module_id', $moduleId)
             ->get();
-        // TODO : keep repository clean, move this to service
-        return (response()->json(
-            [
-                'status' => 'success',
-                'message' => 'student retrieved successfully',
-                'data' => $students
-            ],
-            200
-        ));
+        return ($students);
     }
     public function findByFirstName(string $moduleId, string $fname)
     {
