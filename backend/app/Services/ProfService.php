@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
 use Carbon\Carbon;
 use App\Http\Requests\StoreannouncementRequest;
-
+use App\Http\Resources\StudentNoteResource;
 
 class ProfService
 {
@@ -50,28 +50,22 @@ class ProfService
         $module = Module::where('id', $moduleId)->where('prof_id', $profId)->exists();
         if (!$module)
             return ($this->resourceNotFound());
-        // $firstname = request()->query('fname');
-        // $lastname = request()->query('lname');
-        // if (!$firstname && !$lastname) {
-        //     $student  = StudentResource::collection(Module::find($moduleId)->students);
-        //     return ($this->DATA('profs', $student));
-        // }
-        return ($this->dbRepository->getModuleStudent($moduleId));
-
+        $students = $this->search($moduleId);
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Students found successfully',
+                'data' => StudentNoteResource::collection($students)
+            ]
+        ));
     }
-    public function search(string $moduleId,  $apogee,  $fname,  $lname)
+    public function search(string $moduleId)
     {
-        if (!$fname && !$lname && !$apogee)
-        {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'Please provide at least one search parameter',
-                    'data' => null
-                ],
-                400
-            );
-        }
+        $apogee = request()->query('apogee');
+        $fname = request()->query('fname');
+        $lname = request()->query('lname');
+        if (!$apogee && !$fname && !$lname)
+            return ($this->dbRepository->getModuleStudent($moduleId));
         if ($apogee)
             return ($this->dbRepository->getByApogee($moduleId, $apogee));
         return ($this->dbRepository->searchByNames($moduleId, $fname, $lname));
