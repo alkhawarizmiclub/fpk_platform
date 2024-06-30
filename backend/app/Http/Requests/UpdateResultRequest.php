@@ -25,9 +25,9 @@ class UpdateResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'module_id' => 'required|exists:modules,id',
-            'apogee' => 'required|exists:students,apogee',
-            'normal' => 'numeric|min:0|max:20',
+            'module_id' => 'required',
+            'apogee' => 'required',
+            'normale' => 'numeric|min:0|max:20',
             'ratt' => 'numeric|min:0|max:20',
         ];
     }
