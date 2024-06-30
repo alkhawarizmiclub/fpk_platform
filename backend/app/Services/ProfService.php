@@ -96,7 +96,7 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Prof registered successfully',
-                'prof' => $prof
+                'data' =>new ProfResource( $prof)
             ]
         );
     }
@@ -111,7 +111,7 @@ class ProfService
         return response()->json(
             [
                 'status' => 'success',
-                'prof' => $prof,
+                'data' => new ProfResource($prof),
                 'token' => $token->plainTextToken,
             ]
         );
