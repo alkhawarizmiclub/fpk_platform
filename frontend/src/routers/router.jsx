@@ -23,6 +23,7 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
+import Announcements from "../pages/AnnouncementsPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
 import EntStudentComplaintsCreatePage from "../pages/ent/student/Complaints/EntStudentComplaintsCreatePage";
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements/> },
         ]
     },
     {

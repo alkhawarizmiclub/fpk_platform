@@ -19,7 +19,7 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
     Route::post('/add-result', [ProfController::class, 'result']);
 
     // TODO: add search functionality to get student by name or apogee
-    Route::get('/modules/{id}?search=', [ProfController::class, 'student']);
+    Route::get('/modules/{id}search', [ProfController::class, 'student']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:admin']], function () {
