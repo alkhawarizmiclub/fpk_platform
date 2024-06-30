@@ -13,13 +13,13 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
 
     Route::get('/', [ProfController::class, 'show']);
     Route::get('/modules', [ProfController::class, 'modules']);
-    Route::get('/modules/{id}', [ProfController::class, 'student']); // get student how has that module
+    Route::get('/modules/{id}', [ProfController::class, 'students']); // get student how has that module
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
     Route::post('/add-result', [ProfController::class, 'result']);
 
     // TODO: add search functionality to get student by name or apogee
-    Route::get('/modules/{id}?search=', [ProfController::class, 'student']);
+    Route::get('/modules/{id}/search', [ProfController::class, 'search']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:admin']], function () {

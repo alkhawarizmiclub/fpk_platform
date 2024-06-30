@@ -23,6 +23,12 @@ use App\Http\Requests\StoreannouncementRequest;
 class ProfService
 {
     use JsonTemplate;
+    private DBRepository $dbRepository;
+
+    public function __construct(DBRepository $dbRepository)
+    {
+        $this->dbRepository = $dbRepository;
+    }
     public function all()
     {
         $profs = ProfResource::collection(Prof::all());
@@ -41,11 +47,34 @@ class ProfService
     public function students(string $moduleId)
     {
         $profId = request()->user()->id;
-        $module = Module::where('prof_id', $profId)->where('id', $moduleId)->exists();
+        $module = Module::where('id', $moduleId)->where('prof_id', $profId)->exists();
         if (!$module)
-            return ($this->resourceNotFound());;
-        $student  = StudentResource::collection(Module::find($moduleId)->students);
-        return ($this->DATA('profs', $student));
+            return ($this->resourceNotFound());
+        // $firstname = request()->query('fname');
+        // $lastname = request()->query('lname');
+        // if (!$firstname && !$lastname) {
+        //     $student  = StudentResource::collection(Module::find($moduleId)->students);
+        //     return ($this->DATA('profs', $student));
+        // }
+        return ($this->dbRepository->getModuleStudent($moduleId));
+
+    }
+    public function search(string $moduleId,  $apogee,  $fname,  $lname)
+    {
+        if (!$fname && !$lname && !$apogee)
+        {
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Please provide at least one search parameter',
+                    'data' => null
+                ],
+                400
+            );
+        }
+        if ($apogee)
+            return ($this->dbRepository->getByApogee($moduleId, $apogee));
+        return ($this->dbRepository->searchByNames($moduleId, $fname, $lname));
     }
 
     public function findById(string $id)
@@ -56,6 +85,7 @@ class ProfService
         $prof  = new ProfResource($prof);
         return ($this->DATA('prof', $prof));
     }
+
     public function save(StoreProfRequest $request)
     {
         $prof = Prof::create($request->all());

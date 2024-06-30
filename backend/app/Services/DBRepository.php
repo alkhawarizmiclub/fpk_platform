@@ -41,4 +41,80 @@ class DBRepository
             ->first();
         return $complaint;
     }
+
+    public function getModuleStudent(string $moduleId)
+    {
+        $students = DB::table('students as s')
+            ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
+            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->where('ms.module_id', $moduleId)
+            ->get();
+        // TODO : keep repository clean, move this to service
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'student retrieved successfully',
+                'data' => $students
+            ],
+            200
+        ));
+    }
+    public function findByFirstName(string $moduleId, string $fname)
+    {
+        $student = DB::table('students as s')
+            ->join('module_student as ms', function ($join) use ($moduleId, $fname) {
+                $join->on('ms.apogee', '=', 's.apogee')
+                    ->where('ms.module_id', '=', $moduleId)
+                    ->where('s.firstname', 'like', $fname . '%');
+            })
+            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt')
+            ->get();
+        return ($student);
+    }
+
+    public function findByLastName(string $moduleId, string $lname)
+    {
+        $student = DB::table('students as s')
+            ->join('module_student as ms', function ($join) use ($moduleId, $lname) {
+                $join->on('ms.apogee', '=', 's.apogee')
+                    ->where('ms.module_id', '=', $moduleId)
+                    ->where('s.lastname', 'like', $lname . '%');
+            })
+            ->select('s.image','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt')
+            ->get();
+        return ($student);
+    }
+    public function searchByNames(string $moduleId, ?string $fname, ?string $lname)
+    {
+        if ($lname && $fname) {
+            return (DB::table('students as s')
+                ->join('module_student as ms', function ($join) use ($moduleId, $lname, $fname) {
+                    $join->on('ms.apogee', '=', 's.apogee')
+                        ->where('ms.module_id', '=', $moduleId)
+                        ->where('s.lastname', 'like', $lname . '%')
+                        ->where('s.firstname', 'like', $fname . '%');
+                })
+                ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt')
+                ->get());
+        }
+        else if (!$fname)
+            return ($this->findByFirstName($moduleId, $lname));
+        else if (!$lname)
+            return ($this->findByLastName($moduleId, $fname));
+        // you should never reach this point but just in case
+        return ([]);
+    }
+    // TODO : get image from public storage
+    public function getByApogee(string $moduleId, string $apogee)
+    {
+        $student = DB::table('students as s')
+            ->join('module_student as ms', function ($join) use ($moduleId, $apogee) {
+                $join->on('ms.apogee', '=', 's.apogee')
+                    ->where('ms.module_id', '=', $moduleId)
+                    ->where('ms.apogee', '=', $apogee);
+            })
+            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->get();
+        return ($student);
+    }
 }
