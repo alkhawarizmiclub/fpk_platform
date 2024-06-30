@@ -36,7 +36,13 @@ class ProfController extends Controller
         return ($this->profService->result($request));
     }
 
-
+    public function search(string $moduleId)
+    {
+        $apogee = request()->query('apogee');
+        $fname = request()->query('fname');
+        $lname = request()->query('lname');
+        return ($this->profService->search($moduleId, $apogee, $fname, $lname));
+    }
     public function show(Request $request)
     {
         return ($request->user());
