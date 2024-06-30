@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import EntStudentApi from "../api/EntStudentApi";
 import { readFromLocalStorage, writeToLocalStorage } from "../api/localStorage";
+import EntTeacherApi from "../api/EntTeacherApi";
+import EntStaffApi from "../api/EntStaffApi";
 
 const UserContext = createContext({
     user: {},
@@ -9,7 +11,7 @@ const UserContext = createContext({
     setAuthenticated: (isAuthenticated) => { },
     token: "",
     setToken: (tokenValue) => { },
-    login: async (email, password) => { },
+    login: async (userRole, email, password) => { },
     logout: async () => { },
     entSidebarDisplay: false,
     setEntSidebarDisplay: () => { },
@@ -49,9 +51,23 @@ const UserContextProvider = ({ children }) => {
 
     const [entSidebarDisplay, setEntSidebarDisplay] = useState(false);
 
-    const login = async (email, password) => {
-        await EntStudentApi.getCsrfToken();
-        return EntStudentApi.login(email, password);
+    const login = async (userRole, email, password) => {
+
+        switch (userRole) {
+            case "student":
+                // await EntStudentApi.getCsrfToken();
+                return EntStudentApi.login(email, password);
+
+            case "teacher":
+                return EntTeacherApi.login(email, password);
+
+            case "staff":
+                return EntStaffApi.login(email, password);
+
+            default:
+                return null;
+        }
+
     }
 
     const logout = async () => {
