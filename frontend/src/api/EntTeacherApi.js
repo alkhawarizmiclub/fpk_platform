@@ -15,16 +15,14 @@ const EntTeacherApi = {
     submitGrades: (apogee, module_id, grade, session, fname, lname) => {
         console.log(apogee, module_id, grade, session, fname, lname);
     },
-    getModulesData: () => {
-        return [
-            { id: 1, label: "reseau - smi" },
-            { id: 2, label: "reseau - seg" },
-            { id: 3, label: "lbota - smi" },
-            { id: 4, label: "WAW - smp" },
-            { id: 5, label: "3a - smi" },
-        ]
+    getModulesData: async () => {
+        const response = await axiosClient.get("/api/prof/modules")
+        return response;
     },
-
+    getStudentGrade: async (id, apogee, fname, lname) => {
+        const response = await axiosClient.get(`/api/prof/modules/${id}?apogee=${apogee}&fname=${fname}&lname=${lname}`);
+        return response;
+    },
     getStudentData: (apogee) => {
         if (apogee) {
             return [{
