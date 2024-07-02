@@ -30,6 +30,17 @@ const EntTeacherGradesPage = () => {
     const handleSearch = (e) => {
         e.preventDefault();
 
+		alert("if no module is select is not bug in back is bug in front by hitting the worng endpoint if id is not set");
+		alert("ha 3are la ma diro chewiya deyal validation ");
+
+		if (!apogee && !firstName && !lastName) {
+			alert("Select either apogee or first name and last name")
+			return;
+		}
+		if (!module) {
+			alert("Please select a module");
+			return;
+		}
         EntTeacherApi.getStudentGrade(module, apogee, firstName, lastName)
             .then((response) => {
                 setStudentData(response.data.data);
@@ -85,6 +96,7 @@ const EntTeacherGradesPage = () => {
                             value={module}
                             onChange={(e) => setModule(e.target.value)}
                             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+							required
                         >
                             <option value="">Select Module</option>
                             {modulesList.map(({ id, filiere, semester, module_name }) => <option key={id} value={id}>{filiere} | {semester} | {module_name}</option>)}
