@@ -21,7 +21,13 @@ class FpkController extends Controller
         $announcements = Announcement::all();
         foreach ($announcements as $announcement)
             $announcement->author;
-        return response()->json(AnnounceResource::collection($announcements));
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Announcements retrieved successfully',
+                'data' => AnnounceResource::collection($announcements)
+            ]
+        );
     }
     public function acadmicYear()
     {

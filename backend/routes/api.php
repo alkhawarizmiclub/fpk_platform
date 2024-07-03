@@ -17,6 +17,7 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
     Route::get('/modules/{id}', [ProfController::class, 'students']); // get student how has that module
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
+    Route::delete('/announce/{id}', [ProfController::class, 'deleteAnnounce']);
     Route::post('/add-result', [ProfController::class, 'result']);
 
 
