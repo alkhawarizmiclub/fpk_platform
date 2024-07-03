@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('thumbnail_path')->nullable();
+            $table->string('thumbnail_path');
             $table->string('tags')->nullable();
             $table->text('content');
             $table->morphs('author');
             $table->string('poster_image_path')->nullable();
-            $table->date('published_at')->nullable()->default(null);
             $table->boolean('is_accepted')->default(false);
             $table->timestamps();
         });

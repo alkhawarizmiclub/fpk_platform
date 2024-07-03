@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreannouncementRequest;
 use App\Http\Resources\StudentNoteResource;
 
@@ -154,12 +154,12 @@ class ProfService
         );
     }
 
-    // if file should not visible to public it get store on local storage else is on public
     public function announce(StoreAnnouncementRequest $request)
     {
+        $image_path = env('ANNOUNCE_IMAGE_PATH', 'announce/image');
         $prof = request()->user();
-        $thumbnail_path = $request->file('thumbnail_path')->store('public');
-        $poster_image_path = $request->file('poster_image_path')->store('public');
+        $thumbnail_path = $request->file('thumbnail_path')?->store($image_path, 'public');
+        $poster_image_path = $request->file('poster_image_path')?->store($image_path, 'public');
         $prof->announcements()->create([
             'title' => $request->title,
             'thumbnail_path' => $thumbnail_path,
@@ -173,6 +173,25 @@ class ProfService
                 'message' => 'Announcement created successfully',
             ],
             201
+        );
+    }
+    public function deleteAnnounce(string $id)
+    {
+        $prof = request()->user();
+        $announce = $prof->announcements()->find($id);
+        if (!$announce)
+            return ($this->resourceNotFound());
+        if (Storage::disk('public')->exists($announce->thumbnail_path))
+            Storage::disk('public')->delete($announce->thumbnail_path);
+        if (Storage::disk('public')->exists($announce->poster_image_path))
+            Storage::disk('public')->delete($announce->poster_image_path);
+        $announce->delete();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Announcement deleted successfully',
+            ],
+            202
         );
     }
 }
