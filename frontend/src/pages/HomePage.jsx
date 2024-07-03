@@ -22,8 +22,8 @@ const HomePage = () => {
             <main className="grow">
 
                 <section className='px-10'>
-                    <div className="-translate-y-5 grid grid-cols-4 gap-10">
-                        <HomeGateElement icon={faBookOpenReader} label="espace étudiants" url={Paths.ENT_DASHBOARD_PAGE} />
+                    <div className="max-w-screen-lg mx-auto -translate-y-5 grid grid-cols-3 gap-10 ">
+                        <HomeGateElement icon={faBookOpenReader} label="espace Numérique" url={Paths.ENT_DASHBOARD_PAGE} />
                         <HomeGateElement icon={faBullhorn} label="avis et announces" url={Paths.ANNOUNCEMENTS_PAGE} />
                         <HomeGateElement icon={faPeopleGroup} label="clubs et organisations" url={Paths.CLUBS_PAGE} />
                     </div>
