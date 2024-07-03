@@ -12,6 +12,7 @@ const nawfalImage = "/liinkedin.png";
 const EntTeacherGradesPage = () => {
 
     const [modulesList, setModulesList] = useState([]);
+    const [error, setError] = useState('');
 
     const [apogee, setApogee] = useState('');
     const [module, setModule] = useState('');
@@ -29,11 +30,20 @@ const EntTeacherGradesPage = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
+        setError('');
 
-        EntTeacherApi.getStudentGrade(module, apogee, firstName, lastName)
-            .then((response) => {
-                setStudentData(response.data.data);
-            })
+        if ((apogee || (firstName && lastName)) && module) {
+            EntTeacherApi.getStudentGrade(module, apogee, firstName, lastName)
+                .then((response) => {
+                    setStudentData(response.data.data);
+                })
+                .catch((error) =>{
+                    console.error(error);
+                })
+                
+        } else {
+            setError('veuillez entrer les champs necéssaires');
+        }
     };
 
     return (
@@ -41,55 +51,63 @@ const EntTeacherGradesPage = () => {
             <h1 className="pt-5 px-5 pb-5 mb-5 capitalize text-center text-xl text-slate-800 font-semibold border-b border-slate-300">Notes</h1>
 
             <EntPageContainer title="données de recherche">
-                <div className="flex flex-col space-y-4">
-                    <div>
-                        <label htmlFor="apogee" className="block text-sm font-medium text-gray-700">Apogée</label>
-                        <input
-                            type="text"
-                            id="apogee"
-                            value={apogee}
-                            onChange={(e) => setApogee(e.target.value)}
-                            disabled={firstName || lastName !== ""}
-                            className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        />
+                <div className="flex flex-col gap-4">
+
+                    <div className='grid grid-cols-2 gap-4'>
+
+                        <div>
+                            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                disabled={apogee !== ""}
+                                className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                disabled={apogee !== ""}
+                                className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="apogee" className="block text-sm font-medium text-gray-700">Apogée</label>
+                            <input
+                                type="text"
+                                id="apogee"
+                                value={apogee}
+                                onChange={(e) => setApogee(e.target.value)}
+                                disabled={firstName || lastName !== ""}
+                                className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="module" className="block text-sm font-medium text-gray-700">Module <span className='text-red-600'>*</span></label>
+                            <select
+                                required
+                                id="module"
+                                value={module}
+                                onChange={(e) => setModule(e.target.value)}
+                                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                            >
+                                <option value="">Select Module</option>
+                                {modulesList.map(({ id, filiere, semester, module_name }) => <option key={id} value={id}>{filiere} | {semester} | {module_name}</option>)}
+                            </select>
+                        </div>
+
                     </div>
 
-                    <div>
-                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">First Name</label>
-                        <input
-                            type="text"
-                            id="firstName"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            disabled={apogee !== ""}
-                            className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">Last Name</label>
-                        <input
-                            type="text"
-                            id="lastName"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            disabled={apogee !== ""}
-                            className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="module" className="block text-sm font-medium text-gray-700">Module</label>
-                        <select
-                            id="module"
-                            value={module}
-                            onChange={(e) => setModule(e.target.value)}
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-                        >
-                            <option value="">Select Module</option>
-                            {modulesList.map(({ id, filiere, semester, module_name }) => <option key={id} value={id}>{filiere} | {semester} | {module_name}</option>)}
-                        </select>
-                    </div>
+                    {error && <p className='mt-2 text-sm text-red-600'>{error}</p>}
 
                     <button
                         onClick={handleSearch}
@@ -114,8 +132,8 @@ const EntTeacherGradesPage = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {studentData.map((data) => (
-                                <EntTeacherGradesStudentEntry key={data.id} data={data} />
+                            {studentData.map((data, i) => (
+                                <EntTeacherGradesStudentEntry key={i} data={data} />
                             ))}
                         </tbody>
                     </table>
