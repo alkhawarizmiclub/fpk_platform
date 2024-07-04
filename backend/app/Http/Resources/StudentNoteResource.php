@@ -26,6 +26,7 @@ class StudentNoteResource extends JsonResource
             "normale" => $this->normale,
             "ratt" => $this->ratt,
             "inscrit_number" => $this->inscrit_number,
+            "semester" => $this->semester,
         ];
     }
 }

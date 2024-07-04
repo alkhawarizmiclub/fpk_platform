@@ -46,7 +46,7 @@ class DBRepository
     {
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->where('ms.module_id', $moduleId)
             ->get();
         return ($students);
@@ -59,7 +59,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.firstname', 'like', $fname . '%');
             })
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
@@ -72,7 +72,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.lastname', 'like', $lname . '%');
             })
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
@@ -86,7 +86,7 @@ class DBRepository
                         ->where('s.lastname', 'like', $lname . '%')
                         ->where('s.firstname', 'like', $fname . '%');
                 })
-                ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+                ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
                 ->get());
         }
         else if (!$fname)
@@ -105,7 +105,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('ms.apogee', '=', $apogee);
             })
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number')
+                ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
