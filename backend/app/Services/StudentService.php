@@ -85,9 +85,11 @@ class StudentService
 
     public function result(Student $student)
     {
-        $result = Result::where('apogee', $student->apogee)->get();
-        $results = ResultResource::collection($result);
-        return ($this->DATA('results', $results));
+        // $result = Result::where('apogee', $student->apogee)->get();
+        // $results = ResultResource::collection($result);
+        // return ($this->DATA('results', $results));
+        $result = $this->dbRepository->getStudentResult($student->apogee);
+        return ($this->DATA('results', $result));
     }
 
 

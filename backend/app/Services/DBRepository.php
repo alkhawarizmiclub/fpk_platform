@@ -109,4 +109,14 @@ class DBRepository
             ->get();
         return ($student);
     }
+
+    public function getStudentResult(string $apogee)
+    {
+        $students = DB::table('students as s')
+            ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
+            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester', 'ms.inscrit_year')
+            ->where('s.apogee', $apogee)
+            ->get();
+        return ($students);
+    }
 }
