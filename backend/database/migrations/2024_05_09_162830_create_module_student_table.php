@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBiginteger('module_id');
             $table->integer('inscrit_number')->default(1);
             $table->string('inscrit_year')->default(StudentService::getAcademicYear(date('Y-m-d')));
+            $table->string('semester');
             $table->decimal('normale', 6, 4)->nullable();
             $table->decimal('ratt', 6, 4)->nullable();
 
