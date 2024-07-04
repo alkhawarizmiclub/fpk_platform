@@ -114,7 +114,8 @@ class DBRepository
     {
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
-            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester', 'ms.inscrit_year')
+            ->join('modules as m', 'ms.module_id', '=', 'm.id')
+            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'm.module_name', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'm.semester', 'ms.inscrit_year')
             ->where('s.apogee', $apogee)
             ->get();
         return ($students);
