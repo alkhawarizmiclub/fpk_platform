@@ -44,24 +44,38 @@ class StudentService
     // after that it will base on modules next table to determine student modules
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([
-            ['module_id' => 1],
-            ['module_id' => 2],
-            ['module_id' => 3],
-            ['module_id' => 4],
-            ['module_id' => 5],
-            ['module_id' => 6],
-            ['module_id' => 7],
-            ['module_id' => 8],
-            ['module_id' => 9],
-            ['module_id' => 10],
-            ['module_id' => 11],
-            ['module_id' => 12],
-            ['module_id' => 13],
-            ['module_id' => 14],
-        ]);
+        // $modules = [
+        //     1 => ['semester' => 'S1'],
+        //     2 => ['semester' => 'S1'],
+        //     3 => ['semester' => 'S1'],
+        //     4 => ['semester' => 'S1'],
+        //     5 => ['semester' => 'S1'],
+        //     6 => ['semester' => 'S1'],
+        //     7 => ['semester' => 'S1'],
+        //     8 => ['semester' => 'S1'],
+        //     9 => ['semester' => 'S1'],
+        //     10 => ['semester' => 'S1'],
+        //     11 => ['semester' => 'S1'],
+        //     12 => ['semester' => 'S1'],
+        //     13 => ['semester' => 'S1'],
+        //     14 => ['semester' => 'S1'],
+        // ];
+        $student->modules()->attach(1, ['semester' => 'S1']);
     }
 
+    // 2 =>  ['semester' => 'S1'],
+    // 3 =>  ['semester' => 'S1'],
+    // 4 =>  ['semester' => 'S1'],
+    // 5 =>  ['semester' => 'S1'],
+    // 6 =>  ['semester' => 'S1'],
+    // 7 =>  ['semester' => 'S1'],
+    // 8 =>  ['semester' => 'S2'],
+    // 9 =>  ['semester' => 'S2'],
+    // 10 => ['semester' => 'S2'],
+    // 11 => ['semester' => 'S2'],
+    // 12 => ['semester' => 'S2'],
+    // 13 => ['semester' => 'S2'],
+    // 14 => ['semester' => 'S2'],
     public function modules(Student $student)
     {
         $module = $student->modules;
@@ -71,9 +85,11 @@ class StudentService
 
     public function result(Student $student)
     {
-        $result = Result::where('apogee', $student->apogee)->get();
-        $results = ResultResource::collection($result);
-        return ($this->DATA('results', $results));
+        // $result = Result::where('apogee', $student->apogee)->get();
+        // $results = ResultResource::collection($result);
+        // return ($this->DATA('results', $results));
+        $result = $this->dbRepository->getStudentResult($student->apogee);
+        return ($this->DATA('results', $result));
     }
 
 

@@ -64,22 +64,23 @@ class DatabaseSeeder extends Seeder
             'inscription_date' => '2021-09-09',
         ]);
 
-        $student->modules()->attach([
-            ['module_id' => 1],
-            ['module_id' => 2],
-            ['module_id' => 3],
-            ['module_id' => 4],
-            ['module_id' => 5],
-            ['module_id' => 6],
-            ['module_id' => 7],
-            ['module_id' => 8],
-            ['module_id' => 9],
-            ['module_id' => 10],
-            ['module_id' => 11],
-            ['module_id' => 12],
-            ['module_id' => 13],
-            ['module_id' => 14],
-        ]);
+        $modules = [
+            1 => ['semester' => 'S1'],
+            2 => ['semester' => 'S1'],
+            3 => ['semester' => 'S1'],
+            4 => ['semester' => 'S1'],
+            5 => ['semester' => 'S1'],
+            6 => ['semester' => 'S1'],
+            7 => ['semester' => 'S1'],
+            8 => ['semester' => 'S2'],
+            9 => ['semester' => 'S2'],
+            10 => ['semester' => 'S2'],
+            11 => ['semester' => 'S2'],
+            12 => ['semester' => 'S2'],
+            13 => ['semester' => 'S2'],
+            14 => ['semester' => 'S2'],
+        ];
+        $student->modules()->attach($modules);
         Complaint::create([
             'type' => 'PFE : is problem',
         ]);

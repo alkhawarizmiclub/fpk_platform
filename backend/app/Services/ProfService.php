@@ -55,7 +55,8 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Students found successfully',
-                'data' => StudentNoteResource::collection($students)
+                // 'data' => StudentNoteResource::collection($students)
+                'data' => $students
             ]
         ));
     }

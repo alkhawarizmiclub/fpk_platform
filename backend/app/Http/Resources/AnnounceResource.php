@@ -19,6 +19,7 @@ class AnnounceResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
+            'tags' => $this->tags,
             'thumbnail' => Storage::url($this->thumbnail_path),
             'poster_image' => $this->poster_image_path ? Storage::url($this->poster_image_path) : null,
             'Author_name' => $this->whenLoaded('author')->firstname . ' ' . $this->whenLoaded('author')->lastname,

@@ -8,7 +8,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
 
     const [normalNote, _setNormalNote] = useState('');
     const [rattrapageNote, _setRattrapageNote] = useState('');
-
+  
     const setNormalNote = (val) => {
         _setNormalNote(val ? val : '');
     }
@@ -49,7 +49,6 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
                     min="0"
                     max="20"
                     value={normalNote}
-
                     onChange={(e) => { setNormalNote(e.target.value); }}
                     className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />

@@ -12,12 +12,15 @@ const EntTeacherApi = {
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
         ]
     },
+  
     submitAnnouncement: (title, thumbnail_path, tags, content, poster_image_path) => {
         console.log(title, thumbnail_path, tags, content, poster_image_path);
     },
+  
     submitGrades: async (apogee, module_id, normale, ratt) => {
         return await axiosClient.post("/api/prof/add-result", { apogee, module_id, normale, ratt });
     },
+
     getModulesData: async () => {
         const response = await axiosClient.get("/api/prof/modules")
         return response;
@@ -36,7 +39,7 @@ const EntTeacherApi = {
             }
             ]
         }
-        else{
+        else {
             console.error('not found');
         }
 
