@@ -1,4 +1,4 @@
-import { faAngleRight, faEye, faEyeDropper, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import EntResultsTypeInfo from "./EntResultsTypeInfo";
@@ -19,7 +19,7 @@ const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
                 <div className="grow space-x-2">
                     <span>{majorLabel}</span>
                     <FontAwesomeIcon icon={faAngleRight} className="text-xs text-slate-600" />
-                    <span>S{semesterNumber}</span>
+                    <span>{semesterNumber}</span>
                 </div>
                 <button onClick={() => handleExtendButton()} className="capitalize">
                     {extended ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
@@ -44,14 +44,14 @@ const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
                                 <span>Resultat Rattrapage</span>
                             </th>
                         </tr>
-                        {moduleObjects.map(({ name, season, normal, rattrapage }, i) => (
+                        {moduleObjects.map(({ name, inscrit_year, normal, rattrapage }, i) => (
                             <tr key={i}>
                                 <td className="py-2 px-5">{name}</td>
-                                <td className="py-2 px-5 text-center">{season}</td>
-                                <td className="py-2 px-5 text-center">{normal} / 20</td>
-                                <td className="py-2 px-5 text-center">R</td>
-                                <td className="py-2 px-5 text-center">{rattrapage} / 20</td>
-                                <td className="py-2 px-5 text-center">V</td>
+                                <td className="py-2 px-5 text-center">{inscrit_year}</td>
+                                <td className="py-2 px-5 text-center">{normal ? `${normal} / 20` : "-"}</td>
+                                <td className="py-2 px-5 text-center"></td>
+                                <td className="py-2 px-5 text-center">{rattrapage ? `${rattrapage} / 20` : "-"}</td>
+                                <td className="py-2 px-5 text-center"></td>
                             </tr>
                         ))}
                     </tbody>
