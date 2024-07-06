@@ -12,10 +12,9 @@ const EntStudentComplaintsPage = () => {
 
     useEffect(() => {
         EntStudentApi.getComplaintsData().then((response) => {
-            console.log(response.data);
             setComplaintsList(response.data);
         });
-    })
+    }, [])
 
     return (
         <EntPageContainer title="Reclamations">
