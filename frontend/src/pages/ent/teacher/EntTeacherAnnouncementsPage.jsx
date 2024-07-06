@@ -1,43 +1,61 @@
 
 // import { useState } from 'react';
 // import EntPageContainer from "../../../components/ent/EntPageContainer";
+// import EntTeacherApi from '../../../api/EntTeacherApi';
 
 // const EntTeacherAnnouncementsPage = () => {
 //     const [title, setTitle] = useState('');
 //     const [message, setMessage] = useState('');
 //     const [thumbnail, setThumbnail] = useState(null);
+//     const [annoncePhoto, setAnnoncePhoto] = useState(null);
 //     const [announcements, setAnnouncements] = useState([]);
+
 
 //     const handleThumbnailChange = (e) => {
 //         if (e.target.files && e.target.files[0]) {
 //             const reader = new FileReader();
 //             reader.onload = (event) => {
 //                 setThumbnail(event.target.result);
-//                 console.log(e.target.files[0]);
 //             };
 //             reader.readAsDataURL(e.target.files[0]);
 //         }
 //     };
 
-//     const handleSubmit = (e) => {
+//     const handleAnnoncePhotoChange = (e) => {
+//         if (e.target.files && e.target.files[0]) {
+//             const reader = new FileReader();
+//             reader.onload = (event) => {
+//                 setAnnoncePhoto(event.target.result);
+//             };
+//             reader.readAsDataURL(e.target.files[0]);
+//         }
+//     };
+
+//     // const handleSubmit = async () =>{
+//     //     EntTeacherApi.submitAnnouncement(title,thumbnail,)
+//     // }
+
+//     const handleCreate = (e) => {
 //         e.preventDefault();
 //         const newAnnouncement = {
 //             id: announcements.length + 1,
 //             title,
 //             message,
 //             thumbnail,
+//             annoncePhoto,
 //             date: new Date().toLocaleDateString(),
 //         };
 //         setAnnouncements([...announcements, newAnnouncement]);
 //         setTitle('');
 //         setMessage('');
 //         setThumbnail(null);
+//         setAnnoncePhoto(null);
 //     };
 
 //     return (
 //         <EntPageContainer title="Announcements">
 //             <div className="flex flex-col space-y-4">
-//                 <form onSubmit={handleSubmit} className="space-y-4">
+//                 <form onSubmit={handleCreate} className="space-y-4">
 //                     <div>
 //                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
 //                         <input
@@ -67,6 +85,16 @@
 //                             className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
 //                         />
 //                     </div>
+//                     <div>
+//                         <label htmlFor="annoncePhoto" className="block text-sm font-medium text-gray-700">Annonce Photo</label>
+//                         <input
+//                             type="file"
+//                             id="annoncePhoto"
+//                             accept="image/*"
+//                             onChange={handleAnnoncePhotoChange}
+//                             className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+//                         />
+//                     </div>
 //                     <button
 //                         type="submit"
 //                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -80,7 +108,7 @@
 //                     {announcements.length > 0 ? (
 //                         <ul className="mt-4 space-y-4">
 //                             {announcements.map(announcement => (
-//                                 <li key={announcement.id} className="p-4 bg-white shadow rounded-lg">
+//                                 <li key={announcement.id} className="p-4 bg-white shadow rounded-lg" onSubmit=''>
 //                                     {announcement.thumbnail && (
 //                                         <img
 //                                             src={announcement.thumbnail}
@@ -90,7 +118,20 @@
 //                                     )}
 //                                     <h3 className="text-xl font-semibold text-gray-800">{announcement.title}</h3>
 //                                     <p className="mt-2 text-gray-600">{announcement.message}</p>
+//                                     {announcement.annoncePhoto && (
+//                                         <img
+//                                             src={announcement.annoncePhoto}
+//                                             alt="Annonce Photo"
+//                                             className="w-full h-48 object-contain mb-4 rounded-lg"
+//                                         />
+//                                     )}
 //                                     <span className="block mt-4 text-sm text-gray-500">Posted on: {announcement.date}</span>
+//                                     <button 
+//                                     type='submit' 
+//                                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+//                                     >
+//                                         envoyer
+//                                     </button>
 //                                 </li>
 //                             ))}
 //                         </ul>
@@ -107,14 +148,18 @@
 
 
 
+
+
 import { useState } from 'react';
 import EntPageContainer from "../../../components/ent/EntPageContainer";
+import EntTeacherApi from '../../../api/EntTeacherApi';
 
 const EntTeacherAnnouncementsPage = () => {
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
     const [annoncePhoto, setAnnoncePhoto] = useState(null);
+    const [tags, setTags] = useState('');
     const [announcements, setAnnouncements] = useState([]);
 
     const handleThumbnailChange = (e) => {
@@ -137,7 +182,9 @@ const EntTeacherAnnouncementsPage = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    
+
+    const handleCreate = (e) => {
         e.preventDefault();
         const newAnnouncement = {
             id: announcements.length + 1,
@@ -145,6 +192,7 @@ const EntTeacherAnnouncementsPage = () => {
             message,
             thumbnail,
             annoncePhoto,
+            tags,
             date: new Date().toLocaleDateString(),
         };
         setAnnouncements([...announcements, newAnnouncement]);
@@ -152,12 +200,13 @@ const EntTeacherAnnouncementsPage = () => {
         setMessage('');
         setThumbnail(null);
         setAnnoncePhoto(null);
+        setTags('');
     };
 
     return (
         <EntPageContainer title="Announcements">
             <div className="flex flex-col space-y-4">
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleCreate} className="space-y-4">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
                         <input
@@ -197,6 +246,17 @@ const EntTeacherAnnouncementsPage = () => {
                             className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                         />
                     </div>
+                    <div>
+                        <label htmlFor="tags" className="block text-sm font-medium text-gray-700">Tags</label>
+                        <input
+                            type="text"
+                            id="tags"
+                            value={tags}
+                            onChange={(e) => setTags(e.target.value)}
+                            className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Enter tags separated by spaces"
+                        />
+                    </div>
                     <button
                         type="submit"
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -210,7 +270,21 @@ const EntTeacherAnnouncementsPage = () => {
                     {announcements.length > 0 ? (
                         <ul className="mt-4 space-y-4">
                             {announcements.map(announcement => (
-                                <li key={announcement.id} className="p-4 bg-white shadow rounded-lg">
+                                
+                                // const handleSubmit = async () => {
+                                //     EntTeacherApi.submitAnnouncement(title, thumbnail,tags,message,annoncePhoto)
+                                //         .then((response)=>{
+                                //             console.log(response);
+                                //             alert('announce successfully submitted!');
+                                //         })
+                                //         .catch((error)=>{
+                                //             console.log(error);
+                                //             alert('announce failed to be submitted!');
+                                //         })
+                                //         .finally();
+                                // }
+
+                                <li key={announcement.id}  className="p-4 bg-white shadow rounded-lg">
                                     {announcement.thumbnail && (
                                         <img
                                             src={announcement.thumbnail}
@@ -227,7 +301,14 @@ const EntTeacherAnnouncementsPage = () => {
                                             className="w-full h-48 object-contain mb-4 rounded-lg"
                                         />
                                     )}
+                                    <p className="mt-2 text-gray-600"><strong>Tags:</strong> {announcement.tags}</p>
                                     <span className="block mt-4 text-sm text-gray-500">Posted on: {announcement.date}</span>
+                                    <button
+                                        type="submit"
+                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                    >
+                                        Envoyer
+                                    </button>
                                 </li>
                             ))}
                         </ul>

@@ -8,7 +8,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
 
     const [normalNote, _setNormalNote] = useState('');
     const [rattrapageNote, _setRattrapageNote] = useState('');
-
+  
     const setNormalNote = (val) => {
         _setNormalNote(val ? val : '');
     }
@@ -22,7 +22,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
     }, [normale, ratt]);
 
     const handleSubmit = async () => {
-        EntTeacherApi.submitGrades(apogee, module_id, normale, ratt)
+        EntTeacherApi.submitGrades(apogee, module_id, normalNote, rattrapageNote)
             .then((response) => {
                 console.log(response);
                 alert('Notes successfully submitted!');
@@ -30,6 +30,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
             .catch((error) => {
                 console.log(error);
                 alert('Failed to submit grades.');
+                console.error(error.getMessage());
             })
             .finally();
     };
@@ -45,6 +46,8 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
                 <input
                     type="number"
                     step=".01"
+                    min="0"
+                    max="20"
                     value={normalNote}
                     onChange={(e) => { setNormalNote(e.target.value); }}
                     className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
@@ -54,6 +57,8 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
                 <input
                     type="number"
                     step=".01"
+                    min="0"
+                    max="20"
                     value={rattrapageNote}
                     onChange={(e) => { setRattrapageNote(e.target.value); }}
                     className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"

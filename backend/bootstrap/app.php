@@ -28,9 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->validateCsrfTokens(except: [
-            "api/student/login",
-            "api/prof/login",
-            "api/admin/login",
+            "api/*",
         ]);
 
     })
