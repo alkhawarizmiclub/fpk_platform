@@ -20,13 +20,17 @@ const EntStudentApi = {
         const api_data = await axiosClient.get("/api/student/modules");
         return api_data.data;
     },
-    getAccountsData: () => {
-        return [
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-        ];
+    getAccountsData: async () => {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        return {
+            status: 200,
+            data: [
+                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
+                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
+                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
+                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
+            ]
+        }
     },
     getSchedulePDF: () => {
         return "http://www.fpk.ac.ma/wp-content/uploads/2024/03/Emploi-du-Temps-SMI-S4-SP-23-24.pdf";
