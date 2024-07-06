@@ -35,8 +35,14 @@ const EntStudentApi = {
     getSchedulePDF: () => {
         return "http://www.fpk.ac.ma/wp-content/uploads/2024/03/Emploi-du-Temps-SMI-S4-SP-23-24.pdf";
     },
-    getPlanningPDF: () => {
-        return "http://www.fpk.ac.ma/wp-content/uploads/2024/06/smi_.pdf";
+    getPlanningPDF: async () => {
+        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        return {
+            status: 200,
+            data: {
+                url: "/schedule.pdf"
+            }
+        };
     },
     getResultsData: async () => {
         return await axiosClient.get("/api/student/result");
