@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        mainColor: "#fb923c",
+        mainColorOnHover: "#fdba74",
+      },
+      transitionDuration: {
+        default: "300ms",
+      },
+    },
   },
   plugins: [],
 }
