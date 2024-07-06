@@ -11,17 +11,20 @@ const EntStudentInscriptionPage = () => {
     const [semesterSubjects, setSemesterSubjects] = useState([]);
 
     useEffect(() => {
+        setIsLoading(true);
+
         EntStudentApi.getInscriptionData()
             .then((response) => {
                 const groupedData = Object.groupBy(response.data, item => item.semester);
                 setSemesterSubjects(groupedData);
             })
             .catch(() => {
-
+                // TODO: Add error handling
             })
             .finally(() => {
                 setIsLoading(false);
             });
+
     }, []);
 
     return (
@@ -36,7 +39,7 @@ const EntStudentInscriptionPage = () => {
                 <div className="space-y-5">
 
                     {Object.entries(semesterSubjects).map(([semester, subjects]) => (
-                        <table className="w-full rounded shadow overflow-hidden">
+                        <table key={semester} className="w-full rounded shadow overflow-hidden">
                             <tbody>
                                 <tr className="text-white bg-slate-800">
                                     <th className="p-3">Filiere</th>
