@@ -1,0 +1,40 @@
+<mxfile host="65bd71144e">
+    <diagram id="knyIHLOpLbPbH_Og_rrt" name="Page-1">
+        <mxGraphModel dx="1127" dy="1056" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="8" value="Front End (React)" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry y="90" width="840" height="990" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="React Custom Context (User Context)" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="150" width="760" height="890" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="React Custom Router (router)" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="210" width="680" height="790" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Blank Layout" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="3">
+                    <mxGeometry x="40" y="460" width="240" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Static Page Layout" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="3">
+                    <mxGeometry x="390" y="460" width="240" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="ENT Layout" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="3">
+                    <mxGeometry x="40" y="60" width="600" height="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Student" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="4">
+                    <mxGeometry x="40" y="60" width="160" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;ul&gt;&lt;li&gt;Dashboard&lt;/li&gt;&lt;li&gt;Inscription&lt;/li&gt;&lt;li&gt;Accounts&lt;/li&gt;&lt;li&gt;Schedule&lt;/li&gt;&lt;li&gt;Planning&lt;/li&gt;&lt;li&gt;Results&lt;/li&gt;&lt;li&gt;E-Docs&lt;/li&gt;&lt;li&gt;Complaints&lt;/li&gt;&lt;/ul&gt;" style="text;strokeColor=none;fillColor=none;html=1;whiteSpace=wrap;verticalAlign=middle;overflow=hidden;" vertex="1" parent="9">
+                    <mxGeometry y="22.5" width="160" height="207.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Teacher" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="4">
+                    <mxGeometry x="220" y="60" width="160" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Staff" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" vertex="1" parent="4">
+                    <mxGeometry x="400" y="60" width="160" height="180" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

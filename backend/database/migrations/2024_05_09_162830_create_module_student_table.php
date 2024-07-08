@@ -22,10 +22,10 @@ return new class extends Migration
             $table->unsignedBiginteger('module_id');
             $table->integer('inscrit_number')->default(1);
             $table->string('inscrit_year')->default(StudentService::getAcademicYear(date('Y-m-d')));
-            $table->decimal('normal', 6, 4)->nullable();
-            $table->string('result_normal')->nullable();
+            $table->string('semester');
+            $table->decimal('normale', 6, 4)->nullable();
             $table->decimal('ratt', 6, 4)->nullable();
-            $table->string('result_ratt')->nullable();
+
             $table->foreign('apogee')->references('apogee')
                 ->on('students')->onDelete('cascade');
             $table->foreign('module_id')->references('id')

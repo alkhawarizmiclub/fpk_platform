@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Http\Requests\StoreComplaintsRequest;
+use App\Http\Resources\StudentComplaintCollection;
+use App\Http\Requests\StoreStudentComplaintRequest;
 use App\Http\Resources\ModuleResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
@@ -13,70 +16,94 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StudentAuth\LoginRequest;
 use Carbon\Carbon;
+use App\Http\Resources\StoreStudentComplaintResource;
+use App\Http\Resources\StudentComplaintResource;
+use App\Models\StudentComplaint;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
+use Illuminate\Support\Facades\DB;
 use DateTime;
 
+use App\Services\DBRepository;
 
 class StudentService
 {
     use JsonTemplate;
+    private DBRepository $dbRepository;
+
+    public function __construct(DBRepository $dbRepository)
+    {
+        $this->dbRepository = $dbRepository;
+    }
     public function all()
     {
-        $students = StudentResource::collection(Student::all());
+        $students = StudentResource::collection(Student::paginate());
         return ($this->DATA('students', $students));
     }
     // add module to new student
     // after that it will base on modules next table to determine student modules
     private function setDefaultModules($student)
     {
-        $student->modules()->attach([
-            ['module_id' => 1],
-            ['module_id' => 2],
-            ['module_id' => 3],
-            ['module_id' => 4],
-            ['module_id' => 5],
-            ['module_id' => 6],
-            ['module_id' => 7],
-        ]);
+        // $modules = [
+        //     1 => ['semester' => 'S1'],
+        //     2 => ['semester' => 'S1'],
+        //     3 => ['semester' => 'S1'],
+        //     4 => ['semester' => 'S1'],
+        //     5 => ['semester' => 'S1'],
+        //     6 => ['semester' => 'S1'],
+        //     7 => ['semester' => 'S1'],
+        //     8 => ['semester' => 'S1'],
+        //     9 => ['semester' => 'S1'],
+        //     10 => ['semester' => 'S1'],
+        //     11 => ['semester' => 'S1'],
+        //     12 => ['semester' => 'S1'],
+        //     13 => ['semester' => 'S1'],
+        //     14 => ['semester' => 'S1'],
+        // ];
+        $student->modules()->attach(1, ['semester' => 'S1']);
     }
 
-    public function modules(string $id)
+    // 2 =>  ['semester' => 'S1'],
+    // 3 =>  ['semester' => 'S1'],
+    // 4 =>  ['semester' => 'S1'],
+    // 5 =>  ['semester' => 'S1'],
+    // 6 =>  ['semester' => 'S1'],
+    // 7 =>  ['semester' => 'S1'],
+    // 8 =>  ['semester' => 'S2'],
+    // 9 =>  ['semester' => 'S2'],
+    // 10 => ['semester' => 'S2'],
+    // 11 => ['semester' => 'S2'],
+    // 12 => ['semester' => 'S2'],
+    // 13 => ['semester' => 'S2'],
+    // 14 => ['semester' => 'S2'],
+    public function modules(Student $student)
     {
-        $module = Student::find($id)->modules;
-        if (!$module)
-            return ($this->NOT_FOUND('student'));
+        $module = $student->modules;
         $module  = ModuleResource::collection($module);
         return ($this->DATA('modules', $module));
     }
 
-    public function findById(string $id)
+    public function result(Student $student)
     {
-        $student = Student::find($id);
-        if (!$student)
-            return ($this->NOT_FOUND('student'));
-
-        $student  = new StudentResource($student);
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'student retrieved successfully',
-                'data' => $student
-            ],
-            200
-        );
+        // $result = Result::where('apogee', $student->apogee)->get();
+        // $results = ResultResource::collection($result);
+        // return ($this->DATA('results', $results));
+        $result = $this->dbRepository->getStudentResult($student->apogee);
+        return ($this->DATA('results', $result));
     }
+
+
     public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . 'api_token', ['role:student'], Carbon::now()->addHours());
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], /*Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2))*/);
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student logged in successfully',
-                'data' => $student,
+                'data' => new StudentResource($student),
                 'token' => $token->plainTextToken
             ]
         );
@@ -96,29 +123,36 @@ class StudentService
     }
 
 
+    // store on public (not very secure ) impl something later like s3
     public function save(StoreStudentRequest $request): JsonResponse
     {
+        // return "TODO";
+
+        $baccalaureat = $request->file('baccalaureat')->store('public');
+        $releve_note = $request->file('releve_note')->store('public');
+        $image_presonnal = $request->file('image_presonnal')->store('public');
+        $identify_recto_versto = $request->file('identify_recto_verso')->store('public');
+        $request->merge([
+            'baccalaureat' => $baccalaureat,
+            'releve_note' => $releve_note,
+            'image_presonnal' => $image_presonnal,
+            'identify_recto_versto' => $identify_recto_versto,
+            'inscription_date' => $this->getAcademicYear(date('Y-m-d'))
+        ]);
 
         $student = Student::create($request->all());
         $this->setDefaultModules($student);
         event(new Registered($student));
-        Auth::login($student);
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student created successfully',
-                'data' => new StudentResource($student)
+                'data' => $student
             ],
             201
         );
     }
 
-    public function result($apogee)
-    {
-        $module = Result::where('apogee', $apogee)->get();
-        $results = ResultResource::collection($module);
-        return ($this->DATA('results', $results));
-    }
 
     public static  function getAcademicYear($date, $academicYearStartMonth = 9)
     {
@@ -138,5 +172,47 @@ class StudentService
         }
         // Return the academic year in the format "YYYY-YYYY"
         return $startYear . '-' . $endYear;
+    }
+
+    public function finalResult(Student $student)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student final result',
+                'data' => $student->results->GroupBy('semester')
+            ]
+        );
+    }
+
+    public function complaints(StoreStudentComplaintRequest $request)
+    {
+        $student = request()->user();
+        $student->complaints()->attach($request->complaint_id, ['description' => $request->description]);
+
+        $complaint = $this->dbRepository->getStudentLatestComplaint($student);
+
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Complaint created successfully',
+                'data' => new StudentComplaintResource($complaint)
+
+            ],
+            201
+        ));
+    }
+
+    public function getComplaints(Student $student)
+    {
+        $complaint = $this->dbRepository->getStudentComplaints($student);
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Complaint created successfully',
+                'data' => StudentComplaintResource::collection($complaint)
+            ],
+            201
+        ));
     }
 }

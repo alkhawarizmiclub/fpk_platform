@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfRequest;
 use App\Http\Requests\ProfAuth\LoginRequest;
-// use App\Http\Requests\UpdateProfRequest;
-// use App\Http\Resources\ProfResource;
-// use App\Models\Prof;
+use App\Http\Resources\StudentNoteResource;
 use App\Services\ProfService;
 use App\Http\Requests\UpdateResultRequest;
 use Illuminate\Http\Request;
@@ -36,7 +34,16 @@ class ProfController extends Controller
         return ($this->profService->result($request));
     }
 
-
+    public function search(string $moduleId)
+    {
+        $apogee = request()->query('apogee');
+        $fname = request()->query('fname');
+        $lname = request()->query('lname');
+        if (!$apogee && !$fname && !$lname)
+            return ($this->profService->students($moduleId));
+        $result = $this->profService->search($moduleId, $apogee, $fname, $lname);
+        return (StudentNoteResource::collection($result));
+    }
     public function show(Request $request)
     {
         return ($request->user());
@@ -47,9 +54,9 @@ class ProfController extends Controller
         return ($this->profService->modules($request->user()->id));
     }
 
-    public function listStudents(string $moduleId)
+    public function students(string $moduleId)
     {
-        return ($this->profService->listStudents($moduleId));
+        return ($this->profService->students($moduleId));
     }
 
     public function login(LoginRequest $request)
@@ -64,6 +71,10 @@ class ProfController extends Controller
     public function announce(StoreAnnouncementRequest $request)
     {
         return ($this->profService->announce($request));
+    }
+    public function deleteAnnounce(string $id)
+    {
+        return ($this->profService->deleteAnnounce($id));
     }
 
 }

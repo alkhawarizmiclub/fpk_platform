@@ -29,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:profs',
+            'email' => 'required|email',
             'password' => ['required', 'string'],
         ];
     }
@@ -43,28 +43,7 @@ class LoginRequest extends FormRequest
             'password.string' => 'Password must be a string',
         ];
     }
-    protected function failedAuthorization()
-    {
 
-        $validator = NULL;
-        $response = new JsonResponse([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => null
-        ], 422);
-
-        throw new ValidationException($validator, $response);
-    }
-    protected function failedValidation(Validator $validator)
-    {
-        $response = new JsonResponse([
-            'success' => false,
-            'message' => 'Validation errors',
-            'data' => $validator->errors()
-        ], 422);
-
-        throw new ValidationException($validator, $response);
-    }
 
     /**
      * Attempt to authenticate the request's credentials.
@@ -80,7 +59,6 @@ class LoginRequest extends FormRequest
                 'email' => __('auth.failed'),
             ]);
         }
-
         RateLimiter::clear($this->throttleKey());
     }
 

@@ -1,28 +1,55 @@
-import { Link } from "react-router-dom";
 import Paths from "../../routers/Paths.json";
-import EntPagesUrlsList from "./EntPagesUrlsList";
 import SidebarMenuItem from "./SidebarMenuItem";
-import { faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { faBorderAll, faHome, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { useUserContext } from "../../contexts/context";
+import NavbarToggleButton from "./NavbarToggleButton";
+import { EntStaffPagesUrlsList, EntStudentPagesUrlsList, EntTeacherPagesUrlsList } from "./EntPagesUrlsList";
 
 const Sidebar = () => {
 
+    const { user, entSidebarDisplay } = useUserContext();
+
+    let entPagesList = []
+    switch (user.role) {
+        case "student":
+            entPagesList = EntStudentPagesUrlsList;
+            break;
+
+        case "teacher":
+            entPagesList = EntTeacherPagesUrlsList;
+            break;
+
+        case "staff":
+            entPagesList = EntStaffPagesUrlsList;
+            break;
+
+        default:
+            break;
+    }
+
     return (
-        <aside className="p-5 w-full max-w-xs flex flex-col justify-between bg-slate-700">
+        <>
+            <aside className={`fixed z-[11] p-5 w-full max-w-xs h-screen transition-all duration-300 ${entSidebarDisplay ? "-translate-x-0" : "-translate-x-full"} flex flex-col justify-between bg-slate-700`}>
 
-            <div className="space-y-5">
-                <Link to={Paths.HOME_PAGE} className="w-full aspect-[3/1] flex">
-                    <img src="/fpk_logo.svg" className="w-full h-full object-contain" />
-                </Link>
+                <div className="space-y-5">
+                    <div className="flex items-center text-white">
+                        <NavbarToggleButton />
+                        <h1 className="text-xl font-semibold">ENT</h1>
+                    </div>
 
-                <div className="flex flex-col gap-1">
-                    <SidebarMenuItem label="Home" url={Paths.E_STUDENT_DASHBOARD_PAGE} icon={faHome} />
-                    {EntPagesUrlsList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
+                    <div className="flex flex-col gap-1">
+                        <SidebarMenuItem label="tableau de bord" url={Paths.ENT_DASHBOARD_PAGE} icon={faBorderAll} />
+                        {entPagesList.map(({ label, url, icon }, i) => <SidebarMenuItem label={label} url={url} icon={icon} key={i} />)}
+                    </div>
                 </div>
-            </div>
 
-            <SidebarMenuItem label="Log Out" url={Paths.LOGOUT_PAGE} icon={faSignOut} />
+                <div>
+                    <SidebarMenuItem label="Log Out" url={Paths.LOGOUT_PAGE} icon={faSignOut} />
+                    <SidebarMenuItem label="Retour à la page d'accueil" url={Paths.HOME_PAGE} icon={faHome} />
+                </div>
 
-        </aside>
+            </aside>
+        </>
     );
 }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use DateTime;
+use App\Models\Complaint;
 
 class Student extends Authenticatable
 {
@@ -16,12 +16,27 @@ class Student extends Authenticatable
     protected $fillable = [
         'firstname',
         'lastname',
-        'email',
-        'password',
-        'phone_number',
-        'gender',
+        'firstname_ar',
+        'lastname_ar',
         'birth_date',
+        'birth_place',
+        'student_code',
+        'nationality',
+        'num_identify',
+        'email',
+        'phone_number',
+        'phone_urgent',
+        'address',
+        'filiere',
+        'password',
+        'gender',
+        'baccalaureat',
+        'releve_note',
+        'image_presonnal',
+        'identify_recto_verso',
+        'inscription_date',
     ];
+
     protected $table = 'students';
     protected $primaryKey = 'apogee';
     public $incrementing = true;
@@ -44,8 +59,13 @@ class Student extends Authenticatable
         return $this->belongsToMany(Module::class, 'module_student', 'apogee', 'module_id');
     }
 
-    public function finalResults()
+    public function results()
     {
-        return $this->hasMany(FinalResult::class, 'final_results', 'apogee',);
+        return $this->hasMany(FinalResult::class, 'apogee');
+    }
+
+    public function complaints()
+    {
+        return $this->belongsToMany(Complaint::class, 'student_complaints', 'apogee', 'complaint_id')->withPivot(['description', 'id'])->withTimestamps();
     }
 }

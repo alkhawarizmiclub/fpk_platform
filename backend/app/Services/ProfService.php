@@ -16,13 +16,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
-use Carbon\Carbon;
-use App\Http\Requests\StoreannouncementRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreannouncementRequest;
+use App\Http\Resources\StudentNoteResource;
 
 class ProfService
 {
     use JsonTemplate;
+    private DBRepository $dbRepository;
+
+    public function __construct(DBRepository $dbRepository)
+    {
+        $this->dbRepository = $dbRepository;
+    }
     public function all()
     {
         $profs = ProfResource::collection(Prof::all());
@@ -38,14 +44,32 @@ class ProfService
         return ($this->DATA('modules', $modules));
     }
 
-    public function listStudents(string $moduleId)
+    public function students(string $moduleId)
     {
         $profId = request()->user()->id;
-        $module = Module::where('prof_id', $profId)->where('id', $moduleId)->exists();
+        $module = Module::where('id', $moduleId)->where('prof_id', $profId)->exists();
         if (!$module)
-            return ($this->resourceNotFound());;
-        $student  = StudentResource::collection(Module::find($moduleId)->students);
-        return ($this->DATA('profs', $student));
+            return ($this->resourceNotFound());
+        $students = $this->search($moduleId);
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Students found successfully',
+                // 'data' => StudentNoteResource::collection($students)
+                'data' => $students
+            ]
+        ));
+    }
+    public function search(string $moduleId)
+    {
+        $apogee = request()->query('apogee');
+        $fname = request()->query('fname');
+        $lname = request()->query('lname');
+        if (!$apogee && !$fname && !$lname)
+            return ($this->dbRepository->getModuleStudent($moduleId));
+        if ($apogee)
+            return ($this->dbRepository->getByApogee($moduleId, $apogee));
+        return ($this->dbRepository->searchByNames($moduleId, $fname, $lname));
     }
 
     public function findById(string $id)
@@ -56,6 +80,7 @@ class ProfService
         $prof  = new ProfResource($prof);
         return ($this->DATA('prof', $prof));
     }
+
     public function save(StoreProfRequest $request)
     {
         $prof = Prof::create($request->all());
@@ -66,22 +91,23 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Prof registered successfully',
-                'prof' => $prof
+                'data' =>new ProfResource( $prof)
             ]
         );
     }
 
+    // TODO : add expration date
     public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
         $prof = Prof::where('email', $request->email)->first();
         $prof->tokens()->delete();
-        $token = $prof->createToken('api_token', ['role:prof'], Carbon::now()->addHours());
+        $token = $prof->createToken('api_token', ['role:prof']);
         return response()->json(
             [
                 'status' => 'success',
-                'prof' => $prof,
-                'token' => $token->plainTextToken
+                'data' => new ProfResource($prof),
+                'token' => $token->plainTextToken,
             ]
         );
     }
@@ -102,18 +128,24 @@ class ProfService
     public function result(UpdateResultRequest $request)
     {
         $profId = request()->user()->id;
-        $modules = Prof::find($profId)->modules()->where('id', $request->module_id)->exists();
+        $modules = Module::find($request->module_id)?->where('prof_id', $profId)->where('id', $request->module_id)->exists();
         if (!$modules)
             return ($this->resourceNotFound());
         $moduleId = $request->module_id;
         $apogee = $request->apogee;
-        $student = Result::where('module_id', $moduleId)->where('apogee', $apogee);
-        $normal = $request->normal;
+        $student = Result::where('module_id', $moduleId)->where('apogee', $apogee)->first();
+        if (!$student)
+            return ($this->resourceNotFound());
+        $normale = $request->normale;
         $ratt = $request->ratt;
-        $state = $student->update([
-            'normal' => $normal,
-            'ratt' => $ratt
-        ]);
+        if (!$normale && !$ratt)
+            return (response()->noContent());
+        $notes = [];
+        if ($normale)
+            $notes['normale'] = $normale;
+        if ($ratt)
+            $notes['ratt'] = $ratt;
+        $student->update($notes);
         return response()->json(
             [
                 'status' => 'success',
@@ -123,19 +155,12 @@ class ProfService
         );
     }
 
-    // if file should not visible to public it get store on local storage else is on public
     public function announce(StoreAnnouncementRequest $request)
     {
-        $poster_image_path = null;
+        $image_path = env('ANNOUNCE_IMAGE_PATH', 'announce/image');
         $prof = request()->user();
-        if (!$prof)
-            return ($this->resourceNotFound());
-        if ($request->hasFile('thumbnail_path'))
-            $thumbnail_path = $request->file('thumbnail_path')->store('public');
-        else
-            $thumbnail_path = 'default.png';
-        if ($request->hasFile('poster_image_path'))
-            $poster_image_path = $request->file('poster_image_path')->store('public');
+        $thumbnail_path = $request->file('thumbnail_path')?->store($image_path, 'public');
+        $poster_image_path = $request->file('poster_image_path')?->store($image_path, 'public');
         $prof->announcements()->create([
             'title' => $request->title,
             'thumbnail_path' => $thumbnail_path,
@@ -149,6 +174,25 @@ class ProfService
                 'message' => 'Announcement created successfully',
             ],
             201
+        );
+    }
+    public function deleteAnnounce(string $id)
+    {
+        $prof = request()->user();
+        $announce = $prof->announcements()->find($id);
+        if (!$announce)
+            return ($this->resourceNotFound());
+        if (Storage::disk('public')->exists($announce->thumbnail_path))
+            Storage::disk('public')->delete($announce->thumbnail_path);
+        if (Storage::disk('public')->exists($announce->poster_image_path))
+            Storage::disk('public')->delete($announce->poster_image_path);
+        $announce->delete();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Announcement deleted successfully',
+            ],
+            202
         );
     }
 }

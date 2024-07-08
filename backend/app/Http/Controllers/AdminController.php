@@ -2,64 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAdminRequest;
-use App\Http\Requests\UpdateAdminRequest;
-use App\Models\Admin;
-use App\Models\Module;
-use App\Models\Prof;
-use App\Services\Template;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+
+use App\Services\AdminService;
+
+use App\Http\Requests\AdminAuth\LoginRequest;
+
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private AdminService $adminService;
+    public function __construct(AdminService $adminService)
     {
-        //
+        $this->adminService = $adminService;
+    }
+
+
+    public function login(LoginRequest $request): JsonResponse
+    {
+        return $this->adminService->login($request);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Destroy an authenticated session.
      */
-    public function create()
+    public function logout(Request $request): JsonResponse
     {
-        //
+        return $this->adminService->logout($request);
+    }
+    public function genreateFinalResult()
+    {
+        return $this->adminService->genreateFinalResult();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAdminRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAdminRequest $request, Admin $admin)
-    {
-        //
-    }
 
     // public function assignProf(Request $request)
     // {

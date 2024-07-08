@@ -13,14 +13,28 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->unsignedBigInteger("apogee")->primary()->autoIncrement();
-            $table->string("password");
-            $table->string("phone_number");
             $table->string("firstname");
             $table->string("lastname");
+            $table->string("firstname_ar");
+            $table->string("lastname_ar");
             $table->date("birth_date");
+            $table->string("birth_place");
+            $table->string("student_code");
+            $table->string("nationality");
+            $table->string("num_identify");
             $table->string("email")->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string("phone_number")->unique();
+            $table->string("phone_urgent");
+            $table->string("inscription_date");
+            $table->string("address");
+            $table->string("filiere");
+            $table->string("password");
             $table->string("gender");
+            $table->string("baccalaureat");
+            $table->string("releve_note");
+            $table->string("image_presonnal");
+            $table->string("identify_recto_verso");
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

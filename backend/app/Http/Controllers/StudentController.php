@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\StudentAuth\LoginRequest;
-use App\Http\Requests\UpdateStudentRequest;
-use App\Models\Student;
 use App\Http\Resources\StudentResource;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreComplaintsRequest;
+use App\Http\Requests\StoreStudentComplaintRequest;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -42,8 +43,8 @@ class StudentController extends Controller
 
     public function modules()
     {
-        $apogee = request()->user()->apogee;
-        return ($this->studentService->modules($apogee));
+        $student = request()->user();
+        return ($this->studentService->modules($student));
     }
 
     /**
@@ -51,12 +52,43 @@ class StudentController extends Controller
      */
     public function show(Request $request)
     {
-        return ($request->user());
+        $student = $request->user();
+        return (Response()->json(
+            [
+                'status' => 'success',
+                'message' => 'student profile retrieved successfully',
+                'data' => new StudentResource($student)
+            ]
+        ));
     }
 
     public function result()
     {
-        $apogee = request()->user()->apogee;
-        return ($this->studentService->result($apogee));
+        $student = request()->user();
+        return ($this->studentService->result($student));
+    }
+    public function finalResult()
+    {
+        $student = request()->user();
+        return ($this->studentService->finalResult($student));
+    }
+
+    public function complaints(StoreStudentComplaintRequest $request)
+    {
+        return ($this->studentService->complaints($request));
+    }
+    public function getComplaints(Request $request)
+    {
+        $Student = $request->user();
+        return ($this->studentService->getComplaints($Student));
+    }
+
+    public function deleteComplaint(string $id)
+    {
+        $student = request()->user();
+
+
+        DB::table('student_complaints')->where('id', $id)->where('apogee', $student->apogee)->delete();
+        return ($this->studentService->getComplaints($student));
     }
 }

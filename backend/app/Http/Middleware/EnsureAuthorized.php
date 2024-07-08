@@ -6,19 +6,21 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyStudent
+class EnsureAuthorized
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user() || !$request->user()->tokenCan('role:student')) {
+        if (!$request->user() || !$request->user()->tokenCan("role:$role")) {
             return response()->json(
                 [
-                    'message' => 'you are not authorized to access this route.'
+                    'status' => 'error',
+                    'message' => 'You are not authorized',
+                    'data' => null
                 ],
                 403
             );

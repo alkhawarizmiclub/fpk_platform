@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import NavbarDropMenu from "./NavbarDropMenu";
 import Paths from "../routers/Paths.json";
 import Button from "./Button";
+import { useUserContext } from "../contexts/context";
 
 const Navbar = () => {
+
+    const { authenticated } = useUserContext();
 
     let navLinks = [
         {
@@ -29,7 +32,7 @@ const Navbar = () => {
             label: "espace scolarité",
             children: [
                 { label: "E-Etudiant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
-                { label: "E-Enseignant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
+                { label: "E-Enseignant", url: Paths.E_TEACHER_DASHBOARD_PAGE },
                 { label: "Emploi du temps", url: "____" },
                 { label: "Planning des exams", url: "____" },
             ]
@@ -69,15 +72,29 @@ const Navbar = () => {
             </ul>
 
             <div className="flex gap-4">
-                <Button plain_bg={true}>
-                    <Link className="py-3 px-6 block" to={Paths.LOGIN_PAGE}>Login</Link>
-                </Button>
-                <Button>
-                    <Link className="py-3 px-6 block" to={Paths.SIGNUP_PAGE}>Apply</Link>
-                </Button>
-            </div>
 
-        </nav>
+                {authenticated ? (
+                    <>
+                        <Button>
+                            <Link className="py-3 px-6 block" to={Paths.ENT_DASHBOARD_PAGE}>ENT</Link>
+                        </Button>
+                        <Button plain_bg={true}>
+                            <Link className="py-3 px-6 block" to={Paths.LOGOUT_PAGE}>Log Out</Link>
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <Button plain_bg={true}>
+                            <Link className="py-3 px-6 block" to={Paths.LOGIN_PAGE}>Login</Link>
+                        </Button>
+                        <Button>
+                            <Link className="py-3 px-6 block" to={Paths.SIGNUP_PAGE}>Apply</Link>
+                        </Button>
+                    </>
+                )}
+            </div >
+
+        </nav >
     );
 }
 

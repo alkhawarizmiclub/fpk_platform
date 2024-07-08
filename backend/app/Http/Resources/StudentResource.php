@@ -18,11 +18,14 @@ class StudentResource extends JsonResource
             'apogee' => $this->apogee,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
+            'firstname_ar' => $this->firstname_ar,
+            'lastname_ar' => $this->lastname_ar,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
+            'phone_urgant' => $this->phone_urgent,
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
-            'modules' => $this->whenLoaded('modules')
+            'role' => 'student'
         ];
     }
 }
