@@ -68,14 +68,18 @@ const EntStudentApi = {
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");
-        return response.data;
+        return response;
     },
-    getComplaintCategories: () => {
-        return [
-            { id: 1, label: "Cat 1" },
-            { id: 2, label: "Cat 2" },
-            { id: 3, label: "Cat 3" },
-        ];
+    getComplaintCategories: async () => {
+        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        return {
+            status: 200,
+            data: [
+                { id: 1, label: "Cat 1" },
+                { id: 2, label: "Cat 2" },
+                { id: 3, label: "Cat 3" },
+            ]
+        };
     },
     createComplaint: async (subject, message) => {
         return await axiosClient.post("/api/student/complaint", { complaint_id: 1, description: message });
