@@ -76,7 +76,7 @@ const Navbar = () => {
                 {authenticated ? (
                     <>
                         <Button>
-                            <Link className="py-3 px-6 block" to={Paths.E_STUDENT_DASHBOARD_PAGE}>ENT</Link>
+                            <Link className="py-3 px-6 block" to={Paths.ENT_DASHBOARD_PAGE}>ENT</Link>
                         </Button>
                         <Button plain_bg={true}>
                             <Link className="py-3 px-6 block" to={Paths.LOGOUT_PAGE}>Log Out</Link>

@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EntPageContainer from "../../../../components/ent/EntPageContainer";
 import EntStudentApi from "../../../../api/EntStudentApi";
 import Paths from "../../../../routers/Paths.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntStudentComplaintsCreatePage = () => {
 
-    const complaintCategories = EntStudentApi.getComplaintCategories();
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [complaintCategories, setComplaintCategories] = useState([]);
 
     const [complaintCategory, setComplaintCategory] = useState("");
     const [description, setDescription] = useState("");
@@ -14,48 +18,85 @@ const EntStudentComplaintsCreatePage = () => {
 
     const complaintCategoryChangeHandler = (e) => setComplaintCategory(e.target.value);
 
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
 
-        await EntStudentApi.createComplaint(complaintCategory, description).then(() => {
-            navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
-        });
+        EntStudentApi.createComplaint(complaintCategory, description)
+            .then(() => {
+                navigate(Paths.E_STUDENT_COMPLAINTS_PAGE);
+            })
+            .catch(() => {
+                // TODO: Add error handling
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
 
     }
 
+    useEffect(() => {
+        setIsLoading(true);
+
+        EntStudentApi.getComplaintCategories()
+            .then((response) => {
+                setComplaintCategories(response.data)
+            })
+            .catch(() => {
+                // TODO: Add error handling
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+
+    }, [])
+
     return (
         <EntPageContainer title="Reclamations">
-            <form onSubmit={submitHandler} className="mx-auto max-w-xl flex flex-col gap-5">
 
-                <div>
+            {isLoading ? (
 
-                    <label htmlFor="documentType" className="block text-sm font-medium text-gray-700">Sélectionnez le sujet de reclamation</label>
+                <div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
 
-                    <select id="documentType" name="documentType" value={complaintCategory} onChange={complaintCategoryChangeHandler} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
-                        <option value="">-- Sélectionnez un sujet --</option>
-                        {complaintCategories.map(({ id, label }) => <option key={id} value={id}>{label}</option>)}
-                    </select>
+            ) : (
+                <form onSubmit={submitHandler} className="mx-auto max-w-xl flex flex-col gap-5">
 
-                </div>
+                    <div>
 
-                <div className="w-full flex flex-col">
+                        <label htmlFor="documentType" className="block text-sm font-medium text-gray-700">Sélectionnez le sujet de reclamation</label>
 
-                    <label htmlFor="description">Votre reclamation :</label>
+                        <select id="documentType" name="documentType" value={complaintCategory} onChange={complaintCategoryChangeHandler} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
+                            <option value="">-- Sélectionnez un sujet --</option>
+                            {complaintCategories.map(({ id, label }) => <option key={id} value={id}>{label}</option>)}
+                        </select>
 
-                    <textarea name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
+                    </div >
 
-                </div>
+                    <div className="w-full flex flex-col">
 
-                <div className="flex justify-center gap-5">
+                        <label htmlFor="description">Votre reclamation :</label>
 
-                    <button type="submit" className="px-5 py-3 rounded-lg text-white bg-orange-400">Soumettre</button>
+                        <textarea name="description" id="description" minLength={8} value={description} onChange={(e) => setDescription(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
 
-                    <Link to={Paths.E_STUDENT_COMPLAINTS_PAGE} className="px-5 py-3 rounded-lg text-white bg-orange-400">Annuler</Link>
+                    </div>
 
-                </div>
+                    <div className="flex justify-center gap-5">
 
-            </form>
-        </EntPageContainer>
+                        <button type="submit" disabled={isSubmitting} className={`px-5 py-3 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>
+                            {isSubmitting ? (<FontAwesomeIcon icon={faSpinner} className="text-lg loader" />) : (<FontAwesomeIcon icon={faSave} />)}
+                            <span> Soumettre</span>
+                        </button>
+
+                        {!isSubmitting &&
+                            <Link to={Paths.E_STUDENT_COMPLAINTS_PAGE} className={`px-5 py-3 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>Annuler</Link>
+                        }
+
+                    </div>
+
+                </form >
+            )}
+
+        </EntPageContainer >
     );
 }
 

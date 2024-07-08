@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const EntResultsTypeInfo = () => {
     return (
-        <span className="relative group">
-            <FontAwesomeIcon icon={faInfoCircle} className="hover:text-slate-400 transition-all duration-300" />
-            <span className="absolute top-5 left-1/2 -translate-x-1/2 py-1 px-2 hidden group-hover:block rounded-lg shadow bg-white">
+        <div className="relative group">
+
+            <FontAwesomeIcon icon={faInfoCircle} className="hover:text-mainEntColorOnHover transition-all duration-300" />
+
+            <div className="absolute top-5 left-1/2 -translate-x-1/2 py-1 px-2 hidden group-hover:block rounded-lg shadow text-mainEntColor bg-white">
                 <table className="text-xs">
                     <tbody>
                         <tr>
@@ -33,8 +35,9 @@ const EntResultsTypeInfo = () => {
                         </tr>
                     </tbody>
                 </table>
-            </span>
-        </span>
+            </div>
+
+        </div>
     );
 }
 
