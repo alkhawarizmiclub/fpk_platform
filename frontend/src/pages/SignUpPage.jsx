@@ -283,7 +283,7 @@ const SignUpPage = () => {
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="grid-phone"
                       type="telephone"
-                      placeholder="(+212) 6879867564 "
+                      placeholder="(+212) 68982291 "
                       value={formData.phone}
                       onChange={handleChange}
                     />
@@ -296,7 +296,7 @@ const SignUpPage = () => {
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="grid-emergency-phone"
                       type="tel"
-                      placeholder="(+212) 79808564545"
+                      placeholder="(+212) 679875764"
                       value={formData.emergencyPhone}
                       onChange={handleChange}
                     />
@@ -311,7 +311,7 @@ const SignUpPage = () => {
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       id="grid-address"
                       type="text"
-                      placeholder="123 hay Zitouna "
+                      placeholder="123 Rue Zitouna "
                       value={formData.address}
                       onChange={handleChange}
                     />

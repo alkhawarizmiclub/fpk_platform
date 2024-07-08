@@ -18,13 +18,13 @@
     "PHDS_PAGE": "/formations/doctorat",
 
     "E_STUDENT_DASHBOARD_PAGE": "/e-etudiant",
-    "E_STUDENT_INSCRIPTIONS_PAGE": "/e-etudiant/insctiptions",
-    "E_STUDENT_ACCOUNTS_PAGE": "/e-etudiant/comptes",
-    "E_STUDENT_SCHEDULES_PAGE": "/e-etudiant/emplois",
-    "E_STUDENT_PLANNING_PAGE": "/e-etudiant/planning",
     "E_STUDENT_RESULTS_PAGE": "/e-etudiant/resultats",
-    "E_STUDENT_E_DOCUMENTS_PAGE": "/e-etudiant/e-documents",
+    "E_STUDENT_ACCOUNTS_PAGE": "/e-etudiant/comptes",
     "E_STUDENT_COMPLAINTS_PAGE": "/e-etudiant/reclamations",
+    "E_STUDENT_PLANNING_PAGE": "/e-etudiant/planning",
+    "E_STUDENT_SCHEDULES_PAGE": "/e-etudiant/emplois",
+    "E_STUDENT_E_DOCUMENTS_PAGE": "/e-etudiant/e-documents",
+    "E_STUDENT_INSCRIPTIONS_PAGE": "/e-etudiant/e-documents",
 
     "E_TEACHER_PAGE": "/e-enseignant",
 
