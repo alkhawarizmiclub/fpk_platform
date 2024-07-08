@@ -53,14 +53,18 @@ const EntStudentApi = {
     getResultsData: async () => {
         return await axiosClient.get("/api/student/result");
     },
-    getEDocumentsData: () => {
-        return [
-            { label: "Relevé de notes de S1", creationDateTime: new Date(), type: "grades sheet", data: {} },
-            { label: "Attestation de DEUG", creationDateTime: new Date(), type: "deug attestation", data: {} },
-            { label: "Relevé de notes de S3", creationDateTime: new Date(), type: "grades sheet", data: {} },
-            { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} },
-            { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} }
-        ];
+    getEDocumentsData: async () => {
+        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        return {
+            status: 200,
+            data: [
+                { label: "Relevé de notes de S1", creationDateTime: new Date(), type: "grades sheet", data: {} },
+                { label: "Attestation de DEUG", creationDateTime: new Date(), type: "deug attestation", data: {} },
+                { label: "Relevé de notes de S3", creationDateTime: new Date(), type: "grades sheet", data: {} },
+                { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} },
+                { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} }
+            ]
+        };
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");
