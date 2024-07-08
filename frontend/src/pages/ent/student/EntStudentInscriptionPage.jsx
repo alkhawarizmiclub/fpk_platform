@@ -39,7 +39,7 @@ const EntStudentInscriptionPage = () => {
                 <div className="space-y-5">
 
                     {Object.entries(semesterSubjects).map(([semester, subjects]) => (
-                        <table key={semester} className="w-full rounded shadow overflow-hidden">
+                        <table key={semester} className="w-full rounded-lg shadow overflow-hidden">
                             <tbody>
                                 <tr className="text-white bg-slate-800">
                                     <th className="p-3">Filiere</th>
