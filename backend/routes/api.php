@@ -8,6 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\FpkController;
 use App\Http\Controllers\ModuleController;
+use Illuminate\Support\Facades\Storage;
 
 Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:prof']], function () {
 
@@ -77,4 +78,7 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     // get all with pagination
     Route::get('/announce', [FpkController::class, 'announce']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
+    Route::get('/emploi', function () {
+        return (Storage::url('emploi/smi-s1.pdf'));
+    });
 });

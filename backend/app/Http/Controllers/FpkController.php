@@ -18,13 +18,23 @@ class FpkController extends Controller
 
     public function announce()
     {
-        $announcements = Announcement::all();
+        $pageSize = 10;
+        $page = request()->query('page');
+        if (!$page || $page <= 0)
+        	$page = 1;
+        $AnnounceCount = Announcement::all()->count();
+        $pageCount = ceil($AnnounceCount / $pageSize);
+        if ($page > $pageCount)
+        	$page = $pageCount;
+        $announcements = Announcement::all()->skip(($page - 1) * $pageSize)->take($pageSize);
         foreach ($announcements as $announcement)
             $announcement->author;
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Announcements retrieved successfully',
+                'page_count' => $pageCount,
+                'page_number' => $page,
                 'data' => AnnounceResource::collection($announcements)
             ]
         );
