@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Paths from '../routers/Paths.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
-    famille: '',
-    personnel: '',
+    nom: '',
+    prenom: '',
+    date: '',
+    lieu: '',
     code: '',
     nationality: '',
     cin: '',
@@ -19,17 +22,25 @@ const SignUpPage = () => {
     phone: '',
     emergencyPhone: '',
     address: '',
-    filière: '',
-
+    password: '',
+    confirmPassword: '',
+    filiere: '',
+    studentPhoto: '',
   });
   const [errors, setErrors] = useState('');
 
   const nextStep = () => {
-    setStep(step + 1);
+    if (validateStep(step)) {
+      setStep(step + 1);
+      setErrors('');
+    } else {
+      setErrors('Please fill out all required fields.');
+    }
   };
 
   const prevStep = () => {
     setStep(step - 1);
+    setErrors('');
   };
 
   const handleChange = (e) => {
@@ -39,34 +50,109 @@ const SignUpPage = () => {
       [id]: value,
     }));
   };
+  const generatePDF = () => {
+    const doc = new jsPDF();
 
+    // Adding header
+    doc.addImage('/lo.jpeg', 'JPEG', 10, 10, 30, 30); // Adjust path and size as needed
+    doc.setFontSize(18);
+    doc.text('Faculte Polidyciplinaire de Khouribga ', 105, 25, null, null, 'center');
+    if (formData.studentPhoto) {
+      doc.addImage(formData.studentPhoto, 'PNG', 150, 15, 40, 40); // Adjust the dimensions as needed
+    }
+
+    // Adding student info table
+    const studentInfo = [
+      ['Nom', formData.nom],
+      ['Prenom', formData.prenom],
+      ['Famille', formData.nom],
+      ['Personnel', formData.prenom],
+      ['Date de Naissance', formData.date],
+      ['Lieu de Naissance', formData.lieu],
+      ['Code Etudiant', formData.code],
+      ['Nationalité', formData.nationality],
+      ['CIN/Passport', formData.nationality === 'marocain' ? formData.cin : formData.passport],
+      ['Email', formData.email],
+      ['Téléphone', formData.phone],
+      ['Téléphone Urgent', formData.emergencyPhone],
+      ['Adresse', formData.address],
+      ['Filière', formData.filiere],
+    ];
+
+    doc.autoTable({
+      head: [['Champ', 'Détails']],
+      body: studentInfo,
+      startY: 50, // Adjust as needed
+      styles: { fontSize: 10 },
+    });
+
+    // Adding footer
+    doc.setFontSize(10);
+    doc.text('Rue Zitouna ', 105, doc.internal.pageSize.height - 10, null, null, 'center');
+
+    doc.save('etudiant_info.pdf');
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) {
-      setErrors('Please fill out all required fields.');
-    } else {
+    if (validateStep(step)) {
       setErrors('');
-      console.log(formData);
+      generatePDF();
       alert('Form submitted successfully!');
+      navigate(Paths.LOGIN_PAGE) // Redirect to login page
+    } else {
+      setErrors('Please fill out all required fields.');
     }
   };
 
-  const validateForm = () => {
-    return Object.values(formData).every((value) => value !== '');
+  const validateStep = (step) => {
+    switch (step) {
+      case 1:
+        return (
+          formData.nom &&
+          formData.prenom &&
+          formData.nom &&
+          formData.prenom &&
+          formData.date &&
+          formData.lieu &&
+          formData.code &&
+          formData.nationality &&
+          (formData.nationality === 'marocain' ? formData.cin : formData.passport)
+        );
+      case 2:
+        return (
+          formData.email &&
+          formData.phone &&
+          formData.emergencyPhone &&
+          formData.address
+        );
+      case 3:
+        return (
+          formData.filiere
+        );
+      case 4:
+        // Adjust validation logic as necessary for file uploads
+        return true;
+      default:
+        return false;
+    }
   };
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0]; // Obtenez le premier fichier
-    // Vous pouvez maintenant utiliser le fichier comme vous le souhaitez, par exemple, le stocker dans le state ou l'envoyer à votre backend
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((prevData) => ({
+        ...prevData,
+        studentPhoto: reader.result,
+      }));
+    };
+    reader.readAsDataURL(file);
   };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="container mx-auto py-8">
-        <p>
-          <Link to={Paths.HOME_PAGE} className="w-full space-x-2 text-sm text-slate-600">
-            <FontAwesomeIcon icon={faArrowLeftLong} />
-            <span>Go back Home</span>
-          </Link>
-        </p>
+
         <div className="flex justify-center mb-6">
           <Link to={Paths.HOME_PAGE} className="grow flex justify-center items-center">
             <img src="/fpk_logo.svg" className="max-w-64" alt="logo" />
@@ -76,30 +162,14 @@ const SignUpPage = () => {
           <div className="bg-white shadow-md rounded-lg p-6">
             <div className="mb-6">
               <ul className="flex justify-between">
-                <li className={`flex-1 text-center ${step === 1 ? 'text-blue-500' : 'text-gray-600'}`}>
-                  <div className="relative mb-2">
-                    <div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">1</div>
-                  </div>
-                  <div className="text-xs text-orange">Étape 1</div>
-                </li>
-                <li className={`flex-1 text-center ${step === 2 ? 'text-blue-500' : step > 2 ? 'text-gray-600' : ''}`}>
-                  <div className="relative mb-2">
-                    <div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">2</div>
-                  </div>
-                  <div className="text-xs">Étape 2</div>
-                </li>
-                <li className={`flex-1 text-center ${step === 3 ? 'text-blue-500' : step > 3 ? 'text-gray-600' : ''}`}>
-                  <div className="relative mb-2">
-                    <div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">3</div>
-                  </div>
-                  <div className="text-xs">Étape 3</div>
-                </li>
-                <li className={`flex-1 text-center ${step === 4 ? 'text-blue-500' : step > 4 ? 'text-gray-600' : ''}`}>
-                  <div className="relative mb-2">
-                    <div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">4</div>
-                  </div>
-                  <div className="text-xs">Étape 4</div>
-                </li>
+                {[1, 2, 3, 4].map((num) => (
+                  <li key={num} className={`flex-1 text-center ${step === num ? 'text-blue-500' : 'text-gray-600'}`}>
+                    <div className="relative mb-2">
+                      <div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">{num}</div>
+                    </div>
+                    <div className="text-xs">{`Étape ${num}`}</div>
+                  </li>
+                ))}
               </ul>
             </div>
             {step === 1 && (
@@ -110,7 +180,7 @@ const SignUpPage = () => {
                       Nom
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                       id="nom"
                       type="text"
                       placeholder="Votre nom"
@@ -123,7 +193,7 @@ const SignUpPage = () => {
                       Prenom
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                       id="prenom"
                       type="text"
                       placeholder="Votre prenom"
@@ -135,28 +205,27 @@ const SignUpPage = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="famille">
-                    الإسم العائلي
+                      الإسم العائلي
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="famille"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                      id="nom"
                       type="text"
                       placeholder="الإسم العائلي"
-                      value={formData.famille}
+                      value={formData.nom}
                       onChange={handleChange}
                     />
-                    <p className="text-red-500 text-xs italic">Please fill out this field.</p>
                   </div>
                   <div className="w-full md:w-1/2 px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="personnel">
                       الإسم الشخصي
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="personnel"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                      id="prenom"
                       type="text"
                       placeholder="الإسم الشخصي"
-                      value={formData.personnel}
+                      value={formData.prenom}
                       onChange={handleChange}
                     />
                   </div>
@@ -167,7 +236,7 @@ const SignUpPage = () => {
                       Date de Naissance
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                       id="date"
                       type="date"
                       value={formData.date}
@@ -179,7 +248,7 @@ const SignUpPage = () => {
                       Lieu de Naissance
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                       id="lieu"
                       type="text"
                       placeholder="lieu"
@@ -194,7 +263,7 @@ const SignUpPage = () => {
                       Code Etudiant
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                       id="code"
                       type="text"
                       placeholder="X123456"
@@ -206,52 +275,63 @@ const SignUpPage = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full px-3">
                     <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="nationality">
-                      Êtes-vous Marocain ou Étranger?
+                      Nationalité
                     </label>
-                    <select
-                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      id="nationality"
-                      value={formData.nationality}
-                      onChange={handleChange}
-                    >
-                      <option value="" disabled>Choisir...</option>
-                      <option value="marocain">Marocain</option>
-                      <option value="etranger">Étranger</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="nationality"
+                        value={formData.nationality}
+                        onChange={handleChange}
+                      >
+                        <option value="">Select</option>
+                        <option value="marocain">Marocain</option>
+                        <option value="etranger">Etranger</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 {formData.nationality === 'marocain' && (
-                  <div className="mb-4">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cin">
-                      CIN
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="cin"
-                      type="text"
-                      placeholder="CIN"
-                      value={formData.cin}
-                      onChange={handleChange}
-                    />
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3">
+                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cin">
+                        C.I.N
+                      </label>
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                        id="cin"
+                        type="text"
+                        placeholder="X123456"
+                        value={formData.cin}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                 )}
                 {formData.nationality === 'etranger' && (
-                  <div className="mb-4">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="passport">
-                      Numéro de Passeport
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="passport"
-                      type="text"
-                      placeholder="Numéro de Passeport"
-                      value={formData.passport}
-                      onChange={handleChange}
-                    />
+                  <div className="flex flex-wrap -mx-3 mb-6">
+                    <div className="w-full px-3">
+                      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="passport">
+                        Passport
+                      </label>
+                      <input
+                        className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                        id="passport"
+                        type="text"
+                        placeholder="123456789"
+                        value={formData.passport}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                 )}
+                {errors && <p className="text-red-500 text-xs italic">{errors}</p>}
                 <div className="flex items-center justify-between">
-                  <button onClick={nextStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+                  <button
+                    onClick={nextStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                  >
                     Suivant
                   </button>
                 </div>
@@ -259,202 +339,220 @@ const SignUpPage = () => {
             )}
             {step === 2 && (
               <form id="formEtape2">
-                <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full px-3 mb-6">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                      Email
-                    </label>
-                   < input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                    Adresse E-mail
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Adresse E-mail"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="phone">
-                      Telephone
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+                      Téléphone
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-phone"
-                      type="telephone"
-                      placeholder="(+212) 68982291 "
+                      id="phone"
+                      type="tel"
+                      placeholder="+000 693129042"
                       value={formData.phone}
                       onChange={handleChange}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
-                  <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="uphone">
-                      Telephone Urgent
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="emergencyPhone">
+                      Téléphone  Urgent
                     </label>
                     <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-emergency-phone"
+                      id="emergencyPhone"
                       type="tel"
-                      placeholder="(+212) 679875764"
+                      placeholder="+000 7039182924"
                       value={formData.emergencyPhone}
                       onChange={handleChange}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                  <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="address">
-                      Addresse
-                    </label>
-                    <input
-                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                      id="grid-address"
-                      type="text"
-                      placeholder="123 Rue Zitouna "
-                      value={formData.address}
-                      onChange={handleChange}
-                    />
-                  </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+                    Adresse
+                  </label>
+                  <input
+                    id="address"
+                    type="text"
+                    placeholder="Rue Zitouna 123"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
                 </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                    Mot de Passe
+                  </label>
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="*************"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+                    Confirmer Mot de Passe
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="***************"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                {errors && <p className="text-red-500 text-xs italic">{errors}</p>}
                 <div className="flex items-center justify-between">
-                  <button onClick={prevStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                  <button
+                    onClick={prevStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
                     Retour
                   </button>
-                  <button onClick={nextStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                  <button
+                    onClick={nextStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
                     Suivant
                   </button>
                 </div>
               </form>
             )}
             {step === 3 && (
-              <form id="formEtape3" onSubmit={handleSubmit}>
-                <div className="mb-6">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="filiere">
-        Filière
-      </label>
-      <select
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="filiere"
-        value={formData.filiere}
-        onChange={handleChange}
-      >
-        <option value="" disabled>Sélectionner une filière...</option>
-        <option value="Informatique">Informatique</option>
-        <option value="Electronique">Electronique</option>
-        <option value="Mécanique">Mécanique</option>
-        {/* Ajoutez d'autres options selon vos besoins */}
-      </select>
-    </div>
-                <div className="mb-6">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    Mot de passe
+              <form id="formEtape3">
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="filiere">
+                    Filière
                   </label>
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password"
-                    type="password"
-                    placeholder="********"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
+                  <div className="relative">
+                    <select
+                      id="filiere"
+                      value={formData.filiere}
+                      onChange={handleChange}
+                      className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                      <option value="">Select</option>
+                      <option value="SMI">Sciences Mathématiques et Informatique</option>
+                      <option value="SMA">Sciences Mathématiques et Application</option>
+                      <option value="SMP">Sciences de la Matière Physique</option>
+                      <option value="SMC">Sciences de la Matière Chimie</option>
+                      <option value="SV">Sciences de la Vie</option>
+                      <option value="GEO">Géographie</option>
+                      <option value="EA">Etude arabes</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="mb-6">
-      <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
-        Confirmer le mot de passe
-      </label>
-      <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        id="confirmPassword"
-        type="password"
-        placeholder="********"
-        value={formData.confirmPassword}
-        onChange={handleChange}
-      />
-    </div>
+                {errors && <p className="text-red-500 text-xs italic">{errors}</p>}
                 <div className="flex items-center justify-between">
-                  <button onClick={prevStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                  <button
+                    onClick={prevStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
                     Retour
                   </button>
-                  <button onClick={nextStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                  <button
+                    onClick={nextStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
                     Suivant
                   </button>
                 </div>
               </form>
             )}
             {step === 4 && (
-                 <form id="formEtape4" onSubmit={handleSubmit}>
-                 <div className="mb-6">
-                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="baccalaureat">
-                     Télécharger le Baccalauréat
-                   </label>
-                   <input
-                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                     id="baccalaureat"
-                     type="file"
-                     accept=".pdf, .jpg, .jpeg, .png"
-                     onChange={handleFileUpload}
-                   />
-                 </div>
-                 <div className="mb-6">
-                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="releveNotes">
-                     Télécharger le Relevé de Notes
-                   </label>
-                   <input
-                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                     id="releveNotes"
-                     type="file"
-                     accept=".pdf, .jpg, .jpeg, .png"
-                     onChange={handleFileUpload}
-                   />
-                 </div>
-                 <div className="mb-6">
-                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="images">
-                     Télécharger les Images 4x4
-                   </label>
-                   <input
-                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                     id="images"
-                     type="file"
-                     accept="image/*"
-                     multiple
-                     onChange={handleFileUpload}
-                   />
-                 </div>
-                 <div className="mb-6">
-                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cinOrPassport">
-                     Télécharger la CIN recto-verso ou le Passeport
-                   </label>
-                   <input
-                     className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                     id="cinOrPassport"
-                     type="file"
-                     accept=".pdf, .jpg, .jpeg, .png"
-                     onChange={handleFileUpload}
-                   />
-                 </div>
+              <form id="formEtape4" onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
+                    CNI recto-verso
+                  </label>
+                  <input
+                    id="file"
+                    type="file"
+                    onChange={handleFileUpload}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Bac">
+                    Bac recto-verso
+                  </label>
+                  <input
+                    id="Bac"
+                    type="file"
+                    onChange={handleFileUpload}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
 
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="RN">
+                    Releve de Notes
+                  </label>
+                  <input
+                    id="RN"
+                    type="file"
+                    onChange={handleFileUpload}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="studentPhoto">
+                    Photo
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="studentPhoto"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                  />
+                </div>
+                {errors && <p className="text-red-500 text-xs italic">{errors}</p>}
                 <div className="flex items-center justify-between">
-                  <button onClick={prevStep} className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                  <button
+                    onClick={prevStep}
+                    className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
                     Retour
                   </button>
-                  <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Terminer
+                  <button
+                    onClick={handleSubmit}
+                    className="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 focus:outline-none"
+                  >
+                    Soumettre
                   </button>
                 </div>
-        </form>
-)}
+              </form>
+            )}
           </div>
         </div>
+
       </div>
-      {errors && (
-        <div className="text-red-500 text-center mt-4">
-          {errors}
-        </div>
-      )}
     </div>
   );
 };
 
 export default SignUpPage;
-
