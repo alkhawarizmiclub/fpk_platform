@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string("phone")->unique();
             $table->string("emergencyPhone");
             $table->string("address");
-            $table->string("filiere");
+            $table->unsignedBigInteger("filiere_id");
             $table->string("password");
             $table->string("gender");
             $table->string("baccalaureat");
@@ -36,6 +36,11 @@ return new class extends Migration
             $table->string("identify_recto_verso");
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+
+
+            $table->foreign('filiere_id')
+                ->references('id')
+                ->on('filieres');
             $table->timestamps();
         });
     }

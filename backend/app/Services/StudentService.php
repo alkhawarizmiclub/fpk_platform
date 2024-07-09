@@ -35,16 +35,16 @@ class StudentService
     {
         $this->dbRepository = $dbRepository;
     }
+
+
     public function all()
     {
         $students = StudentResource::collection(Student::paginate());
         return ($this->DATA('students', $students));
     }
-    // add module to new student
-    // after that it will base on modules next table to determine student modules
-    private function setDefaultModules($student)
+
+    static public function setDefaultModules($student)
     {
-        // this depend on the filiere
         $modules = [
             1 => ['semester' =>  'S1'],
             2 => ['semester' =>  'S1'],
@@ -61,8 +61,11 @@ class StudentService
             13 => ['semester' => 'S2'],
             14 => ['semester' => 'S2'],
         ];
-
-        $student->modules()->attach($modules);
+        $filiere_id = $student->filiere_id;
+        foreach ($modules as $id => $val) {
+            $id2 = (int)$id * (int)$filiere_id;
+            $student->modules()->attach($id2, $val);
+        }
     }
 
 
@@ -134,7 +137,7 @@ class StudentService
                 'phone' => $request->phone,
                 'emergencyPhone' => $request->emergencyPhone,
                 'address' => $request->address,
-                'filiere' => $request->filiere,
+                'filiere_id' => $request->filiere,
                 'password' => bcrypt($request->password),
                 'gender' => $request->gender,
                 'baccalaureat' => $baccalaureat,

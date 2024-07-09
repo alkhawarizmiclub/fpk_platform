@@ -17,10 +17,16 @@ return new class extends Migration
                 ->nullable();
             $table->string('module_name');
             $table->string('semester');
-            $table->string('filiere');
+
+            $table->unsignedBigInteger('filiere_id')
+                ->nullable();
             $table->foreign('prof_id')
                 ->references('id')
                 ->on('profs');
+
+            $table->foreign('filiere_id')
+                ->references('id')
+                ->on('filieres');
             $table->timestamps();
         });
     }

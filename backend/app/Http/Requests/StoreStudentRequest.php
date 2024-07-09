@@ -43,12 +43,11 @@ class StoreStudentRequest extends FormRequest
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:students',
             'emergencyPhone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|string',
             'address' => 'required|string|max:255',
-            'filiere' => 'required|numeric|max:64',//|exists:filieres,id
-            'password' => 'required|string|min:8|confirmed',
+            'filiere' => 'required|numeric|exists:filieres,id|max:64',//            'password' => 'required|string|min:8|confirmed',
             'gender' => ['required', Rule::in($allowedGenders)],
             'baccalaureat' => 'required|mimes:pdf|max:4096',
             'releve_note' => 'required|mimes:pdf|max:4096',
-            'studentPhoto' => 'required|mimes:pdf|max:4096',
+            'studentPhoto' => 'required|image|mimes:png,jpge,jpg|max:4096',
             'identify_recto_verso' => 'required|mimes:pdf|max:4096',
 
 

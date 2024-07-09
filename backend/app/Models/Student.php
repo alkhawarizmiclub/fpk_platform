@@ -27,7 +27,7 @@ class Student extends Authenticatable
         'phone',
         'emergencyPhone',
         'address',
-        'filiere',
+        'filiere_id',
         'password',
         'gender',
         'baccalaureat',
