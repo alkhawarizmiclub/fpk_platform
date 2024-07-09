@@ -40,7 +40,8 @@ const EntStudentComplaintsCreatePage = () => {
 
         EntStudentApi.getComplaintCategories()
             .then((response) => {
-                setComplaintCategories(response.data)
+                console.log(response.data.data);
+                setComplaintCategories(response.data.data)
             })
             .catch(() => {
                 // TODO: Add error handling
@@ -65,9 +66,11 @@ const EntStudentComplaintsCreatePage = () => {
 
                         <label htmlFor="documentType" className="block text-sm font-medium text-gray-700">Sélectionnez le sujet de reclamation</label>
 
-                        <select id="documentType" name="documentType" value={complaintCategory} onChange={complaintCategoryChangeHandler} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
+                        <select id="documentType" name="documentType" disabled={isSubmitting} value={complaintCategory} onChange={complaintCategoryChangeHandler} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
                             <option value="">-- Sélectionnez un sujet --</option>
-                            {complaintCategories.map(({ id, label }) => <option key={id} value={id}>{label}</option>)}
+                            {complaintCategories.map(({ id, is_active, type }) => (
+                                is_active && <option key={id} value={id}>{type}</option>
+                            ))}
                         </select>
 
                     </div >
@@ -76,7 +79,7 @@ const EntStudentComplaintsCreatePage = () => {
 
                         <label htmlFor="description">Votre reclamation :</label>
 
-                        <textarea name="description" id="description" minLength={8} value={description} onChange={(e) => setDescription(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
+                        <textarea name="description" id="description" minLength={8} disabled={isSubmitting} value={description} onChange={(e) => setDescription(e.target.value)} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" ></textarea>
 
                     </div>
 
