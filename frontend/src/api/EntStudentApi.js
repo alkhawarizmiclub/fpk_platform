@@ -10,6 +10,9 @@ const EntStudentApi = {
             baseURL: import.meta.env.VITE_BACKEND_URL
         });
     },
+    signup: async (nom_fr, prenom_fr, nom_ar, prenom_ar, date, lieu, code, nationality, cin, passport, email, phone, emergencyPhone, address, password, confirmPassword, filiere, studentPhoto) => {
+        console.log({ nom_fr, prenom_fr, nom_ar, prenom_ar, date, lieu, code, nationality, cin, passport, email, phone, emergencyPhone, address, password, confirmPassword, filiere, studentPhoto });
+    },
     login: async (email, password) => {
         return await axiosClient.post("/api/student/login", { email, password });
     },
