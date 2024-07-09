@@ -22,10 +22,10 @@ class Student extends Authenticatable
         'birth_place',
         'student_code',
         'nationality',
-        'num_identify',
+        'id_num',
         'email',
-        'phone_number',
-        'phone_urgent',
+        'phone',
+        'emergencyPhone',
         'address',
         'filiere',
         'password',
@@ -34,8 +34,10 @@ class Student extends Authenticatable
         'releve_note',
         'image_presonnal',
         'identify_recto_verso',
-        'inscription_date',
     ];
+
+
+
 
     protected $table = 'students';
     protected $primaryKey = 'apogee';
