@@ -1,9 +1,5 @@
 import { axiosClient } from "./axiosClient"
 
-const randomInt = (min, max) => {
-    return min + Math.random() * (max - min);
-}
-
 const EntStudentApi = {
     getCsrfToken: async () => {
         return await axiosClient.get("/sanctum/csrf-cookie", {
