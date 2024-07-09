@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AnnounceResource;
 use App\Models\Announcement;
 use App\Services\StudentService;
+use Illuminate\Support\Facades\DB;
 
 class FpkController extends Controller
 {
@@ -45,6 +46,17 @@ class FpkController extends Controller
             'status' => 'success',
             'message' => 'Acadmic Year retrieved successfully',
             'data' => StudentService::getAcademicYear(date('Y-m-d'))
+        ];
+    }
+    public function filiere()
+    {
+        $result = DB::table('filieres')
+                      ->select('id', 'filiere_name', 'filiere_code')
+                      ->get();
+        return [
+            'status' => 'success',
+            'message' => 'Filiere retrieved successfully',
+            'data' => $result
         ];
     }
 }

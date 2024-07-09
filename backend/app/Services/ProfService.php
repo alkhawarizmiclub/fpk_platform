@@ -19,6 +19,7 @@ use App\Traits\JsonTemplate;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreannouncementRequest;
 use App\Http\Resources\StudentNoteResource;
+use Illuminate\Support\Facades\DB;
 
 class ProfService
 {
@@ -37,9 +38,11 @@ class ProfService
 
     public function modules(string $id)
     {
-        $modules = Prof::find($id)->modules;
-        if (!$modules)
-            return ($this->NOT_FOUND('prof'));
+        $modules = DB::table('modules as m')
+            ->join('filieres as f', 'm.filiere_id', '=', 'f.id')
+            ->select('m.id', 'm.module_name', 'm.semester', 'f.filiere_code')
+            ->where('prof_id', $id)
+            ->get();
         $modules  = ModuleResource::collection($modules);
         return ($this->DATA('modules', $modules));
     }

@@ -8,6 +8,9 @@ use App\Models\Prof;
 use Illuminate\Database\Seeder;
 use App\Services\ModuleService;
 use App\Models\Student;
+use App\Services\StudentService;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male'
 
         ]);
-                $prof = Prof::create([
+        $prof = Prof::create([
             'lastname' => 'chifo',
             'firstname' => 'master',
             'email' => 'chifo@gmail.com',
@@ -39,7 +42,66 @@ class DatabaseSeeder extends Seeder
             'gender' => 'male'
 
         ]);
-        ModuleService::ADD_MODULE($prof->id);
+
+        $prof1 = Prof::create([
+            'lastname' => 'python',
+            'firstname' => 'achraf',
+            'email' => 'django@gmail.com',
+            'password' => bcrypt('pandas'),
+            'birth_date' => '1998-05-09',
+            'phone_number' => '1234567890',
+            'gender' => 'male'
+
+        ]);
+
+        $prof2 = Prof::create([
+            'lastname' => '3alah',
+            'firstname' => 'nawfal',
+            'email' => '3alah@gmail.com',
+            'password' => bcrypt('pandas'),
+            'birth_date' => '1998-05-09',
+            'phone_number' => '1234567890',
+            'gender' => 'male'
+
+        ]);
+
+
+
+
+
+        Complaint::create([
+            'type' => 'PFE : is problem',
+        ]);
+
+    $currentTimestamp = Carbon::now();
+        db::table('filieres')
+            ->insert(
+                [
+                    [
+                        'filiere_name' => 'sciences mathématiques et informatique',
+                        'filiere_code' => 'SMI',
+                        'created_at' => $currentTimestamp,
+                        'updated_at' => $currentTimestamp
+                    ],
+                    [
+                        'filiere_name' => 'sciences économiques et gestion',
+                        'filiere_code' => 'SEG',
+                        'created_at' => $currentTimestamp,
+                        'updated_at' => $currentTimestamp
+                    ],
+                    [
+                        'filiere_name' => 'sciences de de la matière physique',
+                        'filiere_code' => 'SMP',
+                        'created_at' => $currentTimestamp,
+                        'updated_at' => $currentTimestamp
+
+                    ]
+                ]
+            );
+        ModuleService::SMI($prof->id);
+        // ModuleService::SEG($prof1->id);
+        // ModuleService::SMP($prof2->id);
+
         $student = Student::create([
             'firstname' => 'test',
             'lastname' => 'test',
@@ -49,44 +111,21 @@ class DatabaseSeeder extends Seeder
             'birth_place' => 'casablanca',
             'student_code' => '1234567890',
             'nationality' => 'moroccan',
-            'num_identify'=>'q1323',
+            'id_num'=>'q1323',
             'email'=>'test@mail.com',
-            'phone_number' => '0612345678',
-            'phone_urgent' => '0612345676',
+            'phone' => '0612345678',
+            'emergencyPhone' => '0612345676',
             'address' => 'hay fath',
-            'filiere' => 'SMI',
+            'filiere_id' => 1,
             'password' => bcrypt('motpass'),
             'gender' => 'male',
             'baccalaureat' => 'math',
             'releve_note' => 'note',
             'image_presonnal' => 'image',
             'identify_recto_verso' => 'identite',
-            'inscription_date' => '2021-09-09',
         ]);
 
-        $modules = [
-            1 => ['semester' => 'S1'],
-            2 => ['semester' => 'S1'],
-            3 => ['semester' => 'S1'],
-            4 => ['semester' => 'S1'],
-            5 => ['semester' => 'S1'],
-            6 => ['semester' => 'S1'],
-            7 => ['semester' => 'S1'],
-            8 => ['semester' => 'S2'],
-            9 => ['semester' => 'S2'],
-            10 => ['semester' => 'S2'],
-            11 => ['semester' => 'S2'],
-            12 => ['semester' => 'S2'],
-            13 => ['semester' => 'S2'],
-            14 => ['semester' => 'S2'],
-        ];
-        $student->modules()->attach($modules);
-        Complaint::create([
-            'type' => 'PFE : is problem',
-        ]);
-
-
-
-
+        StudentService::setDefaultModules($student);
     }
+
 }
