@@ -32,13 +32,7 @@ const EntStudentApi = {
         }
     },
     getSchedulePDF: async () => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        return {
-            status: 200,
-            data: {
-                url: "/schedule.pdf"
-            }
-        };
+        return await axiosClient.get("/api/public/emploi");
     },
     getPlanningPDF: async () => {
         await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED

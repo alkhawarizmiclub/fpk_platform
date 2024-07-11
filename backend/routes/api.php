@@ -80,6 +80,6 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
     Route::get('/emploi', function () {
-        return (Storage::url('emploi/smi-s1.pdf'));
+        return (url(Storage::url('emploi/smi-s1.pdf')));
     });
 });
