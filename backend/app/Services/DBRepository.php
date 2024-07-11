@@ -5,6 +5,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use Ramsey\Uuid\Type\Integer;
 
 class DBRepository
 {
@@ -119,5 +120,13 @@ class DBRepository
             ->where('s.apogee', $apogee)
             ->get();
         return ($students);
+    }
+
+    public function getStudentAccounts(string $apogee)
+    {
+        $accounts = DB::table('accounts')
+        ->where('apogee', $apogee)
+        ->get();
+        return ($accounts);
     }
 }
