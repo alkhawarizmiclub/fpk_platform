@@ -1,5 +1,11 @@
 import { useState } from "react";
 import EntPageContainer from "../../../../components/ent/EntPageContainer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import Paths from "../../../../routers/Paths.json";
+import EntStudentApi from "../../../../api/EntStudentApi";
+
 
 const EntStudentEDocumentsCreatePage = () => {
 
@@ -19,20 +25,30 @@ const EntStudentEDocumentsCreatePage = () => {
         { id: 'Internship_agreement', label: 'Convention de Stage' },
     ];
 
-    const documentChangeHandler = (e) => setDocumentType(e.target.value);
+    const submitHandler = (e) => {
+        e.preventDefault();
 
-    const submitHandler = () => {
+        EntStudentApi.demandEDocument()
+            .then(() => {
+                navigate(Paths.E_STUDENT_E_DOCUMENTS_PAGE);
+            })
+            .catch(() => {
+                // TODO: Add error handling
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
 
     }
 
     return (
         <EntPageContainer title="E-Documents">
             <div className="mx-auto p-4">
-                <form onSubmit={submitHandler} className="space-y-4">
+                <form onSubmit={submitHandler} className="mx-auto max-w-xl flex flex-col gap-5">
 
                     <div>
                         <label htmlFor="documentType" className="block text-sm font-medium text-gray-700">Sélectionnez le type de document</label>
-                        <select id="documentType" name="documentType" value={documentType} onChange={documentChangeHandler} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
+                        <select id="documentType" name="documentType" value={documentType} onChange={(e) => setDocumentType(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required >
                             <option value="">-- Sélectionnez un document --</option>
                             {documentOptions.map((option) => (
                                 <option key={option.id} value={option.id}>
@@ -42,10 +58,17 @@ const EntStudentEDocumentsCreatePage = () => {
                         </select>
                     </div>
 
-                    <div>
-                        <button type="submit" className={`py-2 px-4 bg-blue-500 text-white rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`} disabled={isSubmitting} >
-                            {isSubmitting ? 'Processing...' : 'Request Document'}
+                    <div className="flex justify-center gap-5">
+
+                        <button type="submit" disabled={isSubmitting} className={`px-5 py-3 space-x-2 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>
+                            {isSubmitting ? (<FontAwesomeIcon icon={faSpinner} className="text-lg loader" />) : (<FontAwesomeIcon icon={faSave} />)}
+                            <span>Demander</span>
                         </button>
+
+                        {!isSubmitting &&
+                            <Link to={Paths.E_STUDENT_E_DOCUMENTS_PAGE} className={`px-5 py-3 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>Annuler</Link>
+                        }
+
                     </div>
 
                 </form>

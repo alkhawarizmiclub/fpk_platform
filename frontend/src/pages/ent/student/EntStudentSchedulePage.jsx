@@ -43,7 +43,7 @@ const EntStudentSchedulePage = () => {
 
                     <div className="rounded-lg overflow-hidden">
                         <object data={pdfFilePath} type="application/pdf" className="w-full aspect-video">
-                            <p>Alternative text - include a link <a href={pdfFilePath}><a href={pdfFilePath} download={pdfFilename} target="_blank" rel="noreferrer" className="p-3 bg-slate-300">Telecharger</a></a></p>
+                            <p>Alternative text - include a link <a href={pdfFilePath} download={pdfFilename} target="_blank" rel="noreferrer" className="p-3 bg-slate-300">Telecharger</a></p>
                         </object>
                     </div>
                 </div >
