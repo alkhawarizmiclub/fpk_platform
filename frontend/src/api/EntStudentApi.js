@@ -65,6 +65,10 @@ const EntStudentApi = {
             ]
         };
     },
+    demandEDocument: async (document_type) => {
+        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        console.log(document_type);
+    },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");
         return response;
