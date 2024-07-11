@@ -10,8 +10,8 @@ const SignUpPage = () => {
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
-    nom: '',
-    prenom: '',
+    nomArabe: '',
+    prenomArabe: '',
     date: '',
     lieu: '',
     code: '',
@@ -25,7 +25,12 @@ const SignUpPage = () => {
     password: '',
     confirmPassword: '',
     filiere: '',
+    tbac: '',
+    datebac: '',
+    mbac: '',
     studentPhoto: '',
+    cniFile: false,
+    Bac: false,
   });
   const [errors, setErrors] = useState('');
 
@@ -54,44 +59,105 @@ const SignUpPage = () => {
     const doc = new jsPDF();
 
     // Adding header
-    doc.addImage('/lo.jpeg', 'JPEG', 10, 10, 30, 30); // Adjust path and size as needed
+    doc.addImage('/lo.png', 'png', 10, 10, 30, 30); // Replace with your logo path and size
     doc.setFontSize(18);
-    doc.text('Faculte Polidyciplinaire de Khouribga ', 105, 25, null, null, 'center');
+    doc.text('Université Soltan Molay', 105, 25, { align: 'center' });
+    doc.text(' Selaiman', 105, 32, { align: 'center' });
+    doc.text('Faculté Polydisciplinaire de', 105, 39, { align: 'center' });
+    doc.text(' Khouribga', 105, 46, { align: 'center' });
+    
     if (formData.studentPhoto) {
       doc.addImage(formData.studentPhoto, 'PNG', 150, 15, 40, 40); // Adjust the dimensions as needed
     }
+    
 
     // Adding student info table
     const studentInfo = [
+      [{ content: 'Informations personnelles', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
+      ['Champs', 'Détails'],
       ['Nom', formData.nom],
-      ['Prenom', formData.prenom],
-      ['Famille', formData.nom],
-      ['Personnel', formData.prenom],
+      ['Prénom', formData.prenom],
+      ['Nom en arabe', formData.nomArabe],
+      ['Prénom en arabe', formData.prenomArabe],
       ['Date de Naissance', formData.date],
       ['Lieu de Naissance', formData.lieu],
-      ['Code Etudiant', formData.code],
       ['Nationalité', formData.nationality],
       ['CIN/Passport', formData.nationality === 'marocain' ? formData.cin : formData.passport],
       ['Email', formData.email],
       ['Téléphone', formData.phone],
       ['Téléphone Urgent', formData.emergencyPhone],
       ['Adresse', formData.address],
-      ['Filière', formData.filiere],
+      
     ];
-
     doc.autoTable({
-      head: [['Champ', 'Détails']],
       body: studentInfo,
       startY: 50, // Adjust as needed
       styles: { fontSize: 10 },
+      headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
+      bodyStyles: { halign: 'left' },
+      columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
+      tableLineWidth: 0.1, // Line width between columns
     });
+  
+
+    // Adding academic info table
+    const academicInfo = [
+      [{ content: 'Parcours Académique', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
+      ['Champs', 'Détails'],
+      ['Filière', formData.filiere],
+      ['Type du  Baccalauréat', formData.tbac],
+      ['CNE', formData.code],
+      ['Année du Baccalauréat', formData.datebac],
+      ['Moyenne du Bac', formData.mbac], // Replace with correct key
+    ];
+  
+    doc.autoTable({
+      body: academicInfo,
+      startY: doc.autoTable.previous.finalY + 10, // Start after previous table + padding
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
+      bodyStyles: { halign: 'left' },
+      columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
+      tableLineWidth: 0.1, // Line width between columns
+    });
+  
+  
+    // Adding documents provided section
+    const documentsProvided = [
+      [{ content: 'Documents Fournis', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
+      ['Champs', 'Détails'],
+      ['Copie de la CNI (Recto-verso)', formData.cniFile ? 'X' : ''],
+      ['Copie du diplôme du Baccalauréat', formData.Bac ? 'X' : ''],
+    ];
+  
+    doc.autoTable({
+      body: documentsProvided,
+      startY: doc.autoTable.previous.finalY + 10, // Start after previous table + padding
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
+      bodyStyles: { halign: 'left' },
+      columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
+      tableLineWidth: 0.1, // Line width between columns
+    });
+    
+   // Adding download date
+const downloadDate = new Date().toLocaleDateString('fr-FR');
+doc.setFontSize(10);
+doc.text(`Date de téléchargement : ${downloadDate}`, 180, doc.autoTable.previous.finalY + 10, null, null, 'right');
+   
 
     // Adding footer
-    doc.setFontSize(10);
-    doc.text('Rue Zitouna ', 105, doc.internal.pageSize.height - 10, null, null, 'center');
+    doc.setLineWidth(0.5);
+  doc.line(10, doc.internal.pageSize.height - 20, doc.internal.pageSize.width - 10, doc.internal.pageSize.height - 20);
+  doc.setFontSize(8);
+  doc.text('www.example.com', 105, doc.internal.pageSize.height - 8, null, null, 'center'); 
 
-    doc.save('etudiant_info.pdf');
+    doc.text('tel: +212 456 789 || Fax: +212 5671234475' , 105, doc.internal.pageSize.height - 4, null, null, 'center'); // Replace with actual phone number
+    
+
+    doc.save('informations_etudiant.pdf');
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep(step)) {
@@ -110,8 +176,8 @@ const SignUpPage = () => {
         return (
           formData.nom &&
           formData.prenom &&
-          formData.nom &&
-          formData.prenom &&
+          formData.nomArabe &&
+          formData.prenomArabe &&
           formData.date &&
           formData.lieu &&
           formData.code &&
@@ -127,7 +193,10 @@ const SignUpPage = () => {
         );
       case 3:
         return (
-          formData.filiere
+          formData.filiere &&
+          formData.tbac &&
+          formData.datebac  &&
+          formData.mbac 
         );
       case 4:
         // Adjust validation logic as necessary for file uploads
@@ -209,10 +278,10 @@ const SignUpPage = () => {
                     </label>
                     <input
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="nom"
+                      id="nomArabe"
                       type="text"
                       placeholder="الإسم العائلي"
-                      value={formData.nom}
+                      value={formData.nomArabe}
                       onChange={handleChange}
                     />
                   </div>
@@ -222,10 +291,10 @@ const SignUpPage = () => {
                     </label>
                     <input
                       className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                      id="prenom"
+                      id="prenomArabe"
                       type="text"
                       placeholder="الإسم الشخصي"
-                      value={formData.prenom}
+                      value={formData.prenomArabe}
                       onChange={handleChange}
                     />
                   </div>
@@ -440,7 +509,7 @@ const SignUpPage = () => {
             )}
             {step === 3 && (
               <form id="formEtape3">
-                <div className="mb-4">
+                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="filiere">
                     Filière
                   </label>
@@ -460,6 +529,61 @@ const SignUpPage = () => {
                       <option value="GEO">Géographie</option>
                       <option value="EA">Etude arabes</option>
                     </select>
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tbac">
+                    Type du Baccalauréat
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="tbac"
+                      value={formData.tbac}
+                      onChange={handleChange}
+                      className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                      <option value="">Select</option>
+                      <option value="SMA">SCIENCES MATHÉMATIQUES A </option>
+                      <option value="SMB">SSCIENCES MATHÉMATIQUES B</option>
+                      <option value="PC"> SCIENCES PHYSIQUES</option>
+                      <option value="SVT"> SVT</option>
+                      <option value="SE">SCIENCES ÉCONOMIQUES</option>
+                      <option value="SGC">TECHNIQUES DE GESTION ET COMPTABILITÉ</option>
+                      <option value="STE">SCIENCES ET TECHNOLOGIES ÉLECTRIQUES</option>
+                      <option value="STM">SCIENCES ET TECHNOLOGIES MÉCANIQUES</option>
+                      <option value="SC">SCIENCES DE LA CHARIAA</option>
+                      <option value="L">LETTRES</option>
+                      <option value="SH">SCIENCES HUMAINES</option>
+                    </select>
+                  </div>
+                </div>
+               
+                <div className="flex flex-wrap -mx-3 mb-6">
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="datebac">
+                    Année du Baccalauréat
+                    </label>
+                    <input
+                      id="datebac"
+                      type="text"
+                      placeholder="2020"
+                      value={formData.datebac}
+                      onChange={handleChange}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mbac">
+                    Moyenne du Bac
+                    </label>
+                    <input
+                      id="mbac"
+                      type="tel"
+                      placeholder="20.00"
+                      value={formData.mbac}
+                      onChange={handleChange}
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
                   </div>
                 </div>
                 {errors && <p className="text-red-500 text-xs italic">{errors}</p>}
@@ -488,7 +612,7 @@ const SignUpPage = () => {
                     CNI recto-verso
                   </label>
                   <input
-                    id="file"
+                    id="cnifile"
                     type="file"
                     onChange={handleFileUpload}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
