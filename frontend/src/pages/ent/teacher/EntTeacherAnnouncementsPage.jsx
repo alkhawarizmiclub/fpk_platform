@@ -153,6 +153,7 @@
 import { useState } from 'react';
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 import EntTeacherApi from '../../../api/EntTeacherApi';
+import EntTeacherAnnouncementSubmit from '../../../components/ent/EntTeacherAnnouncementSubmit';
 
 const EntTeacherAnnouncementsPage = () => {
     const [title, setTitle] = useState('');
@@ -203,10 +204,12 @@ const EntTeacherAnnouncementsPage = () => {
         setTags('');
     };
 
+    
+
     return (
         <EntPageContainer title="Announcements">
             <div className="flex flex-col space-y-4">
-                <form onSubmit={handleCreate} className="space-y-4">
+                <form onSubmit={handleCreate}  className="space-y-4" >
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
                         <input
@@ -229,6 +232,7 @@ const EntTeacherAnnouncementsPage = () => {
                     <div>
                         <label htmlFor="thumbnail" className="block text-sm font-medium text-gray-700">Thumbnail</label>
                         <input
+                            required
                             type="file"
                             id="thumbnail"
                             accept="image/*"
@@ -269,47 +273,9 @@ const EntTeacherAnnouncementsPage = () => {
                     <h2 className="text-lg font-medium text-gray-900">Existing Announcements</h2>
                     {announcements.length > 0 ? (
                         <ul className="mt-4 space-y-4">
-                            {announcements.map(announcement => (
-                                
-                                // const handleSubmit = async () => {
-                                //     EntTeacherApi.submitAnnouncement(title, thumbnail,tags,message,annoncePhoto)
-                                //         .then((response)=>{
-                                //             console.log(response);
-                                //             alert('announce successfully submitted!');
-                                //         })
-                                //         .catch((error)=>{
-                                //             console.log(error);
-                                //             alert('announce failed to be submitted!');
-                                //         })
-                                //         .finally();
-                                // }
+                            {announcements.map((announcement,i) => (
 
-                                <li key={announcement.id}  className="p-4 bg-white shadow rounded-lg">
-                                    {announcement.thumbnail && (
-                                        <img
-                                            src={announcement.thumbnail}
-                                            alt="Thumbnail"
-                                            className="w-full h-48 object-contain mb-4 rounded-lg"
-                                        />
-                                    )}
-                                    <h3 className="text-xl font-semibold text-gray-800">{announcement.title}</h3>
-                                    <p className="mt-2 text-gray-600">{announcement.message}</p>
-                                    {announcement.annoncePhoto && (
-                                        <img
-                                            src={announcement.annoncePhoto}
-                                            alt="Annonce Photo"
-                                            className="w-full h-48 object-contain mb-4 rounded-lg"
-                                        />
-                                    )}
-                                    <p className="mt-2 text-gray-600"><strong>Tags:</strong> {announcement.tags}</p>
-                                    <span className="block mt-4 text-sm text-gray-500">Posted on: {announcement.date}</span>
-                                    <button
-                                        type="submit"
-                                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                    >
-                                        Envoyer
-                                    </button>
-                                </li>
+                                <EntTeacherAnnouncementSubmit key={i} announcement={announcement}/>
                             ))}
                         </ul>
                     ) : (

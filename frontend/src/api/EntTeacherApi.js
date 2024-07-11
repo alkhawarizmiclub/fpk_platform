@@ -12,11 +12,22 @@ const EntTeacherApi = {
             { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
         ]
     },
-  
-    submitAnnouncement: (title, thumbnail_path, tags, content, poster_image_path) => {
-        console.log(title, thumbnail_path, tags, content, poster_image_path);
+
+    submitAnnouncement: async (title, thumbnail_path, tags, content, poster_image_path) => {
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('thumbnail_path', thumbnail_path);
+        formData.append('tags', tags);
+        formData.append('content', content);
+        formData.append('poster_image_path', poster_image_path);
+
+        return await axiosClient.post("/api/prof/announce", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
     },
-  
+
     submitGrades: async (apogee, module_id, normale, ratt) => {
         return await axiosClient.post("/api/prof/add-result", { apogee, module_id, normale, ratt });
     },
