@@ -60,6 +60,7 @@ const EntStudentComplaintsCreatePage = () => {
                 <div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
 
             ) : (
+
                 <form onSubmit={submitHandler} className="mx-auto max-w-xl flex flex-col gap-5">
 
                     <div>
@@ -85,9 +86,9 @@ const EntStudentComplaintsCreatePage = () => {
 
                     <div className="flex justify-center gap-5">
 
-                        <button type="submit" disabled={isSubmitting} className={`px-5 py-3 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>
+                        <button type="submit" disabled={isSubmitting} className={`px-5 py-3 space-x-2 rounded-lg text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-300`}>
                             {isSubmitting ? (<FontAwesomeIcon icon={faSpinner} className="text-lg loader" />) : (<FontAwesomeIcon icon={faSave} />)}
-                            <span> Soumettre</span>
+                            <span>Soumettre</span>
                         </button>
 
                         {!isSubmitting &&
