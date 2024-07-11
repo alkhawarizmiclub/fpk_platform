@@ -23,10 +23,10 @@ class StoreAnnouncementRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'thumbnail_path' => 'required|mimes:jpeg,jpg,png|max:512',
+            'thumbnail_path' => 'required|mimes:jpeg,jpg,png',
             'tags' => 'string|max:1024|nullable',
             'content' => 'required|string|max:65535',
-            'thumbnail_path' => 'mimes:jpeg,jpg,png|max:512',
+            'poster_image_path' => 'mimes:jpeg,jpg,png',
         ];
     }
     public function messages(): array
