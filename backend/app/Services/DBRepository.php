@@ -5,6 +5,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use Ramsey\Uuid\Type\Integer;
 
 class DBRepository
 {
@@ -46,7 +47,7 @@ class DBRepository
     {
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->where('ms.module_id', $moduleId)
             ->get();
         return ($students);
@@ -59,7 +60,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.firstname', 'like', $fname . '%');
             })
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
@@ -72,7 +73,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.lastname', 'like', $lname . '%');
             })
-            ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
@@ -86,7 +87,7 @@ class DBRepository
                         ->where('s.lastname', 'like', $lname . '%')
                         ->where('s.firstname', 'like', $fname . '%');
                 })
-                ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+                ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
                 ->get());
         }
         else if (!$fname)
@@ -105,7 +106,7 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('ms.apogee', '=', $apogee);
             })
-                ->select('s.image_presonnal','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+                ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
             ->get();
         return ($student);
     }
@@ -119,5 +120,34 @@ class DBRepository
             ->where('s.apogee', $apogee)
             ->get();
         return ($students);
+    }
+
+    public function getStudentAccounts(string $apogee)
+    {
+        $accounts = DB::table('accounts')
+        ->where('apogee', $apogee)
+        ->get();
+        return ($accounts);
+    }
+
+            // 'apogee' => $this->apogee,
+            // 'firstname' => $this->firstname,
+            // 'lastname' => $this->lastname,
+            // 'firstname_ar' => $this->firstname_ar,
+            // 'lastname_ar' => $this->lastname_ar,
+            // 'email' => $this->email,
+            // 'phone_number' => $this->phone_number,
+            // 'phone_urgant' => $this->phone_urgent,
+            // 'gender' => $this->gender,
+            // 'birth_date' => $this->birth_date,
+            // 'role' => 'student'
+    public function getStudentProfile(string $apogee)
+    {
+        $student = DB::table('students as s')
+        ->join('filieres as f', 's.filiere_id', '=', 'f.id')
+        ->where('apogee', $apogee)
+        ->select('s.apogee', 's.firstname', 's.lastname', 's.firstname_ar', 's.lastname_ar', 's.email', 's.phone_number', 's.emergency_phone', 'f.filiere_name')
+        ->get();
+        return ($student);
     }
 }
