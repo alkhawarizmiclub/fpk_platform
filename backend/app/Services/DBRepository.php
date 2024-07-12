@@ -157,7 +157,8 @@ class DBRepository
             'f.filiere_name',
             's.filiere_id',
         )
-        ->get();
+        ->first();
+        $student->role = 'student';
         return ($student);
     }
 }
