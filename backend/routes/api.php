@@ -47,9 +47,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::post('/complaint', [StudentController::class, 'complaints']);
     Route::get('/complaint', [StudentController::class, 'getComplaints']);
     Route::delete('/complaint/{id}', [StudentController::class, 'deleteComplaint']);
+    Route::get('/accounts', [StudentController::class, 'accounts']);
 
     // TODO:
-    // Route::get('/accounts', [StudentController::class, 'accounts']);
     // Route::post('/complaints', [StudentController::class, 'add-complaints']);
 });
 

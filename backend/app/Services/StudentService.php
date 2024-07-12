@@ -93,7 +93,7 @@ class StudentService
             [
                 'status' => 'success',
                 'message' => 'Student logged in successfully',
-                'data' => new StudentResource($student),
+                'data' => $this->dbRepository->getStudentProfile($student->apogee),
                 'token' => $token->plainTextToken
             ]
         );
@@ -112,47 +112,30 @@ class StudentService
         );
     }
 
-
     public function save(StoreStudentRequest $request): JsonResponse
     {
-
-        $baccalaureat = $request->file('baccalaureat')?->store('student/baccalaureat','public');
+        $baccalaureat = $request->file('baccalaureat')?->store('student/baccalaureat', 'public');
         $releve_note = $request->file('releve_note')?->store('student/releve_note', 'public');
-        $image_presonnal = $request->file('studentPhoto')?->store('student/image_presonnal', 'public');
+        $student_photo = $request->file('student_photo')?->store('student/student_photo', 'public');
         $identify_recto_versto = $request->file('identify_recto_verso')?->store('student/identify', 'public');
-
 
         $student = Student::create(
             [
-                'firstname' => $request->prenom_fr,
-                'lastname' => $request->nom_fr,
-                'firstname_ar' => $request->prenom_ar,
-                'lastname_ar' => $request->nom_ar,
-                'birth_date' => $request->date,
-                'birth_place' => $request->lieu,
-                'student_code' => $request->code,
-                'nationality' => $request->nationality,
-                'id_num' => $request->id_num,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'emergencyPhone' => $request->emergencyPhone,
-                'address' => $request->address,
-                'filiere_id' => $request->filiere,
-                'password' => bcrypt($request->password),
-                'gender' => $request->gender,
+                ...$request->all(),
                 'baccalaureat' => $baccalaureat,
                 'releve_note' => $releve_note,
-                'image_presonnal' => $image_presonnal,
-                'identify_recto_verso' => $identify_recto_versto,
+                'student_photo' => $student_photo,
+                'identify_recto_verso' => $identify_recto_versto
             ]
         );
+
         $this->setDefaultModules($student);
         event(new Registered($student));
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student created successfully',
-                'data' => new StudentResource($student)
+                'data' => $this->dbRepository->getStudentProfile($student->apogee)
             ],
             201
         );
@@ -218,6 +201,16 @@ class StudentService
                 'data' => StudentComplaintResource::collection($complaint)
             ],
             201
+        ));
+    }
+    public function accounts(Student $student)
+    {
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student accounts',
+                'data' => $this->dbRepository->getStudentAccounts($student)
+            ]
         ));
     }
 }
