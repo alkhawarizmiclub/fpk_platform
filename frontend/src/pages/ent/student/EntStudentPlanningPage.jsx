@@ -16,7 +16,7 @@ const EntStudentPlanningPage = () => {
 
         EntStudentApi.getPlanningPDF()
             .then((response) => {
-                setPdfFilePath(response.data.url);
+                setPdfFilePath(response.data);
                 const parts = pdfFilePath.split('/');
                 setPdfFilename(parts[parts.length - 1]);
             })
