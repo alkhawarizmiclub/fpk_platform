@@ -147,7 +147,8 @@ class DBRepository
         ->join('filieres as f', 's.filiere_id', '=', 'f.id')
         ->where('apogee', $apogee)
         ->select('s.apogee', 's.firstname', 's.lastname', 's.firstname_ar', 's.lastname_ar', 's.email', 's.phone_number', 's.emergency_phone', 'f.filiere_name')
-        ->get();
+        ->first();
+        $student->role = 'student';
         return ($student);
     }
 }
