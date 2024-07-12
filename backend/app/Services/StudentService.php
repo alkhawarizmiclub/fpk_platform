@@ -209,7 +209,7 @@ class StudentService
             [
                 'status' => 'success',
                 'message' => 'Student accounts',
-                'data' => $this->dbRepository->getStudentAccounts($student)
+                'data' => $this->dbRepository->getStudentAccounts($student->apogee)
             ]
         ));
     }

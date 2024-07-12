@@ -20,16 +20,7 @@ const EntStudentApi = {
         return api_data.data;
     },
     getAccountsData: async () => {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        return {
-            status: 200,
-            data: [
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-            ]
-        }
+        return await axiosClient.get("/api/student/accounts");
     },
     getSchedulePDF: async () => {
         return await axiosClient.get("/api/public/emploi");
