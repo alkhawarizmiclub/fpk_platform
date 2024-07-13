@@ -58,7 +58,6 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Students found successfully',
-                // 'data' => StudentNoteResource::collection($students)
                 'data' => $students
             ]
         ));
@@ -94,12 +93,11 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Prof registered successfully',
-                'data' =>new ProfResource( $prof)
+                'data' => new ProfResource($prof)
             ]
         );
     }
 
-    // TODO : add expration date
     public function login(LoginRequest $request): JsonResponse
     {
         $request->authenticate();
@@ -109,7 +107,7 @@ class ProfService
         return response()->json(
             [
                 'status' => 'success',
-                'data' => new ProfResource($prof),
+                'data' => $this->dbRepository->getProfProfile($prof),
                 'token' => $token->plainTextToken,
             ]
         );
@@ -196,6 +194,15 @@ class ProfService
                 'message' => 'Announcement deleted successfully',
             ],
             202
+        );
+    }
+    public function profile(Prof $prof)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfProfile($prof)
+            ]
         );
     }
 }

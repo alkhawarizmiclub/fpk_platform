@@ -63,7 +63,11 @@ class StudentController extends Controller
         $student = request()->user();
         return ($this->studentService->finalResult($student));
     }
-
+    public function show()
+    {
+        $student = request()->user();
+        return ($this->studentService->profile($student));
+    }
     public function complaints(StoreStudentComplaintRequest $request)
     {
         return ($this->studentService->complaints($request));
