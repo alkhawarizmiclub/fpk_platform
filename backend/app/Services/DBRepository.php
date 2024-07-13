@@ -238,8 +238,8 @@ class DBRepository
                 ->get();
             foreach ($schedules as $sch)
             {
-                $sch->time_schedule = Storage::url($sch->time_schedule);
-                $sch->exam_schedule = Storage::url($sch->exam_schedule);
+                $sch->time_schedule = url(Storage::url($sch->time_schedule));
+                $sch->exam_schedule = url(Storage::url($sch->exam_schedule));
             }
             return ($schedules);
         }
@@ -247,8 +247,8 @@ class DBRepository
         $schedule = DB::table('filiere_schedules')
             ->where('filiere_id', $filiere_id)
             ->first();
-        $schedule->time_schedule = Storage::url($schedule->time_schedule);
-        $schedule->exam_schedule = Storage::url($schedule->exam_schedule);
+        $schedule->time_schedule = url(Storage::url($schedule->time_schedule));
+        $schedule->exam_schedule = url(Storage::url($schedule->exam_schedule));
 
         return ($schedule);
     }

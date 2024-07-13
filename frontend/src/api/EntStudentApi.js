@@ -22,11 +22,11 @@ const EntStudentApi = {
     getAccountsData: async () => {
         return await axiosClient.get("/api/student/accounts");
     },
-    getSchedulePDF: async () => {
-        return await axiosClient.get("/api/public/emploi");
+    getSchedulePDF: async (major_id) => {
+        return await axiosClient.get(`/api/public/filieres/schedule?id=${major_id}`);
     },
-    getPlanningPDF: async () => {
-        return await axiosClient.get("/api/public/emploi");
+    getPlanningPDF: async (major_id) => {
+        return await axiosClient.get(`/api/public/filieres/schedule?id=${major_id}`);
     },
     getResultsData: async () => {
         return await axiosClient.get("/api/student/result");
