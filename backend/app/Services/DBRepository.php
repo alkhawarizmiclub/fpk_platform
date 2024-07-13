@@ -5,7 +5,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
-use Ramsey\Uuid\Type\Integer;
+use App\Models\Prof;
+use Illuminate\Support\Facades\Storage;
 
 class DBRepository
 {
@@ -14,8 +15,6 @@ class DBRepository
         $complaints = DB::table('student_complaints')
             ->join('complaints', 'student_complaints.complaint_id', '=', 'complaints.id')
             ->where('student_complaints.apogee', $student->apogee)
-            // ->where('student_complaints.complaint_id', $request->complaint_id)
-            // ->orderBy('student_complaints.created_at', 'desc')
             ->select('student_complaints.*', 'complaints.type')
             ->get();
         return ($complaints);
@@ -94,10 +93,8 @@ class DBRepository
             return ($this->findByFirstName($moduleId, $lname));
         else if (!$lname)
             return ($this->findByLastName($moduleId, $fname));
-        // you should never reach this point but just in case
         return ([]);
     }
-    // TODO : get image from public storage
     public function getByApogee(string $moduleId, string $apogee)
     {
         $student = DB::table('students as s')
@@ -130,17 +127,6 @@ class DBRepository
         return ($accounts);
     }
 
-            // 'apogee' => $this->apogee,
-            // 'firstname' => $this->firstname,
-            // 'lastname' => $this->lastname,
-            // 'firstname_ar' => $this->firstname_ar,
-            // 'lastname_ar' => $this->lastname_ar,
-            // 'email' => $this->email,
-            // 'phone_number' => $this->phone_number,
-            // 'phone_urgant' => $this->phone_urgent,
-            // 'gender' => $this->gender,
-            // 'birth_date' => $this->birth_date,
-            // 'role' => 'student'
     public function getStudentProfile(string $apogee)
     {
         $student = DB::table('students as s')
@@ -160,5 +146,34 @@ class DBRepository
         ->first();
         $student->role = 'student';
         return ($student);
+    }
+
+    public function getProfProfile(Prof $prof)
+    {
+        $prof = DB::table('profs as p')
+        ->where('apogee', $prof->id)
+        ->select('p.apogee',
+            'p.firstname',
+            'p.lastname',
+            'p.firstname_ar',
+            'p.lastname_ar',
+            'p.email',
+            'p.phone_number',
+            'p.emergency_phone',
+        )
+        ->first();
+        $prof->role = 'teacher';
+        return ($prof);
+    }
+    public function getFiliereSchedules(string $filiere_id)
+    {
+        $schedule = DB::table('filiere_schedules')
+        ->where('filiere_id', $filiere_id)
+        ->first();
+
+        $schedule->time_schedule = Storage::url($schedule->time_schedule);
+        $schedule->exam_schedule = Storage::url($schedule->exam_schedule);
+
+        return ($schedule);
     }
 }

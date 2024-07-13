@@ -203,6 +203,18 @@ class StudentService
             201
         ));
     }
+
+    public function profile(Student $student)
+    {
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student profile',
+                'data' => $this->dbRepository->getStudentProfile($student->apogee)
+            ]
+        ));
+    }
+
     public function accounts(Student $student)
     {
         return (response()->json(
