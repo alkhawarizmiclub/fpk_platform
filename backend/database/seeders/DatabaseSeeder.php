@@ -173,5 +173,27 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         );
+        DB::table('prof_schedules')->insert(
+            [
+                [
+                    'prof_id' => $prof->id,
+                    'time_schedule' => 'time_schedule/prof1.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
+                [
+                    'prof_id' => $prof1->id,
+                    'time_schedule' => 'time_schedule/prof2.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
+                [
+                    'prof_id' => $prof2->id,
+                    'time_schedule' => 'time_schedule/prof3.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
+            ]
+        );
     }
 }
