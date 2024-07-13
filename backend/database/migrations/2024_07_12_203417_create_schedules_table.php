@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('filiere_schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('filier_id');
+            $table->unsignedBigInteger('filiere_id');
             $table->string('time_schedule');
             $table->string('exam_schedule');
             $table->timestamps();
 
-            $table->foreign('filier_id')
+            $table->foreign('filiere_id')
                 ->references('id')
                 ->on('filieres')
                 ->onDelete('cascade');

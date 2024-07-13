@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
             'type' => 'PFE : is problem',
         ]);
 
-    $currentTimestamp = Carbon::now();
+        $currentTimestamp = Carbon::now();
         db::table('filieres')
             ->insert(
                 [
@@ -126,8 +126,8 @@ class DatabaseSeeder extends Seeder
             'birth_place' => 'casablanca',
             'massar_code' => '1234567890',
             'nationality' => 'moroccan',
-            'id_num'=>'q1323',
-            'email'=>'test@mail.com',
+            'id_num' => 'q1323',
+            'email' => 'test@mail.com',
             'phone_number' => '0612345678',
             'emergency_phone' => '0612345676',
             'address' => 'hay fath',
@@ -141,6 +141,37 @@ class DatabaseSeeder extends Seeder
         ]);
 
         StudentService::setDefaultModules($student);
-    }
+        // DB::table('final_results')->insert([
+        //     'student_id' => $student->id,
+        //     'result' => 12.5,
+        //     'created_at' => $currentTimestamp,
+        //     'updated_at' => $currentTimestamp
+        // ]);
+        DB::table('filiere_schedules')->insert(
+            [
+                [
+                    'filiere_id' => 1,
+                    'time_schedule' => 'time_schedule/smi.pdf',
+                    'exam_schedule' => 'exam_schedule/smi.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
 
+                [
+                    'filiere_id' => 2,
+                    'time_schedule' => 'time_schedule/seg.pdf',
+                    'exam_schedule' => 'exam_schedule/seg.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
+                [
+                    'filiere_id' => 3,
+                    'time_schedule' => 'time_schedule/smp.pdf',
+                    'exam_schedule' => 'exam_schedule/smp.pdf',
+                    'created_at' => $currentTimestamp,
+                    'updated_at' => $currentTimestamp
+                ],
+            ]
+        );
+    }
 }
