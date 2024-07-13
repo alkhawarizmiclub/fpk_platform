@@ -46,7 +46,17 @@ class DBRepository
     {
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
-            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select(
+                's.student_photo',
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                'ms.module_id',
+                'ms.normale',
+                'ms.ratt',
+                'ms.inscrit_number',
+                'ms.semester'
+            )
             ->where('ms.module_id', $moduleId)
             ->get();
         return ($students);
@@ -59,7 +69,17 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.firstname', 'like', $fname . '%');
             })
-            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select(
+                's.student_photo',
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                'ms.module_id',
+                'ms.normale',
+                'ms.ratt',
+                'ms.inscrit_number',
+                'ms.semester'
+            )
             ->get();
         return ($student);
     }
@@ -72,7 +92,17 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.lastname', 'like', $lname . '%');
             })
-            ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select(
+                's.student_photo',
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                'ms.module_id',
+                'ms.normale',
+                'ms.ratt',
+                'ms.inscrit_number',
+                'ms.semester'
+            )
             ->get();
         return ($student);
     }
@@ -86,10 +116,19 @@ class DBRepository
                         ->where('s.lastname', 'like', $lname . '%')
                         ->where('s.firstname', 'like', $fname . '%');
                 })
-                ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+                ->select(
+                    's.student_photo',
+                    's.apogee',
+                    's.firstname',
+                    's.lastname',
+                    'ms.module_id',
+                    'ms.normale',
+                    'ms.ratt',
+                    'ms.inscrit_number',
+                    'ms.semester'
+                )
                 ->get());
-        }
-        else if (!$fname)
+        } else if (!$fname)
             return ($this->findByFirstName($moduleId, $lname));
         else if (!$lname)
             return ($this->findByLastName($moduleId, $fname));
@@ -103,7 +142,17 @@ class DBRepository
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('ms.apogee', '=', $apogee);
             })
-                ->select('s.student_photo','s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'ms.semester')
+            ->select(
+                's.student_photo',
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                'ms.module_id',
+                'ms.normale',
+                'ms.ratt',
+                'ms.inscrit_number',
+                'ms.semester'
+            )
             ->get();
         return ($student);
     }
@@ -113,7 +162,18 @@ class DBRepository
         $students = DB::table('students as s')
             ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
             ->join('modules as m', 'ms.module_id', '=', 'm.id')
-            ->select('s.apogee', 's.firstname', 's.lastname', 'ms.module_id', 'm.module_name', 'ms.normale', 'ms.ratt', 'ms.inscrit_number', 'm.semester', 'ms.inscrit_year')
+            ->select(
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                'ms.module_id',
+                'm.module_name',
+                'ms.normale',
+                'ms.ratt',
+                'ms.inscrit_number',
+                'm.semester',
+                'ms.inscrit_year'
+            )
             ->where('s.apogee', $apogee)
             ->get();
         return ($students);
@@ -122,55 +182,71 @@ class DBRepository
     public function getStudentAccounts(string $apogee)
     {
         $accounts = DB::table('accounts')
-        ->where('apogee', $apogee)
-        ->get();
+            ->where('apogee', $apogee)
+            ->get();
         return ($accounts);
     }
 
     public function getStudentProfile(string $apogee)
     {
         $student = DB::table('students as s')
-        ->join('filieres as f', 's.filiere_id', '=', 'f.id')
-        ->where('apogee', $apogee)
-        ->select('s.apogee',
-            's.firstname',
-            's.lastname',
-            's.firstname_ar',
-            's.lastname_ar',
-            's.email',
-            's.phone_number',
-            's.emergency_phone',
-            'f.filiere_name',
-            's.filiere_id',
-        )
-        ->first();
+            ->join('filieres as f', 's.filiere_id', '=', 'f.id')
+            ->where('apogee', $apogee)
+            ->select(
+                's.apogee',
+                's.firstname',
+                's.lastname',
+                's.firstname_ar',
+                's.lastname_ar',
+                's.email',
+                's.phone_number',
+                's.emergency_phone',
+                'f.filiere_name',
+                's.filiere_id',
+            )
+            ->first();
         $student->role = 'student';
         return ($student);
     }
 
+
+
     public function getProfProfile(Prof $prof)
     {
         $prof = DB::table('profs as p')
-        ->where('apogee', $prof->id)
-        ->select('p.apogee',
-            'p.firstname',
-            'p.lastname',
-            'p.firstname_ar',
-            'p.lastname_ar',
-            'p.email',
-            'p.phone_number',
-            'p.emergency_phone',
-        )
-        ->first();
+            ->where('p.id', $prof->id)
+            ->select(
+                'p.id',
+                'p.firstname',
+                'p.lastname',
+                'p.email',
+                'p.phone_number',
+                'p.emergency_phone',
+                'p.gender',
+                'p.birth_date',
+            )
+            ->first();
         $prof->role = 'teacher';
         return ($prof);
     }
-    public function getFiliereSchedules(string $filiere_id)
-    {
-        $schedule = DB::table('filiere_schedules')
-        ->where('filiere_id', $filiere_id)
-        ->first();
 
+    public function getFiliereSchedules(?string $filiere_id)
+    {
+        if (!$filiere_id)
+        {
+            $schedules = DB::table('filiere_schedules')
+                ->get();
+            foreach ($schedules as $sch)
+            {
+                $sch->time_schedule = Storage::url($sch->time_schedule);
+                $sch->exam_schedule = Storage::url($sch->exam_schedule);
+            }
+            return ($schedules);
+        }
+
+        $schedule = DB::table('filiere_schedules')
+            ->where('filiere_id', $filiere_id)
+            ->first();
         $schedule->time_schedule = Storage::url($schedule->time_schedule);
         $schedule->exam_schedule = Storage::url($schedule->exam_schedule);
 

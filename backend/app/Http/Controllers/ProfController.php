@@ -44,9 +44,10 @@ class ProfController extends Controller
         $result = $this->profService->search($moduleId, $apogee, $fname, $lname);
         return (StudentNoteResource::collection($result));
     }
-    public function show(Request $request)
+    public function show()
     {
-        return ($request->user());
+        $prof = request()->user();
+        return ($this->profService->profile($prof));
     }
 
     public function modules(Request $request)

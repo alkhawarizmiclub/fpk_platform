@@ -37,10 +37,15 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'master',
             'email' => 'chifo@gmail.com',
             'password' => bcrypt('pandas'),
+
             'birth_date' => '1998-05-09',
             'phone_number' => '1234567890',
-            'gender' => 'male'
-
+            'gender' => 'male',
+            'birth_place' => 'casablanca',
+            'nationality' => 'Marocain',
+            'id_num' => 'q1323',
+            'emergency_phone' => '0612345676',
+            'address' => 'hay fath',
         ]);
 
         $prof1 = Prof::create([
@@ -49,8 +54,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'django@gmail.com',
             'password' => bcrypt('pandas'),
             'birth_date' => '1998-05-09',
-            'phone_number' => '1234567890',
-            'gender' => 'male'
+            'phone_number' => '1234567891',
+            'gender' => 'male',
+            'birth_place' => 'casablanca',
+            'nationality' => 'Marocain',
+            'id_num' => 'q1323',
+            'emergency_phone' => '0612345676',
+            'address' => 'hay fath',
 
         ]);
 
@@ -60,8 +70,13 @@ class DatabaseSeeder extends Seeder
             'email' => '3alah@gmail.com',
             'password' => bcrypt('pandas'),
             'birth_date' => '1998-05-09',
-            'phone_number' => '1234567890',
-            'gender' => 'male'
+            'phone_number' => '0612345676',
+            'gender' => 'male',
+            'birth_place' => 'casablanca',
+            'nationality' => 'Marocain',
+            'id_num' => 'q1323',
+            'emergency_phone' => '0612345676',
+            'address' => 'hay fath',
 
         ]);
 

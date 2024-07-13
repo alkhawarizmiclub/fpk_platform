@@ -75,9 +75,10 @@ Route::post('/prof/login', [ProfController::class, 'login'])
 
 Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/complaint', [ComplaintsController::class, 'index']);
-    // get all with pagination
+
     Route::get('/announce', [FpkController::class, 'announce']);
     Route::get('/filieres', [FpkController::class, 'filiere']);
+    Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
     Route::get('/emploi', function () {
         return (url(Storage::url('emploi/smi-s1.pdf')));

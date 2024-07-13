@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
+
             $table->unsignedBigInteger("apogee")->primary()->autoIncrement();
             $table->string("firstname");
             $table->string("lastname");
