@@ -252,4 +252,13 @@ class DBRepository
 
         return ($schedule);
     }
+
+    public function getProfSchedule(Prof $prof)
+    {
+        $schedule = DB::table('prof_schedules')
+            ->where('prof_id', $prof->id)
+            ->first();
+        $schedule->time_schedule = url(Storage::url($schedule->time_schedule));
+        return ($schedule);
+    }
 }

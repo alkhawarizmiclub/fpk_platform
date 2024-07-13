@@ -77,5 +77,9 @@ class ProfController extends Controller
     {
         return ($this->profService->deleteAnnounce($id));
     }
+    public function schedule()
+    {
+        return ($this->profService->schedule());
+    }
 
 }

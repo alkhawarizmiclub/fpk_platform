@@ -196,6 +196,16 @@ class ProfService
             202
         );
     }
+    public function schedule()
+    {
+        $prof = request()->user();
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfSchedule($prof)
+            ]
+        );
+    }
     public function profile(Prof $prof)
     {
         return response()->json(
