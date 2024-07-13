@@ -10,7 +10,7 @@ const DeanWordPage = () => {
           <div className="w-full lg:w-1/3 px-4">
             <div className="bg-white rounded-lg overflow-hidden shadow-lg">
               <img
-                src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/02/doyen-scaled.jpg?w=640"
+                src="dean.jpg"
                 alt="Doyen"
                 className="w-full h-auto"
               />
