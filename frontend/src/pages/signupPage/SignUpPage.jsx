@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Paths from '../routers/Paths.json';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import EntStudentApi from '../api/EntStudentApi';
+import Paths from '../../routers/Paths.json';
+import EntStudentApi from '../../api/EntStudentApi';
+import generatePDF from './signupPdfGenerator';
 
 const SignUpPage = () => {
 	const navigate = useNavigate();
-	const [step, setStep] = useState(1);
+
+	const years = [];
+	for (let year = new Date().getFullYear(); year >= 1970; year--) {
+		years.push(year);
+	}
+
+	const [currentStep, setCurrentStep] = useState(1);
+	const [errors, setErrors] = useState('');
+
 	const [formData, setFormData] = useState({
-		nom: '',
-		prenom: '',
-		nomArabe: '',
-		prenomArabe: '',
+		studentPhoto: '',
+		firstName: '',
+		lastName: '',
+		firstNameAr: '',
+		lastNameAr: '',
 		birthDate: '',
 		birthPlace: '',
-		cne: '',
+		studentId: '',
 		nationality: '',
 		idNum: '',
+		idCardFile: null,
 		email: '',
 		phone: '',
 		emergencyPhone: '',
@@ -25,207 +34,18 @@ const SignUpPage = () => {
 		password: '',
 		passwordConfirmation: '',
 		major: '',
-		bacYear: '',
+		bacMajor: '',
 		bacYear: '',
 		bacGrade: '',
-		studentPhoto: '',
-		cniFile: false,
-		Bac: false,
+		bacFile: null,
 	});
-	const [errors, setErrors] = useState('');
-
-	const nextStep = () => {
-		if (validateStep(step)) {
-			setStep(step + 1);
-			setErrors('');
-		} else {
-			setErrors('Please fill out all required fields.');
-		}
-	};
-
-	const prevStep = () => {
-		setStep(step - 1);
-		setErrors('');
-	};
 
 	const handleChange = (e) => {
-		const { id, value } = e.target;
+		setErrors('');
 		setFormData((prevData) => ({
 			...prevData,
-			[id]: value,
+			[e.target.id]: e.target.value,
 		}));
-	};
-	const generatePDF = () => {
-		const doc = new jsPDF();
-
-		// Adding header
-		doc.addImage('/lo.png', 'png', 10, 10, 30, 30); // Replace with your logo path and size
-		doc.setFontSize(18);
-		doc.text('Université Soltan Molay', 105, 25, { align: 'center' });
-		doc.text(' Selaiman', 105, 32, { align: 'center' });
-		doc.text('Faculté Polydisciplinaire de', 105, 39, { align: 'center' });
-		doc.text(' Khouribga', 105, 46, { align: 'center' });
-
-		if (formData.studentPhoto) {
-			doc.addImage(formData.studentPhoto, 'PNG', 150, 15, 40, 40); // Adjust the dimensions as needed
-		}
-
-
-		// Adding student info table
-		const studentInfo = [
-			[{ content: 'Informations personnelles', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
-			['Champs', 'Détails'],
-			['Nom', formData.nom],
-			['Prénom', formData.prenom],
-			['Nom en arabe', formData.nomArabe],
-			['Prénom en arabe', formData.prenomArabe],
-			['Date de Naissance', formData.birthDate],
-			['Lieu de Naissance', formData.birthPlace],
-			['Nationalité', formData.nationality],
-			['CIN/Passport', formData.idNum],
-			['Email', formData.email],
-			['Téléphone', formData.phone],
-			['Téléphone Urgent', formData.emergencyPhone],
-			['Adresse', formData.homeAddress],
-
-		];
-		doc.autoTable({
-			body: studentInfo,
-			startY: 50, // Adjust as needed
-			styles: { fontSize: 10 },
-			headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
-			bodyStyles: { halign: 'left' },
-			columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
-			tableLineWidth: 0.1, // Line width between columns
-		});
-
-
-		// Adding academic info table
-		const academicInfo = [
-			[{ content: 'Parcours Académique', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
-			['Champs', 'Détails'],
-			['Filière', formData.major],
-			['Type du  Baccalauréat', formData.bacYear],
-			['CNE', formData.cne],
-			['Année du Baccalauréat', formData.bacYear],
-			['Moyenne du Bac', formData.bacGrade], // Replace with correct key
-		];
-
-		doc.autoTable({
-			body: academicInfo,
-			startY: doc.autoTable.previous.finalY + 10, // Start after previous table + padding
-			styles: { fontSize: 10 },
-			headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
-			bodyStyles: { halign: 'left' },
-			columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
-			tableLineWidth: 0.1, // Line width between columns
-		});
-
-
-		// Adding documents provided section
-		const documentsProvided = [
-			[{ content: 'Documents Fournis', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
-			['Champs', 'Détails'],
-			['Copie de la CNI (Recto-verso)', formData.cniFile ? 'X' : ''],
-			['Copie du diplôme du Baccalauréat', formData.Bac ? 'X' : ''],
-		];
-
-		doc.autoTable({
-			body: documentsProvided,
-			startY: doc.autoTable.previous.finalY + 10, // Start after previous table + padding
-			styles: { fontSize: 10 },
-			headStyles: { fillColor: [255, 165, 0], fontStyle: 'bold', halign: 'center' },
-			bodyStyles: { halign: 'left' },
-			columnStyles: { 0: { cellWidth: 'auto' }, 1: { cellWidth: 'wrap' } },
-			tableLineWidth: 0.1, // Line width between columns
-		});
-
-		// Adding download date
-		const downloadDate = new Date().toLocaleDateString('fr-FR');
-		doc.setFontSize(10);
-		doc.text(`Date de téléchargement : ${downloadDate}`, 180, doc.autoTable.previous.finalY + 10, null, null, 'right');
-
-		// Adding footer
-		doc.setLineWidth(0.5);
-		doc.line(10, doc.internal.pageSize.height - 20, doc.internal.pageSize.width - 10, doc.internal.pageSize.height - 20);
-		doc.setFontSize(8);
-		doc.text('www.example.com', 105, doc.internal.pageSize.height - 8, null, null, 'center');
-
-		doc.text('tel: +212 456 789 || Fax: +212 5671234475', 105, doc.internal.pageSize.height - 4, null, null, 'center'); // Replace with actual phone number
-
-		doc.save('informations_etudiant.pdf');
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (validateStep(step)) {
-			setErrors('');
-			// generatePDF();
-
-			EntStudentApi.signup(
-				nom,
-				prenom,
-				nomArabe,
-				prenomArabe,
-				birthDate,
-				birthPlace,
-				cne,
-				nationality,
-				id_num,
-				email,
-				phone,
-				emergencyPhone,
-				homeAddress,
-				password,
-				passwordConfirmation,
-				major,
-				studentPhoto,
-			)
-				.then(() => { })
-				.catch(() => { })
-				.finally(() => { })
-
-			alert('Form submitted successfully!');
-			navigate(Paths.LOGIN_PAGE) // Redirect to login page
-		} else {
-			setErrors('Please fill out all required fields.');
-		}
-	};
-
-	const validateStep = (step) => {
-		switch (step) {
-			case 1:
-				return (
-					formData.nom &&
-					formData.prenom &&
-					formData.nomArabe &&
-					formData.prenomArabe &&
-					formData.birthDate &&
-					formData.birthPlace &&
-					formData.cne &&
-					formData.nationality &&
-					formData.idNum
-				);
-			case 2:
-				return (
-					formData.email &&
-					formData.phone &&
-					formData.emergencyPhone &&
-					formData.homeAddress
-				);
-			case 3:
-				return (
-					formData.major &&
-					formData.bacYear &&
-					formData.bacYear &&
-					formData.bacGrade
-				);
-			case 4:
-				// Adjust validation logic as necessary for file uploads
-				return true;
-			default:
-				return false;
-		}
 	};
 
 	const handleFileUpload = (e) => {
@@ -240,6 +60,85 @@ const SignUpPage = () => {
 		reader.readAsDataURL(file);
 	};
 
+	const validateStep = (currentStep) => {
+		switch (currentStep) {
+			case 1:
+				return (
+					formData.firstName &&
+					formData.lastName &&
+					formData.firstNameAr &&
+					formData.lastNameAr &&
+					formData.birthDate &&
+					formData.birthPlace &&
+					formData.studentId &&
+					formData.nationality &&
+					formData.idNum
+				);
+
+			case 2:
+				if (formData.email && formData.phone && formData.emergencyPhone && formData.homeAddress && formData.password) {
+					if (formData.password === formData.passwordConfirmation) {
+						return true;
+					} else {
+						setErrors("Le mot de passe et la confirmation du mot de passe doivent être identiques");
+					}
+				} else {
+					setErrors("Il est obligatoire de remplir tous les champs");
+				}
+				return false;
+
+			case 3:
+				return (formData.major && formData.bacMajor && formData.bacYear && formData.bacGrade);
+
+			case 4:
+				// Adjust validation logic as necessary for file uploads
+				return true;
+
+			default:
+				return false;
+		}
+	};
+
+	const nextStep = (e) => {
+		e.preventDefault();
+		if (validateStep(currentStep)) {
+			setCurrentStep(currentStep + 1);
+			setErrors('');
+		} else {
+			setErrors('Please fill out all required fields.');
+		}
+	};
+
+	const prevStep = () => {
+		if (currentStep > 1) {
+			setCurrentStep(currentStep - 1);
+			setErrors('');
+		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		setErrors('');
+
+		if (validateStep(currentStep)) {
+			generatePDF(formData);
+
+			EntStudentApi.signup(formData)
+				.then((response) => {
+					setCurrentStep(5);
+				})
+				.catch(() => { })
+				.finally(() => { })
+		} else {
+			setErrors('Please fill out all required fields.');
+		}
+	};
+
+	const handePdfGeneration = () => {
+		generatePDF(formData);
+	}
+
+
 	return (
 		<div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
 			<div className="container mx-auto py-8">
@@ -249,47 +148,53 @@ const SignUpPage = () => {
 						<img src="/fpk_logo.svg" className="max-w-64" alt="logo" />
 					</Link>
 				</div>
+
 				<div className="max-w-2xl mx-auto mt-10">
 					<div className="bg-white shadow-md rounded-lg p-6">
+
 						<div className="mb-6">
 							<ul className="flex justify-between">
-								{[1, 2, 3, 4].map((num) => (
-									<li key={num} className={`flex-1 text-center ${step === num ? 'text-blue-500' : 'text-gray-600'}`}>
+								{[1, 2, 3, 4, 5].map((num) => (
+									<li key={num} className={`flex-1 text-center ${currentStep === num ? 'text-orange-400' : 'text-orange-300'}`}>
 										<div className="relative mb-2">
-											<div className="w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center bg-orange-500 text-white">{num}</div>
+											<div className={`w-10 h-10 mx-auto rounded-full text-lg flex items-center justify-center ${currentStep === num ? "bg-orange-500" : "bg-orange-300"} text-white`}>{num}</div>
 										</div>
 										<div className="text-xs">{`Étape ${num}`}</div>
 									</li>
 								))}
 							</ul>
 						</div>
-						{step === 1 && (
-							<form id="formEtape1">
+
+						{/* ============================================================== FIRST STEP ============================================================== */}
+						{currentStep === 1 && (
+							<form id="formEtape1" onSubmit={nextStep}>
 								<div className="flex flex-wrap -mx-3 mb-6">
 									<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="nom">
+										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="firstName">
 											Nom
 										</label>
 										<input
 											className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-											id="nom"
+											id="firstName"
 											type="text"
 											placeholder="Votre nom"
-											value={formData.nom}
+											value={formData.firstName}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 									<div className="w-full md:w-1/2 px-3">
-										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="prenom">
+										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="lastName">
 											Prenom
 										</label>
 										<input
 											className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-											id="prenom"
+											id="lastName"
 											type="text"
 											placeholder="Votre prenom"
-											value={formData.prenom}
+											value={formData.lastName}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 								</div>
@@ -300,11 +205,12 @@ const SignUpPage = () => {
 										</label>
 										<input
 											className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-											id="nomArabe"
+											id="firstNameAr"
 											type="text"
 											placeholder="الإسم العائلي"
-											value={formData.nomArabe}
+											value={formData.firstNameAr}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 									<div className="w-full md:w-1/2 px-3">
@@ -313,11 +219,12 @@ const SignUpPage = () => {
 										</label>
 										<input
 											className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-											id="prenomArabe"
+											id="lastNameAr"
 											type="text"
 											placeholder="الإسم الشخصي"
-											value={formData.prenomArabe}
+											value={formData.lastNameAr}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 								</div>
@@ -332,6 +239,7 @@ const SignUpPage = () => {
 											type="date"
 											value={formData.birthDate}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 									<div className="w-full md:w-1/2 px-3">
@@ -345,21 +253,23 @@ const SignUpPage = () => {
 											placeholder="Lieu de naissance"
 											value={formData.birthPlace}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 								</div>
 								<div className="flex flex-wrap -mx-3 mb-6">
 									<div className="w-full px-3">
-										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="cne">
+										<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="studentId">
 											Code Etudiant
 										</label>
 										<input
 											className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-											id="cne"
+											id="studentId"
 											type="text"
 											placeholder="F101020300"
-											value={formData.cne}
+											value={formData.studentId}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 								</div>
@@ -370,10 +280,11 @@ const SignUpPage = () => {
 										</label>
 										<div className="relative">
 											<select
-												className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+												className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 												id="nationality"
 												value={formData.nationality}
 												onChange={handleChange}
+												required
 											>
 												<option value="">Select</option>
 												<option value="marocain">Marocain</option>
@@ -394,23 +305,25 @@ const SignUpPage = () => {
 											placeholder="X123456"
 											value={formData.idNum}
 											onChange={handleChange}
+											required
 										/>
 									</div>
 								</div>
-								{errors && <p className="text-red-500 text-xs italic">{errors}</p>}
-								<div className="flex items-center justify-between">
+
+								<div className="flex items-center justify-end">
 									<button
-										onClick={nextStep}
-										className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-										type="button"
+										className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+										type="submit"
 									>
 										Suivant
 									</button>
 								</div>
 							</form>
 						)}
-						{step === 2 && (
-							<form id="formEtape2">
+
+						{/* ============================================================== SECOND STEP ============================================================== */}
+						{currentStep === 2 && (
+							<form id="formEtape2" onSubmit={nextStep}>
 								<div className="mb-4">
 									<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
 										Adresse E-mail
@@ -421,7 +334,8 @@ const SignUpPage = () => {
 										placeholder="Adresse E-mail"
 										value={formData.email}
 										onChange={handleChange}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										required
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
 								<div className="flex flex-wrap -mx-3 mb-6">
@@ -435,7 +349,8 @@ const SignUpPage = () => {
 											placeholder="+000 693129042"
 											value={formData.phone}
 											onChange={handleChange}
-											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+											required
+											className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 										/>
 									</div>
 									<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -448,7 +363,8 @@ const SignUpPage = () => {
 											placeholder="+000 7039182924"
 											value={formData.emergencyPhone}
 											onChange={handleChange}
-											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+											required
+											className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 										/>
 									</div>
 								</div>
@@ -462,7 +378,8 @@ const SignUpPage = () => {
 										placeholder="Rue Zitouna 123"
 										value={formData.homeAddress}
 										onChange={handleChange}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										required
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
 								<div className="mb-4">
@@ -475,7 +392,8 @@ const SignUpPage = () => {
 										placeholder="*************"
 										value={formData.password}
 										onChange={handleChange}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										required
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
 								<div className="mb-4">
@@ -488,10 +406,11 @@ const SignUpPage = () => {
 										placeholder="***************"
 										value={formData.passwordConfirmation}
 										onChange={handleChange}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										required
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
-								{errors && <p className="text-red-500 text-xs italic">{errors}</p>}
+
 								<div className="flex items-center justify-between">
 									<button
 										onClick={prevStep}
@@ -501,17 +420,18 @@ const SignUpPage = () => {
 										Retour
 									</button>
 									<button
-										onClick={nextStep}
 										className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-										type="button"
+										type="submit"
 									>
 										Suivant
 									</button>
 								</div>
 							</form>
 						)}
-						{step === 3 && (
-							<form id="formEtape3">
+
+						{/* ============================================================== THIRD STEP ============================================================== */}
+						{currentStep === 3 && (
+							<form id="formEtape3" onSubmit={nextStep}>
 								<div className="mb-4">
 									<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="major">
 										Filière
@@ -521,7 +441,8 @@ const SignUpPage = () => {
 											id="major"
 											value={formData.major}
 											onChange={handleChange}
-											className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+											required
+											className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										>
 											<option value="">Select</option>
 											<option value="SMI">Sciences Mathématiques et Informatique</option>
@@ -540,10 +461,11 @@ const SignUpPage = () => {
 									</label>
 									<div className="relative">
 										<select
-											id="bacYear"
-											value={formData.bacYear}
+											id="bacMajor"
+											value={formData.bacMajor}
 											onChange={handleChange}
-											className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+											required
+											className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
 										>
 											<option value="">Select</option>
 											<option value="SMA">SCIENCES MATHÉMATIQUES A </option>
@@ -566,14 +488,19 @@ const SignUpPage = () => {
 										<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bacYear">
 											Année du Baccalauréat
 										</label>
-										<input
+										<select
 											id="bacYear"
-											type="text"
-											placeholder="2020"
 											value={formData.bacYear}
 											onChange={handleChange}
-											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-										/>
+											required
+											className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+										>
+											{years.map((year) => (
+												<option key={year} value={year}>
+													{year}
+												</option>
+											))}
+										</select>
 									</div>
 									<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 										<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="bacGrade">
@@ -581,15 +508,19 @@ const SignUpPage = () => {
 										</label>
 										<input
 											id="bacGrade"
-											type="tel"
+											type="number"
+											min={0}
+											max={20}
+											step={0.01}
 											placeholder="20.00"
 											value={formData.bacGrade}
 											onChange={handleChange}
-											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+											required
+											className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 										/>
 									</div>
 								</div>
-								{errors && <p className="text-red-500 text-xs italic">{errors}</p>}
+
 								<div className="flex items-center justify-between">
 									<button
 										onClick={prevStep}
@@ -599,16 +530,17 @@ const SignUpPage = () => {
 										Retour
 									</button>
 									<button
-										onClick={nextStep}
 										className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-										type="button"
+										type="submit"
 									>
 										Suivant
 									</button>
 								</div>
 							</form>
 						)}
-						{step === 4 && (
+
+						{/* ============================================================== FOURTH STEP ============================================================== */}
+						{currentStep === 4 && (
 							<form id="formEtape4" onSubmit={handleSubmit}>
 								<div className="mb-4">
 									<label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
@@ -618,7 +550,7 @@ const SignUpPage = () => {
 										id="cnifile"
 										type="file"
 										onChange={handleFileUpload}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
 								<div className="mb-4">
@@ -629,7 +561,7 @@ const SignUpPage = () => {
 										id="Bac"
 										type="file"
 										onChange={handleFileUpload}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 
 								</div>
@@ -641,7 +573,7 @@ const SignUpPage = () => {
 										id="RN"
 										type="file"
 										onChange={handleFileUpload}
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 									/>
 								</div>
 								<div className="mb-4">
@@ -649,14 +581,14 @@ const SignUpPage = () => {
 										Photo
 									</label>
 									<input
-										className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+										className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 										id="studentPhoto"
 										type="file"
 										accept="image/*"
 										onChange={handleFileUpload}
 									/>
 								</div>
-								{errors && <p className="text-red-500 text-xs italic">{errors}</p>}
+
 								<div className="flex items-center justify-between">
 									<button
 										onClick={prevStep}
@@ -674,6 +606,16 @@ const SignUpPage = () => {
 								</div>
 							</form>
 						)}
+
+						{/* ============================================================== FOURTH STEP ============================================================== */}
+						{currentStep === 5 && (
+							<div className='text-center'>
+								<p>Félicitations, vous avez postulé avec succès à la Faculté Polydisciplinaire de Khouribga.</p>
+								<p>Si le téléchargement du document de candidature a commencé automatiquement, veuillez <a href='#' onClick={handePdfGeneration} className='text-orange-400'>cliquer ici</a> pour le faire manuellement.</p>
+							</div>
+						)}
+
+						{errors && <p className="text-red-500 text-xs italic">{errors}</p>}
 					</div>
 				</div>
 

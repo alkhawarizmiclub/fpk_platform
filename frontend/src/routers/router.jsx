@@ -5,7 +5,7 @@ import StaticPageLayout from "../layouts/StaticPageLayout";
 import EntLayout from "../layouts/EntLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
-import SignUpPage from "../pages/SignUpPage";
+import SignUpPage from "../pages/signupPage/SignUpPage";
 import LogOutPage from "../pages/LogOutPage";
 import ApplyPage from "../pages/ApplyPage";
 import Error404Page from "../pages/static/Error404Page";
