@@ -69,9 +69,10 @@ class ProfController extends Controller
     {
         return ($this->profService->logout($request));
     }
-    public function getAnnounce(string $id)
+    public function getAnnounce()
     {
-        return ($this->profService->getAnnonce($id));
+        $prof = request()->user();
+        return ($this->profService->getAnnonce($prof));
     }
     public function announce(StoreAnnouncementRequest $request)
     {
