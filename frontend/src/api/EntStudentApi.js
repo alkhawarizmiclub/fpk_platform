@@ -7,7 +7,36 @@ const EntStudentApi = {
         });
     },
     signup: async (data) => {
-        console.log(data);
+        return await axiosClient.post("/api/student/register", {
+            firstname: data.firstName,
+            lastname: data.lastName,
+            firstname_ar: data.firstNameAr,
+            lastname_ar: data.lastNameAr,
+            birth_date: data.birthDate,
+            birth_place: data.birthPlace,
+            gender: data.gender,
+            massar_code: data.studentId,
+            nationality: data.nationality,
+            id_num: data.studentId,
+            identify_recto_verso: data.idCardFile,
+            email: data.email,
+            phone_number: data.phone,
+            emergency_phone: data.emergencyPhone,
+            address: data.homeAddress,
+            password: data.password,
+            password_confirmation: data.passwordConfirmation,
+            filiere_id: data.major,
+            // bacMajor
+            // bacYear
+            // bacGrade
+            baccalaureat: data.bacFile,
+            releve_note: data.gradeSheetsFile,
+            student_photo: data.studentPhotoFile,
+        }, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
     },
     login: async (email, password) => {
         return await axiosClient.post("/api/student/login", { email, password });
@@ -46,7 +75,6 @@ const EntStudentApi = {
     },
     demandEDocument: async (document_type) => {
         await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        console.log(document_type);
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");

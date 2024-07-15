@@ -42,6 +42,7 @@ import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnounce
 import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
+import SignUpContextProvider from "../contexts/signUpContext";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
         element: <BlankLayout />,
         children: [
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
-            { path: Paths.SIGNUP_PAGE, element: <SignUpPage /> },
+            { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
             { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
             { path: Paths.ERROR_PAGE, element: <Error404Page /> }
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
-            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements/> },
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
         ]
     },
     {
