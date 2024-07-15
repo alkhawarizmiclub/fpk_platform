@@ -196,12 +196,34 @@ class ProfService
             202
         );
     }
+    public function schedule()
+    {
+        $prof = request()->user();
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfSchedule($prof)
+            ]
+        );
+    }
     public function profile(Prof $prof)
     {
         return response()->json(
             [
                 'status' => 'success',
                 'data' => $this->dbRepository->getProfProfile($prof)
+            ]
+        );
+    }
+    public function getAnnonce(string $id)
+    {
+        $prof = request()->user();
+        if (!$announce)
+            return ($this->resourceNotFound());
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfAnnouncements($prof)
             ]
         );
     }
