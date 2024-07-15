@@ -215,11 +215,8 @@ class ProfService
             ]
         );
     }
-    public function getAnnonce(string $id)
+    public function getAnnonce($prof)
     {
-        $prof = request()->user();
-        if (!$announce)
-            return ($this->resourceNotFound());
         return response()->json(
             [
                 'status' => 'success',
