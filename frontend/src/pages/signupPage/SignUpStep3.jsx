@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSignUpContext } from "../../contexts/signUpContext";
 import EntPublicApi from "../../api/EntPublicApi";
+import { yearsListUntilToday } from "../../utils/functions";
 
 const SignUpStep3 = () => {
 
@@ -10,10 +11,7 @@ const SignUpStep3 = () => {
 
     const [majors, setMajors] = useState([]);
 
-    const years = [];
-    for (let year = new Date().getFullYear(); year >= 1970; year--) {
-        years.push(year);
-    }
+    const years = yearsListUntilToday(2010, true);
 
     useEffect(() => {
         setLoading(true);
@@ -21,12 +19,12 @@ const SignUpStep3 = () => {
         EntPublicApi.getAllMajors()
             .then((response) => {
                 setMajors(response.data.data)
-                console.log(response.data.data);
             })
             .catch(() => { })
             .finally(() => {
                 setLoading(false);
             })
+
     }, [])
 
     return (
