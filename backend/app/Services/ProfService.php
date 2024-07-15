@@ -215,4 +215,16 @@ class ProfService
             ]
         );
     }
+    public function getAnnonce(string $id)
+    {
+        $prof = request()->user();
+        if (!$announce)
+            return ($this->resourceNotFound());
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfAnnouncements($prof)
+            ]
+        );
+    }
 }

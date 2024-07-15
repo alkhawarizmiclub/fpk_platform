@@ -232,12 +232,10 @@ class DBRepository
 
     public function getFiliereSchedules(?string $filiere_id)
     {
-        if (!$filiere_id)
-        {
+        if (!$filiere_id) {
             $schedules = DB::table('filiere_schedules')
                 ->get();
-            foreach ($schedules as $sch)
-            {
+            foreach ($schedules as $sch) {
                 $sch->time_schedule = url(Storage::url($sch->time_schedule));
                 $sch->exam_schedule = url(Storage::url($sch->exam_schedule));
             }
@@ -260,5 +258,35 @@ class DBRepository
             ->first();
         $schedule->time_schedule = url(Storage::url($schedule->time_schedule));
         return ($schedule);
+    }
+    // tags: varchar(255)
+    // content: text
+    // author_type: varchar(255)
+    // author_id: bigint unsigned
+    // poster_image_path: varchar(255)
+    // is_accepted: tinyint(1)
+    // created_at: timestamp
+    // updated_at: timestamp
+    public function getProfAnnouncements(Prof $prof)
+    {
+        $announcements = DB::table('announcements as a')
+            ->join('profs as f', 'f.id', '=', 'a.author_id')
+            ->where('author_id', $prof->id)
+            ->select(
+                'f.firstname',
+                'f.lastname',
+                'a.thumbnail_path',
+                'a.title',
+                'a.content',
+                'a.tags',
+                'a.poster_image_path',
+                'a.created_at'
+            )
+            ->get();
+        foreach ($announcements as $announce) {
+            $announce->thumbnail_path = url(Storage::url($announce->thumbnail_path));
+            $announce->poster_image_path = url(Storage::url($announce->poster_image_path));
+        }
+        return ($announcements);
     }
 }
