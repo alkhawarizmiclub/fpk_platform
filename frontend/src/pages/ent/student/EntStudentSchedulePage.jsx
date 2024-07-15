@@ -3,8 +3,11 @@ import EntStudentApi from "../../../api/EntStudentApi";
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useUserContext } from "../../../contexts/context";
 
 const EntStudentSchedulePage = () => {
+
+    const { user } = useUserContext();
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -14,11 +17,12 @@ const EntStudentSchedulePage = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        EntStudentApi.getSchedulePDF()
+        EntStudentApi.getSchedulePDF(user.filiere_id)
             .then((response) => {
-                setPdfFilePath(response.data);
+                setPdfFilePath(response.data.data.time_schedule);
                 const parts = pdfFilePath.split('/');
                 setPdfFilename(parts[parts.length - 1]);
+
             })
             .catch(() => {
                 // TODO: Add error handling

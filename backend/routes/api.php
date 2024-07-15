@@ -81,7 +81,4 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
-    Route::get('/emploi', function () {
-        return (url(Storage::url('time_schedule/mip-s2.pdf')));
-    });
 });
