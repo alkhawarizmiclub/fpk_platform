@@ -42,6 +42,7 @@ import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnounce
 import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
+import ContactPage from "../pages/ContactPage";
 import SignUpContextProvider from "../contexts/signUpContext";
 
 const router = createBrowserRouter([
@@ -53,7 +54,9 @@ const router = createBrowserRouter([
             { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
             { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
-            { path: Paths.ERROR_PAGE, element: <Error404Page /> }
+            { path: Paths.ERROR_PAGE, element: <Error404Page /> },
+            { path: Paths.CONTACT_PAGE, element: <ContactPage /> },
+           
         ]
     },
     {
