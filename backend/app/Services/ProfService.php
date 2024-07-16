@@ -40,7 +40,7 @@ class ProfService
     {
         $modules = DB::table('modules as m')
             ->join('filieres as f', 'm.filiere_id', '=', 'f.id')
-            ->select('m.id', 'm.module_name', 'm.semester', 'f.filiere_code')
+            ->select('m.id', 'm.module_name', 'm.semester', 'f.filiere_abrv')
             ->where('prof_id', $id)
             ->get();
         $modules  = ModuleResource::collection($modules);
@@ -196,9 +196,8 @@ class ProfService
             202
         );
     }
-    public function schedule()
+    public function schedule($prof)
     {
-        $prof = request()->user();
         return response()->json(
             [
                 'status' => 'success',

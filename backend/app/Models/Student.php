@@ -58,7 +58,7 @@ class Student extends Authenticatable
 
     public function modules()
     {
-        return $this->belongsToMany(Module::class, 'module_student', 'apogee', 'module_id');
+        return $this->belongsToMany(Module::class, 'result', 'apogee', 'module_id');
     }
 
     public function results()

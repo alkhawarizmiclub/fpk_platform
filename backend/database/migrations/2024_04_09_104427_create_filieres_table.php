@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('filieres', function (Blueprint $table) {
             $table->id();
             $table->string("filiere_name");
-            $table->string("filiere_code");
+            $table->string("filiere_abrv");
             $table->unsignedBigInteger("responsible_id")->nullable();
             $table->unsignedBigInteger("department_id")->nullable();
 
