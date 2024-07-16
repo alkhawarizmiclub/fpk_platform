@@ -54,8 +54,9 @@ class StudentService
 
     public function modules(Student $student)
     {
-        $module = $student->modules;
-        $module  = ModuleResource::collection($module);
+        // $module = $student->modules;
+        $module = $this->dbRepository->getStudentModules($student);
+        // $module  = ModuleResource::collection($module);
         return ($this->DATA('modules', $module));
     }
 

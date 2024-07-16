@@ -164,9 +164,6 @@ class DBRepository
             ->join('modules as m', 'ms.module_id', '=', 'm.id')
             ->select(
                 's.apogee',
-                's.firstname',
-                's.lastname',
-                'ms.module_id',
                 'm.module_name',
                 'ms.normale',
                 'ms.ratt',
@@ -294,5 +291,15 @@ class DBRepository
                     ->where('mi.filiere_id', $id)
                     ->get();
         return ($mapping);
+    }
+public function getStudentModules($student)
+    {
+        $modules = DB::table('result as sm')
+            ->join('modules as m', 'sm.module_id', '=', 'm.id')
+			->join('filieres as f', 'f.id', '=', 'm.filiere_id')
+            ->where('sm.apogee', $student->apogee)
+            ->select('m.module_name', 'f.filiere_name', 'sm.semester', 'sm.inscrit_number', 'sm.inscrit_year')
+            ->get();
+        return ($modules);
     }
 }
