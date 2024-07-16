@@ -45,7 +45,7 @@ class DBRepository
     public function getModuleStudent(string $moduleId)
     {
         $students = DB::table('students as s')
-            ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
+            ->join('result as ms', 'ms.apogee', '=', 's.apogee')
             ->select(
                 's.student_photo',
                 's.apogee',
@@ -64,7 +64,7 @@ class DBRepository
     public function findByFirstName(string $moduleId, string $fname)
     {
         $student = DB::table('students as s')
-            ->join('module_student as ms', function ($join) use ($moduleId, $fname) {
+            ->join('result as ms', function ($join) use ($moduleId, $fname) {
                 $join->on('ms.apogee', '=', 's.apogee')
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.firstname', 'like', $fname . '%');
@@ -87,7 +87,7 @@ class DBRepository
     public function findByLastName(string $moduleId, string $lname)
     {
         $student = DB::table('students as s')
-            ->join('module_student as ms', function ($join) use ($moduleId, $lname) {
+            ->join('result as ms', function ($join) use ($moduleId, $lname) {
                 $join->on('ms.apogee', '=', 's.apogee')
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('s.lastname', 'like', $lname . '%');
@@ -110,7 +110,7 @@ class DBRepository
     {
         if ($lname && $fname) {
             return (DB::table('students as s')
-                ->join('module_student as ms', function ($join) use ($moduleId, $lname, $fname) {
+                ->join('result as ms', function ($join) use ($moduleId, $lname, $fname) {
                     $join->on('ms.apogee', '=', 's.apogee')
                         ->where('ms.module_id', '=', $moduleId)
                         ->where('s.lastname', 'like', $lname . '%')
@@ -137,7 +137,7 @@ class DBRepository
     public function getByApogee(string $moduleId, string $apogee)
     {
         $student = DB::table('students as s')
-            ->join('module_student as ms', function ($join) use ($moduleId, $apogee) {
+            ->join('result as ms', function ($join) use ($moduleId, $apogee) {
                 $join->on('ms.apogee', '=', 's.apogee')
                     ->where('ms.module_id', '=', $moduleId)
                     ->where('ms.apogee', '=', $apogee);
@@ -160,7 +160,7 @@ class DBRepository
     public function getStudentResult(string $apogee)
     {
         $students = DB::table('students as s')
-            ->join('module_student as ms', 'ms.apogee', '=', 's.apogee')
+            ->join('result as ms', 'ms.apogee', '=', 's.apogee')
             ->join('modules as m', 'ms.module_id', '=', 'm.id')
             ->select(
                 's.apogee',
@@ -257,16 +257,10 @@ class DBRepository
             ->where('prof_id', $prof->id)
             ->first();
         $schedule->time_schedule = url(Storage::url($schedule->time_schedule));
+        $schedule->exam_schedule = url(Storage::url($schedule->exam_schedule));
         return ($schedule);
     }
-    // tags: varchar(255)
-    // content: text
-    // author_type: varchar(255)
-    // author_id: bigint unsigned
-    // poster_image_path: varchar(255)
-    // is_accepted: tinyint(1)
-    // created_at: timestamp
-    // updated_at: timestamp
+
     public function getProfAnnouncements(Prof $prof)
     {
         $announcements = DB::table('announcements as a')
@@ -283,10 +277,22 @@ class DBRepository
                 'a.created_at'
             )
             ->get();
+
         foreach ($announcements as $announce) {
             $announce->thumbnail_path = url(Storage::url($announce->thumbnail_path));
             $announce->poster_image_path = url(Storage::url($announce->poster_image_path));
         }
         return ($announcements);
+    }
+
+    // get default module for filieres
+   public function getFiliereDefaultModule(string $id)
+    {
+        $mapping = DB::table('module_init as mi')
+                    ->select('mi.module_id', 'm.semester')
+                    ->join('modules as m', 'm.id', '=', 'mi.module_id')
+                    ->where('mi.filiere_id', $id)
+                    ->get();
+        return ($mapping);
     }
 }

@@ -19,6 +19,6 @@ class Module extends Model
     ];
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'module_student', 'module_id',  'apogee');
+        return $this->belongsToMany(Student::class, 'result', 'module_id',  'apogee');
     }
 }

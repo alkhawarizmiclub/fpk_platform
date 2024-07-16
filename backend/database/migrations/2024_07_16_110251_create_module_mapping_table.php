@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prof_schedules', function (Blueprint $table) {
+        Schema::create('module_mapping', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('prof_id');
-            $table->string('time_schedule');
-            $table->string('exam_schedule');
+            $table->unsignedBigInteger('module_id');
+            $table->unsignedBigInteger('next_module_id');
 
-            $table->foreign('prof_id')
-                ->references('id')
-                ->on('profs')
-                ->onDelete('cascade');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
+            $table->foreign('next_module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prof_schedules');
+        Schema::dropIfExists('module_mapping');
     }
 };

@@ -43,28 +43,11 @@ class StudentService
         return ($this->DATA('students', $students));
     }
 
-    static public function setDefaultModules($student)
+    public function setDefaultModules($student)
     {
-        $modules = [
-            1 => ['semester' =>  'S1'],
-            2 => ['semester' =>  'S1'],
-            3 => ['semester' =>  'S1'],
-            4 => ['semester' =>  'S1'],
-            5 => ['semester' =>  'S1'],
-            6 => ['semester' =>  'S1'],
-            7 => ['semester' =>  'S1'],
-            8 => ['semester' =>  'S2'],
-            9 => ['semester' =>  'S2'],
-            10 => ['semester' => 'S2'],
-            11 => ['semester' => 'S2'],
-            12 => ['semester' => 'S2'],
-            13 => ['semester' => 'S2'],
-            14 => ['semester' => 'S2'],
-        ];
-        $filiere_id = $student->filiere_id;
-        foreach ($modules as $id => $val) {
-            $id2 = (int)$id * (int)$filiere_id;
-            $student->modules()->attach($id2, $val);
+        $modules = $this->dbRepository->getFiliereDefaultModule($student->filiere_id);
+        foreach ($modules as $module) {
+            $student->modules()->attach($module->module_id, ['semester' => $module->semester]);
         }
     }
 
