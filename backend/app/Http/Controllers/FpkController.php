@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AnnounceResource;
 use App\Models\Announcement;
+use App\Services\DBRepository;
 use App\Services\StudentService;
 use Illuminate\Support\Facades\DB;
 
 class FpkController extends Controller
 {
+    private DBRepository $dBRepository;
+    public function __construct(DBRepository $dBRepository)
+    {
+        $this->dBRepository = $dBRepository;
+    }
     public function index()
     {
         return [
@@ -22,11 +28,11 @@ class FpkController extends Controller
         $pageSize = 10;
         $page = request()->query('page');
         if (!$page || $page <= 0)
-        	$page = 1;
+            $page = 1;
         $AnnounceCount = Announcement::all()->count();
         $pageCount = ceil($AnnounceCount / $pageSize);
         if ($page > $pageCount)
-        	$page = $pageCount;
+            $page = $pageCount;
         $announcements = Announcement::all()->skip(($page - 1) * $pageSize)->take($pageSize);
         foreach ($announcements as $announcement)
             $announcement->author;
@@ -51,12 +57,22 @@ class FpkController extends Controller
     public function filiere()
     {
         $result = DB::table('filieres')
-                      ->select('id', 'filiere_name', 'filiere_code')
-                      ->get();
+            ->select('id', 'filiere_name', 'filiere_abrv')
+            ->get();
         return [
             'status' => 'success',
             'message' => 'Filiere retrieved successfully',
             'data' => $result
         ];
+    }
+    public function schedule()
+    {
+        $filiereId = request()->query('id');
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'data' => $this->dBRepository->getFiliereSchedules($filiereId)
+                ]
+            );
     }
 }

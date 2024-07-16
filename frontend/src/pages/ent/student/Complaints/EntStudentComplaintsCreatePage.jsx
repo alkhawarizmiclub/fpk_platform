@@ -5,6 +5,7 @@ import EntStudentApi from "../../../../api/EntStudentApi";
 import Paths from "../../../../routers/Paths.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import EntPublicApi from "../../../../api/EntPublicApi";
 
 const EntStudentComplaintsCreatePage = () => {
 
@@ -38,7 +39,7 @@ const EntStudentComplaintsCreatePage = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        EntStudentApi.getComplaintCategories()
+        EntPublicApi.getComplaintCategories()
             .then((response) => {
                 console.log(response.data.data);
                 setComplaintCategories(response.data.data)

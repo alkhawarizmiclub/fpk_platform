@@ -1,6 +1,5 @@
 import StaticPageContainer from "../../layouts/StaticPageContainer";
 
-
 const staffMembers = [
     { name: "ABDELAZIZ EL MEKNASSI" },
     { name: "ABDELHADI NAKHAL" },

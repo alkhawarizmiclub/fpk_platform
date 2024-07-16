@@ -20,19 +20,19 @@ class Student extends Authenticatable
         'lastname_ar',
         'birth_date',
         'birth_place',
-        'student_code',
+        'massar_code',
         'nationality',
         'id_num',
         'email',
-        'phone',
-        'emergencyPhone',
+        'phone_number',
+        'emergency_phone',
         'address',
         'filiere_id',
         'password',
         'gender',
         'baccalaureat',
         'releve_note',
-        'image_presonnal',
+        'student_photo',
         'identify_recto_verso',
     ];
 
@@ -58,7 +58,7 @@ class Student extends Authenticatable
 
     public function modules()
     {
-        return $this->belongsToMany(Module::class, 'module_student', 'apogee', 'module_id');
+        return $this->belongsToMany(Module::class, 'result', 'apogee', 'module_id');
     }
 
     public function results()

@@ -18,7 +18,7 @@ class StudentNoteResource extends JsonResource
             return [];
         return [
             // TODO: add the student image from storage
-            "image" =>$this->image_presonnal,
+            "image" =>$this->student_photo,
             "apogee" => $this->apogee,
             "firstname" => $this->firstname,
             "lastname" => $this->firstname,

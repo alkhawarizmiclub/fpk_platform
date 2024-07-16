@@ -18,7 +18,9 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
     Route::get('/modules/{id}', [ProfController::class, 'students']); // get student how has that module
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
+    Route::get('/announce', [ProfController::class, 'getAnnounce']);
     Route::delete('/announce/{id}', [ProfController::class, 'deleteAnnounce']);
+    Route::get('/schedule', [ProfController::class, 'schedule']);
     Route::post('/add-result', [ProfController::class, 'result']);
 
 
@@ -47,9 +49,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::post('/complaint', [StudentController::class, 'complaints']);
     Route::get('/complaint', [StudentController::class, 'getComplaints']);
     Route::delete('/complaint/{id}', [StudentController::class, 'deleteComplaint']);
+    Route::get('/accounts', [StudentController::class, 'accounts']);
 
     // TODO:
-    // Route::get('/accounts', [StudentController::class, 'accounts']);
     // Route::post('/complaints', [StudentController::class, 'add-complaints']);
 });
 
@@ -75,11 +77,9 @@ Route::post('/prof/login', [ProfController::class, 'login'])
 
 Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/complaint', [ComplaintsController::class, 'index']);
-    // get all with pagination
+
     Route::get('/announce', [FpkController::class, 'announce']);
     Route::get('/filieres', [FpkController::class, 'filiere']);
+    Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
-    Route::get('/emploi', function () {
-        return (Storage::url('emploi/smi-s1.pdf'));
-    });
 });

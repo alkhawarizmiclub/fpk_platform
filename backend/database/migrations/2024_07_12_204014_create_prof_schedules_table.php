@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filieres', function (Blueprint $table) {
+        Schema::create('prof_schedules', function (Blueprint $table) {
             $table->id();
-            $table->string("filiere_name");
-            $table->string("filiere_abrv");
-            $table->unsignedBigInteger("responsible_id")->nullable();
-            $table->unsignedBigInteger("department_id")->nullable();
+            $table->unsignedBigInteger('prof_id');
+            $table->string('time_schedule');
+            $table->string('exam_schedule');
 
-            $table->foreign('responsible_id')
+            $table->foreign('prof_id')
                 ->references('id')
-                ->on('profs');
+                ->on('profs')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filiere');
+        Schema::dropIfExists('prof_schedules');
     }
 };

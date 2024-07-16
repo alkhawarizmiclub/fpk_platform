@@ -47,19 +47,10 @@ class StudentController extends Controller
         return ($this->studentService->modules($student));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
+    public function accounts()
     {
-        $student = $request->user();
-        return (Response()->json(
-            [
-                'status' => 'success',
-                'message' => 'student profile retrieved successfully',
-                'data' => new StudentResource($student)
-            ]
-        ));
+        $student = request()->user();
+        return ($this->studentService->accounts($student));
     }
 
     public function result()
@@ -72,7 +63,11 @@ class StudentController extends Controller
         $student = request()->user();
         return ($this->studentService->finalResult($student));
     }
-
+    public function show()
+    {
+        $student = request()->user();
+        return ($this->studentService->profile($student));
+    }
     public function complaints(StoreStudentComplaintRequest $request)
     {
         return ($this->studentService->complaints($request));
@@ -86,7 +81,6 @@ class StudentController extends Controller
     public function deleteComplaint(string $id)
     {
         $student = request()->user();
-
 
         DB::table('student_complaints')->where('id', $id)->where('apogee', $student->apogee)->delete();
         return ($this->studentService->getComplaints($student));

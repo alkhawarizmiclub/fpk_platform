@@ -44,9 +44,10 @@ class ProfController extends Controller
         $result = $this->profService->search($moduleId, $apogee, $fname, $lname);
         return (StudentNoteResource::collection($result));
     }
-    public function show(Request $request)
+    public function show()
     {
-        return ($request->user());
+        $prof = request()->user();
+        return ($this->profService->profile($prof));
     }
 
     public function modules(Request $request)
@@ -68,6 +69,11 @@ class ProfController extends Controller
     {
         return ($this->profService->logout($request));
     }
+    public function getAnnounce()
+    {
+        $prof = request()->user();
+        return ($this->profService->getAnnonce($prof));
+    }
     public function announce(StoreAnnouncementRequest $request)
     {
         return ($this->profService->announce($request));
@@ -75,6 +81,11 @@ class ProfController extends Controller
     public function deleteAnnounce(string $id)
     {
         return ($this->profService->deleteAnnounce($id));
+    }
+    public function schedule()
+    {
+        $prof = request()->user();
+        return ($this->profService->schedule($prof));
     }
 
 }

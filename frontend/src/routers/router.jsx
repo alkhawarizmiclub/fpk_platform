@@ -5,7 +5,7 @@ import StaticPageLayout from "../layouts/StaticPageLayout";
 import EntLayout from "../layouts/EntLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
-import SignUpPage from "../pages/SignUpPage";
+import SignUpPage from "../pages/signupPage/SignUpPage";
 import LogOutPage from "../pages/LogOutPage";
 import ApplyPage from "../pages/ApplyPage";
 import Error404Page from "../pages/static/Error404Page";
@@ -43,6 +43,7 @@ import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntS
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
 import ContactPage from "../pages/ContactPage";
+import SignUpContextProvider from "../contexts/signUpContext";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         element: <BlankLayout />,
         children: [
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
-            { path: Paths.SIGNUP_PAGE, element: <SignUpPage /> },
+            { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
             { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
             { path: Paths.ERROR_PAGE, element: <Error404Page /> },
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
-            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements/> },
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
         ]
     },
     {

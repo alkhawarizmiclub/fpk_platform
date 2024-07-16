@@ -6,8 +6,37 @@ const EntStudentApi = {
             baseURL: import.meta.env.VITE_BACKEND_URL
         });
     },
-    signup: async (nom_fr, prenom_fr, nom_ar, prenom_ar, date, lieu, code, nationality, cin, passport, email, phone, emergencyPhone, address, password, confirmPassword, filiere, studentPhoto) => {
-        console.log({ nom_fr, prenom_fr, nom_ar, prenom_ar, date, lieu, code, nationality, cin, passport, email, phone, emergencyPhone, address, password, confirmPassword, filiere, studentPhoto });
+    signup: async (data) => {
+        return await axiosClient.post("/api/student/register", {
+            firstname: data.firstName,
+            lastname: data.lastName,
+            firstname_ar: data.firstNameAr,
+            lastname_ar: data.lastNameAr,
+            birth_date: data.birthDate,
+            birth_place: data.birthPlace,
+            gender: data.gender,
+            massar_code: data.studentId,
+            nationality: data.nationality,
+            id_num: data.studentId,
+            identify_recto_verso: data.idCardFile,
+            email: data.email,
+            phone_number: data.phone,
+            emergency_phone: data.emergencyPhone,
+            address: data.homeAddress,
+            password: data.password,
+            password_confirmation: data.passwordConfirmation,
+            filiere_id: data.major,
+            // bacMajor
+            // bacYear
+            // bacGrade
+            baccalaureat: data.bacFile,
+            releve_note: data.gradeSheetsFile,
+            student_photo: data.studentPhotoFile,
+        }, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
     },
     login: async (email, password) => {
         return await axiosClient.post("/api/student/login", { email, password });
@@ -20,34 +49,13 @@ const EntStudentApi = {
         return api_data.data;
     },
     getAccountsData: async () => {
-        await new Promise(resolve => setTimeout(resolve, 500));
-        return {
-            status: 200,
-            data: [
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-                { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-            ]
-        }
+        return await axiosClient.get("/api/student/accounts");
     },
-    getSchedulePDF: async () => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        return {
-            status: 200,
-            data: {
-                url: "/schedule.pdf"
-            }
-        };
+    getSchedulePDF: async (major_id) => {
+        return await axiosClient.get(`/api/public/filieres/schedule?id=${major_id}`);
     },
-    getPlanningPDF: async () => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        return {
-            status: 200,
-            data: {
-                url: "/schedule.pdf"
-            }
-        };
+    getPlanningPDF: async (major_id) => {
+        return await axiosClient.get(`/api/public/filieres/schedule?id=${major_id}`);
     },
     getResultsData: async () => {
         return await axiosClient.get("/api/student/result");
@@ -67,14 +75,10 @@ const EntStudentApi = {
     },
     demandEDocument: async (document_type) => {
         await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        console.log(document_type);
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");
         return response;
-    },
-    getComplaintCategories: async () => {
-        return await axiosClient.get("/api/public/complaint");
     },
     createComplaint: async (complaint_id, description) => {
         return await axiosClient.post("/api/student/complaint", { complaint_id, description });
