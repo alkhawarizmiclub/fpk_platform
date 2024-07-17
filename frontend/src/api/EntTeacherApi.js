@@ -47,7 +47,10 @@ const EntTeacherApi = {
             console.error('not found');
         }
 
-    }
+    },
+	getClassesData: async () => {
+		return await axiosClient.get("/api/prof/classes");
+	},
 }
 
 export default EntTeacherApi;
