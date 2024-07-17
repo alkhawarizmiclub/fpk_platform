@@ -1,10 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import EntTeacherApi from "../../../../api/EntTeacherApi";
-import Paths from "../../../../routers/Paths.json";
+import { useNavigate } from "react-router-dom";
 import EntPageContainer from "../../../../components/ent/EntPageContainer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntTeacherAnnouncementCreatePage = () => {
 
@@ -30,16 +26,16 @@ const EntTeacherAnnouncementCreatePage = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        EntTeacherApi.submitAnnouncement(formData)
-            .then(() => {
-                navigate(Paths.E_TEACHER_ANNOUNCEMENTS_PAGE);
-            })
-            .catch(() => {
-                // TODO: Add error handling
-            })
-            .finally(() => {
-                setIsSubmitting(false);
-            });
+        // EntTeacherApi.submitAnnouncement(formData)
+        //     .then(() => {
+        //         navigate(Paths.E_TEACHER_ANNOUNCEMENTS_PAGE);
+        //     })
+        //     .catch(() => {
+        //         // TODO: Add error handling
+        //     })
+        //     .finally(() => {
+        //         setIsSubmitting(false);
+        //     });
 
     }
 
@@ -81,6 +77,7 @@ const EntTeacherAnnouncementCreatePage = () => {
                 </div>
             </form>
         </EntPageContainer>
+
     );
 }
 

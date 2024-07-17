@@ -25,8 +25,8 @@ const HomePage = () => {
         setIsLoading(true);
 
         EntPublicApi.getAllAnnounceements()
-            .then(() => {
-
+            .then((response) => {
+                setAnnouncements(response.data.data);
             }).catch(() => {
 
             }).finally(() => {
@@ -113,9 +113,8 @@ const HomePage = () => {
 
                 <Section title="avis & announces" className="p-10">
                     <div className='grid grid-cols-4 gap-5'>
-                        {announcements.map(({ }) => (
-                            <Announcement title="Avis aux étudiants SV S6" url="#" img_src="/w.jpg" />
-                            
+                        {announcements.map(({ title, content, thumbnail, author, created_at }) => (
+                            <Announcement title={title} url="#" content={content} img_src={thumbnail} author={author} creation_date={created_at} />
                         ))}
                     </div>
                     <div className="text-center">

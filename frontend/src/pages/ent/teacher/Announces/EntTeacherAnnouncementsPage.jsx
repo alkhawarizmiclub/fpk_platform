@@ -55,7 +55,7 @@ const EntTeacherAnnouncementsPage = () => {
                         {announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
                             <tr>
                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">
-                                    <div className="aspect-video flex rounded-lg overflow-hidden bg-slate-100">
+                                    <div className="w-full max-w-sm aspect-video flex rounded-lg overflow-hidden bg-slate-100">
                                         <img src={thumbnail_path ? thumbnail_path : "/club_logo.svg"} alt="Post Thumbnail" className="w-full h-full object-cover hover:object-contain" />
                                     </div>
                                 </td>
