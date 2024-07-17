@@ -12,8 +12,29 @@ import { Link } from 'react-router-dom';
 import Paths from "../routers/Paths.json";
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useEffect, useState } from 'react';
+import EntPublicApi from '../api/EntPublicApi';
 
 const HomePage = () => {
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [announcements, setAnnouncements] = useState([]);
+
+    useEffect(() => {
+        setIsLoading(true);
+
+        EntPublicApi.getAllAnnounceements()
+            .then(() => {
+
+            }).catch(() => {
+
+            }).finally(() => {
+                setIsLoading(false);
+            })
+
+    }, []);
+
     return (
         <>
 
@@ -92,15 +113,10 @@ const HomePage = () => {
 
                 <Section title="avis & announces" className="p-10">
                     <div className='grid grid-cols-4 gap-5'>
-                        <Announcement title="Avis aux étudiants SV S6" url="#" img_src="/w.jpg" />
-                        <Announcement title="TC PC : Séances de rattrapage du TD de Module Algèbre" url="#" img_src="/w.jpg" />
-                        <Announcement title="دليل الدخول لمنصة روزيتا عبر منصة موودل" url="#" img_src="/w.jpg" />
-                        <Announcement title="P.E GMS/S5, Examen de rattrapage du module: réhabilitation des sites miniers" url="#" img_src="/w.jpg" />
-                        <Announcement title="Colloque International sur le thème : Résilience Entrepreneuriale en Situation de Crise" url="#" img_src="/w.jpg" />
-                        <Announcement title="Session d’information « FutureSkills4all »" url="#" img_src="/w.jpg" />
-                        <Announcement title="Formation en méthodologie de recherche FD SEG" url="#" img_src="/w.jpg" />
-                        <Announcement title="Announcement title #9" url="#" img_src="/w.jpg" />
-                        <Announcement title="Announcement title #10 Announcement title #10 Announcement title #10 Announcement title #10" url="#" img_src="/w.jpg" />
+                        {announcements.map(({ }) => (
+                            <Announcement title="Avis aux étudiants SV S6" url="#" img_src="/w.jpg" />
+                            
+                        ))}
                     </div>
                     <div className="text-center">
                         <Button plain_bg={true} >
