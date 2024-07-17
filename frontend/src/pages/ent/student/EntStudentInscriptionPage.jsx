@@ -1,41 +1,73 @@
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 import EntStudentApi from "../../../api/EntStudentApi";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntStudentInscriptionPage = () => {
 
-    const [subjects, setSubjects] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        EntStudentApi.getInscriptionData().then((resp) => {
-            setSubjects(resp.data);
-        });
-    }, []);
+	const [semesterSubjects, setSemesterSubjects] = useState([]);
 
-    return (
-        <EntPageContainer title="Inscription">
-            <table className="w-full rounded shadow overflow-hidden">
-                <tbody>
-                    <tr className="text-white bg-slate-800">
-                        {/* <th className="p-3">Systeme</th> */}
-                        <th className="p-3">Module</th>
-                        <th className="p-3">Semester</th>
-                        {/* <th className="p-3">Group</th> */}
-                        <th className="p-3">Statue</th>
-                    </tr>
-                    {subjects.map(({ isOldSystem, module_name, semester }, i) => (
-                        <tr key={i} className="text-slate-700 odd:bg-gray-100">
-                            {/* <td className="p-3 text-center">{isOldSystem ? "Ancienne" : "Nouveau"}</td> */}
-                            <td className="p-3 text-center">{module_name}</td>
-                            <td className="p-3 text-center">{semester}</td>
-                            {/* <td className="p-3 text-center">{groupLabel}</td> */}
-                            {/* <td className="p-3 text-center">{inscriptionStatus}</td> */}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </EntPageContainer>
-    );
+	useEffect(() => {
+		setIsLoading(true);
+
+		EntStudentApi.getInscriptionData()
+			.then((response) => {
+				const groupedData = Object.groupBy(response.data, (item) => item.semester);
+				setSemesterSubjects(groupedData);
+			})
+			.catch(() => {
+				// TODO: Add error handling
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+
+	}, []);
+
+	return (
+		<EntPageContainer title="Inscription">
+
+			{isLoading ? (
+
+				<div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
+
+			) : (
+
+				<div className="space-y-5">
+
+					{Object.entries(semesterSubjects).map(([semester, subjects]) => (
+						<table key={semester} className="w-full rounded-lg shadow overflow-hidden">
+							<tbody>
+								<tr className="text-white bg-slate-800">
+									<th className="p-3">Filiere</th>
+									<th className="p-3">Module</th>
+									<th className="p-3">Semester</th>
+									<th className="p-3">Année</th>
+									<th className="p-3">Statue</th>
+								</tr>
+
+								{subjects.map(({ id, module_name, filiere_name, inscrit_number, inscrit_year }) => (
+									<tr key={id} className="odd:bg-gray-100">
+										<td className="p-3 text-center">{filiere_name}</td>
+										<td className="p-3">{module_name}</td>
+										<td className="p-3 text-center">{semester}</td>
+										<td className="p-3 text-center">{inscrit_year}</td>
+										<td className="p-3 text-center">{inscrit_number == 1 ? 'Inscrit' : 'Reinscrit'}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					))}
+
+				</div>
+
+			)}
+
+		</EntPageContainer>
+	);
 }
 
 export default EntStudentInscriptionPage;

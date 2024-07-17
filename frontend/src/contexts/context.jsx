@@ -71,7 +71,7 @@ const UserContextProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        await EntStudentApi.logout();
+        return await EntStudentApi.logout();
     }
 
     return (

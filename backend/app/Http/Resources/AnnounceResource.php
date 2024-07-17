@@ -20,10 +20,11 @@ class AnnounceResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'tags' => $this->tags,
-            'thumbnail' => Storage::url($this->thumbnail_path),
+            'thumbnail' => Storage::url($this->thumbnail_path, 'announce/image'),
+            'thumbnail_path' => $this->thumbnail_path,
             'poster_image' => $this->poster_image_path ? Storage::url($this->poster_image_path) : null,
             'Author_name' => $this->whenLoaded('author')->firstname . ' ' . $this->whenLoaded('author')->lastname,
-            'publish_at' => $this->created_at->diffForHumans(),
+            'publish_at' => $this->created_at
         ];
     }
 }

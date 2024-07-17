@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 maintest.php
+.DS_store

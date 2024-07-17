@@ -38,7 +38,7 @@ const Navbar = () => {
             ]
         },
         {
-            label: "h",
+            label: "activités",
             children: [
                 { label: "Evénements", url: Paths.EVENTS_PAGE },
                 { label: "Clubs", url: Paths.CLUBS_PAGE },
@@ -46,7 +46,7 @@ const Navbar = () => {
             ]
         },
         {
-            label: "recherche & coopérqtion",
+            label: "recherche & coopération",
             children: [
                 { label: "Professeurs", url: Paths.PROFESSORS_PAGE },
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
@@ -76,7 +76,7 @@ const Navbar = () => {
                 {authenticated ? (
                     <>
                         <Button>
-                            <Link className="py-3 px-6 block" to={Paths.E_STUDENT_DASHBOARD_PAGE}>ENT</Link>
+                            <Link className="py-3 px-6 block" to={Paths.ENT_DASHBOARD_PAGE}>ENT</Link>
                         </Button>
                         <Button plain_bg={true}>
                             <Link className="py-3 px-6 block" to={Paths.LOGOUT_PAGE}>Log Out</Link>

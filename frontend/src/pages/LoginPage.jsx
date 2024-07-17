@@ -38,28 +38,40 @@ const LoginPage = () => {
 
         login(userRole, email, password)
             .then((response) => {
+
                 if (response.data.status === "success") {
                     setAuthenticated(true);
                     setUser(response.data.data || {});
                     setToken(response.data.token);
                     navigate(Paths.ENT_DASHBOARD_PAGE);
                 }
+
             })
-            .catch(({ response }) => {
+            .catch((error) => {
 
-                switch (response.status) {
-                    case 401:
-                        setError("Email ou mot de passe est invalide.");
-                        break;
+                if (!error.response) {
 
-                    default:
-                        setError("La plateforme rencontre quelques difficultés techniques, veuillez réessayer plus tard.");
-                        break;
+                    setError("La plateforme rencontre quelques difficultés techniques, veuillez réessayer plus tard.");
+
+                } else {
+
+                    switch (response.status) {
+                        case 401:
+                            setError("Email ou mot de passe est invalide.");
+                            break;
+
+                        default:
+                            setError("La plateforme rencontre quelques difficultés techniques, veuillez réessayer plus tard.");
+                            break;
+                    }
+
                 }
 
             })
             .finally(() => {
+
                 setIsSubmitting(false);
+
             });
 
     }
@@ -99,7 +111,9 @@ const LoginPage = () => {
                             <input type="password" name="password" id="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" />
                         </div>
 
-                        <p>Mot de passe oublié?<a href="#" className="text-orange-400"> Réinitialisez-le ici.</a></p>
+                        <p>Mot de passe oublié? <a href="#" className="text-orange-400">Réinitialisez-le ici.</a></p>
+
+                        {error && <p className="text-red-500">{error}</p>}
 
                         <button type="submit" className={`py-2 px-3 rounded-lg text-white ${isSubmitting ? "bg-orange-200" : "bg-orange-400"}`} disabled={isSubmitting}>{isSubmitting ? 'Logging in...' : 'Login'}</button>
                     </div>

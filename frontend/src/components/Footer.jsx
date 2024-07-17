@@ -27,7 +27,7 @@ const Footer = () => {
                         </li>
                         <li className="space-x-2">
                             <FontAwesomeIcon icon={faAt} />
-                            <span><span className="font-semibold">Email :</span> <a href="mailto:contactfpk@usms.ma">contactfpk@usms.ma</a></span>
+                            <span><span className="font-semibold">Email :</span> contactfpk@usms.ma</span>
                         </li>
                         <li className="space-x-2">
                             <FontAwesomeIcon icon={faPhone} />

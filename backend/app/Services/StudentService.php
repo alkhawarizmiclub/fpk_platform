@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use DateTime;
 
 use App\Services\DBRepository;
+use Illuminate\Support\Facades\Log;
 
 class StudentService
 {
@@ -35,59 +36,31 @@ class StudentService
     {
         $this->dbRepository = $dbRepository;
     }
+
+
     public function all()
     {
         $students = StudentResource::collection(Student::paginate());
         return ($this->DATA('students', $students));
     }
-    // add module to new student
-    // after that it will base on modules next table to determine student modules
-    private function setDefaultModules($student)
+
+    public function setDefaultModules(Student $student)
     {
-        // $modules = [
-        //     1 => ['semester' => 'S1'],
-        //     2 => ['semester' => 'S1'],
-        //     3 => ['semester' => 'S1'],
-        //     4 => ['semester' => 'S1'],
-        //     5 => ['semester' => 'S1'],
-        //     6 => ['semester' => 'S1'],
-        //     7 => ['semester' => 'S1'],
-        //     8 => ['semester' => 'S1'],
-        //     9 => ['semester' => 'S1'],
-        //     10 => ['semester' => 'S1'],
-        //     11 => ['semester' => 'S1'],
-        //     12 => ['semester' => 'S1'],
-        //     13 => ['semester' => 'S1'],
-        //     14 => ['semester' => 'S1'],
-        // ];
-        $student->modules()->attach(1, ['semester' => 'S1']);
+        $modules = $this->dbRepository->getFiliereDefaultModule($student->filiere_id);
+        foreach ($modules as $module) {
+            $student->modules()->attach($module->module_id, ['semester' => $module->semester]);
+        }
     }
 
-    // 2 =>  ['semester' => 'S1'],
-    // 3 =>  ['semester' => 'S1'],
-    // 4 =>  ['semester' => 'S1'],
-    // 5 =>  ['semester' => 'S1'],
-    // 6 =>  ['semester' => 'S1'],
-    // 7 =>  ['semester' => 'S1'],
-    // 8 =>  ['semester' => 'S2'],
-    // 9 =>  ['semester' => 'S2'],
-    // 10 => ['semester' => 'S2'],
-    // 11 => ['semester' => 'S2'],
-    // 12 => ['semester' => 'S2'],
-    // 13 => ['semester' => 'S2'],
-    // 14 => ['semester' => 'S2'],
+
     public function modules(Student $student)
     {
-        $module = $student->modules;
-        $module  = ModuleResource::collection($module);
+        $module = $this->dbRepository->getStudentModules($student);
         return ($this->DATA('modules', $module));
     }
 
     public function result(Student $student)
     {
-        // $result = Result::where('apogee', $student->apogee)->get();
-        // $results = ResultResource::collection($result);
-        // return ($this->DATA('results', $results));
         $result = $this->dbRepository->getStudentResult($student->apogee);
         return ($this->DATA('results', $result));
     }
@@ -98,12 +71,12 @@ class StudentService
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], /*Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2))*/);
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student logged in successfully',
-                'data' => new StudentResource($student),
+                'data' => $this->dbRepository->getStudentProfile($student->apogee),
                 'token' => $token->plainTextToken
             ]
         );
@@ -122,32 +95,30 @@ class StudentService
         );
     }
 
-
-    // store on public (not very secure ) impl something later like s3
     public function save(StoreStudentRequest $request): JsonResponse
     {
-        // return "TODO";
+        $baccalaureat = $request->file('baccalaureat')?->store('student/baccalaureat', 'public');
+        $releve_note = $request->file('releve_note')?->store('student/releve_note', 'public');
+        $student_photo = $request->file('student_photo')?->store('student/student_photo', 'public');
+        $identify_recto_versto = $request->file('identify_recto_verso')?->store('student/identify', 'public');
 
-        $baccalaureat = $request->file('baccalaureat')->store('public');
-        $releve_note = $request->file('releve_note')->store('public');
-        $image_presonnal = $request->file('image_presonnal')->store('public');
-        $identify_recto_versto = $request->file('identify_recto_verso')->store('public');
-        $request->merge([
-            'baccalaureat' => $baccalaureat,
-            'releve_note' => $releve_note,
-            'image_presonnal' => $image_presonnal,
-            'identify_recto_versto' => $identify_recto_versto,
-            'inscription_date' => $this->getAcademicYear(date('Y-m-d'))
-        ]);
+        $student = Student::create(
+            [
+                ...$request->all(),
+                'baccalaureat' => $baccalaureat,
+                'releve_note' => $releve_note,
+                'student_photo' => $student_photo,
+                'identify_recto_verso' => $identify_recto_versto
+            ]
+        );
 
-        $student = Student::create($request->all());
         $this->setDefaultModules($student);
         event(new Registered($student));
         return response()->json(
             [
                 'status' => 'success',
                 'message' => 'Student created successfully',
-                'data' => $student
+                'data' => $this->dbRepository->getStudentProfile($student->apogee)
             ],
             201
         );
@@ -213,6 +184,28 @@ class StudentService
                 'data' => StudentComplaintResource::collection($complaint)
             ],
             201
+        ));
+    }
+
+    public function profile(Student $student)
+    {
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student profile',
+                'data' => $this->dbRepository->getStudentProfile($student->apogee)
+            ]
+        ));
+    }
+
+    public function accounts(Student $student)
+    {
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Student accounts',
+                'data' => $this->dbRepository->getStudentAccounts($student->apogee)
+            ]
         ));
     }
 }

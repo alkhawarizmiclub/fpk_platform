@@ -8,16 +8,18 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\FpkController;
 use App\Http\Controllers\ModuleController;
+use Illuminate\Support\Facades\Storage;
 
 Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:prof']], function () {
 
     Route::get('/', [ProfController::class, 'show']);
     Route::get('/modules', [ProfController::class, 'modules']);
-    // if apogee or fname (firstname) lname (lastname) is not  provided it return all student in that modules
-    Route::get('/modules/{id}', [ProfController::class, 'students']); // get student how has that module
+    Route::get('/modules/{id}', [ProfController::class, 'students']);
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
+    Route::get('/announce', [ProfController::class, 'getAnnounce']);
     Route::delete('/announce/{id}', [ProfController::class, 'deleteAnnounce']);
+    Route::get('/schedule', [ProfController::class, 'schedule']);
     Route::post('/add-result', [ProfController::class, 'result']);
 
 
@@ -46,9 +48,9 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::post('/complaint', [StudentController::class, 'complaints']);
     Route::get('/complaint', [StudentController::class, 'getComplaints']);
     Route::delete('/complaint/{id}', [StudentController::class, 'deleteComplaint']);
+    Route::get('/accounts', [StudentController::class, 'accounts']);
 
     // TODO:
-    // Route::get('/accounts', [StudentController::class, 'accounts']);
     // Route::post('/complaints', [StudentController::class, 'add-complaints']);
 });
 
@@ -74,7 +76,9 @@ Route::post('/prof/login', [ProfController::class, 'login'])
 
 Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/complaint', [ComplaintsController::class, 'index']);
-    // get all with pagination
+
     Route::get('/announce', [FpkController::class, 'announce']);
+    Route::get('/filieres', [FpkController::class, 'filiere']);
+    Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
 });
