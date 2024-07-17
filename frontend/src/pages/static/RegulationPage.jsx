@@ -5,7 +5,7 @@ import StaticPageContainer from "../../layouts/StaticPageContainer";
         title: 'Réglement Intérieur',
         description: 'Réglement intérieur de la faculté polydisciplinaire de Khouribga',
         icon: 'fas fa-book',
-        link: 'reg_inter .pdf',
+        link: 'reg_inter.pdf',
         image: 'fpk_logo.svg', // Add the path to the image
       },
       {
@@ -40,7 +40,7 @@ import StaticPageContainer from "../../layouts/StaticPageContainer";
         title: 'Loi relatif au conseil de discipline',
         description: 'Loi et Décret relatif au conseil de discipline concernant les étudiants',
         icon: 'fas fa-desktop',
-        link: 'la loi.pdf',
+        link: 'loi.pdf',
         image: 'fpk_logo.svg',
       },
     ];

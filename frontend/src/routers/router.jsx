@@ -15,6 +15,7 @@ import DepartmentsPage from "../pages/static/DepartmentsPage";
 import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
+import ClubsPage from "../pages/static/ClubsPage";
 import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
@@ -41,6 +42,7 @@ import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
 import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
+import CLUBS_PAGE from "../pages/static/ClubsPage";
 import ContactPage from "../pages/ContactPage";
 import SignUpContextProvider from "../contexts/signUpContext";
 import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
@@ -81,6 +83,7 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
             { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
+            { path: Paths.CLUBS_PAGE, element: <ClubsPage/> },
         ]
     },
     {
