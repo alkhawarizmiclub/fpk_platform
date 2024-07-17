@@ -38,11 +38,13 @@ import EntTeacherSchedulePage from "../pages/ent/teacher/EntTeacherSchedulePage"
 import EntTeacherPlanningPage from "../pages/ent/teacher/EntTeacherPlanningPage";
 import EntTeacherClassesPage from "../pages/ent/teacher/EntTeacherClassesPage";
 import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
-import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnouncementsPage";
 import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
 import SignUpContextProvider from "../contexts/signUpContext";
+import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
+import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
+import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -96,6 +98,8 @@ const router = createBrowserRouter([
             { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
             { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE, element: <EntTeacherAnnouncementCreatePage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE, element: <EntTeacherAnnouncementDeletePage /> },
             { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },
             { path: Paths.E_TEACHER_GRADES_PAGE, element: <EntTeacherGradesPage /> },
         ]
