@@ -316,11 +316,12 @@ class DBRepository
     }
     public function getProfClasses(Prof $prof)
     {
-        $classes = DB::table('modules as m')
+        $classes = DB::table('result as r')
+            ->join('modules as m', 'm.id','=', 'r.module_id')
             ->join('filieres as f', 'f.id', '=', 'm.filiere_id')
-            ->select('m.module_name', 'f.filiere_name', DB::raw('COUNT(*) as student_count'))
+            ->select('m.module_name', 'f.filiere_name', DB::raw('count(r.apogee) as student_count'))
             ->where('m.prof_id', $prof->id)
-            ->groupBy('m.module_name', 'f.filiere_name')
+            ->groupBy('m.id')
             ->get();
         return ($classes);
     }

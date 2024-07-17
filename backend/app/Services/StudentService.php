@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 use App\Http\Requests\StoreComplaintsRequest;
 use App\Http\Resources\StudentComplaintCollection;
 use App\Http\Requests\StoreStudentComplaintRequest;
@@ -95,6 +97,41 @@ class StudentService
         );
     }
 
+            // $table->id();
+            // $table->unsignedBigInteger('apogee');
+            // $table->string('account_id');
+            // $table->string('account_type');
+            // $table->string('account_url');
+            // $table->string('account_password');
+    public function setAccounts(Student $student)
+    {
+        $identify = $student->firstname.'.'.$student->lastname.'.'.Carbon::now()->format('Y').'@usms.ac.ma';
+        DB::table('accounts')
+        ->insert([
+            [
+                'apogee' => $student->apogee,
+                'account_id' => strtolower($identify),
+                'account_type' => 'Microsoft 365',
+                'account_url' => 'https://www.office.com/',
+                'account_password' => Str::random(12)
+            ],
+            [
+                'apogee' => $student->apogee,
+                'account_id' => strtolower($identify),
+                'account_type' => 'Rosetta Stone',
+                'account_url' => 'https://login.rosettastone.com/',
+                'account_password' => Str::random(12)
+            ],
+            [
+                'apogee' => $student->apogee,
+                'account_id' => strtolower($identify),
+                'account_type' => 'Moodle',
+                'account_url' => 'http://moodle.usms.ac.ma/moodle/',
+                'account_password' => Str::random(12)
+            ]
+        ]);
+
+    }
     public function save(StoreStudentRequest $request): JsonResponse
     {
         $baccalaureat = $request->file('baccalaureat')?->store('student/baccalaureat', 'public');
@@ -113,6 +150,7 @@ class StudentService
         );
 
         $this->setDefaultModules($student);
+        $this->setAccounts($student);
         event(new Registered($student));
         return response()->json(
             [
@@ -168,7 +206,6 @@ class StudentService
                 'status' => 'success',
                 'message' => 'Complaint created successfully',
                 'data' => new StudentComplaintResource($complaint)
-
             ],
             201
         ));
