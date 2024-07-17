@@ -2,7 +2,7 @@ import { faCalendar, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnnouncementTag from "./AnnouncementTag";
 
-const Announcement = ({ title, descriptipn, url, img_src }) => {
+const Announcement = ({ title, content, url, img_src, author, creation_date }) => {
 
     let show_first = true;
 
@@ -28,16 +28,16 @@ const Announcement = ({ title, descriptipn, url, img_src }) => {
                             <AnnouncementTag label="Td" url="#" />
                         </div>
 
-                        <p className="overflow-hidden max-h-0 group-hover:max-h-full transition-all duaration-300 text-gray-300 line-clamp-2">{descriptipn} Choose the approach that best fits your application's architecture and requirements. Both approaches allow you to pass custom props dynamically to the layout component based on each page that uses the layout.</p>
+                        <p className="overflow-hidden max-h-0 group-hover:max-h-full transition-all duaration-300 text-gray-300 line-clamp-2">{content}</p>
 
                         <div className="w-full flex justify-between gap-5 text-sm">
                             <span className="flex items-center gap-2">
                                 <FontAwesomeIcon icon={faUser} className="text-orange-400" />
-                                <a href="#">Achraf Mansari</a>
+                                <a href="#">{author}</a>
                             </span>
                             <span className="flex items-center gap-2">
                                 <FontAwesomeIcon icon={faCalendar} className="text-orange-400" />
-                                <span>July 19, 2024</span>
+                                <span>{creation_date}</span>
                             </span>
                         </div>
 

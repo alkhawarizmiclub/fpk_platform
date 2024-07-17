@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Paths from '../../routers/Paths.json';
-import EntStudentApi from '../../api/EntStudentApi';
-import generatePDF from './signupPdfGenerator';
 import SignUpStep1 from './SignUpStep1';
 import SignUpStep2 from './SignUpStep2';
 import SignUpStep3 from './SignUpStep3';
@@ -21,10 +18,6 @@ const SignUpPage = () => {
 		{ num: 4, element: <SignUpStep4 /> },
 		{ num: 5, element: <SignUpStep5 /> },
 	]
-
-	const handePdfGeneration = () => {
-		generatePDF(formData);
-	}
 
 	return (
 
