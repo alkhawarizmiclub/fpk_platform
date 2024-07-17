@@ -23,15 +23,6 @@ class FpkController extends Controller
         ];
     }
 
-    // )id' => $this->i
-    //  title' => $this
-    //  content' => $th
-    //  tags' => $this-
-    //  thumbnail' => S
-    //  thumbnail_path'
-    //  poster_image' =
-    //  Author_name' =>
-    //  publish_at' =>
     public function announce()
     {
         $pageSize = 10;
@@ -41,17 +32,8 @@ class FpkController extends Controller
         $AnnounceCount = Announcement::all()->count();
         $pageCount = ceil($AnnounceCount / $pageSize);
         if ($page > $pageCount)
-
             $page = $pageCount;
-        $announcements = Announcement::select(
-            'id',
-            'title',
-            'tags',
-            'created_at',
-            'thumbnail_path',
-            'poster_image_path',
-        )
-            ->skip(($page - 1) * $pageSize)->take($pageSize)->get();
+        $announcements = Announcement::all()->skip(($page - 1) * $pageSize)->take($pageSize);
         foreach ($announcements as $announcement)
             $announcement->author;
         return response()->json(
@@ -66,21 +48,12 @@ class FpkController extends Controller
     }
     public function getAnnounce(string $id)
     {
-        $announcement = Announcement::select(
-            'id',
-            'title',
-            'tags',
-            'content',
-            'created_at',
-            'thumbnail_path',
-            'poster_image_path',
-        )
-        ->where('id', $id)
-        ->get();
+        $announce = Announcement::find($id);
+        $announce->author;
         return (response()->json(
             [
                 'status' => 'status',
-                'data' => new AnnounceResource($announcement)
+                'data' => new AnnounceResource($announce)
             ]
         ));
     }
@@ -106,11 +79,11 @@ class FpkController extends Controller
     public function schedule()
     {
         $filiereId = request()->query('id');
-        return response()->json(
-            [
-                'status' => 'success',
-                'data' => $this->dBRepository->getFiliereSchedules($filiereId)
-            ]
-        );
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'data' => $this->dBRepository->getFiliereSchedules($filiereId)
+                ]
+            );
     }
 }
