@@ -8,6 +8,8 @@ use App\Models\Student;
 use App\Models\Prof;
 use Illuminate\Support\Facades\Storage;
 
+use function Laravel\Prompts\table;
+
 class DBRepository
 {
     public function getStudentComplaints(Student $student)
@@ -286,23 +288,40 @@ class DBRepository
     }
 
     // get default module for filieres
-   public function getFiliereDefaultModule(string $id)
+    public function getFiliereDefaultModule(string $id)
     {
         $mapping = DB::table('module_init as mi')
-                    ->select('mi.module_id', 'm.semester')
-                    ->join('modules as m', 'm.id', '=', 'mi.module_id')
-                    ->where('mi.filiere_id', $id)
-                    ->get();
+            ->select('mi.module_id', 'm.semester')
+            ->join('modules as m', 'm.id', '=', 'mi.module_id')
+            ->where('mi.filiere_id', $id)
+            ->get();
         return ($mapping);
     }
-public function getStudentModules($student)
+    public function getStudentModules($student)
     {
         $modules = DB::table('result as sm')
             ->join('modules as m', 'sm.module_id', '=', 'm.id')
-			->join('filieres as f', 'f.id', '=', 'm.filiere_id')
+            ->join('filieres as f', 'f.id', '=', 'm.filiere_id')
             ->where('sm.apogee', $student->apogee)
             ->select('m.module_name', 'f.filiere_name', 'sm.semester', 'sm.inscrit_number', 'sm.inscrit_year')
             ->get();
         return ($modules);
+    }
+    public function getStudentCount(string $module_id)
+    {
+        $count = DB::table('modules')
+            ->where('module_id', $module_id)
+            ->count();
+        return $count;
+    }
+    public function getProfClasses(Prof $prof)
+    {
+        $classes = DB::table('modules as m')
+            ->join('filieres as f', 'f.id', '=', 'm.filiere_id')
+            ->select('m.module_name', 'f.filiere_name', DB::raw('COUNT(*) as student_count'))
+            ->where('m.prof_id', $prof->id)
+            ->groupBy('m.module_name', 'f.filiere_name')
+            ->get();
+        return ($classes);
     }
 }

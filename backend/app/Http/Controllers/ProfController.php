@@ -88,5 +88,10 @@ class ProfController extends Controller
         $prof = request()->user();
         return ($this->profService->schedule($prof));
     }
+    public function classes()
+    {
+        $prof = request()->user();
+        return ($this->profService->classes($prof));
+    }
 
 }

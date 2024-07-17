@@ -14,6 +14,7 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
 
     Route::get('/', [ProfController::class, 'show']);
     Route::get('/modules', [ProfController::class, 'modules']);
+    Route::get('/classes', [ProfController::class, 'classes']);
     Route::get('/modules/{id}', [ProfController::class, 'students']);
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
@@ -50,8 +51,6 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::delete('/complaint/{id}', [StudentController::class, 'deleteComplaint']);
     Route::get('/accounts', [StudentController::class, 'accounts']);
 
-    // TODO:
-    // Route::post('/complaints', [StudentController::class, 'add-complaints']);
 });
 
 
@@ -78,6 +77,7 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/complaint', [ComplaintsController::class, 'index']);
 
     Route::get('/announce', [FpkController::class, 'announce']);
+    Route::get('/announce/{id}', [FpkController::class, 'getAnnounce']);
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
