@@ -17,7 +17,7 @@ const EntStudentApi = {
             gender: data.gender,
             massar_code: data.studentId,
             nationality: data.nationality,
-            id_num: data.studentId,
+            id_num: data.idNum,
             identify_recto_verso: data.idCardFile,
             email: data.email,
             phone_number: data.phone,

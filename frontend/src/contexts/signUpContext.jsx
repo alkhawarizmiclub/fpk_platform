@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import EntStudentApi from "../api/EntStudentApi";
+import generatePDF from "../pages/signupPage/signupPdfGenerator";
 
 const SignUpContext = createContext({
     formData: {},
@@ -157,7 +158,7 @@ const SignUpContextProvider = ({ children }) => {
                     generatePDF(formData);
                 })
                 .catch(({ response }) => {
-                    // TODO: Error Handling
+                    setFormErrorMessage(response.data.message);
                 })
                 .finally(() => { })
         }

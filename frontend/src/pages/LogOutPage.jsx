@@ -7,25 +7,25 @@ import { axiosClient } from "../api/axiosClient";
 
 const LogOutPage = () => {
 
-    const { setUser, setAuthenticated, setToken, user} = useUserContext();
+    const { setUser, setAuthenticated, setToken, user } = useUserContext();
     const navigate = useNavigate();
 
     const logoutHandler = async () => {
-		switch (user.role) {
-			case "student":
-				await axiosClient.get("/api/student/logout");
-			break;
-			case "teacher":
-				await axiosClient.get("/api/prof/logout");
-			break;
-			case "admin":
-				await axiosClient.get("/api/admin/logout");
-			break;
-		}
         setUser({});
         setAuthenticated(false);
         setToken("");
         navigate(Paths.LOGIN_PAGE);
+        switch (user.role) {
+            case "student":
+                await axiosClient.get("/api/student/logout");
+                break;
+            case "teacher":
+                await axiosClient.get("/api/prof/logout");
+                break;
+            case "admin":
+                await axiosClient.get("/api/admin/logout");
+                break;
+        }
     }
 
     return (
