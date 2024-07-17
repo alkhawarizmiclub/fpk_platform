@@ -323,6 +323,16 @@ class DBRepository
             ->where('m.prof_id', $prof->id)
             ->groupBy('m.id')
             ->get();
+
+        // $classes = DB::table('modules as m')
+        //     ->leftJoin('result as r', function ($join) {
+        //         $join->on('m.id', '=', 'r.module_id');
+        //     })
+        //     ->join('filieres as f', 'f.id', '=', 'm.filiere_id')
+        //     ->select('m.module_name', 'f.filiere_name', DB::raw('count(r.apogee) as student_count'))
+        //     ->where('m.prof_id', $prof->id)
+        //     ->groupBy('m.id', 'm.module_name', 'f.filiere_name')
+        //     ->get();
         return ($classes);
     }
 }
