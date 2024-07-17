@@ -4,7 +4,7 @@ import EntTeacherApi from "../../api/EntTeacherApi";
 const EntTeacherGradesStudentEntry = ({ data }) => {
 
 
-    const { apogee, module_id, image, firstname, lastname, normale, ratt } = data;
+    const { apogee, module_id, student_photo, firstname, lastname, normale, ratt } = data;
 
     const [normalNote, _setNormalNote] = useState('');
     const [rattrapageNote, _setRattrapageNote] = useState('');
@@ -38,7 +38,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
     return (
         <tr>
             <td className="px-6 py-4 whitespace-nowrap">
-                <img src={image} alt="Student" className="w-10 h-10 rounded-full" />
+                <img src={student_photo} alt="Student" className="w-10 h-10 rounded-full" />
             </td>
             <td className="px-6 py-4 whitespace-nowrap">{firstname}</td>
             <td className="px-6 py-4 whitespace-nowrap">{lastname}</td>

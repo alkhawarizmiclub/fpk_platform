@@ -5,7 +5,7 @@ import StaticPageLayout from "../layouts/StaticPageLayout";
 import EntLayout from "../layouts/EntLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
-import SignUpPage from "../pages/SignUpPage";
+import SignUpPage from "../pages/signupPage/SignUpPage";
 import LogOutPage from "../pages/LogOutPage";
 import ApplyPage from "../pages/ApplyPage";
 import Error404Page from "../pages/static/Error404Page";
@@ -39,11 +39,15 @@ import EntTeacherSchedulePage from "../pages/ent/teacher/EntTeacherSchedulePage"
 import EntTeacherPlanningPage from "../pages/ent/teacher/EntTeacherPlanningPage";
 import EntTeacherClassesPage from "../pages/ent/teacher/EntTeacherClassesPage";
 import EntTeacherGradesPage from "../pages/ent/teacher/EntTeacherGradesPage";
-import EntTeacherAnnouncementsPage from "../pages/ent/teacher/EntTeacherAnnouncementsPage";
 import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntStudentComplaintsDeletePage";
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
 import CLUBS_PAGE from "../pages/static/ClubsPage";
+import ContactPage from "../pages/ContactPage";
+import SignUpContextProvider from "../contexts/signUpContext";
+import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
+import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
+import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -51,10 +55,12 @@ const router = createBrowserRouter([
         element: <BlankLayout />,
         children: [
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
-            { path: Paths.SIGNUP_PAGE, element: <SignUpPage /> },
+            { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
             { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
-            { path: Paths.ERROR_PAGE, element: <Error404Page /> }
+            { path: Paths.ERROR_PAGE, element: <Error404Page /> },
+            { path: Paths.CONTACT_PAGE, element: <ContactPage /> },
+           
         ]
     },
     {
@@ -76,7 +82,7 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
-            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements/> },
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
             { path: Paths.CLUBS_PAGE, element: <ClubsPage/> },
         ]
     },
@@ -98,6 +104,8 @@ const router = createBrowserRouter([
             { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
             { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE, element: <EntTeacherAnnouncementCreatePage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE, element: <EntTeacherAnnouncementDeletePage /> },
             { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },
             { path: Paths.E_TEACHER_GRADES_PAGE, element: <EntTeacherGradesPage /> },
         ]

@@ -6,66 +6,68 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntStudentInscriptionPage = () => {
 
-    const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 
-    const [semesterSubjects, setSemesterSubjects] = useState([]);
+	const [semesterSubjects, setSemesterSubjects] = useState([]);
 
-    useEffect(() => {
-        setIsLoading(true);
+	useEffect(() => {
+		setIsLoading(true);
 
-        EntStudentApi.getInscriptionData()
-            .then((response) => {
-                const groupedData = Object.groupBy(response.data, item => item.semester);
-                setSemesterSubjects(groupedData);
-            })
-            .catch(() => {
-                // TODO: Add error handling
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+		EntStudentApi.getInscriptionData()
+			.then((response) => {
+				const groupedData = Object.groupBy(response.data, (item) => item.semester);
+				setSemesterSubjects(groupedData);
+			})
+			.catch(() => {
+				// TODO: Add error handling
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 
-    }, []);
+	}, []);
 
-    return (
-        <EntPageContainer title="Inscription">
+	return (
+		<EntPageContainer title="Inscription">
 
-            {isLoading ? (
+			{isLoading ? (
 
-                <div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
+				<div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
 
-            ) : (
+			) : (
 
-                <div className="space-y-5">
+				<div className="space-y-5">
 
-                    {Object.entries(semesterSubjects).map(([semester, subjects]) => (
-                        <table key={semester} className="w-full rounded-lg shadow overflow-hidden">
-                            <tbody>
-                                <tr className="text-white bg-slate-800">
-                                    <th className="p-3">Filiere</th>
-                                    <th className="p-3">Module</th>
-                                    <th className="p-3">Semester</th>
-                                    <th className="p-3">Statue</th>
-                                </tr>
+					{Object.entries(semesterSubjects).map(([semester, subjects]) => (
+						<table key={semester} className="w-full rounded-lg shadow overflow-hidden">
+							<tbody>
+								<tr className="text-white bg-slate-800">
+									<th className="p-3">Filiere</th>
+									<th className="p-3">Module</th>
+									<th className="p-3">Semester</th>
+									<th className="p-3">Année</th>
+									<th className="p-3">Statue</th>
+								</tr>
 
-                                {subjects.map(({ id, module_name, filiere }) => (
-                                    <tr key={id} className="odd:bg-gray-100">
-                                        <td className="p-3 text-center">{filiere}</td>
-                                        <td className="p-3">{module_name}</td>
-                                        <td className="p-3 text-center">{semester}</td>
-                                        <td className="p-3 text-center">I</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ))}
+								{subjects.map(({ id, module_name, filiere_name, inscrit_number, inscrit_year }) => (
+									<tr key={id} className="odd:bg-gray-100">
+										<td className="p-3 text-center">{filiere_name}</td>
+										<td className="p-3">{module_name}</td>
+										<td className="p-3 text-center">{semester}</td>
+										<td className="p-3 text-center">{inscrit_year}</td>
+										<td className="p-3 text-center">{inscrit_number == 1 ? 'Inscrit' : 'Reinscrit'}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					))}
 
-                </div>
+				</div>
 
-            )}
+			)}
 
-        </EntPageContainer>
-    );
+		</EntPageContainer>
+	);
 }
 
 export default EntStudentInscriptionPage;

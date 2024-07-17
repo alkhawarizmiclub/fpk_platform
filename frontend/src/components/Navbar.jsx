@@ -38,7 +38,7 @@ const Navbar = () => {
             ]
         },
         {
-            label: "h",
+            label: "activités",
             children: [
                 { label: "Evénements", url: Paths.EVENTS_PAGE },
                 { label: "Clubs", url: Paths.CLUBS_PAGE },
@@ -46,7 +46,7 @@ const Navbar = () => {
             ]
         },
         {
-            label: "recherche & coopérqtion",
+            label: "recherche & coopération",
             children: [
                 { label: "Professeurs", url: Paths.PROFESSORS_PAGE },
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },

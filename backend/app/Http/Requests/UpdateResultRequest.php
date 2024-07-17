@@ -27,8 +27,8 @@ class UpdateResultRequest extends FormRequest
         return [
             'module_id' => 'required',
             'apogee' => 'required',
-            'normale' => 'numeric|min:0|max:20',
-            'ratt' => 'numeric|min:0|max:20',
+            'normale' => 'nullable|numeric|min:0|max:20',
+            'ratt' => 'nullable|numeric|min:0|max:20',
         ];
     }
     public function messages(): array

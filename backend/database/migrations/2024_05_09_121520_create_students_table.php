@@ -13,6 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
+
             $table->unsignedBigInteger("apogee")->primary()->autoIncrement();
             $table->string("firstname");
             $table->string("lastname");
@@ -20,19 +21,19 @@ return new class extends Migration
             $table->string("lastname_ar");
             $table->date("birth_date");
             $table->string("birth_place");
-            $table->string("student_code");
+            $table->string("massar_code");
             $table->string("nationality");
             $table->string("id_num");
             $table->string("email")->unique();
-            $table->string("phone")->unique();
-            $table->string("emergencyPhone");
+            $table->string("phone_number")->unique();
+            $table->string("emergency_phone");
             $table->string("address");
             $table->unsignedBigInteger("filiere_id");
             $table->string("password");
             $table->string("gender");
             $table->string("baccalaureat");
             $table->string("releve_note");
-            $table->string("image_presonnal");
+            $table->string("student_photo");
             $table->string("identify_recto_verso");
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

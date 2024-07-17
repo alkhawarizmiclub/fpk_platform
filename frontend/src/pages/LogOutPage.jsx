@@ -1,21 +1,31 @@
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../contexts/context";
 import Paths from "../routers/Paths.json";
+import axios from "axios";
+import { axiosClient } from "../api/axiosClient";
 
 
 const LogOutPage = () => {
 
-    const { setUser, setAuthenticated, setToken, logout } = useUserContext();
+    const { setUser, setAuthenticated, setToken, user } = useUserContext();
     const navigate = useNavigate();
 
     const logoutHandler = async () => {
-        // await logout();
-
         setUser({});
         setAuthenticated(false);
         setToken("");
         navigate(Paths.LOGIN_PAGE);
-
+        switch (user.role) {
+            case "student":
+                await axiosClient.get("/api/student/logout");
+                break;
+            case "teacher":
+                await axiosClient.get("/api/prof/logout");
+                break;
+            case "admin":
+                await axiosClient.get("/api/admin/logout");
+                break;
+        }
     }
 
     return (

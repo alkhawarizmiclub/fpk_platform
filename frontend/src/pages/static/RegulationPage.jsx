@@ -40,7 +40,7 @@ import StaticPageContainer from "../../layouts/StaticPageContainer";
         title: 'Loi relatif au conseil de discipline',
         description: 'Loi et Décret relatif au conseil de discipline concernant les étudiants',
         icon: 'fas fa-desktop',
-        link: ' loi.pdf',
+        link: 'loi.pdf',
         image: 'fpk_logo.svg',
       },
     ];
