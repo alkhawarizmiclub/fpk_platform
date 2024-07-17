@@ -40,7 +40,7 @@ const StaffPage = () => {
           <div className="bg-white shadow-lg rounded-lg p-6 max-w-xs">
             <div className="mb-4">
               <img
-                src="https://i0.wp.com/www.fpk.ac.ma/wp-content/uploads/2023/02/doyen-1-scaled-e1677513352365.jpg?resize=200%2C252"
+                src="/dean.jpg"
                 alt="Khalid Mehdi"
                 className="mx-auto rounded-md"
                 width="200"
