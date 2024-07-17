@@ -57,7 +57,7 @@ class FpkController extends Controller
     public function filiere()
     {
         $result = DB::table('filieres')
-            ->select('id', 'filiere_name', 'filiere_code')
+            ->select('id', 'filiere_name', 'filiere_abrv')
             ->get();
         return [
             'status' => 'success',

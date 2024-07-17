@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use DateTime;
 
 use App\Services\DBRepository;
+use Illuminate\Support\Facades\Log;
 
 class StudentService
 {
@@ -43,36 +44,18 @@ class StudentService
         return ($this->DATA('students', $students));
     }
 
-    static public function setDefaultModules($student)
+    public function setDefaultModules(Student $student)
     {
-        $modules = [
-            1 => ['semester' =>  'S1'],
-            2 => ['semester' =>  'S1'],
-            3 => ['semester' =>  'S1'],
-            4 => ['semester' =>  'S1'],
-            5 => ['semester' =>  'S1'],
-            6 => ['semester' =>  'S1'],
-            7 => ['semester' =>  'S1'],
-            8 => ['semester' =>  'S2'],
-            9 => ['semester' =>  'S2'],
-            10 => ['semester' => 'S2'],
-            11 => ['semester' => 'S2'],
-            12 => ['semester' => 'S2'],
-            13 => ['semester' => 'S2'],
-            14 => ['semester' => 'S2'],
-        ];
-        $filiere_id = $student->filiere_id;
-        foreach ($modules as $id => $val) {
-            $id2 = (int)$id * (int)$filiere_id;
-            $student->modules()->attach($id2, $val);
+        $modules = $this->dbRepository->getFiliereDefaultModule($student->filiere_id);
+        foreach ($modules as $module) {
+            $student->modules()->attach($module->module_id, ['semester' => $module->semester]);
         }
     }
 
 
     public function modules(Student $student)
     {
-        $module = $student->modules;
-        $module  = ModuleResource::collection($module);
+        $module = $this->dbRepository->getStudentModules($student);
         return ($this->DATA('modules', $module));
     }
 
@@ -88,7 +71,7 @@ class StudentService
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], /*Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2))*/);
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
         return response()->json(
             [
                 'status' => 'success',

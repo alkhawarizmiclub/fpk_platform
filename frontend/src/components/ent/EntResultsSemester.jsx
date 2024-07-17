@@ -1,7 +1,8 @@
 import EntResultsTypeInfo from "./EntResultsTypeInfo";
 
 const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
-
+	console.log(moduleObjects)
+	// console.log()
     return (
         <table className="w-full rounded-lg shadow overflow-hidden">
 
@@ -29,14 +30,14 @@ const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
                     </th>
                 </tr>
 
-                {moduleObjects.map(({ name, inscrit_year, normal, rattrapage }, i) => (
+                {moduleObjects.map(({ module_name, inscrit_year, normale, ratt }, i) => (
                     <tr key={i} className="odd:bg-gray-100">
-                        <td className="py-2 px-5">{name ? name : "M32: Architecture des oridanteurs"}</td>
+                        <td className="py-2 px-5">{module_name}</td>
                         <td className="py-2 px-5 text-center">{inscrit_year}</td>
-                        <td className="py-2 px-5 text-center">{normal ? `${normal} / 20` : "-"}</td>
-                        <td className="py-2 px-5 text-center"></td>
-                        <td className="py-2 px-5 text-center">{rattrapage ? `${rattrapage} / 20` : "-"}</td>
-                        <td className="py-2 px-5 text-center"></td>
+                        <td className="py-2 px-5 text-center">{normale ? `${normale} / 20` : "-"}</td>
+                        <td className="py-2 px-5 text-center">{normale ? normale >= 10 ? 'V': 'Ratt' : ''}</td>
+                        <td className="py-2 px-5 text-center">{ratt  ? `${ratt} / 20` : "-"}</td>
+                        <td className="py-2 px-5 text-center">{ratt ? ratt >= 10 ? 'VAR': 'NV' : ''}</td>
                     </tr>
                 ))}
             </tbody>

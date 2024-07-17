@@ -52,7 +52,8 @@ class ProfController extends Controller
 
     public function modules(Request $request)
     {
-        return ($this->profService->modules($request->user()->id));
+        $prof = $request->user();
+        return ($this->profService->modules($prof));
     }
 
     public function students(string $moduleId)
@@ -84,7 +85,8 @@ class ProfController extends Controller
     }
     public function schedule()
     {
-        return ($this->profService->schedule());
+        $prof = request()->user();
+        return ($this->profService->schedule($prof));
     }
 
 }

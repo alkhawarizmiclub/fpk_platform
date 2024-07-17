@@ -7,6 +7,8 @@ use App\Http\Requests\StoreModuleRequest;
 use App\Models\Module;
 use Illuminate\Http\Response;
 use App\Traits\JsonTemplate;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ModuleService
 {
@@ -46,272 +48,101 @@ class ModuleService
     }
 
 
-    public static function SMI(string $id)
+
+    public static  function insertModule($modules, string $filiere)
     {
-        Module::create([
-            'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-        ]);
 
-        Module::create([
-            'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M04- Physique 1 – Mécanique 1',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M05- Physique 2 – Thermodynamique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M07- LT I',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M08- Analyse 2- Intégration',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => ' M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M11- Physique 3 – Electrostatique et Electrocinétique',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M12- Physique 4 – Optique 1',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-        Module::create([
-            'module_name' => 'M13- Informatique 2 – Algorithmique I',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M14- LT II',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
+        $v = 1;
+        foreach ($modules as $module) {
+            Module::create([
+                'module_name' => $module,
+                'semester' => $v <= 7 ? 'S1' : 'S2',
+                'filiere_id' => $filiere,
+                'prof_id' => rand(1, 3),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+            $v += 1;
+        }
     }
 
-    public static function SEG(string $id)
+    public static function gnModule()
     {
-        Module::create([
-            'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-        ]);
+        $SEG = [
+            'M01- Comptabilité Générale (I)',
+            'M02- Management (I)',
+            'M03- Introduction à l’économie',
+            'M04- Microéconomie (I)',
+            'M05- Statistique descriptive',
+            'M06- Analyse Mathématique',
+            'M07- Langues et Terminologie (I)',
 
-        Module::create([
-            'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
+            'M08- Macroéconomie',
+            'M09- Microéconomie (II)',
+            'M10- Probabilités',
+            'M11- Algèbre – Mathématiques Financières',
+            'M12- Comptabilité Générale (II)',
+            'M13- Management (II)',
+            'M14- Langues et Terminologie (II)',
+        ];
 
-        ]);
+        $SMI = [
 
-        Module::create([
-            'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
+            'M01- Analyse 1 – Suites Numériques et Fonctions',
+            'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
+            'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
+            'M04- Physique 1 – Mécanique 1',
+            'M05- Physique 2 – Thermodynamique',
+            'M06- Informatique 1 – Introduction à l’informatique',
+            'M07- LT I',
 
-        ]);
+            'M08- Analyse 2- Intégration',
+            'M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications',
+            'M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants',
+            'M11- Physique 3 – Electrostatique et Electrocinétique',
+            'M12- Physique 4 – Optique 1',
+            'M13- Informatique 2 – Algorithmique I',
+            'M14- LT II',
+        ];
 
-        Module::create([
-            'module_name' => 'M04- Physique 1 – Mécanique 1',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
+        $SMP = [
 
-        ]);
+            'M01- Mécanique du point',
+            'M02- Thermodynamique I',
+            'M03- Atomistique',
+            'M04- Thermochimie',
+            'M05- Analyse 1',
+            'M06- Algèbre 1',
+            'M07- LT I',
 
-        Module::create([
-            'module_name' => 'M05- Physique 2 – Thermodynamique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
+            'M08- Electrostatique et Electrocinétique',
+            'M09- Optique géométrique',
+            'M10- Liaisons chimiques',
+            'M11- Chimie des solutions',
+            'M12- Analyse 2',
+            'M13- Algèbre 2',
+            'M14- LT II',
+        ];
 
-        Module::create([
-            'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
+        self::insertModule($SMI, 1);
+        self::insertModule($SEG, 2);
+        self::insertModule($SMP, 3);
 
-        Module::create([
-            'module_name' => 'M07- LT I',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M08- Analyse 2- Intégration',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => ' M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M11- Physique 3 – Electrostatique et Electrocinétique',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M13- Informatique 2 – Algorithmique I',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M07- LT II',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
+        self::setDefaultModule(range(1, 14), 1);
+        self::setDefaultModule(range(15, 28), 2);
+        self::setDefaultModule(range(29, 42), 3);
     }
 
-    public static function SMP(string $id)
+    public static function setDefaultModule($modules, $fId)
     {
-        Module::create([
-            'module_name' => 'M01- Analyse 1 – Suites Numériques et Fonctions',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-        ]);
+        foreach ($modules as $module) {
+            DB::table('module_init')->insert([
+                'module_id' => $module,
+                'filiere_id' => $fId,
 
-        Module::create([
-            'module_name' => 'M02- ALGEBRE 1- Généralités et Arithmétique dans Z',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M03- ALGEBRE 2- Structures, Polynômes et Fractions Rationnelles',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M04- Physique 1 – Mécanique 1',
-            'semester' => 'S1',
-            'filiere_id' => 1,
-            'prof_id' => $id
-
-        ]);
-
-        Module::create([
-            'module_name' => 'M05- Physique 2 – Thermodynamique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M06- Informatique 1 – Introduction à l’informatique',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M07- LT I',
-            'semester' => 'S1',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M08- Analyse 2- Intégration',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => ' M09- Analyse 3 – Formule de Taylor, Développement Limité et Applications',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M10- ALGEBRE 3- Espaces Vectoriels, Matrices et Déterminants',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M11- Physique 3 – Electrostatique et Electrocinétique',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M13- Informatique 2 – Algorithmique I',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
-
-        Module::create([
-            'module_name' => 'M07- LT II',
-            'semester' => 'S2',
-            'filiere_id' => 1
-        ]);
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
     }
 }

@@ -43,7 +43,7 @@ const SignUpStep3 = () => {
                         className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     >
                         <option value="" disabled>Select</option>
-                        {majors.map(({ id, filiere_code, filiere_name }) => (
+                        {majors.map(({ id, filiere_abrv, filiere_name }) => (
                             <option key={id} value={id}>{filiere_name}</option>
                         ))}
                     </select>

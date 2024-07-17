@@ -36,12 +36,12 @@ class ProfService
         return ($this->DATA('profs', $profs));
     }
 
-    public function modules(string $id)
+    public function modules(Prof $prof)
     {
         $modules = DB::table('modules as m')
             ->join('filieres as f', 'm.filiere_id', '=', 'f.id')
-            ->select('m.id', 'm.module_name', 'm.semester', 'f.filiere_code')
-            ->where('prof_id', $id)
+            ->select('m.id', 'm.module_name', 'm.semester', 'f.filiere_abrv')
+            ->where('prof_id', $prof->id)
             ->get();
         $modules  = ModuleResource::collection($modules);
         return ($this->DATA('modules', $modules));
@@ -196,9 +196,8 @@ class ProfService
             202
         );
     }
-    public function schedule()
+    public function schedule($prof)
     {
-        $prof = request()->user();
         return response()->json(
             [
                 'status' => 'success',

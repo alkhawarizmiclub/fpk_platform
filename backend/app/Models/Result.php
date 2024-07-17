@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Result extends Model
 {
     use HasFactory;
-    protected $table = 'module_student';
+    protected $table = 'result';
     protected $fillable = [
         'apogee',
         'module_id',
