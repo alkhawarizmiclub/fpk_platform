@@ -46,6 +46,17 @@ class FpkController extends Controller
             ]
         );
     }
+    public function getAnnounce(string $id)
+    {
+        $announce = Announcement::find($id);
+        $announce->author;
+        return (response()->json(
+            [
+                'status' => 'status',
+                'data' => new AnnounceResource($announce)
+            ]
+        ));
+    }
     public function acadmicYear()
     {
         return [

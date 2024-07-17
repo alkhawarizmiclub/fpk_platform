@@ -223,4 +223,14 @@ class ProfService
             ]
         );
     }
+    public function classes(Prof $prof)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfClasses($prof)
+
+            ]
+        );
+    }
 }
