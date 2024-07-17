@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use DateTime;
 
 use App\Services\DBRepository;
+use Illuminate\Support\Facades\Log;
 
 class StudentService
 {
@@ -43,7 +44,7 @@ class StudentService
         return ($this->DATA('students', $students));
     }
 
-    public function setDefaultModules($student)
+    public function setDefaultModules(Student $student)
     {
         $modules = $this->dbRepository->getFiliereDefaultModule($student->filiere_id);
         foreach ($modules as $module) {
@@ -54,9 +55,7 @@ class StudentService
 
     public function modules(Student $student)
     {
-        // $module = $student->modules;
         $module = $this->dbRepository->getStudentModules($student);
-        // $module  = ModuleResource::collection($module);
         return ($this->DATA('modules', $module));
     }
 
@@ -72,7 +71,7 @@ class StudentService
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
         $student->tokens()->delete();
-        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], /*Carbon::now()->addHours((int)env('S_TOKEN_EXPIRATION', 2))*/);
+        $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
         return response()->json(
             [
                 'status' => 'success',

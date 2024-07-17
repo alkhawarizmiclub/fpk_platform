@@ -34,9 +34,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $prof = Prof::create([
-            'lastname' => 'chifo',
-            'firstname' => 'master',
-            'email' => 'chifo@gmail.com',
+            'lastname' => 'master',
+            'firstname' => 'shifu',
+            'email' => 'shifu@gmail.com',
             'password' => bcrypt('pandas'),
 
             'birth_date' => '1998-05-09',
@@ -50,10 +50,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $prof1 = Prof::create([
-            'lastname' => 'python',
+            'lastname' => 'django',
             'firstname' => 'achraf',
             'email' => 'django@gmail.com',
-            'password' => bcrypt('django)'),
+            'password' => bcrypt('yousuck'),
             'birth_date' => '1998-05-09',
             'phone_number' => '1234567891',
             'gender' => 'male',

@@ -40,10 +40,14 @@ class StudentController extends Controller
     {
         return ($this->studentService->login($request));
     }
+    public function logout(Request $request)
+    {
+        return ($this->studentService->logout($request));
+    }
 
     public function modules()
     {
-        $student = request()->user();
+        $student  = request()->user();
         return ($this->studentService->modules($student));
     }
 

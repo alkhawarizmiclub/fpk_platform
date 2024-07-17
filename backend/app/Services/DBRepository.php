@@ -154,6 +154,9 @@ class DBRepository
                 'ms.semester'
             )
             ->get();
+        foreach ($student as $stud) {
+            $stud->student_photo = url(Storage::url($stud->student_photo));
+        }
         return ($student);
     }
 
