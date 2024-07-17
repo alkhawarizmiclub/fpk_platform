@@ -126,14 +126,14 @@ const HomePage = () => {
 
                 <Section title="activités & événements" className="p-10 bg-slate-100">
                     <div className="grid grid-cols-4 gap-5">
-                        <Activity label="The 14 best website builders for small businesses in 2023" url="#" img_src="/w.jpg" date_day="01" date_month="January" date_year="2024" location="Casablanca" />
-                        <Activity label="The best web design software to use in 2023" url="#" img_src="/w.jpg" date_day="13" date_month="May" date_year="2024" location="Casablanca" />
-                        <Activity label="10 best freelance digital designers for hire in 2023" url="#" img_src="/w.jpg" date_day="20" date_month="Decemeber" date_year="2024" location="Casablanca" />
-                        <Activity label="10 best freelance Youtube banner designers for hire in 2023" url="#" img_src="/w.jpg" date_day="08" date_month="April" date_year="2024" location="Casablanca" />
-                        <Activity label="The 10 best freelance web designers for hire in 2023" url="#" img_src="/w.jpg" date_day="10" date_month="October" date_year="2024" location="Casablanca" />
-                        <Activity label="8 immersive ecommerce trends for 2023" url="#" img_src="/w.jpg" date_day="29" date_month="August" date_year="2024" location="Casablanca" />
-                        <Activity label="The 10 best freelance landing page designers for hire in 2023" url="#" img_src="/w.jpg" date_day="06" date_month="June" date_year="2024" location="Casablanca" />
-                        <Activity label="Activitie number #8" url="#" img_src="/w.jpg" date_day="30" date_month="July" date_year="2024" location="Casablanca" />
+                        <Activity label="The 14 best website builders for small businesses in 2023" url="#" img_src="/event.webp" date_day="01" date_month="January" date_year="2024" location="Casablanca" />
+                        <Activity label="The best web design software to use in 2023" url="#" img_src="/event.webp" date_day="13" date_month="May" date_year="2024" location="Casablanca" />
+                        <Activity label="10 best freelance digital designers for hire in 2023" url="#" img_src="/event.webp" date_day="20" date_month="Decemeber" date_year="2024" location="Casablanca" />
+                        <Activity label="10 best freelance Youtube banner designers for hire in 2023" url="#" img_src="/event.webp" date_day="08" date_month="April" date_year="2024" location="Casablanca" />
+                        <Activity label="The 10 best freelance web designers for hire in 2023" url="#" img_src="/event.webp" date_day="10" date_month="October" date_year="2024" location="Casablanca" />
+                        <Activity label="8 immersive ecommerce trends for 2023" url="#" img_src="/event.webp" date_day="29" date_month="August" date_year="2024" location="Casablanca" />
+                        <Activity label="The 10 best freelance landing page designers for hire in 2023" url="#" img_src="/event.webp" date_day="06" date_month="June" date_year="2024" location="Casablanca" />
+                        <Activity label="Activitie number #8" url="#" img_src="/event.webp" date_day="30" date_month="July" date_year="2024" location="Casablanca" />
                     </div>
                     <div className="text-center">
                         <Button plain_bg={true} >
