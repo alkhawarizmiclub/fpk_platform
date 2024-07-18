@@ -41,7 +41,6 @@ const EntStudentComplaintsCreatePage = () => {
 
         EntPublicApi.getComplaintCategories()
             .then((response) => {
-                console.log(response.data.data);
                 setComplaintCategories(response.data.data)
             })
             .catch(() => {

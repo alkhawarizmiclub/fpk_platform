@@ -61,12 +61,10 @@ const SignUpContextProvider = ({ children }) => {
     };
 
     const stepValidation = (step) => {
-        console.log("Validating step", step);
 
         switch (step) {
 
             case 1:
-                console.log(formData);
                 return (
                     formData.firstName &&
                     formData.lastName &&
