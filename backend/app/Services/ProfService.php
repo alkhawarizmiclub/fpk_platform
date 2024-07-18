@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use App\Traits\JsonTemplate;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreannouncementRequest;
-use App\Http\Resources\StudentNoteResource;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class ProfService
@@ -232,5 +232,19 @@ class ProfService
 
             ]
         );
+    }
+    public function getStudentLists(string $moduleId, Prof $prof)
+    {
+        $module = Module::find($moduleId);
+        $students  = $this->dbRepository->getStudentLists($moduleId, $prof);
+        $pdf = Pdf::loadView('list',
+            [
+                'students' => $students,
+                'module_name' => $module->module_name,
+                'year' => StudentService::getAcademicYear(date('Y-m-d'))
+            ]
+        );
+        return ($pdf->download("$module->module_name.pdf"));
+
     }
 }

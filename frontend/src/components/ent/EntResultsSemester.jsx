@@ -1,8 +1,6 @@
 import EntResultsTypeInfo from "./EntResultsTypeInfo";
 
 const EntResultsSemester = ({ majorLabel, semesterNumber, moduleObjects }) => {
-	console.log(moduleObjects)
-	// console.log()
     return (
         <table className="w-full rounded-lg shadow overflow-hidden">
 

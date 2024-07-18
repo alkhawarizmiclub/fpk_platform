@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ComplaintsController;
 use Illuminate\Support\Facades\Route;
@@ -8,13 +9,16 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfController;
 use App\Http\Controllers\FpkController;
 use App\Http\Controllers\ModuleController;
-use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+
 
 Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthorized:prof']], function () {
 
     Route::get('/', [ProfController::class, 'show']);
     Route::get('/modules', [ProfController::class, 'modules']);
     Route::get('/classes', [ProfController::class, 'classes']);
+    Route::get('/classes/{id}', [ProfController::class, 'studentLists']);
     Route::get('/modules/{id}', [ProfController::class, 'students']);
     Route::get('/logout', [ProfController::class, 'logout']);
     Route::post('/announce', [ProfController::class, 'announce']);
@@ -81,4 +85,5 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
+
 });
