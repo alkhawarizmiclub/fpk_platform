@@ -31,18 +31,16 @@ const Navbar = () => {
         {
             label: "espace scolarité",
             children: [
-                { label: "E-Etudiant", url: Paths.E_STUDENT_DASHBOARD_PAGE },
-                { label: "E-Enseignant", url: Paths.E_TEACHER_DASHBOARD_PAGE },
+                { label: "Espace numerique de Travail", url: Paths.ENT_DASHBOARD_PAGE },
                 { label: "Emploi du temps", url: "____" },
                 { label: "Planning des exams", url: "____" },
             ]
         },
         {
-            label: "activités",
+            label: "nouveautés",
             children: [
-                { label: "Evénements", url: Paths.EVENTS_PAGE },
-                { label: "Clubs", url: Paths.CLUBS_PAGE },
-                { label: "Activités para-universitaires", url: Paths.EXTRACURRICULAR_ACTIVITIES_PAGE }
+                { label: "Avis", url: Paths.ANNOUNCEMENTS_PAGE },
+                { label: "Evenement", url: Paths.EVENTS_PAGE },
             ]
         },
         {
@@ -52,7 +50,6 @@ const Navbar = () => {
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
                 { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
                 { label: "Equipes de recherche", url: Paths.LABOLATORIES_PAGE },
-                { label: "Thèses", url: Paths.THESES_PAGE }
             ]
         },
         { label: "contact", url: Paths.CONTACT_PAGE }
