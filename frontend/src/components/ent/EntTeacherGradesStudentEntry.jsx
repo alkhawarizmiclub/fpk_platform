@@ -24,13 +24,10 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
     const handleSubmit = async () => {
         EntTeacherApi.submitGrades(apogee, module_id, normalNote, rattrapageNote)
             .then((response) => {
-                console.log(response);
                 alert('Notes successfully submitted!');
             })
             .catch((error) => {
-                console.log(error);
                 alert('Failed to submit grades.');
-                console.error(error.getMessage());
             })
             .finally();
     };

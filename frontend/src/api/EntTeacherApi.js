@@ -51,6 +51,11 @@ const EntTeacherApi = {
 	getClassesData: async () => {
 		return await axiosClient.get("/api/prof/classes");
 	},
+	getStudentsList: async (id) => {
+		return axiosClient.get(`/api/prof/classes/${id}`, {
+			responseType: 'blob'
+		});
+	},
 }
 
 export default EntTeacherApi;

@@ -9,11 +9,9 @@ const EntTeacherAnnouncementSubmit = ({ announcement }) => {
         EntTeacherApi.submitAnnouncement(title, thumbnail, tags, message, annoncePhoto)
             .then((response) => {
 
-                console.log(response);
                 alert('announce successfully submitted!');
             })
             .catch((error) => {
-                console.log(error);
                 alert('announce failed to be submitted!');
             })
             .finally();
