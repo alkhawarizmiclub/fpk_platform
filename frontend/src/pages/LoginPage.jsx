@@ -55,7 +55,7 @@ const LoginPage = () => {
 
                 } else {
 
-                    switch (response.status) {
+                    switch (error.response.status) {
                         case 401:
                             setError("Email ou mot de passe est invalide.");
                             break;
@@ -97,7 +97,7 @@ const LoginPage = () => {
                         <p className="hidden md:block">
                             <Link to={Paths.HOME_PAGE} className="w-full space-x-2 text-sm text-slate-600">
                                 <FontAwesomeIcon icon={faArrowLeftLong} />
-                                <span>Go back Home</span>
+                                <span>Retournez à la page d'accueil</span>
                             </Link>
                         </p>
 
@@ -111,7 +111,7 @@ const LoginPage = () => {
                             <input type="password" name="password" id="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" />
                         </div>
 
-                        <p>Mot de passe oublié? <a href="#" className="text-orange-400">Réinitialisez-le ici.</a></p>
+                        {/* <p>Mot de passe oublié? <a href="#" className="text-orange-400">Réinitialisez-le ici.</a></p> */}
 
                         {error && <p className="text-red-500">{error}</p>}
 

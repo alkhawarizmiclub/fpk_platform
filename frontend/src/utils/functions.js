@@ -18,5 +18,19 @@ const yearsListUntilToday = (firstYear, reverse) => {
     return years;
 }
 
+function parseDateTime(dateTimeString) {
+    // Split the date and time parts
+    const [datePart, timePart] = dateTimeString.split(' ');
 
-export { randomInt, yearsListUntilToday };
+    // Split the date part into year, month, and day
+    const [year, month, day] = datePart.split('-').map(Number);
+
+    // Split the time part into hours, minutes, and seconds
+    const [hours, minutes, seconds] = timePart.split(':').map(Number);
+
+    // Note: Months are zero-indexed in JavaScript Date objects (0 = January, 11 = December)
+    return new Date(year, month - 1, day, hours, minutes, seconds);
+}
+
+
+export { randomInt, yearsListUntilToday, parseDateTime };

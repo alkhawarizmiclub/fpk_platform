@@ -2,6 +2,8 @@ import EntPageContainer from "../../../components/ent/EntPageContainer";
 import EntTeacherApi from '../../../api/EntTeacherApi';
 
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntTeacherClassesPage = () => {
 
@@ -22,11 +24,22 @@ const EntTeacherClassesPage = () => {
 	};
 
 	useEffect(() => {
+
+		setIsLoading(isLoading);
+
 		EntTeacherApi.getClassesData()
 			.then((response) => {
 				setClassesList(response.data.data);
 			})
+			.catch(() => {
+				// TODO: Error Handling
+			})
+			.finally(() => {
+				setIsLoading(false);
+			})
+
 	}, []);
+
 	return (
 		<EntPageContainer title="Classes">
 			<div className="overflow-x-auto">
