@@ -167,21 +167,21 @@ class DatabaseSeeder extends Seeder
                 [
                     'prof_id' => $prof->id,
                     'time_schedule' => 'time_schedule/prof1.pdf',
-                    'exam_schedule' => 'time_schedule/prof1.pdf',
+                    'exam_schedule' => 'exam_schedule/prof1.pdf',
                     'created_at' => $currentTimestamp,
                     'updated_at' => $currentTimestamp
                 ],
                 [
                     'prof_id' => $prof1->id,
                     'time_schedule' => 'time_schedule/prof2.pdf',
-                    'exam_schedule' => 'time_schedule/prof2.pdf',
+                    'exam_schedule' => 'exam_schedule/prof2.pdf',
                     'created_at' => $currentTimestamp,
                     'updated_at' => $currentTimestamp
                 ],
                 [
                     'prof_id' => $prof2->id,
                     'time_schedule' => 'time_schedule/prof3.pdf',
-                    'exam_schedule' => 'time_schedule/prof3.pdf',
+                    'exam_schedule' => 'exam_schedule/prof3.pdf',
                     'created_at' => $currentTimestamp,
                     'updated_at' => $currentTimestamp
                 ],
