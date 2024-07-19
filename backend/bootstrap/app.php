@@ -5,6 +5,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -71,4 +72,13 @@ return Application::configure(basePath: dirname(__DIR__))
                 'data' => null
             ], 404);
         });
+
+        $exceptions->render(function (PostTooLargeException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'post data too large',
+                'data' => null
+            ], 404);
+        });
+
     })->create();
