@@ -7,7 +7,7 @@ use App\Http\Requests\ProfAuth\LoginRequest;
 use App\Models\Prof;
 use App\Models\Module;
 use App\Http\Resources\ProfResource;
-use App\Http\Resources\StudentResource;
+use App\Http\Resources\StudentNoteResource;
 use App\Http\Resources\ModuleResource;
 use App\Http\Requests\UpdateResultRequest;
 use App\Models\Result;
@@ -58,7 +58,7 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Students found successfully',
-                'data' => $students
+                'data' => StudentNoteResource::collection($students)
             ]
         ));
     }
@@ -68,7 +68,7 @@ class ProfService
         $fname = request()->query('fname');
         $lname = request()->query('lname');
         if (!$apogee && !$fname && !$lname)
-            return ($this->dbRepository->getModuleStudent($moduleId));
+            return ([]);
         if ($apogee)
             return ($this->dbRepository->getByApogee($moduleId, $apogee));
         return ($this->dbRepository->searchByNames($moduleId, $fname, $lname));
