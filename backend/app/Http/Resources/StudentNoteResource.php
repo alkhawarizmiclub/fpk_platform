@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class StudentNoteResource extends JsonResource
 {
@@ -18,10 +19,10 @@ class StudentNoteResource extends JsonResource
             return [];
         return [
             // TODO: add the student image from storage
-            "image" =>$this->student_photo,
+            "student_photo" =>url(Storage::url($this->student_photo)),
             "apogee" => $this->apogee,
             "firstname" => $this->firstname,
-            "lastname" => $this->firstname,
+            "lastname" => $this->lastname,
             "module_id" => $this->module_id,
             "normale" => $this->normale,
             "ratt" => $this->ratt,
