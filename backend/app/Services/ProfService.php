@@ -235,8 +235,10 @@ class ProfService
     }
     public function getStudentLists(string $moduleId, Prof $prof)
     {
-        $module = Module::find($moduleId);
-        $students  = $this->dbRepository->getStudentLists($moduleId, $prof);
+        $module = Module::where('id', $moduleId)->where('prof_id', $prof->id)->first();
+        if (!$module)
+            return ($this->resourceNotFound());
+        $students  = $this->dbRepository->getStudentLists($moduleId);
         $pdf = Pdf::loadView('list',
             [
                 'students' => $students,
