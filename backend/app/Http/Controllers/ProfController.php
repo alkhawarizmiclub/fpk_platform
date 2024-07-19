@@ -93,5 +93,10 @@ class ProfController extends Controller
         $prof = request()->user();
         return ($this->profService->getStudentLists($moduleId, $prof));
     }
+    public function accounts()
+    {
+        $prof = request()->user();
+        return ($this->profService->accounts($prof));
+    }
 
 }

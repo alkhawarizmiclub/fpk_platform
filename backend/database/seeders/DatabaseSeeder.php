@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use App\Services\ModuleService;
 use App\Models\Student;
 use App\Services\StudentService;
+use App\Services\ProfService;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -82,9 +83,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-
-
-
+        ProfService::setAccounts($prof);
+        ProfService::setAccounts($prof1);
+        ProfService::setAccounts($prof2);
 
 
         DB::table('complaints')
