@@ -238,7 +238,7 @@ class ProfService
         $module = Module::where('id', $moduleId)->where('prof_id', $prof->id)->first();
         if (!$module)
             return ($this->resourceNotFound());
-        $students  = $this->dbRepository->getStudentLists($moduleId, $prof);
+        $students  = $this->dbRepository->getStudentLists($moduleId);
         $pdf = Pdf::loadView('list',
             [
                 'students' => $students,
