@@ -321,8 +321,9 @@ class DBRepository
             ->join('filieres as f', 'f.id', '=', 'm.filiere_id')
             ->select('m.id', 'm.module_name', 'f.filiere_name', DB::raw('count(r.apogee) as student_count'))
             ->where('m.prof_id', $prof->id)
-            ->groupBy('m.id')
-            ->get();
+            ->groupBy('m.id');
+
+        $classes = $classes->get();
 
         // $classes = DB::table('modules as m')
         //     ->leftJoin('result as r', function ($join) {
@@ -333,7 +334,7 @@ class DBRepository
         //     ->where('m.prof_id', $prof->id)
         //     ->groupBy('m.id', 'm.module_name', 'f.filiere_name')
         //     ->get();
-        return ($classes);
+        return $classes;
     }
     public function getStudentLists(string $moduleId)
     {
