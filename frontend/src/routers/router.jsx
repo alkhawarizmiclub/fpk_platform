@@ -12,10 +12,12 @@ import Error404Page from "../pages/static/Error404Page";
 import PresentationPage from "../pages/static/PresentationPage";
 import StaffPage from "../pages/static/StaffPage";
 import DepartmentsPage from "../pages/static/DepartmentsPage";
+
 import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
 import ClubsPage from "../pages/static/ClubsPage";
+import LfsPage  from "../pages/static/LfsPage"
 import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
@@ -49,6 +51,7 @@ import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/Ent
 import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
 import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
 
+
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
     {
@@ -71,6 +74,7 @@ const router = createBrowserRouter([
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
+           
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
@@ -84,6 +88,8 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
             { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
             { path: Paths.CLUBS_PAGE, element: <ClubsPage/> },
+            { path: Paths.LFS_PAGE, element: <LfsPage/> },
+          
         ]
     },
     {
