@@ -48,6 +48,7 @@ import SignUpContextProvider from "../contexts/signUpContext";
 import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
 import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
 import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
+import AnnouncementPage from "../pages/announcements/AnnouncementPage";
 
 const router = createBrowserRouter([
     { path: Paths.HOME_PAGE, element: <HomePage /> },
@@ -60,7 +61,6 @@ const router = createBrowserRouter([
             { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
             { path: Paths.ERROR_PAGE, element: <Error404Page /> },
             { path: Paths.CONTACT_PAGE, element: <ContactPage /> },
-           
         ]
     },
     {
@@ -83,7 +83,8 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
             { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
-            { path: Paths.CLUBS_PAGE, element: <ClubsPage/> },
+            { path: Paths.ANNOUNCEMENT_PAGE, element: <AnnouncementPage /> },
+            { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
         ]
     },
     {
