@@ -61,6 +61,7 @@
     "THESES_PAGE": "/recherche/theses",
 
     "ANNOUNCEMENTS_PAGE": "/avis",
+    "ANNOUNCEMENT_PAGE": "/avis/:id",
 
     "ERROR_PAGE": "*",
 
