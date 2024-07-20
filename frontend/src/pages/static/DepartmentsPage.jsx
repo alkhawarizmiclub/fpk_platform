@@ -43,6 +43,61 @@ const PC = [
   { nom: 'SADIQ M’HAMED', description: 'Propriétés physico-chimiques de la surface du matériau' },
   { nom: 'ZAHIDI YOUNESS', description: 'PHYSIQUE THEORIQUE' },
 ];
+const GG = [
+  { nom: 'ALILOU HAKIM', description: 'BIOTECHNOLOGIE VÉGÉTALE' },
+  { nom: 'AZAITRAOUI MUSTAPHA', description: 'GEOGRAPHIE' },
+  { nom: 'BENZIDIYA KHAILID', description: 'GEOGRAPHIE' },
+  { nom: 'CHERRAD BRAHIM', description: 'GEOGRAPHIE' },
+  { nom: 'DOUMA MOUNTASSER', description: 'Biodiversité microbienne – écotoxine' },
+  { nom: 'EL BOUCHIKHI IHSSANE', description: 'BIOLOGIE MOLÉCULAIRE ET GÉNÉTIQUE' },
+  { nom: 'EL FARTATI MOHAMED', description: 'GEORESSOURCES ET GENIE GEOLOGIQUE' },
+  { nom: 'EL FILALI ABDELHAKIM', description: 'GEOGRAPHIE' },
+  { nom: 'EL KHALLOUFI FATIMA', description: 'Toxicologie environnementale et interactions entre plantes et bactéries' },
+  { nom: 'EL-ABBADI MOHAMED', description: 'Géographie humaine' },
+  { nom: 'HESSANI BOUCHRA', description: 'GEOGRAPHIE ET AMENAGEMENT DE L’ESPACE' },
+  { nom: 'JEBBOUJ RAJAA', description: 'Gestion des ressources naturelles continentales' },
+  { nom: 'MALQUI HAFSA', description: 'BIOLOGIE' },
+  { nom: 'NAJIB SALIHA', description: 'GEOPHYSIQUE-HYDROGEOLOGIE' },
+  { nom: 'SAQRANE SANA', description: 'Microbiologie et toxicologie environnementale' },
+  { nom: 'SGHIR SAID', description: 'GEOGRAPHIE ECONOMIQUE' },
+  { nom: 'TAGMA TARIK', description: 'GEOLOGIE APPLIQUEE : HYDROGEOLOGIE ET GEOENVIRONNEMENT' },
+
+];
+const EE = [
+  { nom: 'ATIK MOHAMED', description: 'ECONOMIE ET GESTION' },
+  { nom: 'BAOUZIL LHOUSSEIN', description: 'SCIENCES ECONOMIQUE' },
+  { nom: 'BOUAYAD AMINE NABIL', description: 'SCIENCES ECONOMIQUES' },
+  { nom: 'CHAHBOUNE MOUNYA', description: 'ECONOMIE APPLIQUEES' },
+  { nom: 'CHOUHBI ABDERRAHMAN', description: 'SCIENCES ECONOMIQUES' },
+  { nom: 'EL YAMLAHI IMANE', description: 'L’INNOVATION ET L’ENTREPRENEURIAT' },
+  { nom: 'HABACHI YOUNES', description: 'SCIENCES DE GESTION' },
+  { nom: 'IZZA ISSAM', description: 'SCIENCES DE GESTION' },
+  { nom: 'LAKHLILI IBTISSAME', description: 'FINANCE COMPTABILITE' },
+  { nom: 'OUBRAHIMI MUSTAFA', description: 'STRATEGIE ECONOMIQUE ET ECONOMIE DE L’ENTREPRISE' },
+  { nom: 'ROUGGANI KHALID', description: 'SCIENCES ECONOMIQUES' },
+  { nom: 'JAOUHAR JINANE', description: 'SCIENCES ECONOMIQUE' }
+];
+const DD = [
+  { nom: 'AITALIOUBRAHIM MYELKEBIR', description: 'ANALYSE CONVEXE' },
+  { nom: 'BELAM MOHAMED', description: 'MATHEMATIQUES' },
+  { nom: 'BENAISSA HICHAM', description: 'MATHEMATIQUES APPLIQUEES' },
+  { nom: 'BIDANI MOSTAPHA', description: 'INFORMATIQUE, RÉSEAUX ET TÉLÉCOMMUNICATION' },
+  { nom: 'BOULAYAT BRAHIM', description: 'MATHEMATIQUES' },
+  { nom: 'CHAKRAOUI MOHAMED', description: 'INFORMATIQUE' },
+  { nom: 'CH-CHAOUI MOHAMED', description: 'MATHEMATIQUES APPLIQUEES' },
+  { nom: 'EL ALLIOUI YOUSSOUF', description: 'INFORMATIQUE' },
+  { nom: 'EL BOUKHARI NIHALE', description: 'CONTRÔLE OPTIMAL' },
+  { nom: 'EL MOUTAWAKIL DRISS', description: 'Analyse fonctionnelle' },
+  { nom: 'FAKHAR RACHID', description: 'Recherche pratique et applications' },
+  { nom: 'ISKAFI KHALID', description: 'Équations dérivées partielles' },
+  { nom: 'KHOURDIFI YOUNESS', description: 'INFORMATIQUE' },
+  { nom: 'MOUJABBIR MOHAMMED', description: 'INFORMATIQUE' },
+  { nom: 'MRHARDY NAOUAL', description: 'Analyse et probabilité' },
+  { nom: 'NAJIB SALAH', description: 'MATHEMATIQUES PURES' },
+  { nom: 'TIDLI YOUSSEF', description: 'ANALYSE FONCTIONNELLE' },
+  { nom: 'ZAROUALI DARKAOUI MOHSSIN', description: 'MATHEMATIQUES/ALGEBRE' },
+  { nom: 'BAKKOURI IBTISSAM', description: 'INFORMATIQUE' }
+];
 
 const departments = [
   {
@@ -61,7 +116,7 @@ const departments = [
                     </a>
                   </li>
                   <li>
-                    <a href=".pdf" className="text-blue-600 hover:underline">
+                    <a href="" className="text-blue-600 hover:underline">
                      Master-آليات تحليل الخطاب الأدبي
                     </a>
                   </li>
@@ -234,119 +289,246 @@ const departments = [
     id: 'gbg',
     title: 'Géographie Biologie Géologie',
     content: (
-      <div id="primary" className="py-6">
-        <div className="container mx-auto">
-          <header className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">Géographie Biologie Géologie</h1>
-          </header>
-          <main id="main" className="site-main">
-            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-              {/* Add detailed content for GBG department here */}
-            </div>
-          </main>
+      <div className="min-h-screen bg-gray-100">
+      {/* Section Filières */}
+      <section id="filiere-section" className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-gray-800 mb-4">
+            <h2 className="text-xl font-semibold text-pink-600">Filières rattachées au département</h2>
+            <ul className="list-disc pl-6">
+              <li><a href=".pdf" className="text-blue-600 hover:underline">GEO - Géographie</a></li>
+              <li><a href=".pdf" className="text-blue-600 hover:underline">SV - Sciences de la Vie</a></li>
+              <li><a href=".pdf" className="text-blue-600 hover:underline">geology - Sciences de la Terre et de l’Univers</a></li>
+              <li><a href=".pdf" className="text-blue-600 hover:underline">LP GÉO-RESSOURCES ET GÉO-MINES</a></li>
+              <li><a href=".pdf" className="text-blue-600 hover:underline">MEBA - Master Ecotoxicologie et Biotechnologie Appliquée</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Section Chef de Département */}
+      <section id="chef-section" className="py-12 bg-gray-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Chef de département</h2>
+          <div className="flex justify-center">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden w-80">
+              <img className="w-full h-70 object-cover" src="/samir.jpg" alt="Samir Ahboucha" />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Samir Ahboucha</h3>
+                <p className="text-gray-600 mb-4">Physiologie du système nerveux</p>
+                <a className="text-blue-500 hover:underline" href="https://www.linkedin.com/in/samir-ahboucha" target="_blank" rel="noopener noreferrer">Profil LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Membres de Département */}
+      <section id="membre-section" className="py-12">
+        <div className="container mx-auto px-4 py-8">
+          <h2 className="text-4xl font-bold text-center mb-8">Membres de département</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {GG.map((GG, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{GG.nom}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{GG.description}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <a href="#" className="text-blue-600 hover:text-blue-900">Read More</a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      
+    </div>
     ),
   },
   {
     id: 'seg',
     title: 'Sciences Economiques & Gestion',
     content: (
-      <div id="primary" className="py-6">
-        <div className="container mx-auto">
-          <header className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">Sciences Economiques & Gestion</h1>
-          </header>
-          <main id="main" className="site-main">
-            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-              {/* Add detailed content for SEG department here */}
-            </div>
-          </main>
+      <div className="min-h-screen bg-gray-100">
+      {/* Section Filières */}
+      <section id="filiere-section" className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-gray-800 mb-4">
+            <h2 className="text-xl font-semibold text-pink-600">Filières rattachées au département</h2>
+            <ul className="list-disc pl-6">
+              <li>
+                <a href=".pdf" className="text-blue-600 hover:underline">SEG - Sciences Economiques et Gestion - Licence fondamentale</a>
+              </li>
+              <li>
+                <a href=".pdf" className="text-blue-600 hover:underline">MBF - Banque et finance - Master</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Section Chef de Département */}
+      <section id="chef-section" className="py-12 bg-gray-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Chef de département</h2>
+          <div className="flex justify-center">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden w-80">
+              <img className="w-full h-70 object-cover" src="/HK.jpg" alt="HERRADI KHALID" />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">HERRADI KHALID</h3>
+                <p className="text-gray-600 mb-4">ANALYSE ET PROSPECTION ECONOMIQUES</p>
+                <a className="text-blue-500 hover:underline" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">Profil LinkedIn</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Membres de Département */}
+      <section id="membre-section" className="py-12">
+        <div className="container mx-auto px-4 py-8">
+          <h2 className="text-4xl font-bold text-center mb-8">Membres de département</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nom
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Description
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {EE.map((EE, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {EE.nom}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {EE.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <a href="#" className="text-blue-600 hover:text-blue-900">
+                        Read More
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
     ),
   },
   {
     id: 'mi',
     title: 'Sciences Mathématiques et Informatique',
     content: (
-      <div id="primary" className="py-6">
-        <div className="container mx-auto">
-          <header className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-800">Sciences Mathématiques et Informatique</h1>
-          </header>
-          <main id="main" className="site-main">
-            <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-              <div className="text-gray-800 mb-4">
-                <h2 className="text-xl font-semibold text-pink-600">Filières rattachées au département</h2>
-                <ul className="list-disc pl-6">
-                  <li>
-                    <a href="/ensak/wp-content/uploads/2021/01/FI-Génie-Informatique.pdf" className="text-blue-600 hover:underline">
-                      Filière ingénieur en - Génie informatique -
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/ensak/wp-content/uploads/2021/01/FI-Informatique-et-Ingénierie-des-données.pdf" className="text-blue-600 hover:underline">
-                      Filière ingénieur en - Informatique et Ingénierie des données -
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/ensak/maths-informatique/" className="text-blue-600 hover:underline">
-                      Master - Big Data et Aide à la Décision -
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-gray-800">
-                <h2 className="text-xl font-semibold text-pink-600">Membres</h2>
-                <table className="min-w-full divide-y divide-gray-200 mt-4">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nom et Prénom
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Adresse E-mail
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {[
-                      { name: 'ABOUELKHIR Imane', email: 'i.abouelkhir@usms.ma' },
-                      { name: 'AGHRICHE Ahmed', email: 'a.aghriche@usms.ma' },
-                      { name: 'AZOUANI Abderahim', email: 'a.azouani@usms.ma' },
-                      { name: 'BOUKHALFA Alaeddine', email: 'a.boukhalfa@usms.ma' },
-                      { name: 'DARGHAM Abdelmajid', email: 'a.dargham@usms.ma' },
-                      { name: 'ELBANNAY Omar', email: 'o.elbannay@usms.ma' },
-                      { name: 'ELHADFI YOUSSEF', email: 'y.elhadfi@usms.ma' },
-                      { name: 'ENNAJI Fatimazohra', email: 'f.ennaji@usms.ma' },
-                      { name: 'GHAZDALI Abdelghani', email: 'a.ghazdali@usms.ma' },
-                      { name: 'GHERABI Noreddine', email: 'n.gherrabi@usms.ma' },
-                      { name: 'HAFIDI Imad', email: 'i.hafidi@usms.ma' },
-                      { name: 'IDRISSI FATMI Nadia', email: 'n.idrissifatmi@usms.ma' },
-                      { name: 'IFZARNE Aziz', email: 'a.ifzarne@usms.ma' },
-                      { name: 'KHALFI Hamza', email: 'h.khalfi@usms.ma' },
-                      { name: 'LAMGHARI Nidal', email: 'n.lamghari@usms.ma' },
-                      { name: 'NASRI Mohammed', email: 'm.nasri@usms.ma' },
-                      { name: 'ROCHD Yassir', email: 'y.rochd@usms.ma' },
-                      { name: 'SAADI Mostafa', email: 'm.saadi@usms.ma' },
-                      { name: 'SOUSSI Nassima', email: 'n.soussi@usms.ma' },
-                      { name: 'ABOUTABIT Noureddine', email: 'n.aboutabit@usms.ma' },
-                    ].map((member, index) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{member.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <a href={`mailto:${member.email}`} className="text-blue-600 hover:underline">{member.email}</a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      <div className="min-h-screen bg-gray-100">
+      {/* Section des Filières */}
+      <section id="filiere-section" className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Filières rattachées au département</h2>
+          <div className="text-gray-800 mb-4">
+            <ul className="list-disc pl-6">
+              <li>
+                <a href="#" className="text-blue-600 hover:underline">
+                  SMA - Sciences Mathématiques et Application (Licence fondamentale)
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-blue-600 hover:underline">
+                  SMI - Filière Sciences Mathématiques et Informatique (Licence fondamentale)
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-blue-600 hover:underline">
+                  MMA - Mathématiques et Applications (Master)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Chef de département */}
+      <section id="chef-section" className="py-12 bg-gray-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Chef de département</h2>
+          <div className="flex justify-center">
+            <div className="bg-white shadow-md rounded-lg overflow-hidden w-80">
+              <img className="w-full h-70 object-cover" src="/KM.jpg" alt="KABBAJ MOSTAFA" />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">KABBAJ MOSTAFA</h3>
+                <p className="text-gray-600 mb-4">MATHEMATIQUES APPLIQUEES</p>
+                <a className="text-blue-500 hover:underline" href="#" target="_blank" rel="noopener noreferrer">
+                  Profil
+                </a>
               </div>
             </div>
-          </main>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Section Membres de département */}
+      <section id="membre-section" className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Membre de département</h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nom
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Description
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {DD.map((DD, index) => (
+                  <tr key={index}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {DD.nom}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {DD.description}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <a href="#" className="text-blue-600 hover:text-blue-900">
+                        Read More
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
     ),
   },
 ];
