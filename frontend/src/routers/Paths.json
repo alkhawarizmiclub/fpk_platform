@@ -1,7 +1,7 @@
 {
     "HOME_PAGE": "/",
     "LOGIN_PAGE": "/login",
-    "SIGNUP_PAGE": "/signup",
+    "SIGNUP_PAGE": "/SignUpPage",
     "LOGOUT_PAGE": "/logout",
     "APPLY_PAGE": "/apply",
     "CONTACT_PAGE": "/contact",
@@ -10,7 +10,6 @@
     "STAFF_PAGE": "/staff",
     "REGULATION_PAGE": "/reglementation",
     "MEDIA_PAGE": "/media",
-  
 
     "TRACKS_PAGE": "/formations",
 
@@ -47,17 +46,17 @@
     "E_TEACHER_SCHEDULES_PAGE": "/ent/enseignant/emplois",
     "E_TEACHER_PLANNING_PAGE": "/ent/enseignant/planning",
     "E_TEACHER_ANNOUNCEMENTS_PAGE": "/ent/enseignant/avis",
-    "E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE": "/ent/enseignant/avis/create",
-    "E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE": "/ent/enseignant/avis/delete/:id",
     "E_TEACHER_GRADES_PAGE": "/ent/enseignant/notes",
     "E_TEACHER_CLASSES_PAGE": "/ent/enseignant/classes",
 
     "EVENTS_PAGE": "/events",
     "CLUBS_PAGE": "/clubs",
     "EXTRACURRICULAR_ACTIVITIES_PAGE": "/activite-parascolaire",
+    "LFS_PAGE": "/formations/licence-fondamentale",
 
     "PROFESSORS_PAGE": "/recherche/professeurs",
     "DEPARTMENTS_PAGE": "/recherche/departements",
+   
     "LABOLATORIES_PAGE": "/recherche/laboratoires",
     "THESES_PAGE": "/recherche/theses",
 
