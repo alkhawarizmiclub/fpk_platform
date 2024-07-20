@@ -7,7 +7,7 @@ use App\Http\Requests\ProfAuth\LoginRequest;
 use App\Models\Prof;
 use App\Models\Module;
 use App\Http\Resources\ProfResource;
-use App\Http\Resources\StudentResource;
+use App\Http\Resources\StudentNoteResource;
 use App\Http\Resources\ModuleResource;
 use App\Http\Requests\UpdateResultRequest;
 use App\Models\Result;
@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreannouncementRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ProfService
 {
@@ -58,7 +60,7 @@ class ProfService
             [
                 'status' => 'success',
                 'message' => 'Students found successfully',
-                'data' => $students
+                'data' => StudentNoteResource::collection($students)
             ]
         ));
     }
@@ -68,7 +70,7 @@ class ProfService
         $fname = request()->query('fname');
         $lname = request()->query('lname');
         if (!$apogee && !$fname && !$lname)
-            return ($this->dbRepository->getModuleStudent($moduleId));
+            return ([]);
         if ($apogee)
             return ($this->dbRepository->getByApogee($moduleId, $apogee));
         return ($this->dbRepository->searchByNames($moduleId, $fname, $lname));
@@ -248,5 +250,46 @@ class ProfService
         );
         return ($pdf->download("$module->module_name.pdf"));
 
+    }
+    public function accounts(Prof $prof)
+    {
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $this->dbRepository->getProfAccounts($prof)
+            ]
+        );
+    }
+
+    static public function setAccounts(Prof $prof)
+    {
+        $identify = $prof->firstname . '.' . $prof->lastname . '.' . Carbon::now()->format('Y') . '@usms.ac.ma';
+        DB::table('accounts')
+            ->insert([
+                [
+                    'user_id' => $prof->id,
+                    'user_type' => 'prof',
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Microsoft 365',
+                    'account_url' => 'https://www.office.com/',
+                    'account_password' => Str::random(12)
+                ],
+                [
+                    'user_id' => $prof->id,
+                    'user_type' => 'prof',
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Rosetta Stone',
+                    'account_url' => 'https://login.rosettastone.com/',
+                    'account_password' => Str::random(12)
+                ],
+                [
+                    'user_id' => $prof->id,
+                    'user_type' => 'prof',
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Moodle',
+                    'account_url' => 'http://moodle.usms.ac.ma/moodle/',
+                    'account_password' => Str::random(12)
+                ]
+            ]);
     }
 }

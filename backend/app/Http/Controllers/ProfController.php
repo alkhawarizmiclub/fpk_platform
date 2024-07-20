@@ -36,12 +36,7 @@ class ProfController extends Controller
 
     public function search(string $moduleId)
     {
-        $apogee = request()->query('apogee');
-        $fname = request()->query('fname');
-        $lname = request()->query('lname');
-        if (!$apogee && !$fname && !$lname)
-            return ($this->profService->students($moduleId));
-        $result = $this->profService->search($moduleId, $apogee, $fname, $lname);
+        $result = $this->profService->search($moduleId);
         return (StudentNoteResource::collection($result));
     }
     public function show()
@@ -97,6 +92,11 @@ class ProfController extends Controller
     {
         $prof = request()->user();
         return ($this->profService->getStudentLists($moduleId, $prof));
+    }
+    public function accounts()
+    {
+        $prof = request()->user();
+        return ($this->profService->accounts($prof));
     }
 
 }

@@ -156,9 +156,6 @@ class DBRepository
                 'ms.semester'
             )
             ->get();
-        foreach ($student as $stud) {
-            $stud->student_photo = url(Storage::url($stud->student_photo));
-        }
         return ($student);
     }
 
@@ -184,7 +181,8 @@ class DBRepository
     public function getStudentAccounts(string $apogee)
     {
         $accounts = DB::table('accounts')
-            ->where('apogee', $apogee)
+            ->where('user_id', $apogee)
+            ->where('user_type', 'student')
             ->get();
         return ($accounts);
     }
@@ -350,5 +348,13 @@ class DBRepository
             ->where('ms.module_id', $moduleId)
             ->get();
         return ($students);
+    }
+    public function getProfAccounts(Prof $prof)
+    {
+        $accounts = DB::table('accounts')
+            ->where('user_id', $prof->id)
+            ->where('user_type', 'prof')
+            ->get();
+        return ($accounts);
     }
 }

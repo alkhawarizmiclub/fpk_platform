@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('apogee');
+            $table->unsignedBigInteger('user_id');
+            $table->enum('user_type', ['student', 'prof'])->default('student');
             $table->string('account_id');
             $table->string('account_type');
             $table->string('account_url');
             $table->string('account_password');
 
-            $table->foreign('apogee')
-                ->references('apogee')
-                ->on('students')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }
