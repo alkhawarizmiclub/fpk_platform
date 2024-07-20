@@ -45,17 +45,19 @@ const EntTeacherAnnouncementsPage = () => {
                     </div>
 
                     <table className="min-w-full table-auto border border-gray-300 rounded-lg bg-white">
-                        <tr>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Image</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Title</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Date de creation</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Tags</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Introduction</th>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Image</th>
+                                <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Title</th>
+                                <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Date de creation</th>
+                                <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Tags</th>
+                                <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Contenu</th>
+                            </tr>
 
-                        {announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
-                            <EntTeacherAnnouncement title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
-                        ))}
+                            {announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
+                                <EntTeacherAnnouncement title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
+                            ))}
+                        </tbody>
                     </table>
                 </>
 

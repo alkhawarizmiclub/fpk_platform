@@ -25,6 +25,7 @@ Route::group(['prefix' => 'prof', 'middleware' => ['auth:sanctum', 'EnsureAuthor
     Route::get('/announce', [ProfController::class, 'getAnnounce']);
     Route::delete('/announce/{id}', [ProfController::class, 'deleteAnnounce']);
     Route::get('/schedule', [ProfController::class, 'schedule']);
+    Route::get('/accounts', [ProfController::class, 'accounts']);
     Route::post('/add-result', [ProfController::class, 'result']);
 
 

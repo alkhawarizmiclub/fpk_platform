@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class Prof extends Authenticatable
 {
@@ -45,4 +48,6 @@ class Prof extends Authenticatable
     {
         return $this->morphMany(Announcement::class, 'author');
     }
+
+
 }

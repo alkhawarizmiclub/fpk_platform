@@ -64,7 +64,7 @@ const EntTeacherAnnouncementCreatePage = () => {
 
                 <div className="w-full flex flex-col">
                     <label htmlFor="thumbnail_path">Image</label>
-                    <input id="thumbnail_path" type="file" onChange={handleInputChange} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" />
+                    <input id="thumbnail_path" type="file" accept="image/*" onChange={handleInputChange} required className="py-2 px-3 rounded-lg border border-gray-200 bg-slate-50" />
                 </div>
 
                 <div className="flex justify-center gap-5">

@@ -103,27 +103,27 @@ class StudentService
             // $table->string('account_type');
             // $table->string('account_url');
             // $table->string('account_password');
-    public function setAccounts(Student $student)
+    static public function setAccounts(Student $student)
     {
         $identify = $student->firstname.'.'.$student->lastname.'.'.Carbon::now()->format('Y').'@usms.ac.ma';
         DB::table('accounts')
         ->insert([
             [
-                'apogee' => $student->apogee,
+                'user_id' => $student->apogee,
                 'account_id' => strtolower($identify),
                 'account_type' => 'Microsoft 365',
                 'account_url' => 'https://www.office.com/',
                 'account_password' => Str::random(12)
             ],
             [
-                'apogee' => $student->apogee,
+                'user_id' => $student->apogee,
                 'account_id' => strtolower($identify),
                 'account_type' => 'Rosetta Stone',
                 'account_url' => 'https://login.rosettastone.com/',
                 'account_password' => Str::random(12)
             ],
             [
-                'apogee' => $student->apogee,
+                'user_id' => $student->apogee,
                 'account_id' => strtolower($identify),
                 'account_type' => 'Moodle',
                 'account_url' => 'http://moodle.usms.ac.ma/moodle/',
