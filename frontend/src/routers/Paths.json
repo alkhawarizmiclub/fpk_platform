@@ -46,6 +46,9 @@
     "E_TEACHER_SCHEDULES_PAGE": "/ent/enseignant/emplois",
     "E_TEACHER_PLANNING_PAGE": "/ent/enseignant/planning",
     "E_TEACHER_ANNOUNCEMENTS_PAGE": "/ent/enseignant/avis",
+    "E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE": "/ent/enseignant/avis/create",
+    "E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE": "/ent/enseignant/avis/delete",
+    "E_TEACHER_ANNOUNCEMENTS_UPDATE_PAGE": "/ent/enseignant/avis/update",
     "E_TEACHER_GRADES_PAGE": "/ent/enseignant/notes",
     "E_TEACHER_CLASSES_PAGE": "/ent/enseignant/classes",
 
