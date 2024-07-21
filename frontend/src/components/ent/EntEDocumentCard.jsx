@@ -2,49 +2,59 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { gradeSheetsPdfGenerator } from "./EntPdfTemplateGradeSheet";
 
+import EntStudentApi from "../../api/EntStudentApi";
+import { useState } from "react";
+
 
 const EntEDocumentCard = ({ label, creationDateTime, type }) => {
 
-    const downloadHandler = () => {
-        const generatedPdfFile = gradeSheetsPdfGenerator({
-            schoolSeason: "2023/2024",
-            docTitle: "RELEVE",
-            docId: "DRYN34R0GJ95",
-            fullname: "John Wick",
-            cneNum: "f131310020",
-            apogeeNum: "20001001",
-            birthPlace: "Casablanca",
-            birthDate: new Date(),
-            semesterNum: 2,
-            majorLabel: "science mathématique et informatique",
-            subjectsResultsTable: [
-                ["Row 1 Col 1", 13, "V", "Normale", "Row 1 Col 5"],
-                ["Row 1 Col 1", 15, "V", "Normale", "Row 1 Col 5"],
-                ["Row 1 Col 1", 12, "V", "Normale", "Row 1 Col 5"],
-                ["Row 1 Col 1", 7, "NV", "Normale", "Row 1 Col 5"],
-                ["Row 1 Col 1", 4.7, "NVAJ", "Rattrapage", "Row 1 Col 5"],
-                ["Row 1 Col 1", 9, "NV", "Rattrapage", "Row 1 Col 5"],
-            ],
-        });
+	const [error, setError] = useState('');
 
-        generatedPdfFile.save();
-    }
+	const downloadHandler = (type) => {
 
-    return (
-        <div className="relative p-5 rounded-lg shadow border border-slate-50">
+		EntStudentApi.getReleveNote(type)
+			.then((res) => {
+				setError('');
+				const url = URL.createObjectURL(res.data)
+				const a = document.createElement('a');
+				a.href = url;
+				a.style = 'display: none';
+				a.download = 'releve-note-' + type + '.pdf';
+				document.body.appendChild(a);
+				a.click();
+				a.remove();
+				URL.revokeObjectURL(url);
+			})
+			.catch((error) => {
+				let errorMessage = '';
+				if (error.response && error.response.data) {
+					const reader = new FileReader();
+					reader.onload = () => {
+						try {
+							const json = JSON.parse(reader.result);
+							errorMessage = json.message || "Une erreur s'est produite";
+						} catch (e) {
+							errorMessage = "Une erreur s'est produite et la réponse à l'erreur n'a pas pu être analysée.";
+						}
+						setError(errorMessage);
+					};
+					reader.readAsText(error.response.data);
+				}
+			});
+	}
 
-            <button onClick={downloadHandler} className="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3 p-2 h-10 w-10 flex justify-center items-center rounded-full bg-slate-300"><FontAwesomeIcon icon={faDownload} className="text-white" /></button>
+	return (
+		<div className="relative p-5 rounded-lg shadow border border-slate-50">
 
-            <div className="text-sm text-slate-400">Créé en : {creationDateTime.getDay()}/{creationDateTime.getMonth()}/{creationDateTime.getFullYear()}</div>
-            <h1 className="font-semibold">{label}</h1>
+			<button onClick={() => downloadHandler(type)} className="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3 p-2 h-10 w-10 flex justify-center items-center rounded-full bg-slate-300"><FontAwesomeIcon icon={faDownload} className="text-white" /></button>
 
-            <div>
-                <h1>Hello, PDF!</h1>
-                <p>This content will be exported to a PDF file.</p>
-            </div>
+			<h1 className="font-semibold">{label}</h1>
 
-        </div>
-    );
+			<div className="text-sm text-slate-400">{error}</div>
+
+
+		</div>
+	);
 }
 
 export default EntEDocumentCard;

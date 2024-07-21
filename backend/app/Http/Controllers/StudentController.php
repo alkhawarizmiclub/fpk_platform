@@ -9,6 +9,7 @@ use App\Services\StudentService;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreComplaintsRequest;
 use App\Http\Requests\StoreStudentComplaintRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -93,8 +94,38 @@ class StudentController extends Controller
     {
         $type = request()->query('type');
         if (!$type)
-			return (response()->noContent());
+            return (response()->noContent());
         $student = request()->user();
-        return ($this->studentService->documents($student, strtolower($type)));
+        $data = $this->studentService->documents($student, strtolower($type));
+        if (!$data) {
+            return (response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'ce document n\'est pas disponible à votre situation actuelle',
+                    'data' => null
+                ],
+                404
+            ));
+        }
+        $r = DB::table('filieres')->where('id', $student->filiere_id)->first();
+        $status = null;
+        if ($data['note'] >= 10) {
+            $status = 'Valide';
+        } else {
+            $status = 'Non Valide';
+        }
+        $pdf = Pdf::loadView(
+            'releve_note',
+            [
+                'student' => $student,
+                'data' => $data['data'],
+                'note' => round($data['note'], 4),
+                'status' => $status,
+                'filiere' => $r->filiere_name,
+                'date' => date('d/m/Y'),
+                'semestre' => $type[1]
+            ]
+        );
+        return ($pdf->download('releve-note.pdf'));
     }
 }
