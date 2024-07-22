@@ -32,7 +32,7 @@ const Navbar = () => {
             label: "espace scolarité",
             children: [
                 { label: "Espace numerique de Travail", url: Paths.ENT_DASHBOARD_PAGE },
-                { label: "Emploi du temps", url: "____" },
+                { label: "Emploi du temps", url: Paths.EMP_PAGE },
                 { label: "Planning des exams", url: "____" },
             ]
         },
