@@ -32,5 +32,18 @@ function parseDateTime(dateTimeString) {
     return new Date(year, month - 1, day, hours, minutes, seconds);
 }
 
+function dateToString(dateObj, format) {
+    const options = {
+        'DD': ('0' + dateObj.getDate()).slice(-2),
+        'MMMM': dateObj.toLocaleString('default', { month: 'long' }),
+        'MM': ('0' + (dateObj.getMonth() + 1)).slice(-2),
+        'YYYY': dateObj.getFullYear(),
+        'HH': ('0' + dateObj.getHours()).slice(-2),
+        'mm': ('0' + dateObj.getMinutes()).slice(-2),
+        'ss': ('0' + dateObj.getSeconds()).slice(-2),
+    };
 
-export { randomInt, yearsListUntilToday, parseDateTime };
+    return format.replace(/DD|MMMM|MM|YYYY|HH|mm|ss/g, match => options[match]);
+}
+
+export { randomInt, yearsListUntilToday, parseDateTime, dateToString };

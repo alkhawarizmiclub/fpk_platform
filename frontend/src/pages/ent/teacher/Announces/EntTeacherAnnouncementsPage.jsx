@@ -44,7 +44,17 @@ const EntTeacherAnnouncementsPage = () => {
 
                     </div>
 
-                    <table className="min-w-full table-auto border border-gray-300 rounded-lg bg-white">
+                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-5"> 
+                        {announcements.length > 0 ? announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
+                            <EntTeacherAnnouncement title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
+                        )) : (
+                            <div>
+                                <div colSpan={5} className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">Vous n'avez encore partagé aucune annonce</div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* <table className="min-w-full table-auto border border-gray-300 rounded-lg bg-white">
                         <tbody>
                             <tr>
                                 <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Image</th>
@@ -54,11 +64,16 @@ const EntTeacherAnnouncementsPage = () => {
                                 <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-center text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Contenu</th>
                             </tr>
 
-                            {announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
+                            {announcements.length > 0 ? announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
                                 <EntTeacherAnnouncement title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
-                            ))}
+                            ))
+                                : (
+                                    <tr>
+                                        <td colSpan={5} className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">Vous n'avez encore partagé aucune annonce</td>
+                                    </tr>
+                                )}
                         </tbody>
-                    </table>
+                    </table> */}
                 </>
 
             )}

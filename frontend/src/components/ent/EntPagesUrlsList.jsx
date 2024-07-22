@@ -8,7 +8,7 @@ const EntStudentPagesUrlsList = [
         label: "inscription",
         url: Paths.E_STUDENT_INSCRIPTIONS_PAGE,
         icon: faFileLines,
-        bg: "bg-gradient-to-tr from-red-500 to-red-300"
+        bg: "bg-gradient-to-tr from-stone-400 to-neutral-300"
     },
     {
         label: "comptes",
@@ -71,19 +71,19 @@ const EntTeacherPagesUrlsList = [
         label: "announces",
         url: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE,
         icon: faBullhorn,
-        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
+        bg: "bg-gradient-to-tr from-orange-500 to-orange-300"
     },
     {
         label: "classes",
         url: Paths.E_TEACHER_CLASSES_PAGE,
         icon: faUsers,
-        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
+        bg: "bg-gradient-to-tr from-red-500 to-red-300"
     },
     {
         label: "notes",
         url: Paths.E_TEACHER_GRADES_PAGE,
         icon: faTableList,
-        bg: "bg-gradient-to-tr from-slate-500 to-slate-300"
+        bg: "bg-gradient-to-tr from-blue-500 to-blue-300"
     }
 ];
 
