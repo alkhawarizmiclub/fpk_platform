@@ -95,6 +95,8 @@ const router = createBrowserRouter([
              
             { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
             { path: Paths.ANNOUNCEMENT_PAGE, element: <AnnouncementPage /> },
+
+           
              
             { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
             { path: Paths.LFS_PAGE, element: <LfsPage/> },
