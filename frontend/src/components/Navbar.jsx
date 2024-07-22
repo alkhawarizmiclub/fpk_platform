@@ -23,7 +23,7 @@ const Navbar = () => {
             label: "formation",
             children: [
                 { label: "Licence Fondamentale", url: Paths.BACHELORS_PAGE },
-                { label: "Licence Professionnelle", url: Paths.PROFESSIONAL_BACHELORS_PAGE },
+                { label: "Licence Professionnelle", url: Paths.LPS_PAGE },
                 { label: "Master", url: Paths.MASTERS_PAGE },
                 { label: "Doctorat", url: Paths.PHDS_PAGE }
             ]
@@ -48,8 +48,8 @@ const Navbar = () => {
             children: [
                 { label: "Professeurs", url: Paths.PROFESSORS_PAGE },
                 { label: "Départements", url: Paths.DEPARTMENTS_PAGE },
-                { label: "Laboratoires", url: Paths.LABOLATORIES_PAGE },
-                { label: "Equipes de recherche", url: Paths.LABOLATORIES_PAGE },
+                { label: "Laboratoires", url: Paths.LABO_PAGE },
+               
             ]
         },
         { label: "contact", url: Paths.CONTACT_PAGE }
