@@ -12,7 +12,7 @@ import Error404Page from "../pages/static/Error404Page";
 import PresentationPage from "../pages/static/PresentationPage";
 import StaffPage from "../pages/static/StaffPage";
 import DepartmentsPage from "../pages/static/DepartmentsPage";
-
+import EventsPage from "../pages/static/EventsPage";
 import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
@@ -92,6 +92,7 @@ const router = createBrowserRouter([
              
             { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
             { path: Paths.LFS_PAGE, element: <LfsPage/> },
+            { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
         ]
     },
     {
