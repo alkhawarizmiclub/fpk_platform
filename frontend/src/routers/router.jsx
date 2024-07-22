@@ -7,7 +7,6 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/signupPage/SignUpPage";
 import LogOutPage from "../pages/LogOutPage";
-import ApplyPage from "../pages/ApplyPage";
 import Error404Page from "../pages/static/Error404Page";
 import PresentationPage from "../pages/static/PresentationPage";
 import StaffPage from "../pages/static/StaffPage";
@@ -32,7 +31,6 @@ import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
 import EmpPage from "../pages/static/EmpPage";
 import PlanningPage from "../pages/static/PlanningPage";
-import Announcements from "../pages/AnnouncementsPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
 import EntStudentComplaintsCreatePage from "../pages/ent/student/Complaints/EntStudentComplaintsCreatePage";
@@ -51,7 +49,6 @@ import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntS
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
 import CLUBS_PAGE from "../pages/static/ClubsPage";
-import ContactPage from "../pages/ContactPage";
 import SignUpContextProvider from "../contexts/signUpContext";
 import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
 import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
@@ -67,9 +64,7 @@ const router = createBrowserRouter([
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
             { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
-            { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
             { path: Paths.ERROR_PAGE, element: <Error404Page /> },
-            { path: Paths.CONTACT_PAGE, element: <ContactPage /> },
         ]
     },
     {

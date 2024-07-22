@@ -3,8 +3,6 @@
     "LOGIN_PAGE": "/login",
     "SIGNUP_PAGE": "/SignUpPage",
     "LOGOUT_PAGE": "/logout",
-    "APPLY_PAGE": "/apply",
-    "CONTACT_PAGE": "/contact",
     "DEAN_WORD_PAGE": "/mot-du-doyen",
     "PRESENTATION_PAGE": "/presenetation",
     "STAFF_PAGE": "/staff",
