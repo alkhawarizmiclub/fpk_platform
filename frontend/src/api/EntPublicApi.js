@@ -7,6 +7,9 @@ const EntPublicApi = {
     getAllAnnounceements: async () => {
         return await axiosClient.get("/api/public/announce");
     },
+    getAnnouncement: async (id) => {
+        return await axiosClient.get(`/api/public/announce/${id}`);
+    },
     getAllMajors: async () => {
         return await axiosClient.get("/api/public/filieres");
     },
