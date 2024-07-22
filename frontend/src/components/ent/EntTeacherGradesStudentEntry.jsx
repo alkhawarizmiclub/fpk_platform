@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import EntTeacherApi from "../../api/EntTeacherApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const EntTeacherGradesStudentEntry = ({ data }) => {
 
@@ -33,7 +35,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
                 alert('Failed to submit grades.');
             })
             .finally(() => {
-                setIsSubmitting(true);
+                setIsSubmitting(false);
             });
     };
 
@@ -62,6 +64,7 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
                     step=".01"
                     min="0"
                     max="20"
+                    disabled={normalNote >= 10}
                     value={rattrapageNote}
                     onChange={(e) => { setRattrapageNote(e.target.value); }}
                     className="mt-1 p-2 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
@@ -70,9 +73,10 @@ const EntTeacherGradesStudentEntry = ({ data }) => {
             <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">
                 <button
                     onClick={handleSubmit}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className={`px-4 py-2 space-x-2 rounded-lg text-sm text-white ${isSubmitting ? "bg-orange-300" : "bg-orange-400 hover:bg-orange-300"} transtition-colors duration-default`}
                 >
-                    Envoyer
+                    {isSubmitting ? (<FontAwesomeIcon icon={faSpinner} className="text-lg loader" />) : (<FontAwesomeIcon icon={faSave} />)}
+                    <span>Envoyer</span>
                 </button>
             </td>
         </tr>
