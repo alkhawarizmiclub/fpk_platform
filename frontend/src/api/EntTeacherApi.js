@@ -4,7 +4,8 @@ const EntTeacherApi = {
     login: async (email, password) => {
         return await axiosClient.post("/api/prof/login", { email, password });
     },
-		return await axiosClient.get("/api/prof/accounts");
+	getAccountsData: async () => {
+ 		return await axiosClient.get("/api/prof/accounts");
     },
     getSchedulePDF: async () => {
         return await axiosClient.get("/api/prof/schedule");

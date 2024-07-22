@@ -1,8 +1,6 @@
 
 
 import EntPageContainer from "../../../components/ent/EntPageContainer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
