@@ -18,6 +18,10 @@ cd into the backend folder and follow the next commands
 <br>
 <br>
 <br>
+install laravel dependency run
+```cmd
+composer install
+```
 run database migration 
 ```cmd
 php artisan migrate 
@@ -34,7 +38,12 @@ php artisan migrate:fresh --seed
 ```
 ## Front-end
 cd into the frontend folder and follow the next commands
-
+<br>
+install dependency
 ```cmd
 npm install
+```
+run in dev mode
+```cmd
+npm run dev
 ```
