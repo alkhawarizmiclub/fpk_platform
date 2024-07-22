@@ -357,4 +357,20 @@ class DBRepository
             ->get();
         return ($accounts);
     }
+    public function getStudentNote(Student $student, $type)
+    {
+        $notes = DB::table('result as r')
+            ->join('modules as m', 'm.id', '=', 'r.module_id')
+            ->select(
+                'm.module_name',
+                'r.normale',
+                'r.ratt',
+                'r.inscrit_number',
+                'r.semester'
+            )
+            ->where('r.apogee', $student->apogee)
+            ->whereIn('r.semester', $type)
+            ->get();
+        return ($notes);
+    }
 }
