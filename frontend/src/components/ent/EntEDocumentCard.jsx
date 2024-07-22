@@ -19,7 +19,7 @@ const EntEDocumentCard = ({ label, creationDateTime, type }) => {
 				const a = document.createElement('a');
 				a.href = url;
 				a.style = 'display: none';
-				a.download = 'releve-note-' + type + '.pdf';
+				a.download = (type === 'att') ? ('attestion.pdf') : ('releve-note- ' + type + '.pdf');
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
@@ -42,7 +42,6 @@ const EntEDocumentCard = ({ label, creationDateTime, type }) => {
 				}
 			});
 	}
-
 	return (
 		<div className="relative p-5 rounded-lg shadow border border-slate-50">
 

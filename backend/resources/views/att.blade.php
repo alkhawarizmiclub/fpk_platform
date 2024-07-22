@@ -58,7 +58,7 @@
             Faculté Polydisciplinaire de Khouribga
         </p>
         <p>
-            Année universitaire 2023/2024
+            Année universitaire {{$year}}
         </p>
         <br />
         <br />
@@ -76,34 +76,34 @@
     <br />
     <div style="margin-left: 60px;">
         <p>le Doyen de la Faculté Polydisciplinaire Khouribga atteste que l'etudiant:</p>
-        <p> Monsieur
+        <br />
+        <p> Monsieur: {{$student->firstname}} {{$student->lastname}}
             <p />
-        <br/>
         <p>
-            Numero de la carte d'idendité nationale:
+            Numero de la carte d'idendité nationale: {{$student->id_num}}
         </p>
 
         <p>
-            Code national de l'etudiant:
+            Code national de l'etudiant: {{$student->massar_code}}
         </p>
 
         <p>
-            né le data a place
+            né le {{$student->birth_date}} a {{$student->birth_place}}
         </p>
         <br />
         <p>
             est régulièrement inscrit à la Faculté Polydisciplinaire Khouribga pour
         </p>
-        <p>l'année universitaire 2023/2024
+        <p>l'année universitaire {{$year}}
             <p />
             <br>
         <p>
-            Année: 1ere Année filiere
+            Année: 1ere Année {{$filiere}}
         </p>
         <br />
         <br />
         <p style="margin-left: 350px;">
-            Faite à Khouribga le 10/10/2023
+            Faite à Khouribga le {{$date}}
         </p>
         </p>
         <br />

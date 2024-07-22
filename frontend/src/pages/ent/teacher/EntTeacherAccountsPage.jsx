@@ -1,39 +1,68 @@
 
 
-import EntTeacherApi from "../../../api/EntTeacherApi";
 import EntPageContainer from "../../../components/ent/EntPageContainer";
 
-const EntTeacherAccountsPage = () => {
-    const accounts = EntTeacherApi.getAccountsData();
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import EntAccountPassword from "../../../components/ent/EntAccountPassword";
+import EntTeacherApi from "../../../api/EntTeacherApi";
+import { useEffect, useState } from "react";
 
-    return (
-        <EntPageContainer title="Comptes">
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300 rounded-lg">
-                    <thead>
-                        <tr>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Compte</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Email</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Mot de passe</th>
-                            <th className="px-6 py-3 border-b-2 border-gray-300 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">Lien de connexion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {accounts.map(({ label, email, password, loginURL }, i) => (
-                            <tr key={i} className="hover:bg-gray-100 transition-colors duration-200">
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{label}</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{email}</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">{password}</td>
-                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-blue-600 underline text-center">
-                                    <a href={loginURL} target="_blank" rel="noopener noreferrer" className="hover:text-blue-800">Lien</a>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </EntPageContainer>
-    );
+const EntTeacherAccountsPage = () => {
+	const [isLoading, setIsLoading] = useState(true);
+
+	const [accounts, setAccounts] = useState([]);
+
+	useEffect(() => {
+		setIsLoading(true);
+
+		EntTeacherApi.getAccountsData()
+			.then((response) => {
+				setAccounts(response.data.data);
+			})
+			.catch(() => {
+				// TODO: Add error handling
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+
+	}, []);
+
+	return (
+		<EntPageContainer title="Comptes">
+
+			{isLoading ? (
+
+				<div className="text-center"><FontAwesomeIcon icon={faSpinner} className="text-lg loader" /></div>
+
+			) : (
+
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+					{accounts.map(({ account_type, account_id, account_password, account_url }, i) =>
+						<div key={i} className="p-5 grow space-y-3 rounded shadow">
+							<div className="w-full flex justify-between items-center">
+								<div>
+									<div className="text-sm text-slate-700 font-semibold">Platform</div>
+									<div className="text-slate-500">{account_type}</div>
+								</div>
+								<a href={account_url} target="_blank" className="text-slate-500"><FontAwesomeIcon icon={faUpRightFromSquare} /></a>
+							</div>
+							<div>
+								<div className="text-sm text-slate-700 font-semibold">Identifiant</div>
+								<div className="text-slate-500">{account_id}</div>
+							</div>
+							<div>
+								<div className="text-sm text-slate-700 font-semibold">Password</div>
+								<div className="text-slate-500"><EntAccountPassword password={account_password} /></div>
+							</div>
+						</div>
+					)}
+				</div>
+
+			)}
+		</EntPageContainer>
+	);
 }
 
 export default EntTeacherAccountsPage;

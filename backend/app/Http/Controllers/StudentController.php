@@ -96,6 +96,9 @@ class StudentController extends Controller
         if (!$type)
             return (response()->noContent());
         $student = request()->user();
+        $r = DB::table('filieres')->where('id', $student->filiere_id)->first();
+        if ($type === 'att')
+            return ($this->attestion($student, $r));
         $data = $this->studentService->documents($student, strtolower($type));
         if (!$data) {
             return (response()->json(
@@ -107,7 +110,11 @@ class StudentController extends Controller
                 404
             ));
         }
-        $r = DB::table('filieres')->where('id', $student->filiere_id)->first();
+        return ($this->releveNote($data, $student, $r, $type));
+    }
+
+    private function releveNote($data, $student, $r, $type)
+    {
         $status = null;
         if ($data['note'] >= 10) {
             $status = 'Valide';
@@ -127,5 +134,19 @@ class StudentController extends Controller
             ]
         );
         return ($pdf->download('releve-note.pdf'));
+    }
+
+    private function attestion($student, $r)
+    {
+        $pdf = Pdf::loadView(
+            'att',
+            [
+                'year' => StudentService::getAcademicYear(date('Y-m-d')),
+                'student' => $student,
+                'filiere' => $r->filiere_name,
+                'date' => date('d/m/Y'),
+            ]
+        );
+        return ($pdf->download('attestion.pdf'));
     }
 }

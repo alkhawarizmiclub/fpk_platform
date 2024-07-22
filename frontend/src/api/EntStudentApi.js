@@ -65,14 +65,15 @@ const EntStudentApi = {
         return {
             status: 200,
             data: [
-                { label: "Relevé de notes de S1", creationDateTime: new Date(), type: "s1", data: {} },
-                { label: "Relevé de notes de S2", creationDateTime: new Date(), type: "s2", data: {} },
+                { label: "Relevé de notes de S1", type: "s1", data: {} },
+                { label: "Relevé de notes de S2", type: "s2", data: {} },
+                { label: "Attestion de inscription", type: "att", data: {} },
 
             ]
         };
     },
     demandEDocument: async (document_type) => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        await new Promise(resolve => setTimeout(resolve, 400)); // TO BE REMOVED
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");

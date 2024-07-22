@@ -4,13 +4,8 @@ const EntTeacherApi = {
     login: async (email, password) => {
         return await axiosClient.post("/api/prof/login", { email, password });
     },
-    getAccountsData: () => {
-        return [
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" },
-            { label: "Microsoft Office", email: "firstname.lastname@usms.ac.ma", password: "thisIsYourPassword", loginURL: "http://www.google.com" }
-        ]
+    getAccountsData: async () => {
+		return await axiosClient.get("/api/prof/accounts");
     },
     getOwnAnnouncements: async () => {
         return await axiosClient.get("/api/prof/announce");
