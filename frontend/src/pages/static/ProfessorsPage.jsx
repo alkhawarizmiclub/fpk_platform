@@ -1,4 +1,5 @@
 import React from "react";
+import StaticPageContainer from "../../layouts/StaticPageContainer";
 
 const ProfessorsPage = () => {
   const professors = [
@@ -38,8 +39,9 @@ const ProfessorsPage = () => {
 
 
   return (
+<StaticPageContainer page_title=" Professors ">
     <div className="flex flex-col items-center mx-auto p-6 space-y-6 max-w-6xl">
-      <h2 className="text-3xl text-blue-900 font-bold mb-8">Nos Professeurs</h2>
+     
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {professors.map((professor, index) => (
           <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -63,6 +65,7 @@ const ProfessorsPage = () => {
         ))}
       </div>
     </div>
+    </StaticPageContainer>
   );
 };
 
