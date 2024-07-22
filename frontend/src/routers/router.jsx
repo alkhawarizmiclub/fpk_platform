@@ -17,7 +17,11 @@ import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
 import ClubsPage from "../pages/static/ClubsPage";
-import LfsPage  from "../pages/static/LfsPage"
+import LfsPage  from "../pages/static/LfsPage";
+import LpsPage  from "../pages/static/LpsPage";
+import MastersPage from "../pages/static/MastersPage";
+import PhdsPage from '../pages/static/PhdsPage';
+import LaboPage from "../pages/static/LaboPage";
 import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
@@ -74,7 +78,7 @@ const router = createBrowserRouter([
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
-           
+            { path: Paths.LABO_PAGE, element: <LaboPage/> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
@@ -89,6 +93,9 @@ const router = createBrowserRouter([
             { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
             { path: Paths.CLUBS_PAGE, element: <ClubsPage/> },
             { path: Paths.LFS_PAGE, element: <LfsPage/> },
+            { path: Paths.LPS_PAGE, element: <LpsPage/> },
+            { path: Paths.PHDS_PAGE, element: <PhdsPage/> },
+            { path: Paths.MASTERS_PAGE, element: <MastersPage/> },
             { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
           
         ]
