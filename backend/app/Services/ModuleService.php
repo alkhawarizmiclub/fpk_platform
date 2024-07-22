@@ -49,7 +49,7 @@ class ModuleService
 
 
 
-    public static  function insertModule($modules, string $filiere)
+    public static  function insertModule($modules, string $filiere, string $prof_id)
     {
 
         $v = 1;
@@ -58,7 +58,7 @@ class ModuleService
                 'module_name' => $module,
                 'semester' => $v <= 7 ? 'S1' : 'S2',
                 'filiere_id' => $filiere,
-                'prof_id' => rand(1, 3),
+                'prof_id' => $prof_id,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
@@ -124,9 +124,9 @@ class ModuleService
             'M14- LT II',
         ];
 
-        self::insertModule($SMI, 1);
-        self::insertModule($SEG, 2);
-        self::insertModule($SMP, 3);
+        self::insertModule($SMI, 1, 1);
+        self::insertModule($SEG, 2, 2);
+        self::insertModule($SMP, 3, 3);
 
         self::setDefaultModule(range(1, 14), 1);
         self::setDefaultModule(range(15, 28), 2);

@@ -89,4 +89,12 @@ class StudentController extends Controller
         DB::table('student_complaints')->where('id', $id)->where('apogee', $student->apogee)->delete();
         return ($this->studentService->getComplaints($student));
     }
+    public function documents()
+    {
+        $type = request()->query('type');
+        if (!$type)
+			return (response()->noContent());
+        $student = request()->user();
+        return ($this->studentService->documents($student, strtolower($type)));
+    }
 }
