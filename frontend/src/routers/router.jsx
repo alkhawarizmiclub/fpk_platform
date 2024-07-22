@@ -12,12 +12,16 @@ import Error404Page from "../pages/static/Error404Page";
 import PresentationPage from "../pages/static/PresentationPage";
 import StaffPage from "../pages/static/StaffPage";
 import DepartmentsPage from "../pages/static/DepartmentsPage";
-
+import EventsPage from "../pages/static/EventsPage";
 import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
 import ClubsPage from "../pages/static/ClubsPage";
-import LfsPage  from "../pages/static/LfsPage"
+import LfsPage  from "../pages/static/LfsPage";
+import LpsPage  from "../pages/static/LpsPage";
+import MastersPage from "../pages/static/MastersPage";
+import PhdsPage from '../pages/static/PhdsPage';
+import LaboPage from "../pages/static/LaboPage";
 import Smi from "../pages/majors/Smi";
 import Sma from "../pages/majors/Sma";
 import Smp from "../pages/majors/Smp";
@@ -26,6 +30,8 @@ import Sv from "../pages/majors/Sv";
 import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
+import EmpPage from "../pages/static/EmpPage";
+import PlanningPage from "../pages/static/PlanningPage";
 import Announcements from "../pages/AnnouncementsPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
@@ -74,7 +80,7 @@ const router = createBrowserRouter([
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
-           
+            { path: Paths.LABO_PAGE, element: <LaboPage/> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
@@ -92,6 +98,13 @@ const router = createBrowserRouter([
              
             { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
             { path: Paths.LFS_PAGE, element: <LfsPage/> },
+            { path: Paths.LPS_PAGE, element: <LpsPage/> },
+            { path: Paths.PHDS_PAGE, element: <PhdsPage/> },
+            { path: Paths.MASTERS_PAGE, element: <MastersPage/> },
+            { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
+
+            { path: Paths.EMP_PAGE, element: <EmpPage/> },
+            { path: Paths.PLANNING_PAGE, element: <PlanningPage/> },
         ]
     },
     {

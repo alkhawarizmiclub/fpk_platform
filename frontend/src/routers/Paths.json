@@ -56,15 +56,18 @@
     "CLUBS_PAGE": "/clubs",
     "EXTRACURRICULAR_ACTIVITIES_PAGE": "/activite-parascolaire",
     "LFS_PAGE": "/formations/licence-fondamentale",
+    "LPS_PAGE": "/formations/licence-professionnelle",
 
     "PROFESSORS_PAGE": "/recherche/professeurs",
     "DEPARTMENTS_PAGE": "/recherche/departements",
    
-    "LABOLATORIES_PAGE": "/recherche/laboratoires",
+    "LABO_PAGE": "/recherche/laboratoires",
     "THESES_PAGE": "/recherche/theses",
 
     "ANNOUNCEMENTS_PAGE": "/avis",
     "ANNOUNCEMENT_PAGE": "/avis/:id",
+    "EMP_PAGE":"/emplois",
+    "PLANNING_PAGE":"/planning",
 
     "ERROR_PAGE": "*",
 

@@ -9,6 +9,7 @@ use App\Services\StudentService;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreComplaintsRequest;
 use App\Http\Requests\StoreStudentComplaintRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -93,8 +94,59 @@ class StudentController extends Controller
     {
         $type = request()->query('type');
         if (!$type)
-			return (response()->noContent());
+            return (response()->noContent());
         $student = request()->user();
-        return ($this->studentService->documents($student, strtolower($type)));
+        $r = DB::table('filieres')->where('id', $student->filiere_id)->first();
+        if ($type === 'att')
+            return ($this->attestion($student, $r));
+        $data = $this->studentService->documents($student, strtolower($type));
+        if (!$data) {
+            return (response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'ce document n\'est pas disponible à votre situation actuelle',
+                    'data' => null
+                ],
+                404
+            ));
+        }
+        return ($this->releveNote($data, $student, $r, $type));
+    }
+
+    private function releveNote($data, $student, $r, $type)
+    {
+        $status = null;
+        if ($data['note'] >= 10) {
+            $status = 'Valide';
+        } else {
+            $status = 'Non Valide';
+        }
+        $pdf = Pdf::loadView(
+            'releve_note',
+            [
+                'student' => $student,
+                'data' => $data['data'],
+                'note' => round($data['note'], 4),
+                'status' => $status,
+                'filiere' => $r->filiere_name,
+                'date' => date('d/m/Y'),
+                'semestre' => $type[1]
+            ]
+        );
+        return ($pdf->download('releve-note.pdf'));
+    }
+
+    private function attestion($student, $r)
+    {
+        $pdf = Pdf::loadView(
+            'att',
+            [
+                'year' => StudentService::getAcademicYear(date('Y-m-d')),
+                'student' => $student,
+                'filiere' => $r->filiere_name,
+                'date' => date('d/m/Y'),
+            ]
+        );
+        return ($pdf->download('attestion.pdf'));
     }
 }

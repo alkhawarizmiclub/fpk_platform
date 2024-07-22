@@ -4,19 +4,8 @@ const EntTeacherApi = {
     login: async (email, password) => {
         return await axiosClient.post("/api/prof/login", { email, password });
     },
-    getAccountsData: async () => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
-        return {
-            status: 200,
-            data: {
-                data: [
-                    { account_type: "Microsoft Office", account_id: "firstname.lastname@usms.ac.ma", account_password: "thisIsYourPassword", account_url: "http://www.google.com" },
-                    { account_type: "Microsoft Office", account_id: "firstname.lastname@usms.ac.ma", account_password: "thisIsYourPassword", account_url: "http://www.google.com" },
-                    { account_type: "Microsoft Office", account_id: "firstname.lastname@usms.ac.ma", account_password: "thisIsYourPassword", account_url: "http://www.google.com" },
-                    { account_type: "Microsoft Office", account_id: "firstname.lastname@usms.ac.ma", account_password: "thisIsYourPassword", account_url: "http://www.google.com" }
-                ],
-            }
-        }
+	getAccountsData: async () => {
+ 		return await axiosClient.get("/api/prof/accounts");
     },
     getSchedulePDF: async () => {
         return await axiosClient.get("/api/prof/schedule");
