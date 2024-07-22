@@ -52,8 +52,7 @@ const Navbar = () => {
                
             ]
         },
-        { label: "contact", url: Paths.CONTACT_PAGE }
-    ]
+        ]
 
     return (
         <nav className="z-10 py-5 px-10 h-24 flex justify-between items-center shadow bg-white">
