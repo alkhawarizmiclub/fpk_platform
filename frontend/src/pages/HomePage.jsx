@@ -113,8 +113,8 @@ const HomePage = () => {
 
                 <Section title="avis & announces" className="p-10">
                     <div className='grid grid-cols-4 gap-5'>
-                        {announcements.map(({ id, title, content, thumbnail, author, created_at }) => (
-                            <Announcement key={id} id={id} title={title} content={content} img_src={thumbnail} author={author} creation_date={created_at} />
+                        {announcements.map(({ id, thumbnail, title, content, tags, created_at, author }) => (
+                            <Announcement key={id} id={id} thumbnail={thumbnail} title={title} content={content} tags={tags} created_at={created_at} author={author} />
                         ))}
                     </div>
                     <div className="text-center">
