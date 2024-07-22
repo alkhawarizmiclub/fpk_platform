@@ -31,6 +31,7 @@ import Smc from "../pages/majors/Smc";
 import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
 import EmpPage from "../pages/static/EmpPage";
+import PlanningPage from "../pages/static/PlanningPage";
 import Announcements from "../pages/AnnouncementsPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
@@ -101,7 +102,9 @@ const router = createBrowserRouter([
             { path: Paths.PHDS_PAGE, element: <PhdsPage/> },
             { path: Paths.MASTERS_PAGE, element: <MastersPage/> },
             { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
+
             { path: Paths.EMP_PAGE, element: <EmpPage/> },
+            { path: Paths.PLANNING_PAGE, element: <PlanningPage/> },
         ]
     },
     {

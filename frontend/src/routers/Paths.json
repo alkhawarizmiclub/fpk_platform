@@ -64,6 +64,7 @@
     "ANNOUNCEMENTS_PAGE": "/avis",
     "ANNOUNCEMENT_PAGE": "/avis/:id",
     "EMP_PAGE":"/emplois",
+    "PLANNING_PAGE":"/planning",
 
     "ERROR_PAGE": "*",
 
