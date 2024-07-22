@@ -87,5 +87,11 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
+    // Route::get('/note', function () {
+    //     // return (view('att'));
+    //     $pdf = PDF::loadView('att');
+
+    //     return ($pdf->download('att.pdf'));
+    // });
 
 });

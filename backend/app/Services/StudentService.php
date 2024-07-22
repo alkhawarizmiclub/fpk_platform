@@ -273,21 +273,9 @@ class StudentService
         if ($is_releve) {
             $data = $this->processData($datas[0], $type);
             if ($data == null) {
-                return (response()->json(
-                    [
-                        'status' => 'error',
-                        'message' => 'ce document n\'est pas disponible à votre situation actuelle',
-                        'data' => null
-                    ]
-                ));
+                return (null);
             }
-            return (response()->json(
-                [
-                    'status' => 'success',
-                    'message' => 'Etudiant documents',
-                    'data' => $data
-                ]
-            ));
+            return ($data);
         }
         $result = new \stdClass();
         $result->note = 0;
@@ -301,7 +289,8 @@ class StudentService
                         'status' => 'error',
                         'message' => 'ce document n\'est pas disponible à votre situation actuelle',
                         'data' => null
-                    ]
+                    ],
+                    404
                 ));
             }
             $result->note += $data['note'];
@@ -313,7 +302,8 @@ class StudentService
                 'status' => 'success',
                 'message' => $datas  && $result->note >= 10 ? 'Etudiant documents' : 'ce document n\'est pas disponible à votre situation actuelle',
                 'data' => $result->note >= 10 ? $result->note : null
-            ]
+            ],
+            $datas  && $result->note >= 10 ? 200 : 404
         ));
     }
     private function processData($data, $type)
