@@ -45,8 +45,8 @@ const EntTeacherAnnouncementsPage = () => {
                     </div>
 
                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-5"> 
-                        {announcements.length > 0 ? announcements.map(({ title, thumbnail_path, content, tags, created_at }) => (
-                            <EntTeacherAnnouncement title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
+                        {announcements.length > 0 ? announcements.map(({ id, title, thumbnail_path, content, tags, created_at }) => (
+                            <EntTeacherAnnouncement key={id} id={id} title={title} thumbnail_path={thumbnail_path} content={content} tags={tags} created_at={created_at} />
                         )) : (
                             <div>
                                 <div colSpan={5} className="px-6 py-4 whitespace-no-wrap border-b border-gray-300 text-sm leading-5 text-gray-800 text-center">Vous n'avez encore partagé aucune annonce</div>

@@ -32,8 +32,8 @@ const Navbar = () => {
             label: "espace scolarité",
             children: [
                 { label: "Espace numerique de Travail", url: Paths.ENT_DASHBOARD_PAGE },
-                { label: "Emploi du temps", url: Paths.EMP_PAGE },
-                { label: "Planning des exams", url: Paths.PLANNING_PAGE },
+                // { label: "Emploi du temps", url: Paths.EMP_PAGE },
+                // { label: "Planning des exams", url: Paths.PLANNING_PAGE },
             ]
         },
         {
@@ -52,8 +52,7 @@ const Navbar = () => {
                
             ]
         },
-        { label: "contact", url: Paths.CONTACT_PAGE }
-    ]
+        ]
 
     return (
         <nav className="z-10 py-5 px-10 h-24 flex justify-between items-center shadow bg-white">

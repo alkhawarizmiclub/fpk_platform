@@ -15,8 +15,8 @@ const generatePDF = (formData) => {
         [{ content: 'Informations personnelles', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
         ['Nom', formData.firstName],
         ['PréfirstName', formData.lastName],
-        ['Nom en arabe', formData.firstNameAr],
-        ['Prénom en arabe', formData.lastNameAr],
+        // ['Nom en arabe', formData.firstNameAr],
+        // ['Prénom en arabe', formData.lastNameAr],
         ['Date de Naissance', formData.birthDate],
         ['Lieu de Naissance', formData.birthPlace],
         ['Nationalité', formData.nationality],
@@ -36,8 +36,9 @@ const generatePDF = (formData) => {
     ];
     const documentsProvided = [
         [{ content: 'Documents Fournis', colSpan: 2, styles: { fontStyle: 'bold', halign: 'center', fillColor: [255, 165, 0] } }],
-        ['Copie de la CNI (Recto-verso)', formData.cniFile ? 'X' : ''],
-        ['Copie du diplôme du Baccalauréat', formData.Bac ? 'X' : ''],
+        ['Copie de la CIN (Recto-verso)', formData.idCardFile ? 'X' : ''],
+        ['Copie du diplôme du Baccalauréat', formData.bacFile ? 'X' : ''],
+        ['Copie des relevees du Baccalauréat', formData.gradeSheetsFile ? 'X' : ''],
     ];
 
     // Adding header

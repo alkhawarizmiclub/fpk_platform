@@ -7,7 +7,6 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/signupPage/SignUpPage";
 import LogOutPage from "../pages/LogOutPage";
-import ApplyPage from "../pages/ApplyPage";
 import Error404Page from "../pages/static/Error404Page";
 import PresentationPage from "../pages/static/PresentationPage";
 import StaffPage from "../pages/static/StaffPage";
@@ -17,8 +16,8 @@ import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
 import ClubsPage from "../pages/static/ClubsPage";
-import LfsPage  from "../pages/static/LfsPage";
-import LpsPage  from "../pages/static/LpsPage";
+import LfsPage from "../pages/static/LfsPage";
+import LpsPage from "../pages/static/LpsPage";
 import MastersPage from "../pages/static/MastersPage";
 import PhdsPage from '../pages/static/PhdsPage';
 import LaboPage from "../pages/static/LaboPage";
@@ -32,7 +31,6 @@ import Geo from "../pages/majors/Geo";
 import Seg from "../pages/majors/Seg";
 import EmpPage from "../pages/static/EmpPage";
 import PlanningPage from "../pages/static/PlanningPage";
-import Announcements from "../pages/AnnouncementsPage";
 import EntStudentResultsPage from "../pages/ent/student/EntStudentResultsPage";
 import EntStudentComplaintsPage from "../pages/ent/student/Complaints/EntStudentComplaintsPage";
 import EntStudentComplaintsCreatePage from "../pages/ent/student/Complaints/EntStudentComplaintsCreatePage";
@@ -51,12 +49,13 @@ import EntStudentComplaintsDeletePage from "../pages/ent/student/Complaints/EntS
 import EntDashboardPage from "../pages/ent/EntDashboardPage";
 import EntStudentEDocumentsCreatePage from "../pages/ent/student/E-Documents/EntStudentEDocumentsCreatePage";
 import CLUBS_PAGE from "../pages/static/ClubsPage";
-import ContactPage from "../pages/ContactPage";
 import SignUpContextProvider from "../contexts/signUpContext";
 import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementCreatePage";
 import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
 import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
 import AnnouncementPage from "../pages/announcements/AnnouncementPage";
+import EntTeacherAnnouncementViewPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementViewPage";
+import AnnouncementsPage from "../pages/announcements/AnnouncementsPage";
 
 
 const router = createBrowserRouter([
@@ -67,9 +66,7 @@ const router = createBrowserRouter([
             { path: Paths.LOGIN_PAGE, element: <LoginPage /> },
             { path: Paths.SIGNUP_PAGE, element: <SignUpContextProvider> <SignUpPage /> </SignUpContextProvider> },
             { path: Paths.LOGOUT_PAGE, element: <LogOutPage /> },
-            { path: Paths.APPLY_PAGE, element: <ApplyPage /> },
             { path: Paths.ERROR_PAGE, element: <Error404Page /> },
-            { path: Paths.CONTACT_PAGE, element: <ContactPage /> },
         ]
     },
     {
@@ -80,7 +77,7 @@ const router = createBrowserRouter([
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
-            { path: Paths.LABO_PAGE, element: <LaboPage/> },
+            { path: Paths.LABO_PAGE, element: <LaboPage /> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
@@ -92,21 +89,19 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
-             
-            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
+
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <AnnouncementsPage /> },
             { path: Paths.ANNOUNCEMENT_PAGE, element: <AnnouncementPage /> },
 
-           
-             
             { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
-            { path: Paths.LFS_PAGE, element: <LfsPage/> },
-            { path: Paths.LPS_PAGE, element: <LpsPage/> },
-            { path: Paths.PHDS_PAGE, element: <PhdsPage/> },
-            { path: Paths.MASTERS_PAGE, element: <MastersPage/> },
-            { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
+            { path: Paths.LFS_PAGE, element: <LfsPage /> },
+            { path: Paths.LPS_PAGE, element: <LpsPage /> },
+            { path: Paths.PHDS_PAGE, element: <PhdsPage /> },
+            { path: Paths.MASTERS_PAGE, element: <MastersPage /> },
+            { path: Paths.EVENTS_PAGE, element: <EventsPage /> },
 
-            { path: Paths.EMP_PAGE, element: <EmpPage/> },
-            { path: Paths.PLANNING_PAGE, element: <PlanningPage/> },
+            { path: Paths.EMP_PAGE, element: <EmpPage /> },
+            { path: Paths.PLANNING_PAGE, element: <PlanningPage /> },
         ]
     },
     {
@@ -127,6 +122,7 @@ const router = createBrowserRouter([
             { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
             { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_VIEW_PAGE, element: <EntTeacherAnnouncementViewPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE, element: <EntTeacherAnnouncementCreatePage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE, element: <EntTeacherAnnouncementDeletePage /> },
             { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },

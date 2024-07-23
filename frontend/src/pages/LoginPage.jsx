@@ -83,10 +83,10 @@ const LoginPage = () => {
 
                 <form onSubmit={submitHandler} className="w-full max-w-lg flex flex-col gap-5">
 
-                    <div className="grid grid-cols-3 overflow-hidden rounded-lg">
-                        <button className={`p-5 text-center text-white font-semibold ${userRole === "student" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "student"} value="student" onClick={loginTypeToggle}>Etudiant</button>
-                        <button className={`p-5 text-center text-white font-semibold ${userRole === "teacher" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "teacher"} value="teacher" onClick={loginTypeToggle}>Enseignant</button>
-                        <button className={`p-5 text-center text-white font-semibold ${userRole === "staff" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "staff"} value="staff" onClick={loginTypeToggle}>Staff</button>
+                    <div className="grid grid-cols-2 overflow-hidden">
+                        <button className={`p-5 text-center text-white font-semibold last:rounded-r-lg first:rounded-l-lg ${userRole === "student" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "student"} value="student" onClick={loginTypeToggle}>Etudiant</button>
+                        <button className={`p-5 text-center text-white font-semibold last:rounded-r-lg first:rounded-l-lg ${userRole === "teacher" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "teacher"} value="teacher" onClick={loginTypeToggle}>Enseignant</button>
+                        {/* <button className={`p-5 text-center text-white font-semibold last:rounded-r-lg first:rounded-l-lg ${userRole === "staff" ? "bg-orange-300" : "bg-orange-400"}`} disabled={userRole === "staff"} value="staff" onClick={loginTypeToggle}>Staff</button> */}
                     </div>
                     <div className="p-5 w-full flex flex-col gap-5 ">
 

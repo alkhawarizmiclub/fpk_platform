@@ -18,9 +18,9 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <button className="flex items-center">
+            {/* <button className="flex items-center">
                 <FontAwesomeIcon icon={faBell} className="text-xl text-slate-500" />
-            </button>
+            </button> */}
 
         </nav>
     );
