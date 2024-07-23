@@ -152,7 +152,7 @@ const ProfessorsPage = () => {
     ]
 
     return (
-        <StaticPageContainer page_title="Professors">
+        <StaticPageContainer page_title="Professeurs">
             <div className="grid grid-cols-4 gap-5">
                 {professors.map(professorObject => <Professor professorObject={professorObject} />)}
             </div>
