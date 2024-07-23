@@ -16,8 +16,8 @@ import RegulationPage from "../pages/static/RegulationPage";
 import MediaPage from "../pages/static/MediaPage";
 import DeanWordPage from "../pages/static/DeanWordPage";
 import ClubsPage from "../pages/static/ClubsPage";
-import LfsPage  from "../pages/static/LfsPage";
-import LpsPage  from "../pages/static/LpsPage";
+import LfsPage from "../pages/static/LfsPage";
+import LpsPage from "../pages/static/LpsPage";
 import MastersPage from "../pages/static/MastersPage";
 import PhdsPage from '../pages/static/PhdsPage';
 import LaboPage from "../pages/static/LaboPage";
@@ -54,6 +54,8 @@ import EntTeacherAnnouncementCreatePage from "../pages/ent/teacher/Announces/Ent
 import EntTeacherAnnouncementDeletePage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementDeletePage";
 import EntTeacherAnnouncementsPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementsPage";
 import AnnouncementPage from "../pages/announcements/AnnouncementPage";
+import EntTeacherAnnouncementViewPage from "../pages/ent/teacher/Announces/EntTeacherAnnouncementViewPage";
+import AnnouncementsPage from "../pages/announcements/AnnouncementsPage";
 
 
 const router = createBrowserRouter([
@@ -75,7 +77,7 @@ const router = createBrowserRouter([
             { path: Paths.PRESENTATION_PAGE, element: <PresentationPage /> },
             { path: Paths.STAFF_PAGE, element: <StaffPage /> },
             { path: Paths.DEPARTMENTS_PAGE, element: <DepartmentsPage /> },
-            { path: Paths.LABO_PAGE, element: <LaboPage/> },
+            { path: Paths.LABO_PAGE, element: <LaboPage /> },
             { path: Paths.REGULATION_PAGE, element: <RegulationPage /> },
             { path: Paths.MEDIA_PAGE, element: <MediaPage /> },
             { path: Paths.PROFESSORS_PAGE, element: <ProfessorsPage /> },
@@ -87,19 +89,19 @@ const router = createBrowserRouter([
             { path: Paths.BACHELOR_SV_PAGE, element: <Sv /> },
             { path: Paths.BACHELOR_SEG_PAGE, element: <Seg /> },
             { path: Paths.BACHELOR_SMC_PAGE, element: <Smc /> },
-             
-            { path: Paths.ANNOUNCEMENTS_PAGE, element: <Announcements /> },
-            { path: Paths.ANNOUNCEMENT_PAGE, element: <AnnouncementPage /> },
-             
-            { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
-            { path: Paths.LFS_PAGE, element: <LfsPage/> },
-            { path: Paths.LPS_PAGE, element: <LpsPage/> },
-            { path: Paths.PHDS_PAGE, element: <PhdsPage/> },
-            { path: Paths.MASTERS_PAGE, element: <MastersPage/> },
-            { path: Paths.EVENTS_PAGE, element: <EventsPage/> },
 
-            { path: Paths.EMP_PAGE, element: <EmpPage/> },
-            { path: Paths.PLANNING_PAGE, element: <PlanningPage/> },
+            { path: Paths.ANNOUNCEMENTS_PAGE, element: <AnnouncementsPage /> },
+            { path: Paths.ANNOUNCEMENT_PAGE, element: <AnnouncementPage /> },
+
+            { path: Paths.CLUBS_PAGE, element: <ClubsPage /> },
+            { path: Paths.LFS_PAGE, element: <LfsPage /> },
+            { path: Paths.LPS_PAGE, element: <LpsPage /> },
+            { path: Paths.PHDS_PAGE, element: <PhdsPage /> },
+            { path: Paths.MASTERS_PAGE, element: <MastersPage /> },
+            { path: Paths.EVENTS_PAGE, element: <EventsPage /> },
+
+            { path: Paths.EMP_PAGE, element: <EmpPage /> },
+            { path: Paths.PLANNING_PAGE, element: <PlanningPage /> },
         ]
     },
     {
@@ -120,6 +122,7 @@ const router = createBrowserRouter([
             { path: Paths.E_TEACHER_SCHEDULES_PAGE, element: <EntTeacherSchedulePage /> },
             { path: Paths.E_TEACHER_PLANNING_PAGE, element: <EntTeacherPlanningPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_PAGE, element: <EntTeacherAnnouncementsPage /> },
+            { path: Paths.E_TEACHER_ANNOUNCEMENTS_VIEW_PAGE, element: <EntTeacherAnnouncementViewPage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_CREATE_PAGE, element: <EntTeacherAnnouncementCreatePage /> },
             { path: Paths.E_TEACHER_ANNOUNCEMENTS_DELETE_PAGE, element: <EntTeacherAnnouncementDeletePage /> },
             { path: Paths.E_TEACHER_CLASSES_PAGE, element: <EntTeacherClassesPage /> },

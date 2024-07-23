@@ -4,8 +4,8 @@ const EntTeacherApi = {
     login: async (email, password) => {
         return await axiosClient.post("/api/prof/login", { email, password });
     },
-	getAccountsData: async () => {
- 		return await axiosClient.get("/api/prof/accounts");
+    getAccountsData: async () => {
+        return await axiosClient.get("/api/prof/accounts");
     },
     getSchedulePDF: async () => {
         return await axiosClient.get("/api/prof/schedule");
@@ -23,6 +23,9 @@ const EntTeacherApi = {
             },
         });
     },
+    deleteAnnouncement: async (id) => {
+        return await axiosClient.delete(`/api/prof/announce/${id}`);
+    },  
     submitGrades: async (apogee, module_id, normale, ratt) => {
         return await axiosClient.post("/api/prof/add-result", { apogee, module_id, normale, ratt });
     },

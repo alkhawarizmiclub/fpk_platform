@@ -3,7 +3,7 @@ import EntPageContainer from "../../../../components/ent/EntPageContainer";
 import EntStudentApi from "../../../../api/EntStudentApi";
 import Paths from "../../../../routers/Paths.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const EntStudentComplaintsDeletePage = () => {
