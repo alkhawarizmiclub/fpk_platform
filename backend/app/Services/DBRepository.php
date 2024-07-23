@@ -267,6 +267,7 @@ class DBRepository
             ->join('profs as f', 'f.id', '=', 'a.author_id')
             ->where('author_id', $prof->id)
             ->select(
+                'a.id',
                 'f.firstname',
                 'f.lastname',
                 'a.thumbnail_path',
