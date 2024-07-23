@@ -68,5 +68,13 @@ const ProfessorsPage = () => {
     </StaticPageContainer>
   );
 };
+    return (
+        <StaticPageContainer page_title="Professeurs">
+            <div className="grid grid-cols-4 gap-5">
+                {professors.map(professorObject => <Professor professorObject={professorObject} />)}
+            </div>
+        </StaticPageContainer>
+    );
+}
 
 export default ProfessorsPage;
