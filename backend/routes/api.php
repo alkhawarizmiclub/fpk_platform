@@ -55,6 +55,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth:sanctum', 'EnsureAut
     Route::get('/complaint', [StudentController::class, 'getComplaints']);
     Route::delete('/complaint/{id}', [StudentController::class, 'deleteComplaint']);
     Route::get('/accounts', [StudentController::class, 'accounts']);
+    Route::get('/e-docment', [StudentController::class, 'documents']);
 
 });
 
@@ -86,5 +87,11 @@ Route::group(['prefix' => 'public', 'guest'], function () {
     Route::get('/filieres', [FpkController::class, 'filiere']);
     Route::get('/filieres/schedule', [FpkController::class, 'schedule']);
     Route::get('/acadmic-year', [FpkController::class, 'acadmicYear']);
+    // Route::get('/note', function () {
+    //     // return (view('att'));
+    //     $pdf = PDF::loadView('att');
+
+    //     return ($pdf->download('att.pdf'));
+    // });
 
 });

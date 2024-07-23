@@ -72,7 +72,6 @@ class StudentService
     {
         $request->authenticate();
         $student = Student::where('email', $request->email)->first();
-        $student->tokens()->delete();
         $token = $student->createToken($student->apogee . '|api_token', ['role:student'], Carbon::now()->addHours(2));
         return response()->json(
             [
@@ -97,40 +96,39 @@ class StudentService
         );
     }
 
-            // $table->id();
-            // $table->unsignedBigInteger('apogee');
-            // $table->string('account_id');
-            // $table->string('account_type');
-            // $table->string('account_url');
-            // $table->string('account_password');
+    // $table->id();
+    // $table->unsignedBigInteger('apogee');
+    // $table->string('account_id');
+    // $table->string('account_type');
+    // $table->string('account_url');
+    // $table->string('account_password');
     static public function setAccounts(Student $student)
     {
-        $identify = $student->firstname.'.'.$student->lastname.'.'.Carbon::now()->format('Y').'@usms.ac.ma';
+        $identify = $student->firstname . '.' . $student->lastname . '.' . Carbon::now()->format('Y') . '@usms.ac.ma';
         DB::table('accounts')
-        ->insert([
-            [
-                'user_id' => $student->apogee,
-                'account_id' => strtolower($identify),
-                'account_type' => 'Microsoft 365',
-                'account_url' => 'https://www.office.com/',
-                'account_password' => Str::random(12)
-            ],
-            [
-                'user_id' => $student->apogee,
-                'account_id' => strtolower($identify),
-                'account_type' => 'Rosetta Stone',
-                'account_url' => 'https://login.rosettastone.com/',
-                'account_password' => Str::random(12)
-            ],
-            [
-                'user_id' => $student->apogee,
-                'account_id' => strtolower($identify),
-                'account_type' => 'Moodle',
-                'account_url' => 'http://moodle.usms.ac.ma/moodle/',
-                'account_password' => Str::random(12)
-            ]
-        ]);
-
+            ->insert([
+                [
+                    'user_id' => $student->apogee,
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Microsoft 365',
+                    'account_url' => 'https://www.office.com/',
+                    'account_password' => Str::random(12)
+                ],
+                [
+                    'user_id' => $student->apogee,
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Rosetta Stone',
+                    'account_url' => 'https://login.rosettastone.com/',
+                    'account_password' => Str::random(12)
+                ],
+                [
+                    'user_id' => $student->apogee,
+                    'account_id' => strtolower($identify),
+                    'account_type' => 'Moodle',
+                    'account_url' => 'http://moodle.usms.ac.ma/moodle/',
+                    'account_password' => Str::random(12)
+                ]
+            ]);
     }
     public function save(StoreStudentRequest $request): JsonResponse
     {
@@ -244,5 +242,123 @@ class StudentService
                 'data' => $this->dbRepository->getStudentAccounts($student->apogee)
             ]
         ));
+    }
+    public function documents(Student $student, string $type)
+    {
+        $datas = null;
+        $is_releve = false;
+        switch ($type) {
+            case 's1':
+            case 's2':
+            case 's3':
+            case 's4':
+            case 's5':
+            case 's6':
+                $is_releve = true;
+                $datas[0] = $this->dbRepository->getStudentNote($student, [$type]);
+                break;
+            case "l1":
+                $datas[0] = $this->dbRepository->getStudentNote($student, ['s1', 's2']);
+                break;
+            case "l2":
+                $datas[0] = $this->dbRepository->getStudentNote($student, ['s1', 's2']);
+                $datas[1] = $this->dbRepository->getStudentNote($student, ['s3', 's4',]);
+                break;
+            case "l3":
+                $datas[0] = $this->dbRepository->getStudentNote($student, ['s1', 's2']);
+                $datas[1] = $this->dbRepository->getStudentNote($student, ['s3', 's4',]);
+                $datas[2] = $this->dbRepository->getStudentNote($student, ['s5', 's6']);
+                break;
+        }
+        if ($is_releve) {
+            $data = $this->processData($datas[0], $type);
+            if ($data == null) {
+                return (null);
+            }
+            return ($data);
+        }
+        $result = new \stdClass();
+        $result->note = 0;
+        $result->data = [];
+        $count = 0;
+        foreach ($datas as $data) {
+            $data = $this->processData($data, $type);
+            if ($data === null) {
+                return (response()->json(
+                    [
+                        'status' => 'error',
+                        'message' => 'ce document n\'est pas disponible à votre situation actuelle',
+                        'data' => null
+                    ],
+                    404
+                ));
+            }
+            $result->note += $data['note'];
+            $count++;
+        }
+
+        return (response()->json(
+            [
+                'status' => 'success',
+                'message' => $datas  && $result->note >= 10 ? 'Etudiant documents' : 'ce document n\'est pas disponible à votre situation actuelle',
+                'data' => $result->note >= 10 ? $result->note : null
+            ],
+            $datas  && $result->note >= 10 ? 200 : 404
+        ));
+    }
+    private function processData($data, $type)
+    {
+        switch ($type)
+        {
+            case 's1':
+            case 's2':
+                return $this->checkValidation($data, 7);
+            case 's3':
+            case 's4':
+            case 's5':
+            case 's6':
+                return $this->checkValidation($data, 6);
+            case "l1":
+                return $this->checkValidation($data, 14);
+            case "l2":
+                return $this->checkValidation($data, 12);
+            case "l3":
+                return $this->checkValidation($data, 12);
+        }
+    }
+    private function checkValidation($data, int $count)
+    {
+        $isAjourne = false;
+        $sum = 0;
+
+        if ($data->count() !== $count) {
+            return null;
+        }
+
+        foreach ($data as $d) {
+            if ($d->normale === null && $d->ratt === null)
+                return null;
+            if ($d->normale >= 10)
+                $d->status = 'V';
+            else if ($d->ratt >= 10)
+                $d->status = 'VAR';
+            else if (max($d->normale, $d->ratt) < 5) {
+                $d->status = 'AJ';
+                $isAjourne = true;
+            } else
+                $d->status = 'NV';
+            $sum += max($d->normale, $d->ratt);
+            $d->note = max($d->normale, $d->ratt);
+        }
+        if ($isAjourne === true)
+            return null;
+        if ($sum / $count < 10)
+            return ['data' => $data, 'note' => $sum / $count];
+
+        foreach ($data as $d) {
+            if ($d->status === 'NV')
+                $d->status = 'AC';
+        }
+        return ['data' => $data, 'note' => $sum / $count];
     }
 }

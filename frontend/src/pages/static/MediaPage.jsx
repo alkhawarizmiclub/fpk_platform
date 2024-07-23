@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 
 const MediaPage = () => {
     return (
-        <StaticPageContainer page_title="MediaPage">
+    <StaticPageContainer page_title="MediaPage">
+        
        <div className="relative group w-full flex flex-col gap-2 rounded-lg overflow-hidden overflow">
             <div className="flex gap-4">
                 <div className="relative w-1/3 aspect-w-3 aspect-h-4 overflow-hidden rounded-lg">

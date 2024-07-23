@@ -61,20 +61,19 @@ const EntStudentApi = {
         return await axiosClient.get("/api/student/result");
     },
     getEDocumentsData: async () => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        await new Promise(resolve => setTimeout(resolve, 400)); // TO BE REMOVED
         return {
             status: 200,
             data: [
-                { label: "Relevé de notes de S1", creationDateTime: new Date(), type: "grades sheet", data: {} },
-                { label: "Attestation de DEUG", creationDateTime: new Date(), type: "deug attestation", data: {} },
-                { label: "Relevé de notes de S3", creationDateTime: new Date(), type: "grades sheet", data: {} },
-                { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} },
-                { label: "convention de stage", creationDateTime: new Date(), type: "", data: {} }
+                { label: "Relevé de notes de S1", type: "s1", data: {} },
+                { label: "Relevé de notes de S2", type: "s2", data: {} },
+                { label: "Attestion de inscription", type: "att", data: {} },
+
             ]
         };
     },
     demandEDocument: async (document_type) => {
-        await new Promise(resolve => setTimeout(resolve, 800)); // TO BE REMOVED
+        await new Promise(resolve => setTimeout(resolve, 400)); // TO BE REMOVED
     },
     getComplaintsData: async () => {
         const response = await axiosClient.get("/api/student/complaint");
@@ -86,6 +85,11 @@ const EntStudentApi = {
     deleteComplaint: async (complaintId) => {
         return await axiosClient.delete(`/api/student/complaint/${complaintId}`);
     },
+	getReleveNote: async (type) => {
+		return await axiosClient.get(`/api/student/e-docment?type=${type}`, {
+			responseType: 'blob'
+		});
+	}
 }
 
 export default EntStudentApi;

@@ -50,7 +50,7 @@
     </header>
     <div>
         <p class="titre">
-                {{$module_name}}
+            {{$module_name}}
             <br>
             Année universitaire: {{$year}}
             <br>
@@ -67,10 +67,12 @@
         </thead>
         <tbody>
             @foreach($students as $student)
+            <tr>
                 <td>{{$student->apogee}}</td>
                 <td>{{$student->firstname}}</td>
                 <td>{{$student->lastname}}</td>
                 <td>{{$student->inscrit_year}}</td>
+            </tr>
             @endforeach
         </tbody>
     </table>
